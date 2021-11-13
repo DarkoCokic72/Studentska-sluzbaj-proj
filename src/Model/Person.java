@@ -8,13 +8,15 @@ public class Person {
 	protected Date dateOfBirth;
 	protected String eMail;
 	protected String phoneNumber;
+	protected Address address;
 	
-	public Person(String name, String surname, Date date, String eMail, String phone) {
+	public Person(String name, String surname, Date date, String eMail, String phone, Address addr) {
 		this.name = name;
 		this.surname = surname;
 		this.dateOfBirth = date;
 		this.eMail = eMail;
 		this.phoneNumber = phone;
+		this.address = addr;
 	}
 
 }
