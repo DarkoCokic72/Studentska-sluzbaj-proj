@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -27,6 +28,12 @@ public class MainFrame extends JFrame {
 		
 		setVisible(true);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		
+		MenuBar menu = new MenuBar();
+		this.setJMenuBar(menu);
+		
+		MyToolBar toolbar = new MyToolBar();
+		add(toolbar, BorderLayout.NORTH);
 		
 		}
 }
