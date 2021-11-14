@@ -1,10 +1,13 @@
 package gui;
 
-import java.awt.Color;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
 public class MyToolBar extends JToolBar {
@@ -34,6 +37,11 @@ public class MyToolBar extends JToolBar {
 		
 		addSeparator();
 		
+		JTextField textField = new JTextField();
+		add(textField);
+		
+		addSeparator();
+		
 		JButton btnSearch = new JButton();
 		btnSearch.setToolTipText("Search entity");
 		btnSearch.setIcon(new ImageIcon("images/search-icon.png"));
@@ -41,7 +49,5 @@ public class MyToolBar extends JToolBar {
 				
 		
 	}
-	
-	
 
 }
