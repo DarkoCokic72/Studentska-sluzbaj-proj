@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.MenuBar;
+
 import gui.MainFrame;
 
 public class MyApp {
