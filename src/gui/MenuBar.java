@@ -10,7 +10,7 @@ public class MenuBar extends JMenuBar{
 		JMenu file = new JMenu("File");
 		JMenuItem miNew = new JMenuItem("New");
 		JMenuItem miSave = new JMenuItem("Save");
-		JMenuItem miOpen = new JMenuItem("Open");
+		JMenu miOpen = new JMenu("Open");
 		
 		JMenuItem miStudent = new JMenuItem("Studenti");
 		JMenuItem miProfesor = new JMenuItem("Profesor");
