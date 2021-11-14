@@ -29,8 +29,11 @@ public class MenuBar extends JMenuBar{
 		miClose.setIcon(new ImageIcon("images/Close-2-icon.png"));
 		
 		file.add(miNew);
+		file.addSeparator();
 		file.add(miSave);
+		file.addSeparator();
 		file.add(miOpen);
+		file.addSeparator();
 		file.add(miClose);
 		
 		file.setMnemonic('F');
