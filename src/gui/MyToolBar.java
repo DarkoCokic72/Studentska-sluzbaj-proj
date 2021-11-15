@@ -1,8 +1,10 @@
 package gui;
 
+import java.awt.Dimension;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -35,9 +37,14 @@ public class MyToolBar extends JToolBar {
 		btnDelete.setIcon(new ImageIcon("images/Recycle-Bin-icon.png"));
 		add(btnDelete);
 		
-		addSeparator();
+		//addSeparator();
+		add(Box.createGlue());
+		
+		Dimension dim = new Dimension(150,20);
 		
 		JTextField textField = new JTextField();
+		textField.setPreferredSize(dim);
+		textField.setMaximumSize(textField.getPreferredSize());
 		add(textField);
 		
 		addSeparator();
