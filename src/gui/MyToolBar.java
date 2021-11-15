@@ -45,6 +45,7 @@ public class MyToolBar extends JToolBar {
 		JTextField textField = new JTextField();
 		textField.setPreferredSize(dim);
 		textField.setMaximumSize(textField.getPreferredSize());
+		textField.setToolTipText("Type entity");
 		add(textField);
 		
 		addSeparator();
