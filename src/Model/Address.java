@@ -16,6 +16,41 @@ public class Address {
 	    this.country = country;
 	    
 	}
+	
+	public String getStreetName() {
+		return streetName;
+	}
+	
+	public int getStreetNumber() {
+		return streetNumber;
+	}
+	
+	public String getCity() {
+		return city;
+	}
+	
+	public String getCountry() {
+		return country;
+	}
+	
+	
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
+	}
+	
+	public void setStreetNumber(int streetNumber) {
+		this.streetNumber = streetNumber;
+	}
+	
+	public void setCity(String city) {
+		this.city = city;
+	}
+	
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	
+	
 		
 }
 
