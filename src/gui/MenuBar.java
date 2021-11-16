@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
@@ -20,6 +21,12 @@ public class MenuBar extends JMenuBar{
 		JMenuItem miProfesor = new JMenuItem("Profesor");
 		JMenuItem miSubject = new JMenuItem("Predmeti");
 		JMenuItem miChair = new JMenuItem("Katedre");
+		
+		miStudent.setIcon(new ImageIcon("images/student.png"));
+		miProfesor.setIcon(new ImageIcon("images/teacher.png"));
+		miSubject.setIcon(new ImageIcon("images/books-icon.png"));
+		miChair.setIcon(new ImageIcon("images/university.png"));
+		
 		miOpen.add(miStudent);
 		miOpen.add(miSubject);
 		miOpen.add(miProfesor);
@@ -78,7 +85,7 @@ public class MenuBar extends JMenuBar{
 		add(file);
 		add(edit);
 		add(help);
-		
+				
 		
 	}
 }
