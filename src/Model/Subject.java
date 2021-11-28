@@ -39,7 +39,7 @@ public class Subject {
 	public Term getTerm() {
 		return term;
 	}
-	public int yearOfStudy() {
+	public Integer getYearOfStudy() {
 		return yearOfStudy;
 	}
 	
@@ -47,7 +47,7 @@ public class Subject {
 		return subjectProfessor;
 	}
 	
-	public int getESPB() {
+	public Integer getESPB() {
 		return ESPB;
 	}
 	

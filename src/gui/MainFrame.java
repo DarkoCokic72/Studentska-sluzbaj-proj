@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 	
@@ -35,6 +36,7 @@ public class MainFrame extends JFrame {
 		add(toolbar, BorderLayout.NORTH);
 		
 		CentralPanel centralPanel = new CentralPanel();
+		centralPanel.setBorder(BorderFactory.createEmptyBorder(12, 12, 7, 20));
 		add(centralPanel, BorderLayout.CENTER);
 		
 		}
