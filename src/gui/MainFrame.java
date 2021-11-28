@@ -24,7 +24,6 @@ public class MainFrame extends JFrame {
 		setLocationRelativeTo(null);
 		Image img=kit.getImage("images/icon.png");
 		setIconImage(img);
-		getContentPane().setBackground(Color.GRAY);
 		
 		setVisible(true);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -34,6 +33,9 @@ public class MainFrame extends JFrame {
 		
 		MyToolBar toolbar = new MyToolBar();
 		add(toolbar, BorderLayout.NORTH);
+		
+		CentralPanel centralPanel = new CentralPanel();
+		add(centralPanel, BorderLayout.CENTER);
 		
 		}
 }
