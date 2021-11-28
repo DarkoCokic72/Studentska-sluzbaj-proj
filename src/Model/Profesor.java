@@ -7,18 +7,20 @@ public class Profesor extends Person {
 	
 	private Address officeAddress;
 	private int personalID;
-	private String title;
+	private String titula;
 	private int yearsOfExperience;
 	private ArrayList<Subject> subjectsTeaches;
+	private String zvanje;
 	
-	public Profesor(String name, String surname, Date date, String eMail, String phone, Address address, Address officeAddress, int ID, String title, int yearsOfExperience) {
+	public Profesor(String name, String surname, Date date, String eMail, String phone, Address address, Address officeAddress, int ID, String title, int yearsOfExperience, String zvanje) {
 		
 		super(name, surname, date, eMail, phone, address);
 		this.officeAddress = officeAddress;
 		this.personalID = ID;
-		this.title = title;
+		this.titula = title;
 		this.yearsOfExperience = yearsOfExperience;
 		subjectsTeaches = new ArrayList<Subject>();
+		this.zvanje = zvanje;
 				
 	}
 	
@@ -26,8 +28,8 @@ public class Profesor extends Person {
 		return personalID;
 	}
 	
-	public String getTitle() {
-		return title;
+	public String getTitula() {
+		return titula;
 	}
 	
 	public int getYearsOfExperience() {
@@ -42,6 +44,10 @@ public class Profesor extends Person {
 		return officeAddress;
 	}
 	
+	public String getZvanje() {
+		return zvanje;
+	}
+	
 	
 	
 	public void setPersonalID(int ID) {
@@ -49,7 +55,7 @@ public class Profesor extends Person {
 	}
 	
 	public void setTitle(String title) {
-		this.title = title;
+		this.titula = title;
 	}
 	
 	public void setYearsOfExperience(int years) {

@@ -16,6 +16,7 @@ public class CentralPanel extends JTabbedPane {
 		JPanel professors = new JPanel();
 		addTab("Profesori", professors);
 		professors.setLayout(new BorderLayout());
+		professors.add(new ProfessorTab());
 		
 		JPanel subjects = new JPanel();
 		addTab("Predmeti", subjects);
