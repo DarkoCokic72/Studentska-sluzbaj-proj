@@ -39,6 +39,9 @@ public class MainFrame extends JFrame {
 		centralPanel.setBorder(BorderFactory.createEmptyBorder(12, 12, 7, 20));
 		add(centralPanel, BorderLayout.CENTER);
 		
+		revalidate(); 
+		repaint();
+		
 		}
 }
 	
