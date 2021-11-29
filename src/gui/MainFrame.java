@@ -37,6 +37,9 @@ public class MainFrame extends JFrame {
 		MyToolBar toolbar = new MyToolBar();
 		add(toolbar, BorderLayout.NORTH);
 		
+		StatusBar stBar = new StatusBar();
+		add(stBar, BorderLayout.SOUTH);
+		
 		CentralPanel centralPanel = CentralPanel.createCentralPanel();
 		centralPanel.setBorder(BorderFactory.createEmptyBorder(12, 12, 7, 20));
 		add(centralPanel, BorderLayout.CENTER);
