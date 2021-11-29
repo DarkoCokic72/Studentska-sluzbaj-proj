@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
@@ -85,6 +86,30 @@ public class MenuBar extends JMenuBar{
 		add(file);
 		add(edit);
 		add(help);
+		
+        
+		miNew.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				CentralPanel centralPanel = CentralPanel.createCentralPanel();
+				switch(centralPanel.getSelectedIndex()) {
+				
+				case 0:
+					//AddStudentDialog
+					break;
+				case 1:
+					AddProfessorDialog addProfessorDialog = new AddProfessorDialog();
+					addProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());
+					break;
+				case 2:
+					//AddSubjectDialog
+				    break;
+
+				}
+			
+			}
+		});
 				
 		
 	}
