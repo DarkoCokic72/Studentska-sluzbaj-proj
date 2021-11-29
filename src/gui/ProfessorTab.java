@@ -12,7 +12,7 @@ public class ProfessorTab extends JPanel {
     public ProfessorTab() {
 		
 		setLayout(new BorderLayout());
-     	ProfessorJTable professorTable = new ProfessorJTable();
+     	ProfessorJTable professorTable = ProfessorJTable.getTable();
 		JScrollPane scrollPane = new JScrollPane(professorTable);
 		
 		scrollPane.setPreferredSize(new Dimension(800,400));

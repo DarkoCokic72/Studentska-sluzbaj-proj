@@ -5,6 +5,7 @@ import javax.swing.ListSelectionModel;
 
 public class ProfessorJTable extends JTable{
 	
+	private static ProfessorJTable professorTable= null;
 	private ProfessorAbstractTable professorTableModel; 
 	
     public ProfessorJTable() {
@@ -18,6 +19,17 @@ public class ProfessorJTable extends JTable{
    		
    		setModel(professorTableModel);
    		
+	}
+    
+    public void updateTable() {
+    	professorTableModel.fireTableDataChanged();
+    }
+    
+    public static ProfessorJTable getTable() {
+		if (professorTable == null) {
+			professorTable = new ProfessorJTable();
+		}
+		return professorTable;
 	}
 	
 

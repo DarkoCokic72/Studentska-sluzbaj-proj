@@ -1,6 +1,6 @@
 package Model;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 
 public class Profesor extends Person {
@@ -12,9 +12,9 @@ public class Profesor extends Person {
 	private ArrayList<Subject> subjectsTeaches;
 	private String zvanje;
 	
-	public Profesor(String name, String surname, Date date, String eMail, String phone, Address address, Address officeAddress, int ID, String title, int yearsOfExperience, String zvanje) {
+	public Profesor(String name, String surname, Date dateOfBirth, String eMail, String mobilePhone, Address address, Address officeAddress, int ID, String title, int yearsOfExperience, String zvanje) {
 		
-		super(name, surname, date, eMail, phone, address);
+		super(name, surname, dateOfBirth, eMail, mobilePhone, address);
 		this.officeAddress = officeAddress;
 		this.personalID = ID;
 		this.titula = title;
@@ -69,6 +69,8 @@ public class Profesor extends Person {
 	public void setOfficeAddress(Address addr) {
 		this.officeAddress = addr;
 	}
+	
+	
 	
 	
 	
