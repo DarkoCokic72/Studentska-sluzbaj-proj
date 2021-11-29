@@ -1,60 +1,68 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Controller.ProfessorController;
+
 public class AddProfessorDialog extends JDialog {
 	
-	private JFrame addProfessorFrame;
 	private JPanel northPanel;
 	private JPanel southPanel;
 	
 	private JPanel name;
-	private JTextField nameField;
+	private static JTextField nameField;
 	private JLabel nameLab;
 	
 	private JPanel surname;
-	private JTextField surnameField;
+	private static JTextField surnameField;
 	private JLabel surnameLab;
 	
 	private JPanel dateOfBirth;
-	private JTextField dateOfBirthField;
+	private static JTextField dateOfBirthField;
 	private JLabel dateOfBirthLab;
 	
 	private JPanel address;
-	private JTextField addressField;
+	private static JTextField addressField;
 	private JLabel addressLab;
 	
 	private JPanel mobile;
-	private JTextField mobileField;
+	private static JTextField mobileField;
 	private JLabel mobileLab;
 	
+	private JPanel mail;
+	private static JTextField mailField;
+	private JLabel mailLab;
+	
 	private JPanel officeAddress;
-	private JTextField officeAddressField;
+	private static JTextField officeAddressField;
 	private JLabel officeAddressLab;
 	
 	private JPanel personalId;
-	private JTextField personalIdField;
+	private static JTextField personalIdField;
 	private JLabel personalIdLab;
     
 	private JPanel titula;
-	private JTextField titulaField;
+	private static JTextField titulaField;
 	private JLabel titulaLab;
 	
 	private JPanel zvanje;
-	private JTextField zvanjeField;
+	private static JTextField zvanjeField;
 	private JLabel zvanjeLab;
+	
+	private JPanel yearsOfExpirience;
+	private static JTextField yearsOfExpirienceField;
+	private JLabel yearsOfExpirienceLab;
 	
 	private JButton confirm;
 	private JButton cancel;
@@ -117,6 +125,15 @@ public class AddProfessorDialog extends JDialog {
 		mobile.add(mobileField);
 		northPanel.add(mobile);
 		
+		mail = new JPanel();
+		mailLab = new JLabel("E-mail  adresa*");
+		mailField = new JTextField();
+		mailLab.setPreferredSize(new Dimension(200,25));
+		mailField.setPreferredSize(new Dimension(200,25));
+		mail.add(mailLab);
+		mail.add(mailField);
+		northPanel.add(mail);
+		
 		officeAddress = new JPanel();
 		officeAddressLab = new JLabel("Adresa kancelarije*");
 		officeAddressField = new JTextField();
@@ -153,15 +170,46 @@ public class AddProfessorDialog extends JDialog {
 		zvanje.add(zvanjeField);
 		northPanel.add(zvanje);
 		
+		yearsOfExpirience = new JPanel();
+		yearsOfExpirienceLab = new JLabel("Godine iskustva*");
+		yearsOfExpirienceField = new JTextField();
+		yearsOfExpirienceLab.setPreferredSize(new Dimension(200,25));
+		yearsOfExpirienceField.setPreferredSize(new Dimension(200,25));
+		yearsOfExpirience.add(yearsOfExpirienceLab);
+		yearsOfExpirience.add(yearsOfExpirienceField);
+		northPanel.add(yearsOfExpirience);
+		
 		confirm = new JButton("Potvrdi");
 		confirm.setPreferredSize(new Dimension(90,30));
-		confirm.setEnabled(false);
+		//confirm.setEnabled(false);
 		southPanel.add(confirm);
+		
+		confirm.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					ProfessorController professorController = new ProfessorController();
+					professorController.add();
+					dispose();
+
+			}
+
+		});
+		
 		southPanel.add(Box.createRigidArea(new Dimension(30, 0)));
 		
 		cancel = new JButton("Odustani");
 		cancel.setPreferredSize(new Dimension(90,30));
 		southPanel.add(cancel);
+		
+		cancel.addActionListener(new ActionListener() {
+
+		    @Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+
+		});
 		
 		add(northPanel,BorderLayout.CENTER);
 		add(southPanel, BorderLayout.SOUTH);
@@ -170,11 +218,51 @@ public class AddProfessorDialog extends JDialog {
 		repaint();
 		
 		
-		
 	}
 	
+	public static JTextField getNameField() {
+		return nameField;
+	}
 	
-	
-	
-
+    public static JTextField getSurnameField() {
+    	return surnameField;
+    }
+    
+    public static JTextField getDateOfBirth() {
+    	return dateOfBirthField;
+    }
+    
+    public static JTextField getAddress() {
+    	return addressField;
+    }
+    
+    public static JTextField getMobile() {
+    	return mobileField;
+    }
+    
+    public static JTextField getMailField() {
+    	return mailField;
+    }
+    
+    public static JTextField getOfficeAddressField() {
+    	return officeAddressField;
+    }
+    
+    public static JTextField getPersonalId() {
+    	return personalIdField;
+    }
+    
+    public static JTextField getTitulaField() {
+    	return titulaField;
+    }
+    
+    public static JTextField getZvanjeField() {
+    	return zvanjeField;
+    }
+    
+    public static JTextField getYearsOfExpirienceField() {
+    	return yearsOfExpirienceField;
+    }
+    
+    
 }

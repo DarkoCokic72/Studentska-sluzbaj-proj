@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class ProfessorDatabase {
 	
+	private static ProfessorDatabase professorDatabase = null;
 	private ArrayList<Profesor> professors;
 	private ArrayList<String> columns;
 		
@@ -59,6 +60,21 @@ public class ProfessorDatabase {
 		    default:
 			    return null;
 		}
+	}
+	
+	public void addProfessorToTable(Profesor professor) {
+		
+		professors.add(professor);
+	}
+	
+	public static ProfessorDatabase getInstance() {
+		
+		if (professorDatabase == null) {
+			
+			 professorDatabase = new ProfessorDatabase();
+
+		}
+		return professorDatabase;
 	}
 	
 
