@@ -67,6 +67,10 @@ public class ProfessorDatabase {
 		professors.add(professor);
 	}
 	
+	public ArrayList<Profesor> getProfessors() {
+		return professors;
+	}
+	
 	public static ProfessorDatabase getInstance() {
 		
 		if (professorDatabase == null) {

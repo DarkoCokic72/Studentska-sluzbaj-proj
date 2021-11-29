@@ -188,9 +188,13 @@ public class AddProfessorDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 					ProfessorController professorController = new ProfessorController();
 					professorController.add();
+					if(professorController.professorAdded == true) {
 					dispose();
+					professorController.professorAdded = false;
+					}
 
 			}
 
