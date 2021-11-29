@@ -7,6 +7,8 @@ import javax.swing.JTabbedPane;
 
 public class CentralPanel extends JTabbedPane {
 	
+	private static CentralPanel centralPanel = null;
+
 	public CentralPanel() {
 		
 		JPanel students = new JPanel();
@@ -23,7 +25,17 @@ public class CentralPanel extends JTabbedPane {
 		subjects.setLayout(new BorderLayout());
 		subjects.add(new SubjectTab());
 		
+	}
+	
+	public static CentralPanel createCentralPanel() {
+		
+		if(centralPanel == null) {
+			centralPanel = new CentralPanel();
+		}
+		
+		return centralPanel;
 		
 	}
+	
 
 }

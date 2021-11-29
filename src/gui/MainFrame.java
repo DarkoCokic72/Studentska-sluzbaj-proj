@@ -12,6 +12,8 @@ import javax.swing.WindowConstants;
 	
 public class MainFrame extends JFrame {
 		
+	    private static MainFrame mf = null;
+	
 		public MainFrame() { 
 			
 		super(); 
@@ -35,7 +37,7 @@ public class MainFrame extends JFrame {
 		MyToolBar toolbar = new MyToolBar();
 		add(toolbar, BorderLayout.NORTH);
 		
-		CentralPanel centralPanel = new CentralPanel();
+		CentralPanel centralPanel = CentralPanel.createCentralPanel();
 		centralPanel.setBorder(BorderFactory.createEmptyBorder(12, 12, 7, 20));
 		add(centralPanel, BorderLayout.CENTER);
 		
@@ -43,6 +45,15 @@ public class MainFrame extends JFrame {
 		repaint();
 		
 		}
+		
+
+		public static MainFrame getMainFrame() {
+			if (mf == null) {
+				mf = new MainFrame();
+			}
+			return mf;
+		}
+		
 }
 	
 	

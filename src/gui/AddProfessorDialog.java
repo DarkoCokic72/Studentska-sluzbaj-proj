@@ -59,13 +59,12 @@ public class AddProfessorDialog extends JDialog {
 	private JButton confirm;
 	private JButton cancel;
 	
-	public AddProfessorDialog(MainFrame mf) {
+	public AddProfessorDialog() {
 		
 		northPanel = new JPanel();
 		southPanel = new JPanel();
 		
 		setVisible(true);
-		//setLocationRelativeTo(mf);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = d.width;
 		int height = d.height;

@@ -3,6 +3,9 @@ package gui;
 import java.awt.Dimension;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -55,6 +58,45 @@ public class MyToolBar extends JToolBar {
 		btnSearch.setIcon(new ImageIcon("images/search-icon.png"));
 		add(btnSearch);
 				
+		btnCreate.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				CentralPanel centralPanel = CentralPanel.createCentralPanel();
+				switch(centralPanel.getSelectedIndex()) {
+				
+				case 0:
+					//AddStudentDialog
+					break;
+				case 1:
+					AddProfessorDialog addProfessorDialog = new AddProfessorDialog();
+					addProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());
+					break;
+				case 2:
+					//AddSubjectDialog
+				    break;
+
+				}
+			}
+			
+		});
 		
 	}
 
