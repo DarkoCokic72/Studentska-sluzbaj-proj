@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 
 import Model.Address;
 import Model.Profesor;
+import Model.Profesor.Titula;
+import Model.Profesor.Zvanje;
 import Model.ProfessorDatabase;
 import gui.AddProfessorDialog;
 import gui.ProfessorJTable;
@@ -18,7 +20,7 @@ public class ProfessorController {
 
 	    private static ProfessorController professorContr = null;
         public boolean professorAdded = false;
-		public Boolean[] textFieldFilled = new Boolean[11];
+		public Boolean[] textFieldFilled = new Boolean[9];
 		
 		public void add() {
 			
@@ -30,11 +32,10 @@ public class ProfessorController {
 			String email = AddProfessorDialog.getMailField().getText().trim();
 			String officeAddressString = AddProfessorDialog.getOfficeAddressField().getText().trim(); //convert to Address
 			String personalIdString = AddProfessorDialog.getPersonalId().getText().trim(); //convert to int
-            String titula = AddProfessorDialog.getTitulaField().getText().trim();
-			String zvanje = AddProfessorDialog.getZvanjeField().getText().trim();
+            Titula titula = AddProfessorDialog.getTitula();
+			Zvanje zvanje = AddProfessorDialog.getZvanje();
 			String yearsOfExperienceString = AddProfessorDialog.getYearsOfExpirienceField().getText().trim(); //convert to int
-			
-			
+				
 			if(checkName(name) == true && checkSurname(surname) == true && checkDate(dateString) == true && checkAddress(addressString) == true
 				&& checkPhoneNumber(phoneNumber) == true && checkMail(email) == true && checkAddress(officeAddressString) 
 				&& checkPersonalId(personalIdString) == true && checkYearsOfExp(yearsOfExperienceString) == true) {
@@ -79,11 +80,12 @@ public class ProfessorController {
 				String city = output[1];
 				String country = output[2];
 				
-				String streetName = "Rumenacka";
-				int streetNumber = 17;                   //FIXME iz output[0] izvuci streetName i streetNumber
+				String streetName = output[0].replaceAll("[0-9]+", "");
+				int streetNumber = Integer.parseInt(output[0].replaceAll("[\\p{L}+\\s]", ""));
 				
 				retAddress = new Address(streetName, streetNumber , city, country);
 				return retAddress;
+				
 			}
 			
 			
@@ -235,6 +237,7 @@ public class ProfessorController {
 			}
 	       
 	   
+	        
 	        public void resetFields() {
 	    		Arrays.fill(textFieldFilled, Boolean.FALSE);
 	    	}
@@ -320,22 +323,6 @@ public class ProfessorController {
 	    			}
 	    			break;
 	    		case 8:
-	    			if(!input.isEmpty()) {
-	    			    textFieldFilled[fieldNumber] = true;
-	    			}
-	    			else {
-	    				textFieldFilled[fieldNumber] = false;
-	    			}
-	    			break;
-	    		case 9:
-	    			if(!input.isEmpty()) {
-	    			    textFieldFilled[fieldNumber] = true;
-	    			}
-	    			else {
-	    				textFieldFilled[fieldNumber] = false;
-	    			}
-	    			break;
-	    		case 10:
 	    			if(!input.isEmpty()) {
 	    			    textFieldFilled[fieldNumber] = true;
 	    			}
