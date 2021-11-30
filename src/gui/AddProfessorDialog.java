@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Controller.ProfessorController;
+import Listeners.AddProfessorListener;
 
 public class AddProfessorDialog extends JDialog {
 	
@@ -60,11 +61,11 @@ public class AddProfessorDialog extends JDialog {
 	private static JTextField zvanjeField;
 	private JLabel zvanjeLab;
 	
-	private JPanel yearsOfExpirience;
-	private static JTextField yearsOfExpirienceField;
-	private JLabel yearsOfExpirienceLab;
+	private JPanel yearsOfExperience;
+	private static JTextField yearsOfExperienceField;
+	private JLabel yearsOfExperienceLab;
 	
-	private JButton confirm;
+	private static JButton confirm;
 	private JButton cancel;
 	
 	public AddProfessorDialog() {
@@ -80,6 +81,8 @@ public class AddProfessorDialog extends JDialog {
 		setTitle("Dodavanje profesora");
 		setResizable(false);
 		
+		ProfessorController.getProfessorController().resetFields();
+		
 		name = new JPanel();
 		nameLab = new JLabel("Ime*");
 		nameField = new JTextField();
@@ -88,6 +91,7 @@ public class AddProfessorDialog extends JDialog {
 		name.add(nameLab);
 		name.add(nameField);
 		northPanel.add(name);
+		nameField.addFocusListener(new AddProfessorListener(nameField, 0));
 		
 		surname = new JPanel();
 		surnameLab = new JLabel("Prezime*");
@@ -97,6 +101,7 @@ public class AddProfessorDialog extends JDialog {
 		surname.add(surnameLab);
 		surname.add(surnameField);
 		northPanel.add(surname);
+		surnameField.addFocusListener(new AddProfessorListener(surnameField, 1));
 		
 		dateOfBirth = new JPanel();
 		dateOfBirthLab = new JLabel("Datum rodjenja*");
@@ -106,6 +111,7 @@ public class AddProfessorDialog extends JDialog {
 		dateOfBirth.add(dateOfBirthLab);
 		dateOfBirth.add(dateOfBirthField);
 		northPanel.add(dateOfBirth);
+		dateOfBirthField.addFocusListener(new AddProfessorListener(dateOfBirthField, 2));
 		
 		address = new JPanel();
 		addressLab = new JLabel("Adresa stanovanja*");
@@ -115,6 +121,7 @@ public class AddProfessorDialog extends JDialog {
 		address.add(addressLab);
 		address.add(addressField);
 		northPanel.add(address);
+		addressField.addFocusListener(new AddProfessorListener(addressField, 3));
 		
 		mobile = new JPanel();
 		mobileLab = new JLabel("Broj telefona*");
@@ -124,6 +131,7 @@ public class AddProfessorDialog extends JDialog {
 		mobile.add(mobileLab);
 		mobile.add(mobileField);
 		northPanel.add(mobile);
+		mobileField.addFocusListener(new AddProfessorListener(mobileField, 4));
 		
 		mail = new JPanel();
 		mailLab = new JLabel("E-mail  adresa*");
@@ -133,6 +141,7 @@ public class AddProfessorDialog extends JDialog {
 		mail.add(mailLab);
 		mail.add(mailField);
 		northPanel.add(mail);
+		mailField.addFocusListener(new AddProfessorListener(mailField, 5));
 		
 		officeAddress = new JPanel();
 		officeAddressLab = new JLabel("Adresa kancelarije*");
@@ -142,6 +151,7 @@ public class AddProfessorDialog extends JDialog {
 		officeAddress.add(officeAddressLab);
 		officeAddress.add(officeAddressField);
 		northPanel.add(officeAddress);
+		officeAddressField.addFocusListener(new AddProfessorListener(officeAddressField, 6));
 		
 		personalId = new JPanel();
 		personalIdLab = new JLabel("Broj licne karte*");
@@ -151,15 +161,17 @@ public class AddProfessorDialog extends JDialog {
 		personalId.add(personalIdLab);
 		personalId.add(personalIdField);
 		northPanel.add(personalId);
+		personalIdField.addFocusListener(new AddProfessorListener(personalIdField, 7));
 		
 		titula = new JPanel();
-		titulaLab = new JLabel("Titula*");
+        titulaLab = new JLabel("Titula*");
 		titulaField = new JTextField();
 		titulaLab.setPreferredSize(new Dimension(200,25));
 		titulaField.setPreferredSize(new Dimension(200,25));
 		titula.add(titulaLab);
 		titula.add(titulaField);
 		northPanel.add(titula);
+		titulaField.addFocusListener(new AddProfessorListener(titulaField, 8));
 		
 		zvanje = new JPanel();
 		zvanjeLab = new JLabel("Zvanje*");
@@ -169,19 +181,21 @@ public class AddProfessorDialog extends JDialog {
 		zvanje.add(zvanjeLab);
 		zvanje.add(zvanjeField);
 		northPanel.add(zvanje);
+		zvanjeField.addFocusListener(new AddProfessorListener(titulaField, 9));
 		
-		yearsOfExpirience = new JPanel();
-		yearsOfExpirienceLab = new JLabel("Godine iskustva*");
-		yearsOfExpirienceField = new JTextField();
-		yearsOfExpirienceLab.setPreferredSize(new Dimension(200,25));
-		yearsOfExpirienceField.setPreferredSize(new Dimension(200,25));
-		yearsOfExpirience.add(yearsOfExpirienceLab);
-		yearsOfExpirience.add(yearsOfExpirienceField);
-		northPanel.add(yearsOfExpirience);
+		yearsOfExperience = new JPanel();
+		yearsOfExperienceLab = new JLabel("Godine iskustva*");
+		yearsOfExperienceField = new JTextField();
+		yearsOfExperienceLab.setPreferredSize(new Dimension(200,25));
+		yearsOfExperienceField.setPreferredSize(new Dimension(200,25));
+		yearsOfExperience.add(yearsOfExperienceLab);
+		yearsOfExperience.add(yearsOfExperienceField);
+		northPanel.add(yearsOfExperience);
+		yearsOfExperienceField.addFocusListener(new AddProfessorListener(yearsOfExperienceField, 10));
 		
 		confirm = new JButton("Potvrdi");
 		confirm.setPreferredSize(new Dimension(90,30));
-		//confirm.setEnabled(false);
+		confirm.setEnabled(false);
 		southPanel.add(confirm);
 		
 		confirm.addActionListener(new ActionListener() {
@@ -189,11 +203,13 @@ public class AddProfessorDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-					ProfessorController professorController = new ProfessorController();
-					professorController.add();
-					if(professorController.professorAdded == true) {
-					dispose();
-					professorController.professorAdded = false;
+					ProfessorController professorContr = ProfessorController.getProfessorController();
+					professorContr.add();
+					if(professorContr.professorAdded == true) {
+						
+						professorContr.resetFields();
+					    dispose();
+					    professorContr.professorAdded = false;
 					}
 
 			}
@@ -210,6 +226,8 @@ public class AddProfessorDialog extends JDialog {
 
 		    @Override
 			public void actionPerformed(ActionEvent e) {
+		    	
+		    	ProfessorController.getProfessorController().resetFields();
 				dispose();
 			}
 
@@ -265,7 +283,11 @@ public class AddProfessorDialog extends JDialog {
     }
     
     public static JTextField getYearsOfExpirienceField() {
-    	return yearsOfExpirienceField;
+    	return yearsOfExperienceField;
+    }
+    
+    public static JButton getConfirm() {
+    	return confirm;
     }
     
     
