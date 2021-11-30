@@ -2,6 +2,7 @@ package Controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -15,8 +16,9 @@ import gui.ProfessorJTable;
 
 public class ProfessorController {
 
-
-		public boolean professorAdded = false;
+	    private static ProfessorController professorContr = null;
+        public boolean professorAdded = false;
+		public Boolean[] textFieldFilled = new Boolean[11];
 		
 		public void add() {
 			
@@ -143,9 +145,9 @@ public class ProfessorController {
 			public boolean checkDate(String date) {
 				
 				String regex = "[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}.";
-				boolean ret = Pattern.matches(regex, date);
+				boolean retVal = Pattern.matches(regex, date);
 				
-				if (ret == false && date.isEmpty() == false) {
+				if (retVal == false && date.isEmpty() == false) {
 					JOptionPane.showMessageDialog(null,
 							"Format datuma nije podrzan.\nPodrzani formati su dd.mm.yyyy. ili d.m.yyyy.");
 					return false;
@@ -165,7 +167,7 @@ public class ProfessorController {
 			public boolean checkAddress(String address) {
 				
 				boolean ret = true;
-				String regex = "[\\p{L}0-9\\s]+,[\\p{L}0-9\\s]+,[\\p{L}0-9\\s]+";
+				String regex = "[\\p{L}0-9\\s]+,[\\p{L}\\s]+,[\\p{L}\\s]+";
 				ret = Pattern.matches(regex, address);
 				if (ret == false && !address.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Pogresan format adrese.\nAdresa mora biti u formatu ulica broj, grad, drzava.");
@@ -209,16 +211,16 @@ public class ProfessorController {
 						}
 				}
 				
-				boolean ret = true;
+				boolean retVal = true;
 				String regex = "^[0-9]*$";
-				ret = Pattern.matches(regex, number);
+				retVal = Pattern.matches(regex, number);
 				
-				if (ret == false && !number.isEmpty()) {
+				if (retVal == false && !number.isEmpty()) {
 					
 					JOptionPane.showMessageDialog(null, "Neispravan format broja licne karte");
 				}
 				
-				return ret;
+				return retVal;
 			}
 			
 	        public boolean checkYearsOfExp(String years) {
@@ -231,7 +233,137 @@ public class ProfessorController {
 				
 				return ret;
 			}
+	       
+	   
+	        public void resetFields() {
+	    		Arrays.fill(textFieldFilled, Boolean.FALSE);
+	    	}
 	        
+	        public boolean validateAdd(String input, int fieldNumber) {
+	        	
+	    		fieldValidationAdd(input, fieldNumber);
+
+	    		if (professorValidAdd()) {
+	    			AddProfessorDialog.getConfirm().setEnabled(true);
+	    		}
+	    		else {
+	    			AddProfessorDialog.getConfirm().setEnabled(false);
+	    		}
+
+	    		return professorValidAdd();
+	    	}
+	        
+	        private void fieldValidationAdd(String input, int fieldNumber) {
+	    		switch (fieldNumber) {
+	    		case 0:
+	    			if(!input.isEmpty()) {
+	    			    textFieldFilled[fieldNumber] = true;
+	    			}
+	    			else {
+	    				textFieldFilled[fieldNumber] = false;
+	    			}
+	    			break;
+	    		case 1:
+	    			if(!input.isEmpty()) {
+	    			    textFieldFilled[fieldNumber] = true;
+	    			}
+	    			else {
+	    				textFieldFilled[fieldNumber] = false;
+	    			}
+	    			break;
+	    		case 2:
+	    			if(!input.isEmpty()) {
+	    			    textFieldFilled[fieldNumber] = true;
+	    			}
+	    			else {
+	    				textFieldFilled[fieldNumber] = false;
+	    			}
+	    			break;
+	    		case 3:
+	    			if(!input.isEmpty()) {
+	    			    textFieldFilled[fieldNumber] = true;
+	    			}
+	    			else {
+	    				textFieldFilled[fieldNumber] = false;
+	    			}
+	    			break;
+	    		case 4:
+	    			if(!input.isEmpty()) {
+	    			    textFieldFilled[fieldNumber] = true;
+	    			}
+	    			else {
+	    				textFieldFilled[fieldNumber] = false;
+	    			}
+	    			break;
+	    		case 5:
+	    			if(!input.isEmpty()) {
+	    			    textFieldFilled[fieldNumber] = true;
+	    			}
+	    			else {
+	    				textFieldFilled[fieldNumber] = false;
+	    			}
+	    			break;
+	    		case 6:
+	    			if(!input.isEmpty()) {
+	    			    textFieldFilled[fieldNumber] = true;
+	    			}
+	    			else {
+	    				textFieldFilled[fieldNumber] = false;
+	    			}
+	    			break;
+	    		case 7:
+	    			if(!input.isEmpty()) {
+	    			    textFieldFilled[fieldNumber] = true;
+	    			}
+	    			else {
+	    				textFieldFilled[fieldNumber] = false;
+	    			}
+	    			break;
+	    		case 8:
+	    			if(!input.isEmpty()) {
+	    			    textFieldFilled[fieldNumber] = true;
+	    			}
+	    			else {
+	    				textFieldFilled[fieldNumber] = false;
+	    			}
+	    			break;
+	    		case 9:
+	    			if(!input.isEmpty()) {
+	    			    textFieldFilled[fieldNumber] = true;
+	    			}
+	    			else {
+	    				textFieldFilled[fieldNumber] = false;
+	    			}
+	    			break;
+	    		case 10:
+	    			if(!input.isEmpty()) {
+	    			    textFieldFilled[fieldNumber] = true;
+	    			}
+	    			else {
+	    				textFieldFilled[fieldNumber] = false;
+	    			}
+	    			break;
+	    		}
+	    	}
+	        
+
+	    	public boolean professorValidAdd() {
+
+	    		for (Boolean t : textFieldFilled) {
+	    			if (!t)
+	    				return false;
+	    		}
+
+	    		return true;
+	    	}
+
+	    	public static ProfessorController getProfessorController() {
+	    		
+	    		if (professorContr == null) {
+	    			professorContr = new ProfessorController();
+	    		}
+	    		return professorContr;
+	    	}
 	        
 			
 			
