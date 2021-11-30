@@ -110,6 +110,34 @@ public class MenuBar extends JMenuBar{
 			
 			}
 		});
+		
+		miEdit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				CentralPanel centralPanel = CentralPanel.createCentralPanel();
+				switch(centralPanel.getSelectedIndex()) {
+				
+				case 0:
+					//EditStudentDialog
+					break;
+				case 1:
+					EditProfessorDialog editProfessorDialog = new EditProfessorDialog();
+					editProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());
+					EditProfessorDialog.setDialog(editProfessorDialog);
+					break;
+				case 2:
+					//EditSubjectDialog
+				    break;
+
+				}
+			
+			}
+		});
+		
+		
+		
 				
 		
 	}
