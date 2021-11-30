@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,6 +16,9 @@ import javax.swing.JTextField;
 
 import Controller.ProfessorController;
 import Listeners.AddProfessorListener;
+import Model.Profesor;
+import Model.Profesor.Titula;
+import Model.Profesor.Zvanje;
 
 public class AddProfessorDialog extends JDialog {
 	
@@ -54,11 +58,11 @@ public class AddProfessorDialog extends JDialog {
 	private JLabel personalIdLab;
     
 	private JPanel titula;
-	private static JTextField titulaField;
+	private static JComboBox<String> titulaComboBox;
 	private JLabel titulaLab;
 	
 	private JPanel zvanje;
-	private static JTextField zvanjeField;
+	private static JComboBox<String> zvanjeComboBox;
 	private JLabel zvanjeLab;
 	
 	private JPanel yearsOfExperience;
@@ -77,7 +81,7 @@ public class AddProfessorDialog extends JDialog {
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = d.width;
 		int height = d.height;
-		setSize(width*3/8, height*300/488); 
+		setSize(width*3/8, height*300/444); 
 		setTitle("Dodavanje profesora");
 		setResizable(false);
 		
@@ -163,35 +167,37 @@ public class AddProfessorDialog extends JDialog {
 		northPanel.add(personalId);
 		personalIdField.addFocusListener(new AddProfessorListener(personalIdField, 7));
 		
+		String titule[] = {"BSC", "MSC", "MR", "DR", "PROF"};
 		titula = new JPanel();
         titulaLab = new JLabel("Titula*");
-		titulaField = new JTextField();
+		titulaComboBox= new JComboBox<String>(titule);
 		titulaLab.setPreferredSize(new Dimension(200,25));
-		titulaField.setPreferredSize(new Dimension(200,25));
+		titulaComboBox.setPreferredSize(new Dimension(200,25));
+		titulaComboBox.setSelectedIndex(0);
 		titula.add(titulaLab);
-		titula.add(titulaField);
+		titula.add(titulaComboBox);
 		northPanel.add(titula);
-		titulaField.addFocusListener(new AddProfessorListener(titulaField, 8));
 		
+		String zvanja[] = {"SARADNIK U NASTAVI", "ASISTENT", "DOCENT", "REDOVNI PROFESOR", "VANREDNI PROFESOR", "EMERITUS"};
 		zvanje = new JPanel();
 		zvanjeLab = new JLabel("Zvanje*");
-		zvanjeField = new JTextField();
+		zvanjeComboBox = new JComboBox<String>(zvanja);
 		zvanjeLab.setPreferredSize(new Dimension(200,25));
-		zvanjeField.setPreferredSize(new Dimension(200,25));
+		zvanjeComboBox.setPreferredSize(new Dimension(200,25));
+		zvanjeComboBox.setSelectedIndex(0);
 		zvanje.add(zvanjeLab);
-		zvanje.add(zvanjeField);
+		zvanje.add(zvanjeComboBox);
 		northPanel.add(zvanje);
-		zvanjeField.addFocusListener(new AddProfessorListener(titulaField, 9));
 		
 		yearsOfExperience = new JPanel();
-		yearsOfExperienceLab = new JLabel("Godine iskustva*");
+		yearsOfExperienceLab = new JLabel("Godine staza*");
 		yearsOfExperienceField = new JTextField();
 		yearsOfExperienceLab.setPreferredSize(new Dimension(200,25));
 		yearsOfExperienceField.setPreferredSize(new Dimension(200,25));
 		yearsOfExperience.add(yearsOfExperienceLab);
 		yearsOfExperience.add(yearsOfExperienceField);
 		northPanel.add(yearsOfExperience);
-		yearsOfExperienceField.addFocusListener(new AddProfessorListener(yearsOfExperienceField, 10));
+		yearsOfExperienceField.addFocusListener(new AddProfessorListener(yearsOfExperienceField, 8));
 		
 		confirm = new JButton("Potvrdi");
 		confirm.setPreferredSize(new Dimension(90,30));
@@ -274,12 +280,75 @@ public class AddProfessorDialog extends JDialog {
     	return personalIdField;
     }
     
-    public static JTextField getTitulaField() {
-    	return titulaField;
+    public static Titula getTitula() {
+    	
+    	int titulaIndex = titulaComboBox.getSelectedIndex();
+    	Titula titula;
+    	
+    	switch (titulaIndex) {
+		case 0:
+			titula = Profesor.Titula.BSC;
+			break;
+		case 1:
+			titula = Profesor.Titula.MSC;
+			break;
+		case 2:
+			titula = Profesor.Titula.MR;
+			break;
+		case 3:
+			titula = Profesor.Titula.DR;
+			break;
+		case 4:
+			titula = Profesor.Titula.PROF;
+			break;
+		default:
+			titula = Profesor.Titula.PROF;
+		}
+    	
+    	return titula;
     }
     
-    public static JTextField getZvanjeField() {
-    	return zvanjeField;
+    public static Zvanje getZvanje() {
+        
+    	int zvanjeIndex = zvanjeComboBox.getSelectedIndex();
+    	Zvanje zvanje;
+    	
+		switch (zvanjeIndex) {
+		case 0:
+			
+			zvanje = Profesor.Zvanje.SARADNIK_U_NASTAVI;
+			break;
+			
+		case 1:
+			
+			zvanje = Profesor.Zvanje.ASISTENT;
+			break;
+			
+		case 2:
+			
+			zvanje = Profesor.Zvanje.DOCENT;
+			break;
+			
+		case 3:
+			
+			zvanje = Profesor.Zvanje.REDOVNI_PROFESOR;
+			break;
+			
+		case 4:
+			
+			zvanje = Profesor.Zvanje.VANREDNI_PROFESOR;
+			
+		case 5:
+			
+			zvanje = Profesor.Zvanje.EMERITUS;
+			
+		default:
+			
+			zvanje = Profesor.Zvanje.SARADNIK_U_NASTAVI;
+			
+		}
+		
+		return zvanje;
     }
     
     public static JTextField getYearsOfExpirienceField() {

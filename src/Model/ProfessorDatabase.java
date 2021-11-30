@@ -51,11 +51,11 @@ public class ProfessorDatabase {
 			
 		    case 2:
 			
-			    return professor.getTitula();
+			    return professor.getTitula().name();
 			
 		    case 3:
 			
-			    return professor.getZvanje();
+			    return professor.getZvanje().name();
 			
 		    default:
 			    return null;
