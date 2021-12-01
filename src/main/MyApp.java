@@ -1,5 +1,6 @@
 package main;
 
+import gui.EditProfessorDialog;
 import gui.MainFrame;
 
 public class MyApp {
@@ -7,7 +8,6 @@ public class MyApp {
 	public static void main(String[] args) {
 		
 		MainFrame mf = MainFrame.getMainFrame();
-
 	}
 
 }

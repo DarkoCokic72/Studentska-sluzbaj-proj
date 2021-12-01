@@ -44,7 +44,7 @@ public class Profesor extends Person {
 		return subjectsTeaches;
 	}
 	
-	public Address getOfficeAdress() {
+	public Address getOfficeAddress() {
 		return officeAddress;
 	}
 	
@@ -72,6 +72,10 @@ public class Profesor extends Person {
 	
 	public void setOfficeAddress(Address addr) {
 		this.officeAddress = addr;
+	}
+	
+	public void setZvanje(Zvanje zvanje) {
+		this.zvanje = zvanje;
 	}
 	
 	

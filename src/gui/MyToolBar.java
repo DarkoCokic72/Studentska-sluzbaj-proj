@@ -98,6 +98,48 @@ public class MyToolBar extends JToolBar {
 			
 		});
 		
+		
+		btnEdit.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				CentralPanel centralPanel = CentralPanel.createCentralPanel();
+				switch(centralPanel.getSelectedIndex()) {
+				
+				case 0:
+					//EditStudentDialog
+					break;
+				case 1:
+					EditProfessorDialog editProfessorDialog = new EditProfessorDialog();
+					editProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());
+					EditProfessorDialog.setDialog(editProfessorDialog);
+					break;
+				case 2:
+					//EditSubjectDialog
+				    break;
+
+				}
+			}
+			
+		});
+		
 	}
 
 }

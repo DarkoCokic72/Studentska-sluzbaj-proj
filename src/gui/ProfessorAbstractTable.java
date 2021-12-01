@@ -10,7 +10,7 @@ public class ProfessorAbstractTable extends AbstractTableModel{
 	
 	public ProfessorAbstractTable() {
 		
-		professorDatabase = ProfessorDatabase.getInstance();
+		professorDatabase = ProfessorDatabase.getDatabase();
 	}
 	
 	@Override
