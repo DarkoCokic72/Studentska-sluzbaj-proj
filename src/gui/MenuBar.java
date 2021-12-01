@@ -137,6 +137,31 @@ public class MenuBar extends JMenuBar{
 		});
 		
 		
+		miDelete.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				CentralPanel centralPanel = CentralPanel.createCentralPanel();
+				switch(centralPanel.getSelectedIndex()) {
+				
+				case 0:
+					//DeleteStudentDialog
+					break;
+				case 1:
+					DeleteProfessorDialog deleteProfessorDialog = new DeleteProfessorDialog();
+					deleteProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());
+					break;
+				case 2:
+					//DeleteSubjectDialog
+				    break;
+
+				}
+			
+			}
+		});
+		
+		
 		
 				
 		

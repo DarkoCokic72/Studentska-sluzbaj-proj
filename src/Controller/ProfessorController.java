@@ -2,6 +2,7 @@ package Controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.regex.Pattern;
@@ -105,6 +106,25 @@ public class ProfessorController {
 			
 			}
 			
+		}
+		
+		public void delete(Profesor professor) {
+			
+			int id = professor.getPersonalID();
+			ArrayList<Profesor> professorList = ProfessorDatabase.getDatabase().getProfessors();
+			int i = 0;
+			
+			for(Profesor p: professorList) {
+				if(p.getPersonalID() == id) {
+					professorList.remove(i);
+					break;
+				}
+				i++;
+			}
+			
+			ProfessorJTable professorTable = ProfessorJTable.getTable();
+			professorTable.updateTable();
+					
 		}
 		
 			

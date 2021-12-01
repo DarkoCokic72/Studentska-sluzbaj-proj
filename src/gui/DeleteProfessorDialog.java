@@ -11,9 +11,12 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Controller.ProfessorController;
+import Model.Profesor;
+import Model.ProfessorDatabase;
 
 public class DeleteProfessorDialog extends JDialog {
 	
@@ -25,6 +28,12 @@ public class DeleteProfessorDialog extends JDialog {
 	
 	public DeleteProfessorDialog() {
 		
+		int selectedRow = ProfessorJTable.getTable().convertRowIndexToModel(ProfessorJTable.getTable().getSelectedRow());
+		if(selectedRow == -1) {
+			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi profesor kog zelite da obrišete");
+			return;
+		}
+		
 		northPanel = new JPanel();
 		southPanel = new JPanel();
 		
@@ -32,7 +41,7 @@ public class DeleteProfessorDialog extends JDialog {
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = d.width;
 		int height = d.height;
-		setSize(width*1/4, height*1/5); 
+		setSize(width*1/4, height*1/5);
 		setTitle("Brisanje profesora");
 		setResizable(false);
 		
@@ -49,8 +58,9 @@ public class DeleteProfessorDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				//ProfessorController professorContr = ProfessorController.getProfessorController();
-				//professorContr.delete();
+				Profesor professor = ProfessorDatabase.getDatabase().getProfessorFromRow(selectedRow);
+				ProfessorController professorContr = ProfessorController.getProfessorController();
+				professorContr.delete(professor);
 				dispose();
 				
 			}
