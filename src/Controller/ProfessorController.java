@@ -31,12 +31,12 @@ public class ProfessorController {
 			String dateString = AddProfessorDialog.getDateOfBirth().getText().trim(); //convert to Date
 			String addressString = AddProfessorDialog.getAddress().getText().trim(); //convert to Address 
 			String phoneNumber = AddProfessorDialog.getMobile().getText().trim(); 
-		    String email = AddProfessorDialog.getMailField().getText().trim();
-		    String officeAddressString = AddProfessorDialog.getOfficeAddressField().getText().trim(); //convert to Address
+			String email = AddProfessorDialog.getMailField().getText().trim();
+			String officeAddressString = AddProfessorDialog.getOfficeAddressField().getText().trim(); //convert to Address
 			String personalIdString = AddProfessorDialog.getPersonalId().getText().trim(); //convert to int
 			Titula titula = AddProfessorDialog.getTitula();
 			Zvanje zvanje = AddProfessorDialog.getZvanje();
-		    String yearsOfExperienceString = AddProfessorDialog.getYearsOfExpirienceField().getText().trim(); //convert to int
+			String yearsOfExperienceString = AddProfessorDialog.getYearsOfExpirienceField().getText().trim(); //convert to int
 				
 			if(checkName(name) == true && checkSurname(surname) == true && checkDate(dateString) == true && checkAddress(addressString) == true
 				&& checkPhoneNumber(phoneNumber) == true && checkMail(email) == true && checkAddress(officeAddressString) 
@@ -69,12 +69,12 @@ public class ProfessorController {
 			String dateString = EditProfessorInformationTab.getDateOfBirth().getText().trim(); //convert to Date
 			String addressString = EditProfessorInformationTab.getAddress().getText().trim(); //convert to Address 
 			String phoneNumber = EditProfessorInformationTab.getMobile().getText().trim(); 
-		    String email = EditProfessorInformationTab.getMailField().getText().trim();
-		    String officeAddressString = EditProfessorInformationTab.getOfficeAddressField().getText().trim(); //convert to Address
+			String email = EditProfessorInformationTab.getMailField().getText().trim();
+			String officeAddressString = EditProfessorInformationTab.getOfficeAddressField().getText().trim(); //convert to Address
 			String personalIdString = EditProfessorInformationTab.getPersonalId().getText().trim(); //convert to int
 			Titula titula = EditProfessorInformationTab.getTitula();
 			Zvanje zvanje = EditProfessorInformationTab.getZvanje();
-		    String yearsOfExperienceString = EditProfessorInformationTab.getYearsOfExpirienceField().getText().trim(); //convert to int
+			String yearsOfExperienceString = EditProfessorInformationTab.getYearsOfExpirienceField().getText().trim(); //convert to int
 				
 			if(checkName(name) == true && checkSurname(surname) == true && checkDate(dateString) == true && checkAddress(addressString) == true
 				&& checkPhoneNumber(phoneNumber) == true && checkMail(email) == true && checkAddress(officeAddressString) 
@@ -86,18 +86,18 @@ public class ProfessorController {
 				int personalId = Integer.parseInt(personalIdString);
 				int yearsOfExperience = Integer.parseInt(yearsOfExperienceString);
 				
-                professor.setName(name);
-                professor.setSurname(surname);
-                professor.setDateOfBirth(date);
-                professor.setAddress(address);
-                professor.setPhoneNumber(phoneNumber);
-                professor.seteMail(email);
-                professor.setOfficeAddress(officeAddress);
-                professor.setPersonalID(personalId);
-                professor.setTitle(titula);
-                professor.setZvanje(zvanje);
-                professor.setTitle(titula);
-                professor.setYearsOfExperience(yearsOfExperience);
+				professor.setName(name);
+				professor.setSurname(surname);
+				professor.setDateOfBirth(date);
+				professor.setAddress(address);
+				professor.setPhoneNumber(phoneNumber);
+				professor.seteMail(email);
+				professor.setOfficeAddress(officeAddress);
+				professor.setPersonalID(personalId);
+				professor.setTitle(titula);
+				professor.setZvanje(zvanje);
+				professor.setTitle(titula);
+				professor.setYearsOfExperience(yearsOfExperience);
 				
 				ProfessorJTable professorTable = ProfessorJTable.getTable();
 				professorTable.updateTable();

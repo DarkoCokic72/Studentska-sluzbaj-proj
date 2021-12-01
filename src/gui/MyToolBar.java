@@ -140,6 +140,47 @@ public class MyToolBar extends JToolBar {
 			
 		});
 		
+		btnDelete.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				CentralPanel centralPanel = CentralPanel.createCentralPanel();
+				switch(centralPanel.getSelectedIndex()) {
+				
+				case 0:
+					//DeleteStudentDialog
+					break;
+				case 1:
+					DeleteProfessorDialog deleteProfessorDialog = new DeleteProfessorDialog();
+					deleteProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());
+					//EditProfessorDialog.setDialog(editProfessorDialog);
+					break;
+				case 2:
+					//DeleteSubjectDialog
+				    break;
+
+				}
+			}
+			
+		});
+		
 	}
 
 }
