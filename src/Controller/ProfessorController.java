@@ -49,7 +49,7 @@ public class ProfessorController {
 				Profesor professor = new Profesor(name, surname, date, email, phoneNumber, address, 
 			    		                          officeAddress, personalId, titula, yearsOfExperience, zvanje);
 			     
-				ProfessorDatabase professorDatabase = ProfessorDatabase.getInstance();
+				ProfessorDatabase professorDatabase = ProfessorDatabase.getDatabase();
 				professorDatabase.addProfessorToTable(professor);
 				ProfessorJTable professorTable = ProfessorJTable.getTable();
 				professorTable.updateTable();
@@ -202,7 +202,7 @@ public class ProfessorController {
 			
 		public boolean checkPersonalId(String number) {
 				
-			for (Profesor p : ProfessorDatabase.getInstance().getProfessors()) {
+			for (Profesor p : ProfessorDatabase.getDatabase().getProfessors()) {
 					if (Integer.parseInt(number) == p.getPersonalID()) {
 							
 						JOptionPane.showMessageDialog(null, "Vec postoji profesor sa unetim brojem licne karte");	

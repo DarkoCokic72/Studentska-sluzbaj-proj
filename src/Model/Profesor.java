@@ -44,7 +44,7 @@ public class Profesor extends Person {
 		return subjectsTeaches;
 	}
 	
-	public Address getOfficeAdress() {
+	public Address getOfficeAddress() {
 		return officeAddress;
 	}
 	

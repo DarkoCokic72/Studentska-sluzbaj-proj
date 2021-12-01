@@ -68,10 +68,16 @@ public class ProfessorDatabase {
 	}
 	
 	public ArrayList<Profesor> getProfessors() {
+		
 		return professors;
 	}
 	
-	public static ProfessorDatabase getInstance() {
+	public Profesor getProfessorFromRow(int rowIndex) {
+		
+		return professors.get(rowIndex);
+	}
+	
+	public static ProfessorDatabase getDatabase() {
 		
 		if (professorDatabase == null) {
 			

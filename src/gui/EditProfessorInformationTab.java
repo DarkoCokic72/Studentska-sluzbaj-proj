@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -14,6 +16,9 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import Model.Profesor;
+import Model.ProfessorDatabase;
 
 
 public class EditProfessorInformationTab extends JPanel {
@@ -68,8 +73,13 @@ public class EditProfessorInformationTab extends JPanel {
 	private static JButton confirm;
 	private JButton cancel;
 	
+	private static Profesor professor;
+	
 	
 	public EditProfessorInformationTab() {
+		
+		int selectedRow = ProfessorJTable.getTable().convertRowIndexToModel(ProfessorJTable.getTable().getSelectedRow());
+		professor = ProfessorDatabase.getDatabase().getProfessorFromRow(selectedRow);
 		
 		northPanel = new JPanel();
 		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
@@ -89,6 +99,8 @@ public class EditProfessorInformationTab extends JPanel {
 		name.add(nameLab);
 		name.add(nameField);
 		northPanel.add(name);
+		
+		nameField.setText(professor.getName());
 		//nameField.addFocusListener(new EditProfessorListener(nameField, 0));
 		
 		surname = new JPanel();
@@ -99,6 +111,8 @@ public class EditProfessorInformationTab extends JPanel {
 		surname.add(surnameLab);
 		surname.add(surnameField);
 		northPanel.add(surname);
+		
+		surnameField.setText(professor.getSurname());
 		//surnameField.addFocusListener(new EditProfessorListener(surnameField, 1));
 		
 		dateOfBirth = new JPanel();
@@ -109,6 +123,9 @@ public class EditProfessorInformationTab extends JPanel {
 		dateOfBirth.add(dateOfBirthLab);
 		dateOfBirth.add(dateOfBirthField);
 		northPanel.add(dateOfBirth);
+		
+		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy.");
+		dateOfBirthField.setText(dateFormat.format(professor.getDateOfBirth()));
 		//dateOfBirthField.addFocusListener(new EditProfessorListener(dateOfBirthField, 2));
 		
 		address = new JPanel();
@@ -119,6 +136,9 @@ public class EditProfessorInformationTab extends JPanel {
 		address.add(addressLab);
 		address.add(addressField);
 		northPanel.add(address);
+		
+		String addressString = professor.getAddress().getStreetName() + Integer.toString(professor.getAddress().getStreetNumber()) + "," + professor.getAddress().getCity() + "," + professor.getAddress().getCountry() ; 
+		addressField.setText(addressString);
 		//addressField.addFocusListener(new EditProfessorListener(addressField, 3));
 		
 		mobile = new JPanel();
@@ -129,6 +149,8 @@ public class EditProfessorInformationTab extends JPanel {
 		mobile.add(mobileLab);
 		mobile.add(mobileField);
 		northPanel.add(mobile);
+		
+		mobileField.setText(professor.getPhoneNumber());
 		//mobileField.addFocusListener(new EditProfessorListener(mobileField, 4));
 		
 		mail = new JPanel();
@@ -139,6 +161,8 @@ public class EditProfessorInformationTab extends JPanel {
 		mail.add(mailLab);
 		mail.add(mailField);
 		northPanel.add(mail);
+		
+		mailField.setText(professor.geteMail());
 		//mailField.addFocusListener(new EditProfessorListener(mailField, 5));
 		
 		officeAddress = new JPanel();
@@ -149,6 +173,9 @@ public class EditProfessorInformationTab extends JPanel {
 		officeAddress.add(officeAddressLab);
 		officeAddress.add(officeAddressField);
 		northPanel.add(officeAddress);
+		
+		String officeAddressString = professor.getOfficeAddress().getStreetName() + Integer.toString(professor.getOfficeAddress().getStreetNumber()) + "," + professor.getOfficeAddress().getCity() + "," + professor.getOfficeAddress().getCountry() ; 
+		officeAddressField.setText(officeAddressString);
 		//officeAddressField.addFocusListener(new EditProfessorListener(officeAddressField, 6));
 		
 		personalId = new JPanel();
@@ -159,6 +186,8 @@ public class EditProfessorInformationTab extends JPanel {
 		personalId.add(personalIdLab);
 		personalId.add(personalIdField);
 		northPanel.add(personalId);
+		
+		personalIdField.setText(Integer.toString(professor.getPersonalID()));
 		//personalIdField.addFocusListener(new EditProfessorListener(personalIdField, 7));
 		
 		String titule[] = {"BSC", "MSC", "MR", "DR", "PROF"};
@@ -172,6 +201,8 @@ public class EditProfessorInformationTab extends JPanel {
 		titula.add(titulaComboBox);
 		northPanel.add(titula);
 		
+		titulaComboBox.setSelectedIndex(professor.getTitula().ordinal());
+		
 		String zvanja[] = {"SARADNIK U NASTAVI", "ASISTENT", "DOCENT", "REDOVNI PROFESOR", "VANREDNI PROFESOR", "EMERITUS"};
 		zvanje = new JPanel();
 		zvanjeLab = new JLabel("Zvanje*");
@@ -183,6 +214,8 @@ public class EditProfessorInformationTab extends JPanel {
 		zvanje.add(zvanjeComboBox);
 		northPanel.add(zvanje);
 		
+		zvanjeComboBox.setSelectedIndex(professor.getZvanje().ordinal());
+		
 		yearsOfExperience = new JPanel();
 		yearsOfExperienceLab = new JLabel("Godine staza*");
 		yearsOfExperienceField = new JTextField();
@@ -191,6 +224,8 @@ public class EditProfessorInformationTab extends JPanel {
 		yearsOfExperience.add(yearsOfExperienceLab);
 		yearsOfExperience.add(yearsOfExperienceField);
 		northPanel.add(yearsOfExperience);
+		
+		yearsOfExperienceField.setText(Integer.toString(professor.getYearsOfExperience()));
 		//yearsOfExperienceField.addFocusListener(new EditProfessorListener(yearsOfExperienceField, 8));
 		
 		confirm = new JButton("Potvrdi");

@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 import Model.Profesor;
 
@@ -15,6 +16,11 @@ public class EditProfessorDialog extends JDialog {
 	
 	public EditProfessorDialog() {
 		
+		int selectedRow = ProfessorJTable.getTable().convertRowIndexToModel(ProfessorJTable.getTable().getSelectedRow());
+		if(selectedRow == -1) {
+			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi profesor kog zelite da izmenite");
+			return;
+		}
 		setVisible(true);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = d.width;
