@@ -41,7 +41,7 @@ public class Student extends Person{
 		this.yearOfEnroll = yearOfEnroll;
 	}
 
-	public int getCurrYearOfStudies() {
+	public Integer getCurrYearOfStudies() {
 		return currYearOfStudies;
 	}
 
@@ -57,7 +57,7 @@ public class Student extends Person{
 		this.currStatus = currStatus;
 	}
 
-	public double getAvgMark() {
+	public Double getAvgMark() {
 		return avgMark;
 	}
 
