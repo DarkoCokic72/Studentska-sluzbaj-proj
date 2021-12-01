@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -26,6 +27,8 @@ public class EditProfessorDialog extends JDialog {
 		int width = d.width;
 		int height = d.height;
 		setSize(width*3/8, height*300/444); 
+		ImageIcon img = new ImageIcon("images/Pen-5-icon.png");
+		setIconImage(img.getImage());
 		setTitle("Izmena profesora");
 		setResizable(false);
 		

@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -42,6 +43,8 @@ public class DeleteProfessorDialog extends JDialog {
 		int width = d.width;
 		int height = d.height;
 		setSize(width*1/4, height*1/5);
+		ImageIcon img = new ImageIcon("images/Recycle-Bin-icon.png");
+		setIconImage(img.getImage());
 		setTitle("Brisanje profesora");
 		setResizable(false);
 		

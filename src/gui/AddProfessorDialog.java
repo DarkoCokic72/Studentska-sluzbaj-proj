@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -81,7 +82,9 @@ public class AddProfessorDialog extends JDialog {
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = d.width;
 		int height = d.height;
-		setSize(width*3/8, height*300/444); 
+		setSize(width*3/8, height*300/444);
+		ImageIcon img = new ImageIcon("images/Plus-icon.png");
+		setIconImage(img.getImage());
 		setTitle("Dodavanje profesora");
 		setResizable(false);
 		
