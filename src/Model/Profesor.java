@@ -74,6 +74,10 @@ public class Profesor extends Person {
 		this.officeAddress = addr;
 	}
 	
+	public void setZvanje(Zvanje zvanje) {
+		this.zvanje = zvanje;
+	}
+	
 	
 	
 	

@@ -14,12 +14,14 @@ import Model.Profesor.Titula;
 import Model.Profesor.Zvanje;
 import Model.ProfessorDatabase;
 import gui.AddProfessorDialog;
+import gui.EditProfessorInformationTab;
 import gui.ProfessorJTable;
 
 public class ProfessorController {
 
 		private static ProfessorController professorContr = null;
 		public boolean professorAdded = false;
+		public boolean professorEdited = false;
 		public Boolean[] textFieldFilled = new Boolean[9];
 		
 		public void add() {
@@ -58,6 +60,53 @@ public class ProfessorController {
 			}
 			
 		}
+		
+		
+		public void edit(Profesor professor) {
+			
+			String name = EditProfessorInformationTab.getNameField().getText().trim();
+			String surname = EditProfessorInformationTab.getSurnameField().getText().trim();
+			String dateString = EditProfessorInformationTab.getDateOfBirth().getText().trim(); //convert to Date
+			String addressString = EditProfessorInformationTab.getAddress().getText().trim(); //convert to Address 
+			String phoneNumber = EditProfessorInformationTab.getMobile().getText().trim(); 
+		    String email = EditProfessorInformationTab.getMailField().getText().trim();
+		    String officeAddressString = EditProfessorInformationTab.getOfficeAddressField().getText().trim(); //convert to Address
+			String personalIdString = EditProfessorInformationTab.getPersonalId().getText().trim(); //convert to int
+			Titula titula = EditProfessorInformationTab.getTitula();
+			Zvanje zvanje = EditProfessorInformationTab.getZvanje();
+		    String yearsOfExperienceString = EditProfessorInformationTab.getYearsOfExpirienceField().getText().trim(); //convert to int
+				
+			if(checkName(name) == true && checkSurname(surname) == true && checkDate(dateString) == true && checkAddress(addressString) == true
+				&& checkPhoneNumber(phoneNumber) == true && checkMail(email) == true && checkAddress(officeAddressString) 
+				&& checkPersonalId(personalIdString) == true && checkYearsOfExp(yearsOfExperienceString) == true) {
+			
+				Date date = convertStringToDate(dateString);
+				Address address = convertStringToAddress(addressString);
+				Address officeAddress = convertStringToAddress(officeAddressString);
+				int personalId = Integer.parseInt(personalIdString);
+				int yearsOfExperience = Integer.parseInt(yearsOfExperienceString);
+				
+                professor.setName(name);
+                professor.setSurname(surname);
+                professor.setDateOfBirth(date);
+                professor.setAddress(address);
+                professor.setPhoneNumber(phoneNumber);
+                professor.seteMail(email);
+                professor.setOfficeAddress(officeAddress);
+                professor.setPersonalID(personalId);
+                professor.setTitle(titula);
+                professor.setZvanje(zvanje);
+                professor.setTitle(titula);
+                professor.setYearsOfExperience(yearsOfExperience);
+				
+				ProfessorJTable professorTable = ProfessorJTable.getTable();
+				professorTable.updateTable();
+				professorEdited = true;
+			
+			}
+			
+		}
+		
 			
 		public Date convertStringToDate(String date) {
 				
@@ -83,7 +132,7 @@ public class ProfessorController {
 			String streetName = output[0].replaceAll("[0-9]+", "");
 			int streetNumber = Integer.parseInt(output[0].replaceAll("[\\p{L}+\\s]", ""));
 				
-			retAddress = new Address(streetName, streetNumber , city, country);
+			retAddress = new Address(streetName, streetNumber, city, country);
 			return retAddress;
 				
 		}
@@ -95,9 +144,9 @@ public class ProfessorController {
 			boolean ret = true;
 			if (name.contains(" ")) {
 					
-				String[] parts = name.split(" ");
+				String[] nameParts = name.split(" ");
 					
-				for (String p : parts) {
+				for (String p : nameParts) {
 						
 					if (p.isEmpty())
 						continue;
@@ -121,25 +170,25 @@ public class ProfessorController {
 			
 		public boolean checkSurname(String surname) {
 				
-			boolean ret = true;
+			boolean retVal = true;
 			if (surname.contains("-")) {
 				String[] parts = surname.split("-");
 				for (String p : parts) {
 					p = p.trim();
-					ret = Pattern.matches("\\p{L}+", p);
-					if (ret == false && !surname.isEmpty()) {
+					retVal = Pattern.matches("\\p{L}+", p);
+					if (retVal == false && !surname.isEmpty()) {
 						JOptionPane.showMessageDialog(null, "Neispravan format prezimena");
-						return ret;
+						return retVal;
 					}
 				}
 			} else {
-				ret = Pattern.matches("\\p{L}+", surname);
+				retVal = Pattern.matches("\\p{L}+", surname);
 			}
-			if (ret == false && !surname.isEmpty()) {
+			if (retVal == false && !surname.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Neispravan format prezimena");
 			}
 
-			return ret;
+			return retVal;
 				
 		}
 			
@@ -178,38 +227,29 @@ public class ProfessorController {
 			
 		public boolean checkPhoneNumber(String number) {
 				
-			boolean ret = true;
+			boolean retVal = true;
 			String regex = "\\+?[0-9][0-9/-]+";
-			ret = Pattern.matches(regex, number);
-			if (ret == false && !number.isEmpty()) {
+			retVal = Pattern.matches(regex, number);
+			if (retVal == false && !number.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Neispravan format broja telefona.");
 			}
-			return ret;
+			return retVal;
 				
 		}
 			
 		public boolean checkMail(String mail) {
 				
-			boolean ret = true;
-			ret = Pattern.matches("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}.[a-z]{2,}$", mail); 
-			if (ret == false && !mail.isEmpty()) {
+			boolean retVal = true;
+			retVal = Pattern.matches("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}.[a-z]{2,}$", mail); 
+			if (retVal == false && !mail.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Neispravan format E-mail adrese");
 			}
 				
-			return ret;
+			return retVal;
 		}
 			
 			
 		public boolean checkPersonalId(String number) {
-				
-			for (Profesor p : ProfessorDatabase.getDatabase().getProfessors()) {
-					if (Integer.parseInt(number) == p.getPersonalID()) {
-							
-						JOptionPane.showMessageDialog(null, "Vec postoji profesor sa unetim brojem licne karte");	
-						return false;
-							
-					}
-			}
 				
 			boolean retVal = true;
 			String regex = "^[0-9]*$";
@@ -219,9 +259,21 @@ public class ProfessorController {
 					
 				JOptionPane.showMessageDialog(null, "Neispravan format broja licne karte");
 			}
+			
+			
+			for (Profesor p : ProfessorDatabase.getDatabase().getProfessors()) {
+				if (Integer.parseInt(number) == p.getPersonalID()) {
+						
+					JOptionPane.showMessageDialog(null, "Vec postoji profesor sa unetim brojem licne karte");	
+					retVal = false;
+						
+				}
+			}
 				
 			return retVal;
 		}
+		
+		
 			
 		
 		public boolean checkYearsOfExp(String years) {
@@ -236,27 +288,44 @@ public class ProfessorController {
 		}
 	       
 	   
-	        
 	    public void resetFields() {
 	    	Arrays.fill(textFieldFilled, Boolean.FALSE);
-	     }
+	    }
+	    
+	    public void fieldsFilled() {
+	    	Arrays.fill(textFieldFilled, Boolean.TRUE);
+	    }
 	        
 	    
 	    public boolean validateAdd(String input, int fieldNumber) {
 	        	
-	    	fieldValidationAdd(input, fieldNumber);
+	    	fieldValidation(input, fieldNumber);
 
-	    	if (professorValidAdd()) {
+	    	if (professorValid()) {
 	    		AddProfessorDialog.getConfirm().setEnabled(true);
 	    	}
 	    	else {
 	    		AddProfessorDialog.getConfirm().setEnabled(false);
 	    	}
 
-	    	return professorValidAdd();
+	    	return professorValid();
+	    }
+	    
+	    public boolean validateEdit(String input, int fieldNumber) {
+        	
+	    	fieldValidation(input, fieldNumber);
+
+	    	if (professorValid()) {
+	    		EditProfessorInformationTab.getConfirm().setEnabled(true);
+	    	}
+	    	else {
+	    		EditProfessorInformationTab.getConfirm().setEnabled(false);
+	    	}
+
+	    	return professorValid();
 	    }
 	        
-	    private void fieldValidationAdd(String input, int fieldNumber) {
+	    private void fieldValidation(String input, int fieldNumber) {
 	    	
 	    	switch (fieldNumber) {
 	    	case 0:
@@ -335,7 +404,7 @@ public class ProfessorController {
 	    }
 	        
 
-	    public boolean professorValidAdd() {
+	    public boolean professorValid() {
 
 	    	for (Boolean t : textFieldFilled) {
 	    		if (!t)

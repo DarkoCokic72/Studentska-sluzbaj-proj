@@ -17,8 +17,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Controller.ProfessorController;
+import Listeners.EditProfessorListener;
 import Model.Profesor;
 import Model.ProfessorDatabase;
+import Model.Profesor.Titula;
+import Model.Profesor.Zvanje;
 
 
 public class EditProfessorInformationTab extends JPanel {
@@ -91,6 +95,8 @@ public class EditProfessorInformationTab extends JPanel {
 		int height = d.height;
 		setSize(width*3/8, height*300/444); 
 		
+		ProfessorController.getProfessorController().fieldsFilled(); 
+		
 		name = new JPanel();
 		nameLab = new JLabel("Ime*");
 		nameField = new JTextField();
@@ -101,7 +107,7 @@ public class EditProfessorInformationTab extends JPanel {
 		northPanel.add(name);
 		
 		nameField.setText(professor.getName());
-		//nameField.addFocusListener(new EditProfessorListener(nameField, 0));
+		nameField.addFocusListener(new EditProfessorListener(nameField, 0));
 		
 		surname = new JPanel();
 		surnameLab = new JLabel("Prezime*");
@@ -113,7 +119,7 @@ public class EditProfessorInformationTab extends JPanel {
 		northPanel.add(surname);
 		
 		surnameField.setText(professor.getSurname());
-		//surnameField.addFocusListener(new EditProfessorListener(surnameField, 1));
+		surnameField.addFocusListener(new EditProfessorListener(surnameField, 1));
 		
 		dateOfBirth = new JPanel();
 		dateOfBirthLab = new JLabel("Datum rodjenja*");
@@ -126,7 +132,7 @@ public class EditProfessorInformationTab extends JPanel {
 		
 		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy.");
 		dateOfBirthField.setText(dateFormat.format(professor.getDateOfBirth()));
-		//dateOfBirthField.addFocusListener(new EditProfessorListener(dateOfBirthField, 2));
+		dateOfBirthField.addFocusListener(new EditProfessorListener(dateOfBirthField, 2));
 		
 		address = new JPanel();
 		addressLab = new JLabel("Adresa stanovanja*");
@@ -139,7 +145,7 @@ public class EditProfessorInformationTab extends JPanel {
 		
 		String addressString = professor.getAddress().getStreetName() + Integer.toString(professor.getAddress().getStreetNumber()) + "," + professor.getAddress().getCity() + "," + professor.getAddress().getCountry() ; 
 		addressField.setText(addressString);
-		//addressField.addFocusListener(new EditProfessorListener(addressField, 3));
+		addressField.addFocusListener(new EditProfessorListener(addressField, 3));
 		
 		mobile = new JPanel();
 		mobileLab = new JLabel("Broj telefona*");
@@ -151,7 +157,7 @@ public class EditProfessorInformationTab extends JPanel {
 		northPanel.add(mobile);
 		
 		mobileField.setText(professor.getPhoneNumber());
-		//mobileField.addFocusListener(new EditProfessorListener(mobileField, 4));
+		mobileField.addFocusListener(new EditProfessorListener(mobileField, 4));
 		
 		mail = new JPanel();
 		mailLab = new JLabel("E-mail  adresa*");
@@ -163,7 +169,7 @@ public class EditProfessorInformationTab extends JPanel {
 		northPanel.add(mail);
 		
 		mailField.setText(professor.geteMail());
-		//mailField.addFocusListener(new EditProfessorListener(mailField, 5));
+		mailField.addFocusListener(new EditProfessorListener(mailField, 5));
 		
 		officeAddress = new JPanel();
 		officeAddressLab = new JLabel("Adresa kancelarije*");
@@ -176,7 +182,7 @@ public class EditProfessorInformationTab extends JPanel {
 		
 		String officeAddressString = professor.getOfficeAddress().getStreetName() + Integer.toString(professor.getOfficeAddress().getStreetNumber()) + "," + professor.getOfficeAddress().getCity() + "," + professor.getOfficeAddress().getCountry() ; 
 		officeAddressField.setText(officeAddressString);
-		//officeAddressField.addFocusListener(new EditProfessorListener(officeAddressField, 6));
+		officeAddressField.addFocusListener(new EditProfessorListener(officeAddressField, 6));
 		
 		personalId = new JPanel();
 		personalIdLab = new JLabel("Broj licne karte*");
@@ -188,7 +194,9 @@ public class EditProfessorInformationTab extends JPanel {
 		northPanel.add(personalId);
 		
 		personalIdField.setText(Integer.toString(professor.getPersonalID()));
-		//personalIdField.addFocusListener(new EditProfessorListener(personalIdField, 7));
+		professor.setPersonalID(-1);	 			//postavljamo personalID na -1 kako bismo mogli da ga ne promenimo prilikom editovanja, 
+													//a da nam pri tome ne iskoci greska da vec postoji profesor sa identicnim ID
+		personalIdField.addFocusListener(new EditProfessorListener(personalIdField, 7));
 		
 		String titule[] = {"BSC", "MSC", "MR", "DR", "PROF"};
 		titula = new JPanel();
@@ -226,17 +234,28 @@ public class EditProfessorInformationTab extends JPanel {
 		northPanel.add(yearsOfExperience);
 		
 		yearsOfExperienceField.setText(Integer.toString(professor.getYearsOfExperience()));
-		//yearsOfExperienceField.addFocusListener(new EditProfessorListener(yearsOfExperienceField, 8));
+		yearsOfExperienceField.addFocusListener(new EditProfessorListener(yearsOfExperienceField, 8));
 		
 		confirm = new JButton("Potvrdi");
 		confirm.setPreferredSize(new Dimension(90,30));
-		confirm.setEnabled(false);
 		southPanel.add(confirm);
 		
 		confirm.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+
+				ProfessorController professorContr = ProfessorController.getProfessorController();
+				professorContr.edit(professor);
+				if(professorContr.professorEdited == true) {
+					
+					professorContr.resetFields();
+					EditProfessorDialog.getEditProfessorDialog().dispose();
+			    	EditProfessorPanel.deleteEditProfessorPanel();
+			    	EditProfessorDialog.deleteEditProfessorDialog();
+				    professorContr.professorEdited = false;
+				}
 				
 
 			}
@@ -267,6 +286,117 @@ public class EditProfessorInformationTab extends JPanel {
 		
 				
 	}
+	
+	public static JTextField getNameField() {
+		return nameField;
+	}
+	
+    public static JTextField getSurnameField() {
+    	return surnameField;
+    }
+    
+    public static JTextField getDateOfBirth() {
+    	return dateOfBirthField;
+    }
+    
+    public static JTextField getAddress() {
+    	return addressField;
+    }
+    
+    public static JTextField getMobile() {
+    	return mobileField;
+    }
+    
+    public static JTextField getMailField() {
+    	return mailField;
+    }
+    
+    public static JTextField getOfficeAddressField() {
+    	return officeAddressField;
+    }
+    
+    public static JTextField getPersonalId() {
+    	return personalIdField;
+    }
+    
+    public static Titula getTitula() {
+    	
+    	int titulaIndex = titulaComboBox.getSelectedIndex();
+    	Titula titula;
+    	
+    	switch (titulaIndex) {
+		case 0:
+			titula = Profesor.Titula.BSC;
+			break;
+		case 1:
+			titula = Profesor.Titula.MSC;
+			break;
+		case 2:
+			titula = Profesor.Titula.MR;
+			break;
+		case 3:
+			titula = Profesor.Titula.DR;
+			break;
+		case 4:
+			titula = Profesor.Titula.PROF;
+			break;
+		default:
+			titula = Profesor.Titula.PROF;
+		}
+    	
+    	return titula;
+    }
+    
+    public static Zvanje getZvanje() {
+        
+    	int zvanjeIndex = zvanjeComboBox.getSelectedIndex();
+    	Zvanje zvanje;
+    	
+		switch (zvanjeIndex) {
+		case 0:
+			
+			zvanje = Profesor.Zvanje.SARADNIK_U_NASTAVI;
+			break;
+			
+		case 1:
+			
+			zvanje = Profesor.Zvanje.ASISTENT;
+			break;
+			
+		case 2:
+			
+			zvanje = Profesor.Zvanje.DOCENT;
+			break;
+			
+		case 3:
+			
+			zvanje = Profesor.Zvanje.REDOVNI_PROFESOR;
+			break;
+			
+		case 4:
+			
+			zvanje = Profesor.Zvanje.VANREDNI_PROFESOR;
+			
+		case 5:
+			
+			zvanje = Profesor.Zvanje.EMERITUS;
+			
+		default:
+			
+			zvanje = Profesor.Zvanje.SARADNIK_U_NASTAVI;
+			
+		}
+		
+		return zvanje;
+    }
+    
+    public static JTextField getYearsOfExpirienceField() {
+    	return yearsOfExperienceField;
+    }
+    
+    public static JButton getConfirm() {
+    	return confirm;
+    }
 	
 
 }
