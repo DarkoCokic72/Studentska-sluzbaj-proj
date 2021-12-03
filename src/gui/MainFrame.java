@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -14,7 +13,7 @@ public class MainFrame extends JFrame {
 		
 	    private static MainFrame mf = null;
 	
-		public MainFrame() { 
+		private MainFrame() { 
 			
 		super(); 
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -40,7 +39,7 @@ public class MainFrame extends JFrame {
 		StatusBar stBar = new StatusBar();
 		add(stBar, BorderLayout.SOUTH);
 		
-		CentralPanel centralPanel = CentralPanel.createCentralPanel();
+		CentralPanel centralPanel = CentralPanel.getCentralPanel();
 		centralPanel.setBorder(BorderFactory.createEmptyBorder(12, 12, 7, 20));
 		add(centralPanel, BorderLayout.CENTER);
 		

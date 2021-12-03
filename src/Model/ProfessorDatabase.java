@@ -8,7 +8,7 @@ public class ProfessorDatabase {
 	private ArrayList<Profesor> professors;
 	private ArrayList<String> columns;
 		
-	public ProfessorDatabase() {
+	private ProfessorDatabase() {
 		
 		professors = new ArrayList<Profesor>();
 		columns = new ArrayList<String>();

@@ -72,37 +72,51 @@ public class ProfessorController {
 			String phoneNumber = EditProfessorInformationTab.getMobile().getText().trim(); 
 			String email = EditProfessorInformationTab.getMailField().getText().trim();
 			String officeAddressString = EditProfessorInformationTab.getOfficeAddressField().getText().trim(); //convert to Address
-			String personalIdString = EditProfessorInformationTab.getPersonalId().getText().trim(); //convert to int
 			Titula titula = EditProfessorInformationTab.getTitula();
 			Zvanje zvanje = EditProfessorInformationTab.getZvanje();
 			String yearsOfExperienceString = EditProfessorInformationTab.getYearsOfExpirienceField().getText().trim(); //convert to int
 				
 			if(checkName(name) == true && checkSurname(surname) == true && checkDate(dateString) == true && checkAddress(addressString) == true
 				&& checkPhoneNumber(phoneNumber) == true && checkMail(email) == true && checkAddress(officeAddressString) 
-				&& checkPersonalId(personalIdString) == true && checkYearsOfExp(yearsOfExperienceString) == true) {
+				&& checkYearsOfExp(yearsOfExperienceString) == true) {
+				
+				
+				String personalIdString = EditProfessorInformationTab.getPersonalId().getText().trim(); //convert to int
+				professor.setPersonalID(-1);	 			//postavljamo personalID na -1 kako bismo mogli da ga ne promenimo prilikom editovanja, 
+															//a da nam pri tome ne iskoci greska da vec postoji profesor sa identicnim ID
+				String personalIdStringWrong = EditProfessorInformationTab.getPersonalId().getText().trim();
+				
+				if(checkPersonalId(personalIdStringWrong)) {
 			
-				Date date = convertStringToDate(dateString);
-				Address address = convertStringToAddress(addressString);
-				Address officeAddress = convertStringToAddress(officeAddressString);
-				int personalId = Integer.parseInt(personalIdString);
-				int yearsOfExperience = Integer.parseInt(yearsOfExperienceString);
+					Date date = convertStringToDate(dateString);
+					Address address = convertStringToAddress(addressString);
+					Address officeAddress = convertStringToAddress(officeAddressString);
+					int personalId = Integer.parseInt(personalIdString);
+					int yearsOfExperience = Integer.parseInt(yearsOfExperienceString);
 				
-				professor.setName(name);
-				professor.setSurname(surname);
-				professor.setDateOfBirth(date);
-				professor.setAddress(address);
-				professor.setPhoneNumber(phoneNumber);
-				professor.seteMail(email);
-				professor.setOfficeAddress(officeAddress);
-				professor.setPersonalID(personalId);
-				professor.setTitle(titula);
-				professor.setZvanje(zvanje);
-				professor.setTitle(titula);
-				professor.setYearsOfExperience(yearsOfExperience);
+					professor.setName(name);
+					professor.setSurname(surname);
+					professor.setDateOfBirth(date);
+					professor.setAddress(address);
+					professor.setPhoneNumber(phoneNumber);
+					professor.seteMail(email);
+					professor.setOfficeAddress(officeAddress);
+					professor.setPersonalID(personalId);
+					professor.setTitle(titula);
+					professor.setZvanje(zvanje);
+					professor.setTitle(titula);
+					professor.setYearsOfExperience(yearsOfExperience);
 				
-				ProfessorJTable professorTable = ProfessorJTable.getTable();
-				professorTable.updateTable();
-				professorEdited = true;
+					ProfessorJTable professorTable = ProfessorJTable.getTable();
+					professorTable.updateTable();
+					professorEdited = true;
+				}
+				
+				else {
+					
+					int personalId = Integer.parseInt(personalIdString);	//ako je personalID pogresnog formata ne mozemo izmeniti profesora, pa samo vracamo stari Id
+					professor.setPersonalID(personalId);
+				}
 			
 			}
 			

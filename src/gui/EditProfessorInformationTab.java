@@ -194,8 +194,6 @@ public class EditProfessorInformationTab extends JPanel {
 		northPanel.add(personalId);
 		
 		personalIdField.setText(Integer.toString(professor.getPersonalID()));
-		professor.setPersonalID(-1);	 			//postavljamo personalID na -1 kako bismo mogli da ga ne promenimo prilikom editovanja, 
-													//a da nam pri tome ne iskoci greska da vec postoji profesor sa identicnim ID
 		personalIdField.addFocusListener(new EditProfessorListener(personalIdField, 7));
 		
 		String titule[] = {"BSC", "MSC", "MR", "DR", "PROF"};
@@ -245,7 +243,6 @@ public class EditProfessorInformationTab extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-
 				ProfessorController professorContr = ProfessorController.getProfessorController();
 				professorContr.edit(professor);
 				if(professorContr.professorEdited == true) {

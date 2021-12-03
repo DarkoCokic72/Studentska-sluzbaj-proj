@@ -8,7 +8,7 @@ public class ProfessorJTable extends JTable{
 	private static ProfessorJTable professorTable= null;
 	private ProfessorAbstractTable professorTableModel; 
 	
-    public ProfessorJTable() {
+    private ProfessorJTable() {
 			
    	    professorTableModel = new ProfessorAbstractTable(); 
    	    

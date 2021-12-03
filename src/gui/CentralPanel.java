@@ -9,7 +9,7 @@ public class CentralPanel extends JTabbedPane {
 	
 	private static CentralPanel centralPanel = null;
 
-	public CentralPanel() {
+	private CentralPanel() {
 		
 		JPanel students = new JPanel();
 		addTab("Studenti", students);
@@ -28,7 +28,7 @@ public class CentralPanel extends JTabbedPane {
 		
 	}
 	
-	public static CentralPanel createCentralPanel() {
+	public static CentralPanel getCentralPanel() {
 		
 		if(centralPanel == null) {
 			centralPanel = new CentralPanel();

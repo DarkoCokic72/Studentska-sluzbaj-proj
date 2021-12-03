@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -10,6 +9,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
+
+import Controller.MainController;
 
 public class MenuBar extends JMenuBar{
 	public MenuBar() {
@@ -92,21 +93,8 @@ public class MenuBar extends JMenuBar{
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				CentralPanel centralPanel = CentralPanel.createCentralPanel();
-				switch(centralPanel.getSelectedIndex()) {
 				
-				case 0:
-					//AddStudentDialog
-					break;
-				case 1:
-					AddProfessorDialog addProfessorDialog = new AddProfessorDialog();
-					addProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());
-					break;
-				case 2:
-					//AddSubjectDialog
-				    break;
-
-				}
+				MainController.add();
 			
 			}
 		});
@@ -116,22 +104,7 @@ public class MenuBar extends JMenuBar{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				CentralPanel centralPanel = CentralPanel.createCentralPanel();
-				switch(centralPanel.getSelectedIndex()) {
-				
-				case 0:
-					//EditStudentDialog
-					break;
-				case 1:
-					EditProfessorDialog editProfessorDialog = new EditProfessorDialog();
-					editProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());
-					EditProfessorDialog.setDialog(editProfessorDialog);
-					break;
-				case 2:
-					//EditSubjectDialog
-				    break;
-
-				}
+				MainController.edit();
 			
 			}
 		});
@@ -142,21 +115,7 @@ public class MenuBar extends JMenuBar{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				CentralPanel centralPanel = CentralPanel.createCentralPanel();
-				switch(centralPanel.getSelectedIndex()) {
-				
-				case 0:
-					//DeleteStudentDialog
-					break;
-				case 1:
-					DeleteProfessorDialog deleteProfessorDialog = new DeleteProfessorDialog();
-					deleteProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());
-					break;
-				case 2:
-					//DeleteSubjectDialog
-				    break;
-
-				}
+			MainController.delete();
 			
 			}
 		});
