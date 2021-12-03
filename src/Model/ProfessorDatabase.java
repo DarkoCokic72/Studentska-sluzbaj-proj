@@ -29,9 +29,7 @@ public class ProfessorDatabase {
 	}
 	
 	public String getColumnName(int index) {
-		
 		return columns.get(index);
-		
 	}
 	
 	
@@ -63,26 +61,20 @@ public class ProfessorDatabase {
 	}
 	
 	public void addProfessorToTable(Profesor professor) {
-		
 		professors.add(professor);
 	}
 	
 	public ArrayList<Profesor> getProfessors() {
-		
 		return professors;
 	}
 	
 	public Profesor getProfessorFromRow(int rowIndex) {
-		
 		return professors.get(rowIndex);
 	}
 	
 	public static ProfessorDatabase getDatabase() {
-		
 		if (professorDatabase == null) {
-			
-			 professorDatabase = new ProfessorDatabase();
-
+			professorDatabase = new ProfessorDatabase();
 		}
 		return professorDatabase;
 	}
