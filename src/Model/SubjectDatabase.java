@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 public class SubjectDatabase {
 
+	private static SubjectDatabase subjectDatabase = null;
 	private ArrayList<Subject> subjects;
 	private ArrayList<String> columns;
 		
-	public SubjectDatabase() {
+	private SubjectDatabase() {
 		
 		subjects = new ArrayList<Subject>();
 		columns = new ArrayList<String>();
@@ -65,6 +66,15 @@ public class SubjectDatabase {
 			    return null;
 		}
 	}
+	
+	public static SubjectDatabase getInstance() {
+		if(subjectDatabase == null) {
+			subjectDatabase = new SubjectDatabase();
+		}
+		
+		return subjectDatabase;
+	}
+
 	
 	
 	
