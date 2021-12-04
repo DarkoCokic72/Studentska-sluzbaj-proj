@@ -4,18 +4,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ListIterator;
 
-enum Status {B, S};
+
 
 public class Student extends Person{
+	public enum StudentStatus {B, S};
+	
 	private String indexID;
 	private int  yearOfEnroll;
 	private int currYearOfStudies;
-	private Status currStatus;
+	private StudentStatus currStatus;
 	private double avgMark;
 	private ArrayList<Grade> passedCourses;
 	private ArrayList<Subject> unpassedCourses;
 	
-	public Student(String name, String surname,Date date, String email, String phone, Address addr, String index, int yearEnr, int currYear, Status st) {
+	public Student(String name, String surname,Date date, String email, String phone, Address addr, String index, int yearEnr, int currYear, StudentStatus st) {
 		super(name, surname, date, email, phone, addr);
 		this.indexID = index;
 		this.yearOfEnroll = yearEnr;
@@ -49,11 +51,11 @@ public class Student extends Person{
 		this.currYearOfStudies = currYearOfStudies;
 	}
 
-	public Status getCurrStatus() {
+	public StudentStatus getCurrStatus() {
 		return currStatus;
 	}
 
-	public void setCurrStatus(Status currStatus) {
+	public void setCurrStatus(StudentStatus currStatus) {
 		this.currStatus = currStatus;
 	}
 
