@@ -93,10 +93,11 @@ public class MenuBar extends JMenuBar{
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
 				MainController.add();
-			
 			}
+
+			
+			
 		});
 		
 		miEdit.addActionListener(new ActionListener() {
@@ -119,10 +120,5 @@ public class MenuBar extends JMenuBar{
 			
 			}
 		});
-		
-		
-		
-				
-		
 	}
 }

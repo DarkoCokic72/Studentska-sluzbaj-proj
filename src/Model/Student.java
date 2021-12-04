@@ -7,17 +7,21 @@ import java.util.ListIterator;
 
 
 public class Student extends Person{
-	public enum StudentStatus {B, S};
+//<<<<<<< HEAD
+//	public enum StudentStatus {B, S};
+//=======
+	public enum Status {B, S};
+//>>>>>>> addStudent
 	
 	private String indexID;
 	private int  yearOfEnroll;
 	private int currYearOfStudies;
-	private StudentStatus currStatus;
+	private Status currStatus;
 	private double avgMark;
 	private ArrayList<Grade> passedCourses;
 	private ArrayList<Subject> unpassedCourses;
 	
-	public Student(String name, String surname,Date date, String email, String phone, Address addr, String index, int yearEnr, int currYear, StudentStatus st) {
+	public Student(String name, String surname,Date date, String email, String phone, Address addr, String index, int yearEnr, int currYear, Status st) {
 		super(name, surname, date, email, phone, addr);
 		this.indexID = index;
 		this.yearOfEnroll = yearEnr;
@@ -51,11 +55,11 @@ public class Student extends Person{
 		this.currYearOfStudies = currYearOfStudies;
 	}
 
-	public StudentStatus getCurrStatus() {
+	public Status getCurrStatus() {
 		return currStatus;
 	}
 
-	public void setCurrStatus(StudentStatus currStatus) {
+	public void setCurrStatus(Status currStatus) {
 		this.currStatus = currStatus;
 	}
 

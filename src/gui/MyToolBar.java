@@ -75,10 +75,9 @@ public class MyToolBar extends JToolBar {
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
 				MainController.add();
 			}
-			
+
 		});
 		
 		
