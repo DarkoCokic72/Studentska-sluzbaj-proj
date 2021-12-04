@@ -26,7 +26,7 @@ public class EditProfessorDialog extends JDialog {
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = d.width;
 		int height = d.height;
-		setSize(width*3/8, height*300/444); 
+		setSize(width*3/8, height*25/37); 
 		ImageIcon img = new ImageIcon("images/Pen-5-icon.png");
 		setIconImage(img.getImage());
 		setTitle("Izmena profesora");

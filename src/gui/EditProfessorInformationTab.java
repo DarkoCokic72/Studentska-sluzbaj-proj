@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Controller.ProfessorController;
+import Controller.Validation;
 import Listeners.EditProfessorListener;
 import Model.Profesor;
 import Model.ProfessorDatabase;
@@ -95,7 +96,7 @@ public class EditProfessorInformationTab extends JPanel {
 		int height = d.height;
 		setSize(width*3/8, height*300/444); 
 		
-		ProfessorController.getProfessorController().fieldsFilled(); 
+		Validation.fieldsFilledProfessor(); 
 		
 		name = new JPanel();
 		nameLab = new JLabel("Ime*");
@@ -247,7 +248,7 @@ public class EditProfessorInformationTab extends JPanel {
 				professorContr.edit(professor);
 				if(professorContr.professorEdited == true) {
 					
-					professorContr.resetFields();
+					Validation.resetFieldsProfessor();
 					EditProfessorDialog.getEditProfessorDialog().dispose();
 			    	EditProfessorPanel.deleteEditProfessorPanel();
 			    	EditProfessorDialog.deleteEditProfessorDialog();

@@ -6,6 +6,7 @@ import java.awt.event.FocusListener;
 import javax.swing.JTextField;
 
 import Controller.ProfessorController;
+import Controller.Validation;
 
 public class EditProfessorListener implements FocusListener{
 	
@@ -26,7 +27,7 @@ public class EditProfessorListener implements FocusListener{
 	@Override
 	public void focusLost(FocusEvent arg0) {
 
-		ProfessorController.getProfessorController().validateEdit(textField.getText().trim(), fieldNumber);
+		Validation.validateEditProfessor(textField.getText().trim(), fieldNumber);
 
 	}
 	
