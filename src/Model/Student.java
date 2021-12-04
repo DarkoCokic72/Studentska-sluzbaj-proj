@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ListIterator;
 
-enum Status {B, S};
+
 
 public class Student extends Person{
+	public enum Status {B, S};
+	
 	private String indexID;
 	private int  yearOfEnroll;
 	private int currYearOfStudies;

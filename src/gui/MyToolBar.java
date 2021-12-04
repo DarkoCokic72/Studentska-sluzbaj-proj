@@ -84,6 +84,8 @@ public class MyToolBar extends JToolBar {
 				
 				case 0:
 					//AddStudentDialog
+					AddStudentDialog addStudDialog = new AddStudentDialog();
+					addStudDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 					break;
 				case 1:
 					AddProfessorDialog addProfessorDialog = new AddProfessorDialog();
