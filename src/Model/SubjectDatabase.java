@@ -67,7 +67,7 @@ public class SubjectDatabase {
 		}
 	}
 	
-	public static SubjectDatabase getInstance() {
+	public static SubjectDatabase getDatabase() {
 		if(subjectDatabase == null) {
 			subjectDatabase = new SubjectDatabase();
 		}

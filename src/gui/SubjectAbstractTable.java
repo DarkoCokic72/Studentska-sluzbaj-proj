@@ -10,7 +10,7 @@ public class SubjectAbstractTable extends AbstractTableModel{
 	
 	public SubjectAbstractTable() {
 		
-		 subDatabase = new SubjectDatabase();
+		 subDatabase = SubjectDatabase.getDatabase();
 		
 	}
 	
