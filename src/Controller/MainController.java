@@ -4,6 +4,7 @@ import gui.AddProfessorDialog;
 import gui.AddStudentDialog;
 import gui.CentralPanel;
 import gui.DeleteProfessorDialog;
+import gui.DeleteStudentDialog;
 import gui.EditProfessorDialog;
 import gui.MainFrame;
 
@@ -58,6 +59,8 @@ public class MainController {
 		
 		case 0:
 			//DeleteStudentDialog
+			DeleteStudentDialog deleteStudDialog = new DeleteStudentDialog();
+			deleteStudDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 			break;
 		case 1:
 			DeleteProfessorDialog deleteProfessorDialog = new DeleteProfessorDialog();

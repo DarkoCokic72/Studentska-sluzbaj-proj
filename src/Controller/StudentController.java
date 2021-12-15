@@ -1,13 +1,10 @@
 package Controller;
 
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.regex.Pattern;
 
-import javax.swing.JOptionPane;
+
+
 
 import Model.Address;
 import Model.Student;
@@ -69,6 +66,23 @@ public class StudentController {
 		}
 		
 		return studContr;
+	}
+
+	public void delete(Student student) {
+		// TODO Auto-generated method stub
+		String index = student.getIndexID();
+		ArrayList<Student> studentList = StudentDatabase.getInstance().getStudents();
+		
+		int i = 0;
+		for(Student s: studentList) {
+			if(index == s.getIndexID()) {
+				studentList.remove(i);
+			}
+			i++;
+		}
+		
+		StudentTable studTable = StudentTable.getTable();
+		studTable.updateTable();
 	}
 	
 	

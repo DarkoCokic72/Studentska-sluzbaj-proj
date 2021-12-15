@@ -69,4 +69,9 @@ public class StudentDatabase {
 		return studentDatabase;
 	}
 
+	public Student getStudentFromRow(int index) {
+		// TODO Auto-generated method stub
+		return students.get(index);
+	}
+
 }
