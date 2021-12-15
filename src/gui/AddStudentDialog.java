@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Controller.StudentController;
+import Controller.ValidationStudent;
 import Listeners.AddStudentListener;
 import Model.Student;
 import Model.Student.Status;
@@ -84,7 +85,7 @@ public class AddStudentDialog extends JDialog {
 		setTitle("Dodavanje studenta");
 		setResizable(false);
 		
-		StudentController.getStudentConstroler().resetFields();
+		ValidationStudent.resetFields();
 		
 		name = new JPanel();
 		nameLabel = new JLabel("Ime*");
@@ -201,7 +202,7 @@ public class AddStudentDialog extends JDialog {
 				StudentController studContr = StudentController.getStudentConstroler();
 				studContr.add();
 				if(studContr.studentAdded == true) {
-					studContr.resetFields();
+					ValidationStudent.resetFields();
 					dispose();
 					studContr.studentAdded = false;
 				}
@@ -220,7 +221,7 @@ public class AddStudentDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				StudentController.getStudentConstroler().resetFields();
+				ValidationStudent.resetFields();
 				dispose();
 			}
 		});
@@ -336,6 +337,14 @@ public class AddStudentDialog extends JDialog {
 		}
 		
 		return currYear;
+	}
+
+	public static JComboBox<String> getCurrYearOfStudiesComboBox() {
+		return currYearOfStudiesComboBox;
+	}
+
+	public static JComboBox<String> getCurrStatusComboBox() {
+		return currStatusComboBox;
 	}
 	
 	

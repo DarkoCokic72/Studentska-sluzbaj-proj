@@ -68,16 +68,21 @@ public class Student extends Person{
 	}
 
 	public void setAvgMark() {
-		ListIterator<Grade> it = passedCourses.listIterator();
-		int sum = 0;
-		int size = 0;
-		while(it.hasNext()) {
-			Grade g = it.next();
-			sum += g.getMark();
-			size++;
-		}
 		
+		if(!passedCourses.isEmpty()) {
+			ListIterator<Grade> it = passedCourses.listIterator();
+			int sum = 0;
+			int size = 0;
+			while(it.hasNext()) {
+				Grade g = it.next();
+				sum += g.getMark();
+				size++;
+			}
+			
 		this.avgMark = sum/size;
+		} else {
+			this.avgMark = 0;
+		}
 	}
 
 	public ArrayList<Grade> getPassedCourses() {

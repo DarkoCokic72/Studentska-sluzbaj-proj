@@ -1,6 +1,7 @@
 package Controller;
 
 import gui.AddProfessorDialog;
+import gui.AddStudentDialog;
 import gui.CentralPanel;
 import gui.DeleteProfessorDialog;
 import gui.EditProfessorDialog;
@@ -15,6 +16,8 @@ public class MainController {
 		
 		case 0:
 			//AddStudentDialog
+			AddStudentDialog addStudentDialog = new AddStudentDialog();
+			addStudentDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 			break;
 		case 1:
 			AddProfessorDialog addProfessorDialog = new AddProfessorDialog();

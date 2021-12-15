@@ -7,7 +7,7 @@ public class StudentDatabase {
 	private ArrayList<Student> students;
 	private ArrayList<String> culumns;
 	
-	private StudentDatabase( ) {
+	public StudentDatabase( ) {
 		students = new ArrayList<Student>();
 		culumns = new ArrayList<String>();
 		

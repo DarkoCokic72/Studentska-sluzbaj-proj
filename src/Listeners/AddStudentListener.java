@@ -6,6 +6,7 @@ import java.awt.event.FocusListener;
 import javax.swing.JTextField;
 
 import Controller.StudentController;
+import Controller.ValidationStudent;
 
 public class AddStudentListener implements FocusListener{
 	private JTextField textField;
@@ -25,7 +26,7 @@ public class AddStudentListener implements FocusListener{
 	@Override
 	public void focusLost(FocusEvent e) {
 		// TODO Auto-generated method stub
-		StudentController.getStudentConstroler().validateAdd(textField.getText().trim(), fieldNum);
+		ValidationStudent.validateAdd(textField.getText().trim(), fieldNum);
 		
 	}
 	
