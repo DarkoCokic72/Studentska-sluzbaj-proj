@@ -1,28 +1,31 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.ImageIcon;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Controller.StudentController;
 import Controller.ValidationStudent;
-import Listeners.AddStudentListener;
+import Listeners.EditStudentListener;
 import Model.Student;
 import Model.Student.Status;
+import Model.StudentDatabase;
 
-
-public class AddStudentDialog extends JDialog {
+public class EditStudentInformationTab extends JPanel {
 	private JPanel northPanel;
 	private JPanel southPanel;
 	
@@ -69,23 +72,22 @@ public class AddStudentDialog extends JDialog {
 	private static JButton confirm;
 	private JButton cancel;
 	
-	//Embrace the boredom
-	
-	public AddStudentDialog() {
+	public EditStudentInformationTab() {
+		int selectedRow = StudentTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow());
+		Student student = StudentDatabase.getInstance().getStudentFromRow(selectedRow);
+		
+		
 		northPanel = new JPanel();
+		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
 		southPanel = new JPanel();
+		southPanel.setBorder(BorderFactory.createEmptyBorder(30,30,30,30));
 		
-		setVisible(true);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		int heigth = d.height;
 		int width = d.width;
-		int height = d.height;
-		setSize(width * 3/8, height * 300 /444);
-		ImageIcon img = new ImageIcon("images/Plus-icon.png");
-		setIconImage(img.getImage());
-		setTitle("Dodavanje studenta");
-		setResizable(false);
+		setSize(heigth * 3/8, width * 300 / 444);
 		
-		ValidationStudent.resetFields();
+		ValidationStudent.fieldsFilled();
 		
 		name = new JPanel();
 		nameLabel = new JLabel("Ime*");
@@ -95,7 +97,9 @@ public class AddStudentDialog extends JDialog {
 		name.add(nameLabel);
 		name.add(nameField);
 		northPanel.add(name);
-		nameField.addFocusListener(new AddStudentListener(nameField, 0));
+		
+		nameField.setText(student.getName());
+		nameField.addFocusListener(new EditStudentListener(0, nameField));
 		
 		surname = new JPanel();
 		surnameLabel = new JLabel("Prezime*");
@@ -105,7 +109,9 @@ public class AddStudentDialog extends JDialog {
 		surname.add(surnameLabel);
 		surname.add(surnameField);
 		northPanel.add(surname);
-		surnameField.addFocusListener(new AddStudentListener(surnameField, 1));
+		
+		surnameField.setText(student.getSurname());
+		surnameField.addFocusListener(new EditStudentListener(1, surnameField));
 		
 		dateOfBirth = new JPanel();
 		dateOfBirthLabel = new JLabel("Datum rodjenja*");
@@ -115,7 +121,11 @@ public class AddStudentDialog extends JDialog {
 		dateOfBirth.add(dateOfBirthLabel);
 		dateOfBirth.add(dateOfBirthField);
 		northPanel.add(dateOfBirth);
-		dateOfBirthField.addFocusListener(new AddStudentListener(dateOfBirthField, 2));
+		
+		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy.");
+		dateOfBirthField.setText(dateFormat.format(student.getDateOfBirth()));
+		dateOfBirthField.addFocusListener(new EditStudentListener(2, dateOfBirthField));
+		
 		
 		address = new JPanel();
 		addressLabel = new JLabel("Adresa*");
@@ -125,7 +135,11 @@ public class AddStudentDialog extends JDialog {
 		address.add(addressLabel);
 		address.add(addressField);
 		northPanel.add(address);
-		addressField.addFocusListener(new AddStudentListener(addressField, 3));
+		
+		String addressStr = student.getAddress().getStreetName() + Integer.toString(student.getAddress().getStreetNumber()) + ", "
+				+ student.getAddress().getCity() + ", " + student.getAddress().getCountry();
+		addressField.setText(addressStr);
+		addressField.addFocusListener(new EditStudentListener(3, addressField));
 		
 		phoneNumber = new JPanel();
 		phoneNumberLabel = new JLabel("Broj telefona*");
@@ -135,7 +149,9 @@ public class AddStudentDialog extends JDialog {
 		phoneNumber.add(phoneNumberLabel);
 		phoneNumber.add(phoneNumberField);
 		northPanel.add(phoneNumber);
-		phoneNumberField.addFocusListener(new AddStudentListener(phoneNumberField, 4));
+		
+		phoneNumberField.setText(student.getPhoneNumber());
+		phoneNumberField.addFocusListener(new EditStudentListener(4, phoneNumberField));
 		
 		email = new JPanel();
 		emailLabel = new JLabel("E-mail adresa*");
@@ -145,7 +161,9 @@ public class AddStudentDialog extends JDialog {
 		email.add(emailLabel);
 		email.add(emailField);
 		northPanel.add(email);
-		emailField.addFocusListener(new AddStudentListener(emailField, 5));
+		
+		emailField.setText(student.geteMail());
+		emailField.addFocusListener(new EditStudentListener(5, emailField));
 		
 		index = new JPanel();
 		indexLabel = new JLabel("Broj indeksa*");
@@ -155,7 +173,9 @@ public class AddStudentDialog extends JDialog {
 		index.add(indexLabel);
 		index.add(indexField);
 		northPanel.add(index);
-		indexField.addFocusListener(new AddStudentListener(indexField, 6));
+		
+		indexField.setText(student.getIndexID());
+		indexField.addFocusListener(new EditStudentListener(6, indexField));
 		
 		yearOfEnroll = new JPanel();
 		yearOfEnrollLabel = new JLabel("Godina upisa*");
@@ -165,7 +185,9 @@ public class AddStudentDialog extends JDialog {
 		yearOfEnroll.add(yearOfEnrollLabel);
 		yearOfEnroll.add(yearOfEnrollField);
 		northPanel.add(yearOfEnroll);
-		yearOfEnrollField.addFocusListener(new AddStudentListener(yearOfEnrollField, 7));
+		
+		yearOfEnrollField.setText(Integer.toString(student.getYearOfEnroll()));
+		yearOfEnrollField.addFocusListener(new EditStudentListener(7, yearOfEnrollField));
 		
 		String[] currYears = {"I(prva)", "II(druga)", "III(treca)", "IV(cetrvta)"};
 		currYearOfStudies = new JPanel();
@@ -178,6 +200,8 @@ public class AddStudentDialog extends JDialog {
 		currYearOfStudies.add(currYearOfStudiesComboBox);
 		northPanel.add(currYearOfStudies);
 		
+		currYearOfStudiesComboBox.setSelectedIndex(student.getCurrYearOfStudies()-1);
+		
 		String[] currStats = {"Budzet", "Samofinansiranje"};
 		currStatus = new JPanel();
 		currStatusLabel = new JLabel("Status Studenta*");
@@ -189,6 +213,8 @@ public class AddStudentDialog extends JDialog {
 		currStatus.add(currStatusComboBox);
 		northPanel.add(currStatus);
 		
+		currStatusComboBox.setSelectedIndex(student.getCurrStatus().ordinal());
+		
 		confirm = new JButton("Potvrdi");
 		confirm.setPreferredSize(new Dimension(90,30));
 		confirm.setEnabled(false);
@@ -199,21 +225,25 @@ public class AddStudentDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				StudentController studContr = StudentController.getStudentConstroler();
-				studContr.add();
-				if(studContr.studentAdded == true) {
+				StudentController studController = new StudentController();
+				studController.edit(student);
+				
+				if(studController.studentEdited == true) {
+					
 					ValidationStudent.resetFields();
-					dispose();
-					studContr.studentAdded = false;
+					EditStudentDialog.getEditStudentDialog().dispose();
+					EditStudentPanel.deleteEditStudPanel();
+					EditStudentDialog.deleteEditStudentDialog();
+					studController.studentEdited = false;
 				}
 				
 			}
 		});
 		
-		southPanel.add(Box.createRigidArea(new Dimension(30,0)));
+		southPanel.add(Box.createRigidArea(new Dimension(30, 0)));
 		
 		cancel = new JButton("Odustani");
-		cancel.setPreferredSize(new Dimension(90,30));
+		cancel.setPreferredSize(new Dimension(90, 30));
 		southPanel.add(cancel);
 		
 		cancel.addActionListener(new ActionListener() {
@@ -221,18 +251,21 @@ public class AddStudentDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				ValidationStudent.resetFields();
-				dispose();
+				EditStudentDialog.getEditStudentDialog().dispose();
+				EditStudentPanel.deleteEditStudPanel();
+				EditStudentDialog.deleteEditStudentDialog();
 			}
 		});
 		
 		add(northPanel, BorderLayout.CENTER);
 		add(southPanel, BorderLayout.SOUTH);
 		
-		revalidate();
-		repaint();
-		
 	}
+
+	public static JButton getConfirm() {
+		return confirm;
+	}
+
 
 	public static JTextField getNameField() {
 		return nameField;
@@ -255,46 +288,33 @@ public class AddStudentDialog extends JDialog {
 	}
 
 
-
 	public static JTextField getPhoneNumberField() {
 		return phoneNumberField;
 	}
-
 
 
 	public static JTextField getEmailField() {
 		return emailField;
 	}
 
-	public JLabel getEmailLabel() {
-		return emailLabel;
-	}
 
 	public static JTextField getIndexField() {
 		return indexField;
 	}
 
-
 	public static JTextField getYearOfEnrollField() {
 		return yearOfEnrollField;
 	}
 
-	public JLabel getYearOfEnrollLabel() {
-		return yearOfEnrollLabel;
+
+	public static JComboBox<String> getCurrYearOfStudiesComboBox() {
+		return currYearOfStudiesComboBox;
 	}
 
-	public JLabel getCurrYearOfStudiesLabel() {
-		return currYearOfStudiesLabel;
+	public static JComboBox<String> getCurrStatusComboBox() {
+		return currStatusComboBox;
 	}
 
-	public JPanel getCurrStatus() {
-		return currStatus;
-	}
-
-	public static JButton getConfirm() {
-		return confirm;
-	}
-	
 	public static Status getStatus() {
 		int statusIndex = currStatusComboBox.getSelectedIndex();
 		Status status;
@@ -313,6 +333,7 @@ public class AddStudentDialog extends JDialog {
 		
 		return status;
 	}
+	
 	
 	public static int getCurrentYearOfStudies() {
 		int currYearIndex = currYearOfStudiesComboBox.getSelectedIndex();
@@ -339,13 +360,5 @@ public class AddStudentDialog extends JDialog {
 		return currYear;
 	}
 
-	public static JComboBox<String> getCurrYearOfStudiesComboBox() {
-		return currYearOfStudiesComboBox;
-	}
-
-	public static JComboBox<String> getCurrStatusComboBox() {
-		return currStatusComboBox;
-	}
-	
-	
+		
 }

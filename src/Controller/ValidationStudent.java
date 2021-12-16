@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import Model.Student;
 import Model.StudentDatabase;
 import gui.AddStudentDialog;
+import gui.EditStudentInformationTab;
 
 public class ValidationStudent {
 	
@@ -237,12 +238,24 @@ public class ValidationStudent {
 		return studentValid();
 	}
 	
+	public static boolean validateEdit(String input, int fieldNum) {
+		fieldValidation(input, fieldNum);
+		
+		if(!input.isEmpty()) {
+			EditStudentInformationTab.getConfirm().setEnabled(true);
+		} else {
+			EditStudentInformationTab.getConfirm().setEnabled(false);
+		}
+		
+		return studentValid();
+	}
+	
 	
 	public static void resetFields() {
 		Arrays.fill(textFieldsFilled, Boolean.FALSE);
 	}
 	
-	public void fieldsFilled() {
+	public static void fieldsFilled() {
 		Arrays.fill(textFieldsFilled, Boolean.TRUE);
 	}
 	

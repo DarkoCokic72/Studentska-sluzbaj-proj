@@ -41,7 +41,7 @@ public class DeleteStudentDialog extends JDialog {
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int heigth = d.height;
 		int width = d.width;
-		setSize(heigth/4, width/4);
+		setSize(width/4, heigth/4);
 		ImageIcon img = new ImageIcon("images/Recycle-Bin-icon.png");
 		setIconImage(img.getImage());
 		setTitle("Brisanje studenta");
