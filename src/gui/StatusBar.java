@@ -12,11 +12,15 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class StatusBar extends JPanel {
+	private static StatusBar statusBar = null;
+	
+	private JLabel labTitle;
+	
 	public StatusBar() {
 		super();
 		setLayout(new BorderLayout());
 		
-		JLabel labTitle = new JLabel("Studentska sluzba");
+		labTitle = new JLabel("Studentska sluzba");
 		labTitle.setBorder(BorderFactory.createEmptyBorder(0, 7, 0, 0));
 		Date currDate = new Date();
 		
@@ -36,7 +40,8 @@ public class StatusBar extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				Date datum = new Date();
-				dateFormat.format(datum);
+				datum.setTime(System.currentTimeMillis());
+				labTime.setText(dateFormat.format(datum));
 				
 			}
 		});
@@ -48,4 +53,23 @@ public class StatusBar extends JPanel {
 		
 		
 	}
+	
+	public static StatusBar getInstance() {
+		if(statusBar == null) {
+			statusBar = new StatusBar();
+		}
+		
+		return statusBar;
+	}
+
+	public JLabel getLabTitle() {
+		return labTitle;
+	}
+
+	public void setLabTitle(String text) {
+		labTitle.setText("Studentska sluzba - " + text);
+	}
+
+	
+	
 }
