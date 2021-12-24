@@ -17,7 +17,6 @@ public class MainController {
 		switch(centralPanel.getSelectedIndex()) {
 		
 		case 0:
-			//AddStudentDialog
 			AddStudentDialog addStudentDialog = new AddStudentDialog();
 			addStudentDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 			break;
@@ -38,7 +37,6 @@ public class MainController {
 		switch(centralPanel.getSelectedIndex()) {
 		
 		case 0:
-			//EditStudentDialog
 			EditStudentDialog editStudentDialog = new EditStudentDialog();
 			editStudentDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 			EditStudentDialog.setEditStudentDialog(editStudentDialog);

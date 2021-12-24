@@ -29,22 +29,32 @@ public class ProfessorController {
 			String name = AddProfessorDialog.getNameField().getText().trim();
 			String surname = AddProfessorDialog.getSurnameField().getText().trim();
 			String dateString = AddProfessorDialog.getDateOfBirth().getText().trim(); //convert to Date
-			String addressString = AddProfessorDialog.getAddress().getText().trim(); //convert to Address 
+			String street = AddProfessorDialog.getStreetField().getText().trim(); 
+			String streetNumberString = AddProfessorDialog.getStreetNumberField().getText().trim(); //convert to int
+			String city = AddProfessorDialog.getCityField().getText().trim();
+			String country = AddProfessorDialog.getCountryField().getText().trim();
 			String phoneNumber = AddProfessorDialog.getMobile().getText().trim(); 
 			String email = AddProfessorDialog.getMailField().getText().trim();
-			String officeAddressString = AddProfessorDialog.getOfficeAddressField().getText().trim(); //convert to Address
+			String officeStreet = AddProfessorDialog.getOfficeStreetField().getText().trim(); 
+			String officeStreetNumberString = AddProfessorDialog.getOfficeStreetNumberField().getText().trim(); //convert to int
+			String officeCity = AddProfessorDialog.getOfficeCityField().getText().trim();
+			String officeCountry = AddProfessorDialog.getCountryField().getText().trim();
 			String personalIdString = AddProfessorDialog.getPersonalId().getText().trim(); //convert to int
 			Titula titula = AddProfessorDialog.getTitula();
 			Zvanje zvanje = AddProfessorDialog.getZvanje();
 			String yearsOfExperienceString = AddProfessorDialog.getYearsOfExpirienceField().getText().trim(); //convert to int
 				
-			if(Validation.checkName(name) == true && Validation.checkSurname(surname) == true && Validation.checkDate(dateString) == true && Validation.checkAddress(addressString) == true
-				&& Validation.checkPhoneNumber(phoneNumber) == true && Validation.checkMail(email) == true && Validation.checkAddress(officeAddressString) 
+			if(Validation.checkName(name) == true && Validation.checkSurname(surname) == true && Validation.checkDate(dateString) == true && Validation.checkStreet(street) == true 
+				&& Validation.checkStreetNumber(streetNumberString) == true && Validation.checkCity(city) == true && Validation.checkCity(country) == true
+				&& Validation.checkPhoneNumber(phoneNumber) == true && Validation.checkEmail(email) == true && Validation.checkStreet(officeStreet) == true
+				&& Validation.checkStreetNumber(officeStreetNumberString) == true && Validation.checkCity(officeCity) == true && Validation.checkCountry(officeCountry) == true
 				&& Validation.checkPersonalId(personalIdString) == true && Validation.checkYearsOfExp(yearsOfExperienceString) == true) {
 			
 				Date date = Converter.convertStringToDate(dateString);
-				Address address = Converter.convertStringToAddress(addressString);
-				Address officeAddress = Converter.convertStringToAddress(officeAddressString);
+				int streetNumber = Integer.parseInt(streetNumberString);
+				Address address = new Address(street, streetNumber, city, country);
+				int officeStreetNumber = Integer.parseInt(officeStreetNumberString);
+				Address officeAddress = new Address(officeStreet, officeStreetNumber, officeCity, officeCountry);
 				int personalId = Integer.parseInt(personalIdString);
 				int yearsOfExperience = Integer.parseInt(yearsOfExperienceString);
 				
@@ -67,16 +77,24 @@ public class ProfessorController {
 			String name = EditProfessorInformationTab.getNameField().getText().trim();
 			String surname = EditProfessorInformationTab.getSurnameField().getText().trim();
 			String dateString = EditProfessorInformationTab.getDateOfBirth().getText().trim(); //convert to Date
-			String addressString = EditProfessorInformationTab.getAddress().getText().trim(); //convert to Address 
+			String street = EditProfessorInformationTab.getStreetField().getText().trim(); 
+			String streetNumberString = EditProfessorInformationTab.getStreetNumberField().getText().trim(); //convert to int
+			String city = EditProfessorInformationTab.getCityField().getText().trim();
+			String country = EditProfessorInformationTab.getCountryField().getText().trim();
 			String phoneNumber = EditProfessorInformationTab.getMobile().getText().trim(); 
 			String email = EditProfessorInformationTab.getMailField().getText().trim();
-			String officeAddressString = EditProfessorInformationTab.getOfficeAddressField().getText().trim(); //convert to Address
+			String officeStreet = EditProfessorInformationTab.getOfficeStreetField().getText().trim();
+			String officeStreetNumberString = EditProfessorInformationTab.getOfficeStreetNumberField().getText().trim(); //convert to int
+			String officeCity = EditProfessorInformationTab.getOfficeCityField().getText().trim();
+			String officeCountry = EditProfessorInformationTab.getOfficeCountryField().getText().trim();
 			Titula titula = EditProfessorInformationTab.getTitula();
 			Zvanje zvanje = EditProfessorInformationTab.getZvanje();
 			String yearsOfExperienceString = EditProfessorInformationTab.getYearsOfExpirienceField().getText().trim(); //convert to int
 				
-			if(Validation.checkName(name) == true && Validation.checkSurname(surname) == true && Validation.checkDate(dateString) == true && Validation.checkAddress(addressString) == true
-				&& Validation.checkPhoneNumber(phoneNumber) == true && Validation.checkMail(email) == true && Validation.checkAddress(officeAddressString) 
+			if(Validation.checkName(name) == true && Validation.checkSurname(surname) == true && Validation.checkDate(dateString) == true && Validation.checkStreet(street) == true
+				&& Validation.checkStreetNumber(streetNumberString) == true && Validation.checkCity(city) == true && Validation.checkCountry(country) == true
+				&& Validation.checkPhoneNumber(phoneNumber) == true && Validation.checkEmail(email) == true && Validation.checkStreet(officeStreet) == true 
+				&& Validation.checkStreetNumber(officeStreetNumberString) == true && Validation.checkCity(officeCity) == true && Validation.checkCountry(officeCountry) == true
 				&& Validation.checkYearsOfExp(yearsOfExperienceString) == true) {
 				
 				
@@ -88,8 +106,10 @@ public class ProfessorController {
 				if(Validation.checkPersonalId(personalIdStringWrong)) {
 			
 					Date date = Converter.convertStringToDate(dateString);
-					Address address = Converter.convertStringToAddress(addressString);
-					Address officeAddress = Converter.convertStringToAddress(officeAddressString);
+					int streetNumber = Integer.parseInt(streetNumberString);
+					Address address = new Address(street, streetNumber, city, country);
+					int officeStreetNumber = Integer.parseInt(officeStreetNumberString);
+					Address officeAddress = new Address(officeStreet, officeStreetNumber, officeCity, officeCountry);
 					int personalId = Integer.parseInt(personalIdString);
 					int yearsOfExperience = Integer.parseInt(yearsOfExperienceString);
 				

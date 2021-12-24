@@ -11,9 +11,8 @@ public class ProfessorJTable extends JTable{
     private ProfessorJTable() {
 			
    	    professorTableModel = new ProfessorAbstractTable(); 
-   	    
+   	    setCellSelectionEnabled(false);
    	    setRowSelectionAllowed(true);
-   		setColumnSelectionAllowed(true);
    		setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
    		getTableHeader().setReorderingAllowed(false);
    		
