@@ -10,10 +10,9 @@ public class SubjectJTable extends JTable {
      public SubjectJTable() {
 			
     	    subjectTableModel = new SubjectAbstractTable(); 
-    	    
-    	    setRowSelectionAllowed(true);
-    		setColumnSelectionAllowed(true);
-    		setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    	    setCellSelectionEnabled(false);
+       	    setRowSelectionAllowed(true);
+       	    setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     		getTableHeader().setReorderingAllowed(false);
     		
     		setModel(subjectTableModel);
