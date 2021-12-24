@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 
 import Controller.StudentController;
 import Controller.ValidationStudent;
+import Listeners.AddProfessorListener;
 import Listeners.AddStudentListener;
 import Model.Student;
 import Model.Student.Status;
@@ -39,7 +40,10 @@ public class AddStudentDialog extends JDialog {
 	private JLabel dateOfBirthLabel;
 	
 	private JPanel address;
-	private static JTextField addressField;
+	private static JTextField streetField;
+	private static JTextField streetNumberField;
+	private static JTextField cityField;
+	private static JTextField countryField;
 	private JLabel addressLabel;
 	
 	private JPanel phoneNumber;
@@ -91,7 +95,7 @@ public class AddStudentDialog extends JDialog {
 		nameLabel = new JLabel("Ime*");
 		nameField = new JTextField();
 		nameLabel.setPreferredSize(new Dimension(200, 25));
-		nameField.setPreferredSize(new Dimension(200, 25));
+		nameField.setPreferredSize(new Dimension(280, 25));
 		name.add(nameLabel);
 		name.add(nameField);
 		northPanel.add(name);
@@ -101,7 +105,7 @@ public class AddStudentDialog extends JDialog {
 		surnameLabel = new JLabel("Prezime*");
 		surnameField = new JTextField();
 		surnameLabel.setPreferredSize(new Dimension(200, 25));
-		surnameField.setPreferredSize(new Dimension(200, 25));
+		surnameField.setPreferredSize(new Dimension(280, 25));
 		surname.add(surnameLabel);
 		surname.add(surnameField);
 		northPanel.add(surname);
@@ -111,31 +115,47 @@ public class AddStudentDialog extends JDialog {
 		dateOfBirthLabel = new JLabel("Datum rodjenja*");
 		dateOfBirthField = new JTextField();
 		dateOfBirthLabel.setPreferredSize(new Dimension(200, 25));
-		dateOfBirthField.setPreferredSize(new Dimension(200, 25));
+		dateOfBirthField.setPreferredSize(new Dimension(280, 25));
 		dateOfBirth.add(dateOfBirthLabel);
 		dateOfBirth.add(dateOfBirthField);
 		northPanel.add(dateOfBirth);
 		dateOfBirthField.addFocusListener(new AddStudentListener(dateOfBirthField, 2));
 		
 		address = new JPanel();
-		addressLabel = new JLabel("Adresa*");
-		addressField = new JTextField();
-		addressLabel.setPreferredSize(new Dimension(200, 25));
-		addressField.setPreferredSize(new Dimension(200, 25));
+		addressLabel = new JLabel("Adresa stanovanja*");
+		streetField = new JTextField();
+		streetNumberField = new JTextField();
+		cityField = new JTextField();
+		countryField = new JTextField();
+		addressLabel.setPreferredSize(new Dimension(200,25));
+		streetField.setPreferredSize(new Dimension(75,25));
+		streetNumberField.setPreferredSize(new Dimension(30,25));
+		cityField.setPreferredSize(new Dimension(75,25));
+		countryField.setPreferredSize(new Dimension(75,25));
+		streetField.setToolTipText("Ulica");
+		streetNumberField.setToolTipText("Broj");
+		cityField.setToolTipText("Grad");
+		countryField.setToolTipText("Drzava");
 		address.add(addressLabel);
-		address.add(addressField);
+		address.add(streetField);
+		address.add(streetNumberField);
+		address.add(cityField);
+		address.add(countryField);
 		northPanel.add(address);
-		addressField.addFocusListener(new AddStudentListener(addressField, 3));
+		streetField.addFocusListener(new AddStudentListener(streetField, 3));
+		streetNumberField.addFocusListener(new AddStudentListener(streetNumberField, 4));
+		cityField.addFocusListener(new AddStudentListener(cityField, 5));
+		countryField.addFocusListener(new AddStudentListener(countryField, 6));
 		
 		phoneNumber = new JPanel();
 		phoneNumberLabel = new JLabel("Broj telefona*");
 		phoneNumberField = new JTextField();
 		phoneNumberLabel.setPreferredSize(new Dimension(200, 25));
-		phoneNumberField.setPreferredSize(new Dimension(200, 25));
+		phoneNumberField.setPreferredSize(new Dimension(280, 25));
 		phoneNumber.add(phoneNumberLabel);
 		phoneNumber.add(phoneNumberField);
 		northPanel.add(phoneNumber);
-		phoneNumberField.addFocusListener(new AddStudentListener(phoneNumberField, 4));
+		phoneNumberField.addFocusListener(new AddStudentListener(phoneNumberField, 7));
 		
 		email = new JPanel();
 		emailLabel = new JLabel("E-mail adresa*");
@@ -145,7 +165,7 @@ public class AddStudentDialog extends JDialog {
 		email.add(emailLabel);
 		email.add(emailField);
 		northPanel.add(email);
-		emailField.addFocusListener(new AddStudentListener(emailField, 5));
+		emailField.addFocusListener(new AddStudentListener(emailField, 8));
 		
 		index = new JPanel();
 		indexLabel = new JLabel("Broj indeksa*");
@@ -155,7 +175,7 @@ public class AddStudentDialog extends JDialog {
 		index.add(indexLabel);
 		index.add(indexField);
 		northPanel.add(index);
-		indexField.addFocusListener(new AddStudentListener(indexField, 6));
+		indexField.addFocusListener(new AddStudentListener(indexField, 9));
 		
 		yearOfEnroll = new JPanel();
 		yearOfEnrollLabel = new JLabel("Godina upisa*");
@@ -165,7 +185,7 @@ public class AddStudentDialog extends JDialog {
 		yearOfEnroll.add(yearOfEnrollLabel);
 		yearOfEnroll.add(yearOfEnrollField);
 		northPanel.add(yearOfEnroll);
-		yearOfEnrollField.addFocusListener(new AddStudentListener(yearOfEnrollField, 7));
+		yearOfEnrollField.addFocusListener(new AddStudentListener(yearOfEnrollField, 10));
 		
 		String[] currYears = {"I(prva)", "II(druga)", "III(treca)", "IV(cetrvta)"};
 		currYearOfStudies = new JPanel();
@@ -249,12 +269,21 @@ public class AddStudentDialog extends JDialog {
 	}
 
 
-
-	public static JTextField getAddressField() {
-		return addressField;
+	public static JTextField getStreetField() {
+		return streetField;
 	}
 
+	public static JTextField getStreetNumberField() {
+		return streetNumberField;
+	}
 
+	public static JTextField getCityField() {
+		return cityField;
+	}
+
+	public static JTextField getCountryField() {
+		return countryField;
+	}
 
 	public static JTextField getPhoneNumberField() {
 		return phoneNumberField;

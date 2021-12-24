@@ -10,7 +10,7 @@ public class StudentTable extends JTable {
 	public StudentTable() {
 		studentTableModel = new StudentAbstractTable();
 		
-		setColumnSelectionAllowed(true);
+		setCellSelectionEnabled(false);
 		setRowSelectionAllowed(true);
 		setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		getTableHeader().setReorderingAllowed(false);

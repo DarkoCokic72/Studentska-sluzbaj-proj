@@ -7,6 +7,7 @@ import Model.Address;
 import Model.Student;
 import Model.Student.Status;
 import Model.StudentDatabase;
+import gui.AddProfessorDialog;
 import gui.AddStudentDialog;
 import gui.EditStudentInformationTab;
 import gui.StudentTable;
@@ -21,17 +22,25 @@ public class StudentController {
 		String name = AddStudentDialog.getNameField().getText().trim();
 		String surname = AddStudentDialog.getSurnameField().getText().trim();
 		String dateStr = AddStudentDialog.getDateOfBirthField().getText().trim();
-		String addressStr = AddStudentDialog.getAddressField().getText().trim();
+		
+		String street = AddStudentDialog.getStreetField().getText().trim(); 
+		String streetNumberString = AddStudentDialog.getStreetNumberField().getText().trim(); //convert to int
+		String city = AddStudentDialog.getCityField().getText().trim();
+		String country = AddStudentDialog.getCountryField().getText().trim();
+		
 		String phoneNum = AddStudentDialog.getPhoneNumberField().getText().trim();
 		String email = AddStudentDialog.getEmailField().getText().trim();
 		String index = AddStudentDialog.getIndexField().getText().trim();
 		String yearOfEnroll = AddStudentDialog.getYearOfEnrollField().getText().trim();
 		int currYearofStudies = AddStudentDialog.getCurrentYearOfStudies();
 		Status status = AddStudentDialog.getStatus();
-		
-		if(checkFields(name, surname, dateStr, addressStr, phoneNum, email, index, yearOfEnroll) == true) {
+
+		//street, streetNumberString, city, country
+		if(checkFields(name, surname, dateStr, street, streetNumberString, city, country, phoneNum, email, index, yearOfEnroll) == true) {
 			Date date = Converter.convertStringToDate(dateStr);
-			Address adr = Converter.convertStringToAddress(addressStr);
+			int streetNumber = Integer.parseInt(streetNumberString);
+			Address adr = new Address(street, streetNumber, city, country); 
+			
 			int yearEnr = Integer.parseInt(yearOfEnroll);
 			
 			Student student = new Student(name, surname, date, email, phoneNum, adr, index, yearEnr, currYearofStudies, status);
@@ -45,11 +54,13 @@ public class StudentController {
 		
 	}
 	
-	public boolean checkFields(String name, String surname, String date, String address, String phone, String email, String index, String year) {
+
+	public boolean checkFields(String name, String surname, String date, String street, String streetNum, String city, String country, String phone, String email, String index, String year) {
 		boolean ret;
 		if(ValidationStudent.checkName(name) == true && ValidationStudent.checkSurname(surname) == true && ValidationStudent.checkDate(date) == true
-		&& ValidationStudent.checkAddress(address) == true && ValidationStudent.checkPhone(phone) == true && ValidationStudent.checkEmail(email) == true 
-		&& ValidationStudent.checkIndex(index) == true && ValidationStudent.checkYearOfEnroll(year) == true) {
+				&& ValidationStudent.checkStreet(street) == true && ValidationStudent.checkStreetNumber(streetNum) == true && ValidationStudent.checkCity(city) == true 
+				&& ValidationStudent.checkCountry(country) == true && ValidationStudent.checkPhone(phone) == true && ValidationStudent.checkEmail(email) == true 
+				&& ValidationStudent.checkIndex(index) == true && ValidationStudent.checkYearOfEnroll(year) == true) {
 			ret = true;
 		} else {
 			ret = false;
@@ -90,7 +101,12 @@ public class StudentController {
 		String name = EditStudentInformationTab.getNameField().getText().trim();
 		String surname = EditStudentInformationTab.getSurnameField().getText().trim();
 		String dateStr = EditStudentInformationTab.getDateOfBirthField().getText().trim();
-		String addressStr = EditStudentInformationTab.getAddressField().getText().trim();
+		
+		String street = EditStudentInformationTab.getStreetField().getText().trim(); 
+		String streetNumberString = EditStudentInformationTab.getStreetNumberField().getText().trim(); //convert to int
+		String city = EditStudentInformationTab.getCityField().getText().trim();
+		String country = EditStudentInformationTab.getCountryField().getText().trim();
+		
 		String phoneNum = EditStudentInformationTab.getPhoneNumberField().getText().trim();
 		String email = EditStudentInformationTab.getEmailField().getText().trim();
 		
@@ -98,8 +114,11 @@ public class StudentController {
 		int currYearofStudies = EditStudentInformationTab.getCurrentYearOfStudies();
 		Status status = EditStudentInformationTab.getStatus();
 		
+		
+		// ValidationStudent.
 		if(ValidationStudent.checkName(name) == true && ValidationStudent.checkSurname(surname) == true && ValidationStudent.checkDate(dateStr) == true
-			&& ValidationStudent.checkAddress(addressStr) == true && ValidationStudent.checkPhone(phoneNum) == true && ValidationStudent.checkEmail(email) == true 
+			&& ValidationStudent.checkStreet(street) == true && ValidationStudent.checkStreetNumber(streetNumberString) == true && ValidationStudent.checkCity(city) == true 
+			&& ValidationStudent.checkCountry(country)==true && ValidationStudent.checkPhone(phoneNum) == true && ValidationStudent.checkEmail(email) == true 
 			&& ValidationStudent.checkYearOfEnroll(yearOfEnroll) == true)  {
 			
 			String index = EditStudentInformationTab.getIndexField().getText().trim();
@@ -107,7 +126,8 @@ public class StudentController {
 			
 			if(ValidationStudent.checkIndex(wrongIndex)) {
 				Date date = Converter.convertStringToDate(dateStr);
-				Address adr = Converter.convertStringToAddress(addressStr);
+				int streetNumber = Integer.parseInt(streetNumberString);
+				Address adr = new Address(street, streetNumber, city, country); 
 				int yearEnr = Integer.parseInt(yearOfEnroll);
 				
 				student.setName(name);

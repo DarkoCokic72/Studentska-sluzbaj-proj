@@ -13,7 +13,7 @@ import gui.EditStudentInformationTab;
 
 public class ValidationStudent {
 	
-	public  static Boolean[] textFieldsFilled = new Boolean[8];
+	public  static Boolean[] textFieldsFilled = new Boolean[11];
 	private static ValidationStudent instanceStudValid = null;
 	
 	private ValidationStudent() {
@@ -92,6 +92,62 @@ public class ValidationStudent {
 		return true;
 	}
 	
+	public static boolean checkStreet(String street) {
+		
+		boolean retVal;
+		String regex = "[\\p{L}\\s]+";
+		retVal = Pattern.matches(regex, street);
+		
+		if (retVal == false && !street.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Pogresan format ulice.");
+		}
+		
+		return retVal;
+		
+	}
+	
+	public static boolean checkStreetNumber(String streetNumber) {
+		
+		boolean retVal;
+		String regex = "[0-9]+";
+		retVal = Pattern.matches(regex, streetNumber);
+		
+		if (retVal == false && !streetNumber.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Pogresan format broja kuce.");
+		}
+		
+		return retVal;
+		
+	}
+	
+	public static boolean checkCity(String city) {
+		
+		boolean retVal;
+		String regex = "[\\p{L}\\s]+";
+		retVal = Pattern.matches(regex, city);
+		
+		if (retVal == false && !city.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Pogresan format grada.");
+		}
+		
+		return retVal;
+		
+	}
+	
+	public static boolean checkCountry(String country) {
+		
+		boolean retVal;
+		String regex = "[\\p{L}\\s]+";
+		retVal = Pattern.matches(regex, country);
+		
+		if (retVal == false && !country.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Pogresan format drzave.");
+		}
+		
+		return retVal;
+		
+	}
+	
 	public static boolean checkAddress(String address) {
 		boolean ret = true;
 		String addressRegex = "[\\p{L}[0-9]\\s]+,[\\p{L}\\s]+,[\\p{L}\\s]+";
@@ -164,63 +220,11 @@ public class ValidationStudent {
 	}
 	
 	private static void fieldValidation(String input, int fieldNum) {
-		switch(fieldNum) {
-		case 0:
-			if(!input.isEmpty()) {
-				textFieldsFilled[fieldNum] = true;
-			} else {
-				textFieldsFilled[fieldNum] = false;
-			}
-			break;
-		case 1:
-			if(!input.isEmpty()) {
-				textFieldsFilled[fieldNum] = true;
-			} else {
-				textFieldsFilled[fieldNum] = false;
-			}
-			break;
-		case 2:
-			if(!input.isEmpty()) {
-				textFieldsFilled[fieldNum] = true;
-			} else {
-				textFieldsFilled[fieldNum] = false;
-			}
-			break;
-		case 3:
-			if(!input.isEmpty()) {
-				textFieldsFilled[fieldNum] = true;
-			} else {
-				textFieldsFilled[fieldNum] = false;
-			}
-			break;
-		case 4:
-			if(!input.isEmpty()) {
-				textFieldsFilled[fieldNum] = true;
-			} else {
-				textFieldsFilled[fieldNum] = false;
-			}
-			break;
-		case 5:
-			if(!input.isEmpty()) {
-				textFieldsFilled[fieldNum] = true;
-			} else {
-				textFieldsFilled[fieldNum] = false;
-			}
-			break;
-		case 6:
-			if(!input.isEmpty()) {
-				textFieldsFilled[fieldNum] = true;
-			} else {
-				textFieldsFilled[fieldNum] = false;
-			}
-			break;
-		case 7:
-			if(!input.isEmpty()) {
-				textFieldsFilled[fieldNum] = true;
-			} else {
-				textFieldsFilled[fieldNum] = false;
-			}
-			break;
+		if(!input.isEmpty()) {
+			textFieldsFilled[fieldNum] = true;
+		}
+		else {
+			textFieldsFilled[fieldNum] = false;
 		}
 	}
 	

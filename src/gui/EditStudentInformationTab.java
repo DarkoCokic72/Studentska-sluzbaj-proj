@@ -20,7 +20,9 @@ import javax.swing.JTextField;
 
 import Controller.StudentController;
 import Controller.ValidationStudent;
+import Listeners.EditProfessorListener;
 import Listeners.EditStudentListener;
+import Model.Address;
 import Model.Student;
 import Model.Student.Status;
 import Model.StudentDatabase;
@@ -42,7 +44,10 @@ public class EditStudentInformationTab extends JPanel {
 	private JLabel dateOfBirthLabel;
 	
 	private JPanel address;
-	private static JTextField addressField;
+	private static JTextField streetField;
+	private static JTextField streetNumberField;
+	private static JTextField cityField;
+	private static JTextField countryField;
 	private JLabel addressLabel;
 	
 	private JPanel phoneNumber;
@@ -93,7 +98,7 @@ public class EditStudentInformationTab extends JPanel {
 		nameLabel = new JLabel("Ime*");
 		nameField = new JTextField();
 		nameLabel.setPreferredSize(new Dimension(200, 25));
-		nameField.setPreferredSize(new Dimension(200, 25));
+		nameField.setPreferredSize(new Dimension(280, 25));
 		name.add(nameLabel);
 		name.add(nameField);
 		northPanel.add(name);
@@ -105,7 +110,7 @@ public class EditStudentInformationTab extends JPanel {
 		surnameLabel = new JLabel("Prezime*");
 		surnameField = new JTextField();
 		surnameLabel.setPreferredSize(new Dimension(200, 25));
-		surnameField.setPreferredSize(new Dimension(200, 25));
+		surnameField.setPreferredSize(new Dimension(280, 25));
 		surname.add(surnameLabel);
 		surname.add(surnameField);
 		northPanel.add(surname);
@@ -117,7 +122,7 @@ public class EditStudentInformationTab extends JPanel {
 		dateOfBirthLabel = new JLabel("Datum rodjenja*");
 		dateOfBirthField = new JTextField();
 		dateOfBirthLabel.setPreferredSize(new Dimension(200, 25));
-		dateOfBirthField.setPreferredSize(new Dimension(200, 25));
+		dateOfBirthField.setPreferredSize(new Dimension(280, 25));
 		dateOfBirth.add(dateOfBirthLabel);
 		dateOfBirth.add(dateOfBirthField);
 		northPanel.add(dateOfBirth);
@@ -128,66 +133,84 @@ public class EditStudentInformationTab extends JPanel {
 		
 		
 		address = new JPanel();
-		addressLabel = new JLabel("Adresa*");
-		addressField = new JTextField();
-		addressLabel.setPreferredSize(new Dimension(200, 25));
-		addressField.setPreferredSize(new Dimension(200, 25));
+		addressLabel = new JLabel("Adresa stanovanja*");
+		streetField = new JTextField();
+		streetNumberField = new JTextField();
+		cityField = new JTextField();
+		countryField = new JTextField();
+		addressLabel.setPreferredSize(new Dimension(200,25));
+		streetField.setPreferredSize(new Dimension(75,25));
+		streetNumberField.setPreferredSize(new Dimension(30,25));
+		cityField.setPreferredSize(new Dimension(75,25));
+		countryField.setPreferredSize(new Dimension(75,25));
+		streetField.setToolTipText("Ulica");
+		streetNumberField.setToolTipText("Broj");
+		cityField.setToolTipText("Grad");
+		countryField.setToolTipText("Drzava");
 		address.add(addressLabel);
-		address.add(addressField);
+		address.add(streetField);
+		address.add(streetNumberField);
+		address.add(cityField);
+		address.add(countryField);
 		northPanel.add(address);
 		
-		String addressStr = student.getAddress().getStreetName() + Integer.toString(student.getAddress().getStreetNumber()) + ", "
-				+ student.getAddress().getCity() + ", " + student.getAddress().getCountry();
-		addressField.setText(addressStr);
-		addressField.addFocusListener(new EditStudentListener(3, addressField));
+		Address address = student.getAddress();
+		streetField.setText(address.getStreetName());
+		streetNumberField.setText(Integer.toString(address.getStreetNumber()));
+		cityField.setText(address.getCity());
+		countryField.setText(address.getCountry());
+		streetField.addFocusListener(new EditStudentListener(3, streetField));
+		streetNumberField.addFocusListener(new EditStudentListener(4, streetNumberField));
+		cityField.addFocusListener(new EditStudentListener(5, cityField));
+		countryField.addFocusListener(new EditStudentListener(6, countryField));
 		
 		phoneNumber = new JPanel();
 		phoneNumberLabel = new JLabel("Broj telefona*");
 		phoneNumberField = new JTextField();
 		phoneNumberLabel.setPreferredSize(new Dimension(200, 25));
-		phoneNumberField.setPreferredSize(new Dimension(200, 25));
+		phoneNumberField.setPreferredSize(new Dimension(280, 25));
 		phoneNumber.add(phoneNumberLabel);
 		phoneNumber.add(phoneNumberField);
 		northPanel.add(phoneNumber);
 		
 		phoneNumberField.setText(student.getPhoneNumber());
-		phoneNumberField.addFocusListener(new EditStudentListener(4, phoneNumberField));
+		phoneNumberField.addFocusListener(new EditStudentListener(7, phoneNumberField));
 		
 		email = new JPanel();
 		emailLabel = new JLabel("E-mail adresa*");
 		emailField = new JTextField();
 		emailLabel.setPreferredSize(new Dimension(200, 25));
-		emailField.setPreferredSize(new Dimension(200, 25));
+		emailField.setPreferredSize(new Dimension(280, 25));
 		email.add(emailLabel);
 		email.add(emailField);
 		northPanel.add(email);
 		
 		emailField.setText(student.geteMail());
-		emailField.addFocusListener(new EditStudentListener(5, emailField));
+		emailField.addFocusListener(new EditStudentListener(8, emailField));
 		
 		index = new JPanel();
 		indexLabel = new JLabel("Broj indeksa*");
 		indexField = new JTextField();
 		indexLabel.setPreferredSize(new Dimension(200, 25));
-		indexField.setPreferredSize(new Dimension(200, 25));
+		indexField.setPreferredSize(new Dimension(280, 25));
 		index.add(indexLabel);
 		index.add(indexField);
 		northPanel.add(index);
 		
 		indexField.setText(student.getIndexID());
-		indexField.addFocusListener(new EditStudentListener(6, indexField));
+		indexField.addFocusListener(new EditStudentListener(9, indexField));
 		
 		yearOfEnroll = new JPanel();
 		yearOfEnrollLabel = new JLabel("Godina upisa*");
 		yearOfEnrollField = new JTextField();
 		yearOfEnrollLabel.setPreferredSize(new Dimension(200, 25));
-		yearOfEnrollField.setPreferredSize(new Dimension(200, 25));
+		yearOfEnrollField.setPreferredSize(new Dimension(280, 25));
 		yearOfEnroll.add(yearOfEnrollLabel);
 		yearOfEnroll.add(yearOfEnrollField);
 		northPanel.add(yearOfEnroll);
 		
 		yearOfEnrollField.setText(Integer.toString(student.getYearOfEnroll()));
-		yearOfEnrollField.addFocusListener(new EditStudentListener(7, yearOfEnrollField));
+		yearOfEnrollField.addFocusListener(new EditStudentListener(10, yearOfEnrollField));
 		
 		String[] currYears = {"I(prva)", "II(druga)", "III(treca)", "IV(cetrvta)"};
 		currYearOfStudies = new JPanel();
@@ -283,10 +306,21 @@ public class EditStudentInformationTab extends JPanel {
 
 
 
-	public static JTextField getAddressField() {
-		return addressField;
+	public static JTextField getStreetField() {
+		return streetField;
 	}
 
+	public static JTextField getStreetNumberField() {
+		return streetNumberField;
+	}
+
+	public static JTextField getCityField() {
+		return cityField;
+	}
+
+	public static JTextField getCountryField() {
+		return countryField;
+	}
 
 	public static JTextField getPhoneNumberField() {
 		return phoneNumberField;
