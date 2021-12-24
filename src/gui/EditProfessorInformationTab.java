@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import Controller.ProfessorController;
 import Controller.Validation;
 import Listeners.EditProfessorListener;
+import Model.Address;
 import Model.Profesor;
 import Model.ProfessorDatabase;
 import Model.Profesor.Titula;
@@ -44,7 +45,10 @@ public class EditProfessorInformationTab extends JPanel {
 	private JLabel dateOfBirthLab;
 	
 	private JPanel address;
-	private static JTextField addressField;
+	private static JTextField streetField;
+	private static JTextField streetNumberField;
+	private static JTextField cityField;
+	private static JTextField countryField;
 	private JLabel addressLab;
 	
 	private JPanel mobile;
@@ -56,7 +60,10 @@ public class EditProfessorInformationTab extends JPanel {
 	private JLabel mailLab;
 	
 	private JPanel officeAddress;
-	private static JTextField officeAddressField;
+	private static JTextField officeStreetField;
+	private static JTextField officeStreetNumberField;
+	private static JTextField officeCityField;
+	private static JTextField officeCountryField;
 	private JLabel officeAddressLab;
 	
 	private JPanel personalId;
@@ -102,7 +109,7 @@ public class EditProfessorInformationTab extends JPanel {
 		nameLab = new JLabel("Ime*");
 		nameField = new JTextField();
 		nameLab.setPreferredSize(new Dimension(200,25));
-		nameField.setPreferredSize(new Dimension(200,25));
+		nameField.setPreferredSize(new Dimension(270,25));
 		name.add(nameLab);
 		name.add(nameField);
 		northPanel.add(name);
@@ -114,7 +121,7 @@ public class EditProfessorInformationTab extends JPanel {
 		surnameLab = new JLabel("Prezime*");
 		surnameField = new JTextField();
 		surnameLab.setPreferredSize(new Dimension(200,25));
-		surnameField.setPreferredSize(new Dimension(200,25));
+		surnameField.setPreferredSize(new Dimension(270,25));
 		surname.add(surnameLab);
 		surname.add(surnameField);
 		northPanel.add(surname);
@@ -126,7 +133,7 @@ public class EditProfessorInformationTab extends JPanel {
 		dateOfBirthLab = new JLabel("Datum rodjenja*");
 		dateOfBirthField = new JTextField();
 		dateOfBirthLab.setPreferredSize(new Dimension(200,25));
-		dateOfBirthField.setPreferredSize(new Dimension(200,25));
+		dateOfBirthField.setPreferredSize(new Dimension(270,25));
 		dateOfBirth.add(dateOfBirthLab);
 		dateOfBirth.add(dateOfBirthField);
 		northPanel.add(dateOfBirth);
@@ -137,72 +144,110 @@ public class EditProfessorInformationTab extends JPanel {
 		
 		address = new JPanel();
 		addressLab = new JLabel("Adresa stanovanja*");
-		addressField = new JTextField();
+		streetField = new JTextField();
+		streetNumberField = new JTextField();
+		cityField = new JTextField();
+		countryField = new JTextField();
 		addressLab.setPreferredSize(new Dimension(200,25));
-		addressField.setPreferredSize(new Dimension(200,25));
+		streetField.setPreferredSize(new Dimension(75,25));
+		streetNumberField.setPreferredSize(new Dimension(30,25));
+		cityField.setPreferredSize(new Dimension(75,25));
+		countryField.setPreferredSize(new Dimension(75,25));
+		streetField.setToolTipText("Ulica");
+		streetNumberField.setToolTipText("Broj");
+		cityField.setToolTipText("Grad");
+		countryField.setToolTipText("Drzava");
 		address.add(addressLab);
-		address.add(addressField);
+		address.add(streetField);
+		address.add(streetNumberField);
+		address.add(cityField);
+		address.add(countryField);
 		northPanel.add(address);
 		
-		String addressString = professor.getAddress().getStreetName() + Integer.toString(professor.getAddress().getStreetNumber()) + "," + professor.getAddress().getCity() + "," + professor.getAddress().getCountry() ; 
-		addressField.setText(addressString);
-		addressField.addFocusListener(new EditProfessorListener(addressField, 3));
+		Address address = professor.getAddress();
+		streetField.setText(address.getStreetName());
+		streetNumberField.setText(Integer.toString(address.getStreetNumber()));
+		cityField.setText(address.getCity());
+		countryField.setText(address.getCountry());
+		streetField.addFocusListener(new EditProfessorListener(streetField, 3));
+		streetNumberField.addFocusListener(new EditProfessorListener(streetNumberField, 4));
+		cityField.addFocusListener(new EditProfessorListener(cityField, 5));
+		countryField.addFocusListener(new EditProfessorListener(countryField, 6));
 		
 		mobile = new JPanel();
 		mobileLab = new JLabel("Broj telefona*");
 		mobileField = new JTextField();
 		mobileLab.setPreferredSize(new Dimension(200,25));
-		mobileField.setPreferredSize(new Dimension(200,25));
+		mobileField.setPreferredSize(new Dimension(270,25));
 		mobile.add(mobileLab);
 		mobile.add(mobileField);
 		northPanel.add(mobile);
 		
 		mobileField.setText(professor.getPhoneNumber());
-		mobileField.addFocusListener(new EditProfessorListener(mobileField, 4));
+		mobileField.addFocusListener(new EditProfessorListener(mobileField, 7));
 		
 		mail = new JPanel();
 		mailLab = new JLabel("E-mail  adresa*");
 		mailField = new JTextField();
 		mailLab.setPreferredSize(new Dimension(200,25));
-		mailField.setPreferredSize(new Dimension(200,25));
+		mailField.setPreferredSize(new Dimension(270,25));
 		mail.add(mailLab);
 		mail.add(mailField);
 		northPanel.add(mail);
 		
 		mailField.setText(professor.geteMail());
-		mailField.addFocusListener(new EditProfessorListener(mailField, 5));
+		mailField.addFocusListener(new EditProfessorListener(mailField, 8));
 		
 		officeAddress = new JPanel();
 		officeAddressLab = new JLabel("Adresa kancelarije*");
-		officeAddressField = new JTextField();
+		officeStreetField = new JTextField();
+		officeStreetNumberField = new JTextField();
+		officeCityField = new JTextField();
+		officeCountryField = new JTextField();
 		officeAddressLab.setPreferredSize(new Dimension(200,25));
-		officeAddressField.setPreferredSize(new Dimension(200,25));
+		officeStreetField.setPreferredSize(new Dimension(75,25));
+		officeStreetNumberField.setPreferredSize(new Dimension(30,25));
+		officeCityField.setPreferredSize(new Dimension(75,25));
+		officeCountryField.setPreferredSize(new Dimension(75,25));
+		officeStreetField.setToolTipText("Ulica");
+		officeStreetNumberField.setToolTipText("Broj");
+		officeCityField.setToolTipText("Grad");
+		officeCountryField.setToolTipText("Drzava");
 		officeAddress.add(officeAddressLab);
-		officeAddress.add(officeAddressField);
+		officeAddress.add(officeStreetField);
+		officeAddress.add(officeStreetNumberField);
+		officeAddress.add(officeCityField);
+		officeAddress.add(officeCountryField);
 		northPanel.add(officeAddress);
 		
-		String officeAddressString = professor.getOfficeAddress().getStreetName() + Integer.toString(professor.getOfficeAddress().getStreetNumber()) + "," + professor.getOfficeAddress().getCity() + "," + professor.getOfficeAddress().getCountry() ; 
-		officeAddressField.setText(officeAddressString);
-		officeAddressField.addFocusListener(new EditProfessorListener(officeAddressField, 6));
+		Address officeAddress = professor.getOfficeAddress();
+		officeStreetField.setText(officeAddress.getStreetName());
+		officeStreetNumberField.setText(Integer.toString(officeAddress.getStreetNumber()));
+		officeCityField.setText(officeAddress.getCity());
+		officeCountryField.setText(officeAddress.getCountry());
+		officeStreetField.addFocusListener(new EditProfessorListener(officeStreetField, 9));
+		officeStreetNumberField.addFocusListener(new EditProfessorListener(officeStreetNumberField, 10));
+		officeCityField.addFocusListener(new EditProfessorListener(officeCityField, 11));
+		officeCountryField.addFocusListener(new EditProfessorListener(officeCountryField, 12));
 		
 		personalId = new JPanel();
 		personalIdLab = new JLabel("Broj licne karte*");
 		personalIdField = new JTextField();
 		personalIdLab.setPreferredSize(new Dimension(200,25));
-		personalIdField.setPreferredSize(new Dimension(200,25));
+		personalIdField.setPreferredSize(new Dimension(270,25));
 		personalId.add(personalIdLab);
 		personalId.add(personalIdField);
 		northPanel.add(personalId);
 		
 		personalIdField.setText(Integer.toString(professor.getPersonalID()));
-		personalIdField.addFocusListener(new EditProfessorListener(personalIdField, 7));
+		personalIdField.addFocusListener(new EditProfessorListener(personalIdField, 13));
 		
 		String titule[] = {"BSC", "MSC", "MR", "DR", "PROF"};
 		titula = new JPanel();
         titulaLab = new JLabel("Titula*");
 		titulaComboBox= new JComboBox<String>(titule);
 		titulaLab.setPreferredSize(new Dimension(200,25));
-		titulaComboBox.setPreferredSize(new Dimension(200,25));
+		titulaComboBox.setPreferredSize(new Dimension(270,25));
 		titulaComboBox.setSelectedIndex(0);
 		titula.add(titulaLab);
 		titula.add(titulaComboBox);
@@ -215,7 +260,7 @@ public class EditProfessorInformationTab extends JPanel {
 		zvanjeLab = new JLabel("Zvanje*");
 		zvanjeComboBox = new JComboBox<String>(zvanja);
 		zvanjeLab.setPreferredSize(new Dimension(200,25));
-		zvanjeComboBox.setPreferredSize(new Dimension(200,25));
+		zvanjeComboBox.setPreferredSize(new Dimension(270,25));
 		zvanjeComboBox.setSelectedIndex(0);
 		zvanje.add(zvanjeLab);
 		zvanje.add(zvanjeComboBox);
@@ -227,13 +272,13 @@ public class EditProfessorInformationTab extends JPanel {
 		yearsOfExperienceLab = new JLabel("Godine staza*");
 		yearsOfExperienceField = new JTextField();
 		yearsOfExperienceLab.setPreferredSize(new Dimension(200,25));
-		yearsOfExperienceField.setPreferredSize(new Dimension(200,25));
+		yearsOfExperienceField.setPreferredSize(new Dimension(270,25));
 		yearsOfExperience.add(yearsOfExperienceLab);
 		yearsOfExperience.add(yearsOfExperienceField);
 		northPanel.add(yearsOfExperience);
 		
 		yearsOfExperienceField.setText(Integer.toString(professor.getYearsOfExperience()));
-		yearsOfExperienceField.addFocusListener(new EditProfessorListener(yearsOfExperienceField, 8));
+		yearsOfExperienceField.addFocusListener(new EditProfessorListener(yearsOfExperienceField, 14));
 		
 		confirm = new JButton("Potvrdi");
 		confirm.setPreferredSize(new Dimension(90,30));
@@ -297,8 +342,20 @@ public class EditProfessorInformationTab extends JPanel {
     	return dateOfBirthField;
     }
     
-    public static JTextField getAddress() {
-    	return addressField;
+    public static JTextField getStreetField() {
+    	return streetField;
+    }
+    
+    public static JTextField getStreetNumberField() {
+    	return streetNumberField;
+    }
+    
+    public static JTextField getCityField() {
+    	return cityField;
+    }
+    
+    public static JTextField getCountryField() {
+    	return countryField;
     }
     
     public static JTextField getMobile() {
@@ -309,8 +366,20 @@ public class EditProfessorInformationTab extends JPanel {
     	return mailField;
     }
     
-    public static JTextField getOfficeAddressField() {
-    	return officeAddressField;
+    public static JTextField getOfficeStreetField() {
+    	return officeStreetField;
+    }
+    
+    public static JTextField getOfficeStreetNumberField() {
+    	return officeStreetNumberField;
+    }
+    
+    public static JTextField getOfficeCityField() {
+    	return officeCityField;
+    }
+    
+    public static JTextField getOfficeCountryField() {
+    	return officeCountryField;
     }
     
     public static JTextField getPersonalId() {

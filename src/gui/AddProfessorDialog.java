@@ -40,7 +40,10 @@ public class AddProfessorDialog extends JDialog {
 	private JLabel dateOfBirthLab;
 	
 	private JPanel address;
-	private static JTextField addressField;
+	private static JTextField streetField;
+	private static JTextField streetNumberField;
+	private static JTextField cityField;
+	private static JTextField countryField;
 	private JLabel addressLab;
 	
 	private JPanel mobile;
@@ -52,7 +55,10 @@ public class AddProfessorDialog extends JDialog {
 	private JLabel mailLab;
 	
 	private JPanel officeAddress;
-	private static JTextField officeAddressField;
+	private static JTextField officeStreetField;
+	private static JTextField officeStreetNumberField;
+	private static JTextField officeCityField;
+	private static JTextField officeCountryField;
 	private JLabel officeAddressLab;
 	
 	private JPanel personalId;
@@ -95,7 +101,7 @@ public class AddProfessorDialog extends JDialog {
 		nameLab = new JLabel("Ime*");
 		nameField = new JTextField();
 		nameLab.setPreferredSize(new Dimension(200,25));
-		nameField.setPreferredSize(new Dimension(200,25));
+		nameField.setPreferredSize(new Dimension(270,25));
 		name.add(nameLab);
 		name.add(nameField);
 		northPanel.add(name);
@@ -105,7 +111,7 @@ public class AddProfessorDialog extends JDialog {
 		surnameLab = new JLabel("Prezime*");
 		surnameField = new JTextField();
 		surnameLab.setPreferredSize(new Dimension(200,25));
-		surnameField.setPreferredSize(new Dimension(200,25));
+		surnameField.setPreferredSize(new Dimension(270,25));
 		surname.add(surnameLab);
 		surname.add(surnameField);
 		northPanel.add(surname);
@@ -115,7 +121,7 @@ public class AddProfessorDialog extends JDialog {
 		dateOfBirthLab = new JLabel("Datum rodjenja*");
 		dateOfBirthField = new JTextField();
 		dateOfBirthLab.setPreferredSize(new Dimension(200,25));
-		dateOfBirthField.setPreferredSize(new Dimension(200,25));
+		dateOfBirthField.setPreferredSize(new Dimension(270,25));
 		dateOfBirth.add(dateOfBirthLab);
 		dateOfBirth.add(dateOfBirthField);
 		northPanel.add(dateOfBirth);
@@ -123,60 +129,92 @@ public class AddProfessorDialog extends JDialog {
 		
 		address = new JPanel();
 		addressLab = new JLabel("Adresa stanovanja*");
-		addressField = new JTextField();
+		streetField = new JTextField();
+		streetNumberField = new JTextField();
+		cityField = new JTextField();
+		countryField = new JTextField();
 		addressLab.setPreferredSize(new Dimension(200,25));
-		addressField.setPreferredSize(new Dimension(200,25));
+		streetField.setPreferredSize(new Dimension(75,25));
+		streetNumberField.setPreferredSize(new Dimension(30,25));
+		cityField.setPreferredSize(new Dimension(75,25));
+		countryField.setPreferredSize(new Dimension(75,25));
+		streetField.setToolTipText("Ulica");
+		streetNumberField.setToolTipText("Broj");
+		cityField.setToolTipText("Grad");
+		countryField.setToolTipText("Drzava");
 		address.add(addressLab);
-		address.add(addressField);
+		address.add(streetField);
+		address.add(streetNumberField);
+		address.add(cityField);
+		address.add(countryField);
 		northPanel.add(address);
-		addressField.addFocusListener(new AddProfessorListener(addressField, 3));
+		streetField.addFocusListener(new AddProfessorListener(streetField, 3));
+		streetNumberField.addFocusListener(new AddProfessorListener(streetNumberField, 4));
+		cityField.addFocusListener(new AddProfessorListener(cityField, 5));
+		countryField.addFocusListener(new AddProfessorListener(countryField, 6));
 		
 		mobile = new JPanel();
 		mobileLab = new JLabel("Broj telefona*");
 		mobileField = new JTextField();
 		mobileLab.setPreferredSize(new Dimension(200,25));
-		mobileField.setPreferredSize(new Dimension(200,25));
+		mobileField.setPreferredSize(new Dimension(270,25));
 		mobile.add(mobileLab);
 		mobile.add(mobileField);
 		northPanel.add(mobile);
-		mobileField.addFocusListener(new AddProfessorListener(mobileField, 4));
+		mobileField.addFocusListener(new AddProfessorListener(mobileField, 7));
 		
 		mail = new JPanel();
 		mailLab = new JLabel("E-mail  adresa*");
 		mailField = new JTextField();
 		mailLab.setPreferredSize(new Dimension(200,25));
-		mailField.setPreferredSize(new Dimension(200,25));
+		mailField.setPreferredSize(new Dimension(270,25));
 		mail.add(mailLab);
 		mail.add(mailField);
 		northPanel.add(mail);
-		mailField.addFocusListener(new AddProfessorListener(mailField, 5));
+		mailField.addFocusListener(new AddProfessorListener(mailField, 8));
 		
 		officeAddress = new JPanel();
 		officeAddressLab = new JLabel("Adresa kancelarije*");
-		officeAddressField = new JTextField();
+		officeStreetField = new JTextField();
+		officeStreetNumberField = new JTextField();
+		officeCityField = new JTextField();
+		officeCountryField = new JTextField();
 		officeAddressLab.setPreferredSize(new Dimension(200,25));
-		officeAddressField.setPreferredSize(new Dimension(200,25));
+		officeStreetField.setPreferredSize(new Dimension(75,25));
+		officeStreetNumberField.setPreferredSize(new Dimension(30,25));
+		officeCityField.setPreferredSize(new Dimension(75,25));
+		officeCountryField.setPreferredSize(new Dimension(75,25));
+		officeStreetField.setToolTipText("Ulica");
+		officeStreetNumberField.setToolTipText("Broj");
+		officeCityField.setToolTipText("Grad");
+		officeCountryField.setToolTipText("Drzava");
 		officeAddress.add(officeAddressLab);
-		officeAddress.add(officeAddressField);
+		officeAddress.add(officeStreetField);
+		officeAddress.add(officeStreetNumberField);
+		officeAddress.add(officeCityField);
+		officeAddress.add(officeCountryField);
 		northPanel.add(officeAddress);
-		officeAddressField.addFocusListener(new AddProfessorListener(officeAddressField, 6));
+		officeStreetField.addFocusListener(new AddProfessorListener(officeStreetField, 9));
+		officeStreetNumberField.addFocusListener(new AddProfessorListener(officeStreetNumberField, 10));
+		officeCityField.addFocusListener(new AddProfessorListener(officeCityField, 11));
+		officeCountryField.addFocusListener(new AddProfessorListener(officeCountryField, 12));
 		
 		personalId = new JPanel();
 		personalIdLab = new JLabel("Broj licne karte*");
 		personalIdField = new JTextField();
 		personalIdLab.setPreferredSize(new Dimension(200,25));
-		personalIdField.setPreferredSize(new Dimension(200,25));
+		personalIdField.setPreferredSize(new Dimension(270,25));
 		personalId.add(personalIdLab);
 		personalId.add(personalIdField);
 		northPanel.add(personalId);
-		personalIdField.addFocusListener(new AddProfessorListener(personalIdField, 7));
+		personalIdField.addFocusListener(new AddProfessorListener(personalIdField, 13));
 		
 		String titule[] = {"BSC", "MSC", "MR", "DR", "PROF"};
 		titula = new JPanel();
         titulaLab = new JLabel("Titula*");
 		titulaComboBox= new JComboBox<String>(titule);
 		titulaLab.setPreferredSize(new Dimension(200,25));
-		titulaComboBox.setPreferredSize(new Dimension(200,25));
+		titulaComboBox.setPreferredSize(new Dimension(270,25));
 		titulaComboBox.setSelectedIndex(0);
 		titula.add(titulaLab);
 		titula.add(titulaComboBox);
@@ -187,7 +225,7 @@ public class AddProfessorDialog extends JDialog {
 		zvanjeLab = new JLabel("Zvanje*");
 		zvanjeComboBox = new JComboBox<String>(zvanja);
 		zvanjeLab.setPreferredSize(new Dimension(200,25));
-		zvanjeComboBox.setPreferredSize(new Dimension(200,25));
+		zvanjeComboBox.setPreferredSize(new Dimension(270,25));
 		zvanjeComboBox.setSelectedIndex(0);
 		zvanje.add(zvanjeLab);
 		zvanje.add(zvanjeComboBox);
@@ -197,11 +235,11 @@ public class AddProfessorDialog extends JDialog {
 		yearsOfExperienceLab = new JLabel("Godine staza*");
 		yearsOfExperienceField = new JTextField();
 		yearsOfExperienceLab.setPreferredSize(new Dimension(200,25));
-		yearsOfExperienceField.setPreferredSize(new Dimension(200,25));
+		yearsOfExperienceField.setPreferredSize(new Dimension(270,25));
 		yearsOfExperience.add(yearsOfExperienceLab);
 		yearsOfExperience.add(yearsOfExperienceField);
 		northPanel.add(yearsOfExperience);
-		yearsOfExperienceField.addFocusListener(new AddProfessorListener(yearsOfExperienceField, 8));
+		yearsOfExperienceField.addFocusListener(new AddProfessorListener(yearsOfExperienceField, 14));
 		
 		confirm = new JButton("Potvrdi");
 		confirm.setPreferredSize(new Dimension(90,30));
@@ -264,8 +302,20 @@ public class AddProfessorDialog extends JDialog {
     	return dateOfBirthField;
     }
     
-    public static JTextField getAddress() {
-    	return addressField;
+    public static JTextField getStreetField() {
+    	return streetField;
+    }
+    
+    public static JTextField getStreetNumberField() {
+    	return streetNumberField;
+    }
+    
+    public static JTextField getCityField() {
+    	return cityField;
+    }
+    
+    public static JTextField getCountryField() {
+    	return countryField;
     }
     
     public static JTextField getMobile() {
@@ -276,8 +326,20 @@ public class AddProfessorDialog extends JDialog {
     	return mailField;
     }
     
-    public static JTextField getOfficeAddressField() {
-    	return officeAddressField;
+    public static JTextField getOfficeStreetField() {
+    	return officeStreetField;
+    }
+    
+    public static JTextField getOfficeStreetNumberField() {
+    	return officeStreetNumberField;
+    }
+    
+    public static JTextField getOfficeCityField() {
+    	return officeCityField;
+    }
+    
+    public static JTextField getOfficeCountryField() {
+    	return officeCountryField;
     }
     
     public static JTextField getPersonalId() {

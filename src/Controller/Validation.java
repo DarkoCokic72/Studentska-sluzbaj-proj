@@ -13,7 +13,7 @@ import gui.EditProfessorInformationTab;
 
 public class Validation {
 	
-	public static Boolean[] textFieldFilledProfessor = new Boolean[9];
+	public static Boolean[] textFieldFilledProfessor = new Boolean[15];
 	
 	public static boolean checkName(String name) {
 			
@@ -89,22 +89,65 @@ public class Validation {
 
 	}
 	
-	public static boolean checkAddress(String address) {
+	public static boolean checkStreet(String street) {
 		
-		boolean retVal = true;
-		String regex = "[\\p{L}0-9\\s]+,[\\p{L}\\s]+,[\\p{L}\\s]+";
-		retVal = Pattern.matches(regex, address);
-		if (retVal == false && !address.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Pogresan format adrese.\nAdresa mora biti u formatu ulica broj, grad, drzava.");
+		boolean retVal;
+		String regex = "[\\p{L}\\s]+";
+		retVal = Pattern.matches(regex, street);
+		
+		if (retVal == false && !street.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Pogresan format ulice.");
 		}
+		
 		return retVal;
-			
+		
 	}
 	
+	public static boolean checkStreetNumber(String streetNumber) {
+		
+		boolean retVal;
+		String regex = "[0-9]+";
+		retVal = Pattern.matches(regex, streetNumber);
+		
+		if (retVal == false && !streetNumber.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Pogresan format broja kuce.");
+		}
+		
+		return retVal;
+		
+	}
+	
+	public static boolean checkCity(String city) {
+		
+		boolean retVal;
+		String regex = "[\\p{L}\\s]+";
+		retVal = Pattern.matches(regex, city);
+		
+		if (retVal == false && !city.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Pogresan format grada.");
+		}
+		
+		return retVal;
+		
+	}
+	
+	public static boolean checkCountry(String country) {
+		
+		boolean retVal;
+		String regex = "[\\p{L}\\s]+";
+		retVal = Pattern.matches(regex, country);
+		
+		if (retVal == false && !country.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Pogresan format drzave.");
+		}
+		
+		return retVal;
+		
+	}
 	
 	public static boolean checkPhoneNumber(String number) {
 			
-		boolean retVal = true;
+		boolean retVal;
 		String regex = "\\+?[0-9][0-9/-]+";
 		retVal = Pattern.matches(regex, number);
 		if (retVal == false && !number.isEmpty()) {
@@ -116,12 +159,14 @@ public class Validation {
 	
 
 	
-	public static boolean checkMail(String mail) {
+	public static boolean checkEmail(String email) {
 		
-		boolean retVal = true;
-		retVal = Pattern.matches("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}.[a-z]{2,}$", mail); 
-		if (retVal == false && !mail.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Neispravan format E-mail adrese");
+		boolean retVal;
+		String emailRegex = "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$"; //https://stackoverflow.com/questions/42266148/email-validation-regex-java
+		retVal = Pattern.matches(emailRegex, email);
+		
+		if(retVal == false && email.isEmpty() == false) {
+			JOptionPane.showMessageDialog(null, "Neispravan format e-mail adrese.");
 		}
 		
 		return retVal;
@@ -157,13 +202,14 @@ public class Validation {
 
 	public static boolean checkYearsOfExp(String years) {
 		
-		boolean ret = true;
-		ret = Pattern.matches("[1-9][0-9]?", years); 
-		if (ret == false && !years.isEmpty()) {
+		boolean retVal;
+		retVal = Pattern.matches("[1-9][0-9]?", years); 
+		
+		if (retVal == false && !years.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Uneli ste pogresan broj godina iskustva");
 		}
 		
-		return ret;
+		return retVal;
 	}
 	
 	   
