@@ -29,6 +29,16 @@ public class MenuBar extends JMenuBar{
 		miSubject.setIcon(new ImageIcon("images/books-icon.png"));
 		miChair.setIcon(new ImageIcon("images/university.png"));
 		
+		miStudent.setMnemonic('t');
+		miProfesor.setMnemonic('P');
+		miSubject.setMnemonic('r');
+		miChair.setMnemonic('K');
+		
+		miStudent.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_0, ActionEvent.CTRL_MASK));
+		miProfesor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.CTRL_MASK));
+		miSubject.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.CTRL_MASK));
+		miChair.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, ActionEvent.CTRL_MASK));
+		
 		miOpen.add(miStudent);
 		miOpen.add(miSubject);
 		miOpen.add(miProfesor);
@@ -40,6 +50,11 @@ public class MenuBar extends JMenuBar{
 		miSave.setIcon(new ImageIcon("images/Save-as-icon.png"));
 		miOpen.setIcon(new ImageIcon("images/open-file-icon.png"));
 		miClose.setIcon(new ImageIcon("images/Close-2-icon.png"));
+		
+		miNew.setMnemonic('N');
+		miSave.setMnemonic('S');
+		miOpen.setMnemonic('O');
+		miClose.setMnemonic('C');
 		
 		miNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
 		miSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
@@ -60,6 +75,9 @@ public class MenuBar extends JMenuBar{
 		JMenuItem miEdit = new JMenuItem("Edit");
 		JMenuItem miDelete = new JMenuItem("Delete");
 		
+		miEdit.setMnemonic('d');
+		miDelete.setMnemonic('e');
+		
 		miEdit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
 		miDelete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, ActionEvent.SHIFT_MASK));
 		
@@ -76,7 +94,14 @@ public class MenuBar extends JMenuBar{
 		JMenuItem miHelp = new JMenuItem("Help");
 		JMenuItem miAbout = new JMenuItem("About");
 		
-		//FIXME miHelp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, ActionEvent.KEY_EVENT_MASK));
+		miHelp.setIcon(new ImageIcon("images/Help-icon.png"));
+		miAbout.setIcon(new ImageIcon("images/icons8-about-32.png"));
+		
+		miHelp.setMnemonic('H');
+		miAbout.setMnemonic('A');
+		
+		miHelp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, (int) ActionEvent.KEY_EVENT_MASK));
+		miAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
 		
 		help.add(miHelp);
 		help.addSeparator();
