@@ -128,7 +128,7 @@ public class AddStudentDialog extends JDialog {
 		cityField = new JTextField();
 		countryField = new JTextField();
 		addressLabel.setPreferredSize(new Dimension(200,25));
-		streetField.setPreferredSize(new Dimension(75,25));
+		streetField.setPreferredSize(new Dimension(85,25));
 		streetNumberField.setPreferredSize(new Dimension(30,25));
 		cityField.setPreferredSize(new Dimension(75,25));
 		countryField.setPreferredSize(new Dimension(75,25));
@@ -161,7 +161,7 @@ public class AddStudentDialog extends JDialog {
 		emailLabel = new JLabel("E-mail adresa*");
 		emailField = new JTextField();
 		emailLabel.setPreferredSize(new Dimension(200, 25));
-		emailField.setPreferredSize(new Dimension(200, 25));
+		emailField.setPreferredSize(new Dimension(280, 25));
 		email.add(emailLabel);
 		email.add(emailField);
 		northPanel.add(email);
@@ -171,7 +171,7 @@ public class AddStudentDialog extends JDialog {
 		indexLabel = new JLabel("Broj indeksa*");
 		indexField = new JTextField();
 		indexLabel.setPreferredSize(new Dimension(200, 25));
-		indexField.setPreferredSize(new Dimension(200, 25));
+		indexField.setPreferredSize(new Dimension(280, 25));
 		index.add(indexLabel);
 		index.add(indexField);
 		northPanel.add(index);
@@ -181,7 +181,7 @@ public class AddStudentDialog extends JDialog {
 		yearOfEnrollLabel = new JLabel("Godina upisa*");
 		yearOfEnrollField = new JTextField();
 		yearOfEnrollLabel.setPreferredSize(new Dimension(200, 25));
-		yearOfEnrollField.setPreferredSize(new Dimension(200, 25));
+		yearOfEnrollField.setPreferredSize(new Dimension(280, 25));
 		yearOfEnroll.add(yearOfEnrollLabel);
 		yearOfEnroll.add(yearOfEnrollField);
 		northPanel.add(yearOfEnroll);
@@ -192,7 +192,7 @@ public class AddStudentDialog extends JDialog {
 		currYearOfStudiesLabel = new JLabel("Trenutna godina studija*");
 		currYearOfStudiesComboBox = new JComboBox<String>(currYears);
 		currYearOfStudiesLabel.setPreferredSize(new Dimension(200, 25));
-		currYearOfStudiesComboBox.setPreferredSize(new Dimension(200, 25));
+		currYearOfStudiesComboBox.setPreferredSize(new Dimension(280, 25));
 		currYearOfStudiesComboBox.setSelectedIndex(0);
 		currYearOfStudies.add(currYearOfStudiesLabel);
 		currYearOfStudies.add(currYearOfStudiesComboBox);
@@ -203,7 +203,7 @@ public class AddStudentDialog extends JDialog {
 		currStatusLabel = new JLabel("Status Studenta*");
 		currStatusComboBox = new JComboBox<String>(currStats);
 		currStatusLabel.setPreferredSize(new Dimension(200, 25));
-		currStatusComboBox.setPreferredSize(new Dimension(200, 25));
+		currStatusComboBox.setPreferredSize(new Dimension(280, 25));
 		currStatusComboBox.setSelectedIndex(0);
 		currStatus.add(currStatusLabel);
 		currStatus.add(currStatusComboBox);

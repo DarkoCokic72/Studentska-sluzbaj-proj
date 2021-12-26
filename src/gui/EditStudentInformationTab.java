@@ -139,7 +139,7 @@ public class EditStudentInformationTab extends JPanel {
 		cityField = new JTextField();
 		countryField = new JTextField();
 		addressLabel.setPreferredSize(new Dimension(200,25));
-		streetField.setPreferredSize(new Dimension(75,25));
+		streetField.setPreferredSize(new Dimension(85,25));
 		streetNumberField.setPreferredSize(new Dimension(30,25));
 		cityField.setPreferredSize(new Dimension(75,25));
 		countryField.setPreferredSize(new Dimension(75,25));
@@ -217,7 +217,7 @@ public class EditStudentInformationTab extends JPanel {
 		currYearOfStudiesLabel = new JLabel("Trenutna godina studija*");
 		currYearOfStudiesComboBox = new JComboBox<String>(currYears);
 		currYearOfStudiesLabel.setPreferredSize(new Dimension(200, 25));
-		currYearOfStudiesComboBox.setPreferredSize(new Dimension(200, 25));
+		currYearOfStudiesComboBox.setPreferredSize(new Dimension(280, 25));
 		currYearOfStudiesComboBox.setSelectedIndex(0);
 		currYearOfStudies.add(currYearOfStudiesLabel);
 		currYearOfStudies.add(currYearOfStudiesComboBox);
@@ -230,7 +230,7 @@ public class EditStudentInformationTab extends JPanel {
 		currStatusLabel = new JLabel("Status Studenta*");
 		currStatusComboBox = new JComboBox<String>(currStats);
 		currStatusLabel.setPreferredSize(new Dimension(200, 25));
-		currStatusComboBox.setPreferredSize(new Dimension(200, 25));
+		currStatusComboBox.setPreferredSize(new Dimension(280, 25));
 		currStatusComboBox.setSelectedIndex(0);
 		currStatus.add(currStatusLabel);
 		currStatus.add(currStatusComboBox);
