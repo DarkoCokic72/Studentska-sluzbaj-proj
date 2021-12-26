@@ -3,12 +3,15 @@ package gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
+import javax.swing.event.MenuKeyEvent;
+import javax.swing.event.MenuKeyListener;
 
 import Controller.MainController;
 
@@ -60,6 +63,7 @@ public class MenuBar extends JMenuBar{
 		miSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 		miClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));
 		// FIXME miOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+		
 		
 		file.add(miNew);
 		file.addSeparator();
@@ -143,6 +147,43 @@ public class MenuBar extends JMenuBar{
 				
 			MainController.delete();
 			
+			}
+		});
+		
+		miClose.addActionListener(new ActionListener() {
+			
+			@Override
+			// https://coderanch.com/t/650766/java/Mnemonic-shortcuts-consumed
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.exit(0);
+			}
+		});
+		
+		miStudent.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				CentralPanel.getCentralPanel().setSelectedIndex(0);
+			}
+		});
+		
+		miProfesor.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				CentralPanel.getCentralPanel().setSelectedIndex(1);
+			}
+		});
+		
+		miSubject.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				CentralPanel.getCentralPanel().setSelectedIndex(2);
 			}
 		});
 	}
