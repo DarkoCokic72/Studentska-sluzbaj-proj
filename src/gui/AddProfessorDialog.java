@@ -19,7 +19,6 @@ import Controller.ProfessorController;
 import Controller.Validation;
 import Listeners.AddProfessorListener;
 import Model.Profesor;
-import Model.Profesor.Titula;
 import Model.Profesor.Zvanje;
 
 public class AddProfessorDialog extends JDialog {
@@ -64,10 +63,6 @@ public class AddProfessorDialog extends JDialog {
 	private JPanel personalId;
 	private static JTextField personalIdField;
 	private JLabel personalIdLab;
-    
-	private JPanel titula;
-	private static JComboBox<String> titulaComboBox;
-	private JLabel titulaLab;
 	
 	private JPanel zvanje;
 	private static JComboBox<String> zvanjeComboBox;
@@ -118,7 +113,7 @@ public class AddProfessorDialog extends JDialog {
 		surnameField.addFocusListener(new AddProfessorListener(surnameField, 1));
 		
 		dateOfBirth = new JPanel();
-		dateOfBirthLab = new JLabel("Datum rodjenja*");
+		dateOfBirthLab = new JLabel("Datum rodjenja* (dd.mm.yyyy.)");
 		dateOfBirthField = new JTextField();
 		dateOfBirthLab.setPreferredSize(new Dimension(200,25));
 		dateOfBirthField.setPreferredSize(new Dimension(270,25));
@@ -208,17 +203,6 @@ public class AddProfessorDialog extends JDialog {
 		personalId.add(personalIdField);
 		northPanel.add(personalId);
 		personalIdField.addFocusListener(new AddProfessorListener(personalIdField, 13));
-		
-		String titule[] = {"BSC", "MSC", "MR", "DR", "PROF"};
-		titula = new JPanel();
-        titulaLab = new JLabel("Titula*");
-		titulaComboBox= new JComboBox<String>(titule);
-		titulaLab.setPreferredSize(new Dimension(200,25));
-		titulaComboBox.setPreferredSize(new Dimension(270,25));
-		titulaComboBox.setSelectedIndex(0);
-		titula.add(titulaLab);
-		titula.add(titulaComboBox);
-		northPanel.add(titula);
 		
 		String zvanja[] = {"SARADNIK U NASTAVI", "ASISTENT", "DOCENT", "REDOVNI PROFESOR", "VANREDNI PROFESOR", "EMERITUS"};
 		zvanje = new JPanel();
@@ -346,33 +330,6 @@ public class AddProfessorDialog extends JDialog {
     	return personalIdField;
     }
     
-    public static Titula getTitula() {
-    	
-    	int titulaIndex = titulaComboBox.getSelectedIndex();
-    	Titula titula;
-    	
-    	switch (titulaIndex) {
-		case 0:
-			titula = Profesor.Titula.BSC;
-			break;
-		case 1:
-			titula = Profesor.Titula.MSC;
-			break;
-		case 2:
-			titula = Profesor.Titula.MR;
-			break;
-		case 3:
-			titula = Profesor.Titula.DR;
-			break;
-		case 4:
-			titula = Profesor.Titula.PROF;
-			break;
-		default:
-			titula = Profesor.Titula.PROF;
-		}
-    	
-    	return titula;
-    }
     
     public static Zvanje getZvanje() {
         

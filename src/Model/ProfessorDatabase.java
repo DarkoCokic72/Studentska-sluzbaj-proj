@@ -15,8 +15,8 @@ public class ProfessorDatabase {
 		
 	    columns.add("Ime");
 	    columns.add("Prezime");
-	    columns.add("Titula");
 	    columns.add("Zvanje");
+	    columns.add("E-mail adresa");
 	    
 	}
 	
@@ -49,11 +49,11 @@ public class ProfessorDatabase {
 			
 		    case 2:
 			
-			    return professor.getTitula().name();
+		    	return professor.getZvanje().name();
 			
 		    case 3:
 			
-			    return professor.getZvanje().name();
+			    return professor.geteMail();
 			
 		    default:
 			    return null;

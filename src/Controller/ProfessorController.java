@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 
 import Model.Address;
 import Model.Profesor;
-import Model.Profesor.Titula;
 import Model.Profesor.Zvanje;
 import Model.ProfessorDatabase;
 import gui.AddProfessorDialog;
@@ -40,7 +39,6 @@ public class ProfessorController {
 			String officeCity = AddProfessorDialog.getOfficeCityField().getText().trim();
 			String officeCountry = AddProfessorDialog.getCountryField().getText().trim();
 			String personalIdString = AddProfessorDialog.getPersonalId().getText().trim(); //convert to int
-			Titula titula = AddProfessorDialog.getTitula();
 			Zvanje zvanje = AddProfessorDialog.getZvanje();
 			String yearsOfExperienceString = AddProfessorDialog.getYearsOfExpirienceField().getText().trim(); //convert to int
 				
@@ -59,7 +57,7 @@ public class ProfessorController {
 				int yearsOfExperience = Integer.parseInt(yearsOfExperienceString);
 				
 				Profesor professor = new Profesor(name, surname, date, email, phoneNumber, address, 
-			    		                          officeAddress, personalId, titula, yearsOfExperience, zvanje);
+			    		                          officeAddress, personalId, yearsOfExperience, zvanje);
 			     
 				ProfessorDatabase professorDatabase = ProfessorDatabase.getDatabase();
 				professorDatabase.addProfessorToTable(professor);
@@ -87,7 +85,6 @@ public class ProfessorController {
 			String officeStreetNumberString = EditProfessorInformationTab.getOfficeStreetNumberField().getText().trim(); //convert to int
 			String officeCity = EditProfessorInformationTab.getOfficeCityField().getText().trim();
 			String officeCountry = EditProfessorInformationTab.getOfficeCountryField().getText().trim();
-			Titula titula = EditProfessorInformationTab.getTitula();
 			Zvanje zvanje = EditProfessorInformationTab.getZvanje();
 			String yearsOfExperienceString = EditProfessorInformationTab.getYearsOfExpirienceField().getText().trim(); //convert to int
 				
@@ -121,9 +118,7 @@ public class ProfessorController {
 					professor.seteMail(email);
 					professor.setOfficeAddress(officeAddress);
 					professor.setPersonalID(personalId);
-					professor.setTitle(titula);
 					professor.setZvanje(zvanje);
-					professor.setTitle(titula);
 					professor.setYearsOfExperience(yearsOfExperience);
 				
 					ProfessorJTable professorTable = ProfessorJTable.getTable();
