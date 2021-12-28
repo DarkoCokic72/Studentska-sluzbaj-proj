@@ -190,7 +190,7 @@ public class ValidationStudent {
 		}
 		
 		for(Student s: StudentDatabase.getInstance().getStudents()) {
-			if(index == s.getIndexID()) {
+			if(s.getIndexID().equalsIgnoreCase(index)) {
 				JOptionPane.showMessageDialog(null, "Vec postoji student sa tim brojem indeksa!");
 				ret = false;
 			}
