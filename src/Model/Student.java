@@ -30,6 +30,17 @@ public class Student extends Person{
 		passedCourses = new ArrayList<Grade>();
 		unpassedCourses = new ArrayList<Subject>();
 	}
+	
+	public Student(Student student) {
+		super(student.name, student.surname, student.dateOfBirth, student.eMail, student.phoneNumber, student.address);
+		this.indexID = student.indexID;
+		this.yearOfEnroll = student.yearOfEnroll;
+		this.currYearOfStudies = student.currYearOfStudies;
+		this.currStatus = student.currStatus;
+		this.passedCourses = student.passedCourses;
+		this.unpassedCourses = student.unpassedCourses;
+	
+	}
 
 	public String getIndexID() {
 		return indexID;

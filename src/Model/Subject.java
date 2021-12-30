@@ -2,9 +2,10 @@ package Model;
 
 import java.util.ArrayList;
 
-enum Term { SUMMER, WINTER}
 
 public class Subject {
+	
+	public enum Term { SUMMER, WINTER}
 	
 	private String subjectCode;
 	private String subjectName;
