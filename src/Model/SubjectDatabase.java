@@ -74,8 +74,10 @@ public class SubjectDatabase {
 		
 		return subjectDatabase;
 	}
+	
+	public Subject getSubjectFromRow(int index) {
+		return subjects.get(index);
+	}
 
-	
-	
 	
 }

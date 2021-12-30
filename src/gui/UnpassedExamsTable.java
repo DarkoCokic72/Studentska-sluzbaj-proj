@@ -19,6 +19,10 @@ public class UnpassedExamsTable extends JTable{
 			
 	}
 	
+	 public void updateTable() {
+	    	model.fireTableDataChanged();
+	    }
+	
 	public static UnpassedExamsTable getTable() {
 		if (unpassedExamsTable == null) {
 			unpassedExamsTable = new UnpassedExamsTable();

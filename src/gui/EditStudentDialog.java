@@ -3,6 +3,8 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.management.remote.TargetedNotification;
 import javax.swing.BorderFactory;
@@ -12,9 +14,10 @@ import javax.swing.JOptionPane;
 
 public class EditStudentDialog extends JDialog{
 	private static EditStudentDialog editStudentDialog = null;
+	public static int selectedRow;
 	
 	public EditStudentDialog() {
-		int selectedRow = StudentTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow());
+		selectedRow = StudentTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow());
 		if(selectedRow == -1) {
 			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi student kog zelite da izmenite.");
 			return;
@@ -33,6 +36,33 @@ public class EditStudentDialog extends JDialog{
 		EditStudentPanel editStudPanel = EditStudentPanel.getEditStudentPanel();
 		editStudPanel.setBorder(BorderFactory.createEmptyBorder(20,0,0,0));
 		add(editStudPanel, BorderLayout.CENTER);
+		addWindowListener(new WindowListener() {
+
+			@Override
+			public void windowActivated(WindowEvent arg0) {}
+
+			@Override
+			public void windowClosed(WindowEvent arg0) {}
+
+			@Override
+			public void windowClosing(WindowEvent arg0) { //potrebno je da azuriramo tabelu ako zatvorimo Dialog na X
+				StudentTable.getTable().updateTable();
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {}
+
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {}
+
+			@Override
+			public void windowIconified(WindowEvent arg0) {}
+
+
+			@Override
+			public void windowOpened(WindowEvent e) {}
+			
+		});
 		
 		revalidate();
 		repaint();

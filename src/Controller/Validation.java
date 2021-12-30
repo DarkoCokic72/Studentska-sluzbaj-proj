@@ -10,10 +10,12 @@ import Model.Profesor;
 import Model.ProfessorDatabase;
 import gui.AddProfessorDialog;
 import gui.EditProfessorInformationTab;
+import gui.GradeEntryDialog;
 
 public class Validation {
 	
 	public static Boolean[] textFieldFilledProfessor = new Boolean[15];
+	public static Boolean textFieldFilledGradeEntry;
 	
 	public static boolean checkName(String name) {
 			
@@ -198,8 +200,6 @@ public class Validation {
 	}
 
 
-	
-
 	public static boolean checkYearsOfExp(String years) {
 		
 		boolean retVal;
@@ -213,6 +213,7 @@ public class Validation {
 	}
 	
 	   
+	//Add and Edit Professor Validation
     public static void resetFieldsProfessor() {
     	Arrays.fill(textFieldFilledProfessor, Boolean.FALSE);
     }
@@ -270,6 +271,44 @@ public class Validation {
     	}
 
     	return true;
+    }
+    
+    
+    // GRADE ENTRY VALIDATION	
+    public static boolean validateGradeEntry(String input) {
+    	
+    	fieldValidationGradeEntry(input);
+
+    	if (gradeEntryValid()) {
+    		GradeEntryDialog.getConfirm().setEnabled(true);
+    	}
+    	else {
+    		GradeEntryDialog.getConfirm().setEnabled(false);
+    	}
+
+    	return gradeEntryValid();
+    }
+        
+    private static void fieldValidationGradeEntry(String input) {
+    	
+    		if(!input.isEmpty()) {
+    			textFieldFilledGradeEntry = true;
+    		}
+    		else {
+    			textFieldFilledGradeEntry = false;
+    		}
+    	
+    }
+        
+
+    public static boolean gradeEntryValid() {
+
+    		if (!textFieldFilledGradeEntry) {
+    			return false;
+    		}
+    		else {
+    			return true;
+    		}
     }
 
    

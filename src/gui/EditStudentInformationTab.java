@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -20,7 +19,6 @@ import javax.swing.JTextField;
 
 import Controller.StudentController;
 import Controller.ValidationStudent;
-import Listeners.EditProfessorListener;
 import Listeners.EditStudentListener;
 import Model.Address;
 import Model.Student;
@@ -277,6 +275,7 @@ public class EditStudentInformationTab extends JPanel {
 				EditStudentDialog.getEditStudentDialog().dispose();
 				EditStudentPanel.deleteEditStudPanel();
 				EditStudentDialog.deleteEditStudentDialog();
+				StudentTable.getTable().updateTable();
 			}
 		});
 		

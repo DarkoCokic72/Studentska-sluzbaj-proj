@@ -15,7 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Controller.GradeController;
 import Controller.Validation;
+import Listeners.GradeEntryListener;
 
 public class GradeEntryDialog extends JDialog{
 	
@@ -42,7 +44,7 @@ public class GradeEntryDialog extends JDialog{
 		
 		int selectedRow = UnpassedExamsTable.getTable().convertRowIndexToModel(UnpassedExamsTable.getTable().getSelectedRow());
 		if(selectedRow == -1) {
-			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kom se nalazi predmet za koji zelite da unesete ocenu");
+			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi predmet za koji zelite da unesete ocenu");
 			return;
 		}
 		
@@ -67,7 +69,6 @@ public class GradeEntryDialog extends JDialog{
 		subjectCode.add(subjectCodeLab);
 		subjectCode.add(subjectCodeField);
 		northPanel.add(subjectCode);
-		//subjectCodeField.addFocusListener(new AddProfessorListener(subjectCodeField, 0));
 		
 		subjectName = new JPanel();
 		subjectNameLab = new JLabel("Naziv*");
@@ -79,7 +80,6 @@ public class GradeEntryDialog extends JDialog{
 		subjectName.add(subjectNameLab);
 		subjectName.add(subjectNameField);
 		northPanel.add(subjectName);
-		//subjectNameField.addFocusListener(new AddProfessorListener(subjectNameField, 1));
 		
 		String grades[] = {"5", "6", "7", "8", "9", "10"};
 		grade = new JPanel();
@@ -100,12 +100,31 @@ public class GradeEntryDialog extends JDialog{
 		date.add(dateLab);
 		date.add(dateField);
 		northPanel.add(date);
-		//subjectNameField.addFocusListener(new AddProfessorListener(subjectNameField, 2));
+		Validation.textFieldFilledGradeEntry = false;
+		dateField.addFocusListener(new GradeEntryListener(subjectNameField));
+		
 		
 		confirm = new JButton("Potvrdi");
 		confirm.setPreferredSize(new Dimension(90,30));
 		confirm.setEnabled(false);
 		southPanel.add(confirm);
+		confirm.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+					GradeController gradeContr = GradeController.getGradeController();
+					gradeContr.entry();
+					
+					if(GradeController.gradeEntried) {
+						
+						dispose();
+						GradeController.gradeEntried = false;
+					}
+
+			}
+
+		});
 		
 		southPanel.add(Box.createRigidArea(new Dimension(30, 0)));
 		
@@ -130,6 +149,53 @@ public class GradeEntryDialog extends JDialog{
 		
 	}
 	
+	public static JTextField getSubjectCodeField() {
+		return subjectCodeField;
+	}
 	
-
+	public static JTextField getSubjectNameField() {
+		return subjectNameField;
+	}
+	
+	public static int getGrade() {
+	        
+		int gradeIndex = gradeComboBox.getSelectedIndex();
+	   	int grade;
+	    	
+		switch (gradeIndex) {
+		case 0:
+			grade = 5;
+			break;
+		case 1:
+			grade = 6;
+			break;
+		case 2:
+			grade = 7;
+			break;
+		case 3:
+			grade = 8;
+			break;
+		case 4:
+			grade = 9;
+			break;
+		case 5:
+			grade = 10;
+			break;
+		default:
+			grade = 5;
+				
+		}
+			
+		return grade;
+    }
+	
+    public static JTextField getDate() {
+    	return dateField;
+    } 
+    
+    public static JButton getConfirm() {
+    	return confirm;
+    }
+    
+	
 }

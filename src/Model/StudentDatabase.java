@@ -61,6 +61,10 @@ public class StudentDatabase {
 		return students;
 	}
 	
+	public Student getStudentFromRow(int index) {
+		return students.get(index);
+	}
+	
 	public static StudentDatabase getInstance() {
 		if(studentDatabase == null) {
 			studentDatabase = new StudentDatabase();
@@ -69,9 +73,5 @@ public class StudentDatabase {
 		return studentDatabase;
 	}
 
-	public Student getStudentFromRow(int index) {
-		// TODO Auto-generated method stub
-		return students.get(index);
-	}
 
 }
