@@ -31,7 +31,7 @@ public class UnpassedExamsAbstractTable extends AbstractTableModel{
 	}
 
 	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
+	public String getValueAt(int rowIndex, int columnIndex) {
 		
 		int rowStudent = StudentTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow());
 		Subject subject = StudentDatabase.getInstance().getStudentFromRow(rowStudent).getUnpassedCourses().get(rowIndex);
