@@ -71,6 +71,9 @@ public class SubjectDatabase {
 		subjects.add(sub);
 	}
 	
+	public ArrayList<Subject> getSubjects() {
+		return subjects;
+	}
 	
 	public Subject getSubjectFromRow(int index) {
 		return subjects.get(index);

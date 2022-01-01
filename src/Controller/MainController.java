@@ -7,6 +7,7 @@ import gui.AddStudentDialog;
 import gui.CentralPanel;
 import gui.DeleteProfessorDialog;
 import gui.DeleteStudentDialog;
+import gui.DeleteSubjectDialog;
 import gui.EditProfessorDialog;
 import gui.EditStudentDialog;
 import gui.MainFrame;
@@ -72,8 +73,9 @@ public class MainController {
 			deleteProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 			break;
 		case 2:
-			//DeleteSubjectDialog
-		    break;
+			DeleteSubjectDialog deleteSubjectDialog = new DeleteSubjectDialog();
+			deleteSubjectDialog.setLocationRelativeTo(MainFrame.getMainFrame());
+			break;
 
 		}
 	}
