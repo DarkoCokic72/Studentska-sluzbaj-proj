@@ -1,5 +1,8 @@
 package Controller;
 
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 import gui.AddProfessorDialog;
 import gui.AddStudentDialog;
 import gui.CentralPanel;
@@ -8,6 +11,8 @@ import gui.DeleteStudentDialog;
 import gui.EditProfessorDialog;
 import gui.EditStudentDialog;
 import gui.MainFrame;
+import gui.ProfessorJTable;
+import gui.SubjectJTable;
 
 public class MainController {
 	
@@ -60,7 +65,6 @@ public class MainController {
 		switch(centralPanel.getSelectedIndex()) {
 		
 		case 0:
-			//DeleteStudentDialog
 			DeleteStudentDialog deleteStudDialog = new DeleteStudentDialog();
 			deleteStudDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 			break;
@@ -72,6 +76,25 @@ public class MainController {
 			//DeleteSubjectDialog
 		    break;
 
+		}
+	}
+		
+	public static void search(JTextField searchField) {
+		
+		CentralPanel centralPanel = CentralPanel.getCentralPanel();
+		switch(centralPanel.getSelectedIndex()) {
+		
+		case 0:
+			
+			break;
+		case 1:
+			ProfessorJTable.getTable().search(searchField.getText());
+			break;
+		case 2:
+			SubjectJTable.getTable().search(searchField.getText());
+		    break;
+		
+		
 		}
 	}
 

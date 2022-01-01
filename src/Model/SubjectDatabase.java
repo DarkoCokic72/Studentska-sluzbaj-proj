@@ -67,16 +67,21 @@ public class SubjectDatabase {
 		}
 	}
 	
+	public void addSubjectIntoTable(Subject sub) {
+		subjects.add(sub);
+	}
+	
+	
+	public Subject getSubjectFromRow(int index) {
+		return subjects.get(index);
+	}
+	
 	public static SubjectDatabase getDatabase() {
 		if(subjectDatabase == null) {
 			subjectDatabase = new SubjectDatabase();
 		}
 		
 		return subjectDatabase;
-	}
-	
-	public Subject getSubjectFromRow(int index) {
-		return subjects.get(index);
 	}
 
 	

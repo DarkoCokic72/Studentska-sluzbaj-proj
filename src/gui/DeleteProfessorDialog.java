@@ -29,7 +29,7 @@ public class DeleteProfessorDialog extends JDialog {
 	
 	public DeleteProfessorDialog() {
 		
-		int selectedRow = ProfessorJTable.getTable().convertRowIndexToModel(ProfessorJTable.getTable().getSelectedRow());
+		int selectedRow = ProfessorJTable.getTable().getSelectedRow();
 		if(selectedRow == -1) {
 			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi profesor kog zelite da obrišete");
 			return;

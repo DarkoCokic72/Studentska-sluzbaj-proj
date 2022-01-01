@@ -306,11 +306,8 @@ public class Validation {
     		if (!textFieldFilledGradeEntry) {
     			return false;
     		}
-    		else {
-    			return true;
-    		}
+    	
+    		return true;
     }
-
-   
 
 }

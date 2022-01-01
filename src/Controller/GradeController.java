@@ -23,7 +23,7 @@ public class GradeController {
 		String subjectCode = GradeEntryDialog.getSubjectCodeField().getText();
 		Subject subject = null;
 		for(Subject s: student.getUnpassedCourses()) {
-			if(s.getSubjectCode() == subjectCode) {
+			if(s.getSubjectCode().equals(subjectCode)) {
 				subject = s;
 			}
 		}
@@ -48,7 +48,7 @@ public class GradeController {
 			student.setAvgMark();
 			
 			//dodavanje studenata u listu studenata koji su polozili predmet
-			//subject.getStudentWhoPassed().add(student);
+			subject.getStudentWhoPassed().add(student);
 			
 			gradeEntried = true;
 				
