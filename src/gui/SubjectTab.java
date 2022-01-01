@@ -12,7 +12,7 @@ public class SubjectTab extends JPanel {
 	public SubjectTab() {
 		
 		setLayout(new BorderLayout());
-		SubjectJTable subTable = new SubjectJTable();
+		SubjectJTable subTable = SubjectJTable.getTable();
 		JScrollPane scrollPane = new JScrollPane(subTable);
 		
 		scrollPane.setPreferredSize(new Dimension(800,400));

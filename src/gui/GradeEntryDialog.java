@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -57,6 +58,8 @@ public class GradeEntryDialog extends JDialog{
 		int height = d.height;
 		setSize(width*3/16, height*25/72);
 		setTitle("Unos ocene");
+		ImageIcon img = new ImageIcon("images/Plus-icon.png");
+		setIconImage(img.getImage());
 		setResizable(false);
 		
 		subjectCode = new JPanel();
@@ -118,6 +121,7 @@ public class GradeEntryDialog extends JDialog{
 					
 					if(GradeController.gradeEntried) {
 						
+						Validation.textFieldFilledGradeEntry = false;
 						dispose();
 						GradeController.gradeEntried = false;
 					}
@@ -136,6 +140,7 @@ public class GradeEntryDialog extends JDialog{
 		    @Override
 			public void actionPerformed(ActionEvent e) {
 		    	
+		    	Validation.textFieldFilledGradeEntry = false;
 				dispose();
 			}
 
