@@ -1,6 +1,5 @@
 package Controller;
 
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import gui.AddProfessorDialog;

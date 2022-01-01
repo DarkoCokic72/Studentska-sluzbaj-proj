@@ -22,6 +22,7 @@ public class ProfessorJTable extends JTable{
    		setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
    		getTableHeader().setReorderingAllowed(false);
    		setModel(professorTableModel);
+   		
    		tableRowSorter = new TableRowSorter<ProfessorAbstractTable>(professorTableModel);
 		setRowSorter(tableRowSorter);
 		
@@ -36,15 +37,15 @@ public class ProfessorJTable extends JTable{
     	String[] words = input.split(" ");
     	int numberOfWords = words.length;
     	if (numberOfWords == 1) {
-    		RowFilter<ProfessorAbstractTable, Integer> nameFilter = RowFilter.regexFilter(".*" + "(?i)" + words[0] + ".*");
-    		List<RowFilter<ProfessorAbstractTable, Integer>> filters = Arrays.asList(nameFilter);
+    		RowFilter<ProfessorAbstractTable, Integer> filter = RowFilter.regexFilter(".*" + "(?i)" + words[0] + ".*");
+    		List<RowFilter<ProfessorAbstractTable, Integer>> filters = Arrays.asList(filter);
     		tableRowSorter.setRowFilter(RowFilter.andFilter(filters));
     	}
     	if (numberOfWords == 2) {
     		
-    		RowFilter<ProfessorAbstractTable, Integer> surnameFilter = RowFilter.regexFilter(".*" + "(?i)" + words[0] + ".*");
-    		RowFilter<ProfessorAbstractTable, Integer> nameFilter = RowFilter.regexFilter(".*" + "(?i)" + words[1] + ".*");
-    		List<RowFilter<ProfessorAbstractTable, Integer>> filters = Arrays.asList(surnameFilter, nameFilter);
+    		RowFilter<ProfessorAbstractTable, Integer> filter1 = RowFilter.regexFilter(".*" + "(?i)" + words[0] + ".*");
+    		RowFilter<ProfessorAbstractTable, Integer> filter2 = RowFilter.regexFilter(".*" + "(?i)" + words[1] + ".*");
+    		List<RowFilter<ProfessorAbstractTable, Integer>> filters = Arrays.asList(filter1, filter2);
     		tableRowSorter.setRowFilter(RowFilter.andFilter(filters));
     	
     	}
