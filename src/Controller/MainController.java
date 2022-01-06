@@ -4,6 +4,7 @@ import javax.swing.JTextField;
 
 import gui.AddProfessorDialog;
 import gui.AddStudentDialog;
+import gui.AddSubjectDialog;
 import gui.CentralPanel;
 import gui.DeleteProfessorDialog;
 import gui.DeleteStudentDialog;
@@ -30,7 +31,8 @@ public class MainController {
 			addProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 			break;
 		case 2:
-			//AddSubjectDialog
+			AddSubjectDialog addSubjectDialog = new AddSubjectDialog();
+			addSubjectDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 		    break;
 
 		}
