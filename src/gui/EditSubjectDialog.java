@@ -80,5 +80,19 @@ public class EditSubjectDialog extends JDialog {
 				
 			}
 		});
+		
+		revalidate();
+		repaint();
+	}
+	
+	public static EditSubjectDialog getInstance() {
+		if(editSubjectDialog == null)
+			editSubjectDialog = new EditSubjectDialog();
+		
+		return editSubjectDialog;
+	}
+	
+	public static void deleteInstance() {
+		editSubjectDialog = null;
 	}
 }

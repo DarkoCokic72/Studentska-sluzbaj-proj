@@ -21,4 +21,8 @@ public class EditSubjectPanel extends JTabbedPane {
 		
 		return editSubjPanel;
 	}
+	
+	public static void deleteInstance() {
+		editSubjPanel = null;
+	}
 }
