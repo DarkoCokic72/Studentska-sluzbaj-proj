@@ -6,12 +6,14 @@ import Model.Subject;
 import Model.Subject.Term;
 import Model.SubjectDatabase;
 import gui.AddSubjectDialog;
+import gui.EditSubjectInformationTab;
 import gui.SubjectJTable;
 
 public class SubjectController {
 	
 	private static SubjectController subjectContr = null;
 	public boolean subjectAdded = false;
+	public boolean subjectEdited = false;
 	
 	public void delete(Subject subject) {
 		
@@ -50,6 +52,38 @@ public class SubjectController {
 			SubjectJTable subjTable = SubjectJTable.getTable();
 			subjTable.updateTable();
 			subjectAdded = true;
+		}
+	}
+	
+	public void edit(Subject subject) {
+		
+		String name = EditSubjectInformationTab.getNameField().getText().trim();
+		String yearOfStudy = EditSubjectInformationTab.getYearOfStudyField().getText().trim();
+		String espb = EditSubjectInformationTab.getEspbField().getText().trim();
+		Term term = EditSubjectInformationTab.getTerm();
+		
+		if( ValidationSubject.checkName(name) == true &&ValidationSubject.checkYearOfStudy(yearOfStudy) == true && ValidationSubject.checkESPB(espb) == true) {
+			
+			String code = EditSubjectInformationTab.getCodeField().getText().trim();
+			String wrongCode = EditSubjectInformationTab.getCodeField().getText().trim();
+			
+			if(ValidationSubject.checkCode(wrongCode)) {
+				int year = Integer.parseInt(yearOfStudy);
+				int espbs = Integer.parseInt(espb);
+				
+				subject.setSubjectName(name);
+				subject.setYearOfStudy(year);
+				subject.setESPB(espbs);
+				subject.setTerm(term);
+				subject.setSubjectCode(code);
+				
+				SubjectJTable subjTable = SubjectJTable.getTable();
+				subjTable.updateTable();
+				subjectEdited = true;
+				
+			} else {
+				subject.setSubjectCode(code);
+			}
 		}
 	}
 	
