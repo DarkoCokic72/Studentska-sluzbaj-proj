@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import Model.Subject;
 import Model.SubjectDatabase;
 import gui.AddSubjectDialog;
+import gui.EditSubjectInformationTab;
 
 
 
@@ -97,6 +98,19 @@ public class ValidationSubject {
 			AddSubjectDialog.getConfirm().setEnabled(true);
 		} else {
 			AddSubjectDialog.getConfirm().setEnabled(false);
+
+		}
+		
+		return subjectValid();
+	}
+	
+	public static boolean validateEdit(String input, int fieldNum) {
+		fieldValidation(input, fieldNum);
+		
+		if(subjectValid()) {
+			EditSubjectInformationTab.getConfirm().setEnabled(true);
+		} else {
+			EditSubjectInformationTab.getConfirm().setEnabled(false);
 
 		}
 		
