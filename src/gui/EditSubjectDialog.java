@@ -95,4 +95,14 @@ public class EditSubjectDialog extends JDialog {
 	public static void deleteInstance() {
 		editSubjectDialog = null;
 	}
+
+	public static EditSubjectDialog getEditSubjectDialog() {
+		return editSubjectDialog;
+	}
+
+	public static void setEditSubjectDialog(EditSubjectDialog editSubjectDialog) {
+		EditSubjectDialog.editSubjectDialog = editSubjectDialog;
+	}
+	
+	
 }

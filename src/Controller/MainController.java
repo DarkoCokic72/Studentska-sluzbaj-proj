@@ -11,6 +11,7 @@ import gui.DeleteStudentDialog;
 import gui.DeleteSubjectDialog;
 import gui.EditProfessorDialog;
 import gui.EditStudentDialog;
+import gui.EditSubjectDialog;
 import gui.MainFrame;
 import gui.ProfessorJTable;
 import gui.SubjectJTable;
@@ -55,6 +56,9 @@ public class MainController {
 			break;
 		case 2:
 			//EditSubjectDialog
+			EditSubjectDialog editSubjectDialog = new EditSubjectDialog();
+			editSubjectDialog.setLocationRelativeTo(MainFrame.getMainFrame());
+			EditSubjectDialog.setEditSubjectDialog(editSubjectDialog);
 		    break;
 
 		}
