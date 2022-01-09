@@ -44,9 +44,10 @@ public class ValidationSubject {
 			JOptionPane.showMessageDialog(null, "Pogresan format sifre predmeta!");
 		
 		for(Subject s: SubjectDatabase.getDatabase().getSubjects()) {
-			if(s.getSubjectName().equalsIgnoreCase(code))
+			if(s.getSubjectCode().equalsIgnoreCase(code)) {
 				JOptionPane.showMessageDialog(null, "Greska! Vec postoji predmet sa tom sifrom!");
 				ret = false;
+			}
 		}
 		
 		
