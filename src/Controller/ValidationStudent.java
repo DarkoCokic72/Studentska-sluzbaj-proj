@@ -73,7 +73,7 @@ public class ValidationStudent {
 	
 	public static boolean checkDate(String date) {
 		//Checked with https://regex101.com/
-		String dateRegex = "^([1-9]|[12]{1}[0-9]|3{1}[01]{1}).([1-9]{1}|10{1}|11{1}|12{1}).((19|20)[0-9][0-9]).";
+		String dateRegex = "^(0?[1-9]|[12]{1}[0-9]|3{1}[01]{1}).(0?[1-9]{1}|10{1}|11{1}|12{1}).((19|20)[0-9][0-9]).";
 		boolean ret = Pattern.matches(dateRegex, date);
 		
 		if(ret == false && date.isEmpty() == false) {
