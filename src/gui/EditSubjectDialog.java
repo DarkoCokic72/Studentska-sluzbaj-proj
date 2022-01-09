@@ -16,7 +16,7 @@ public class EditSubjectDialog extends JDialog {
 	public static int selectedRow;
 	
 	public EditSubjectDialog() {
-		selectedRow = SubjectJTable.getTable().convertRowIndexToModel(SubjectJTable.getTable().getSelectedRow());
+		selectedRow = SubjectJTable.getTable().getSelectedRow();
 		if(selectedRow == -1) {
 			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi predmet koji zelite da izmenite");
 			return;

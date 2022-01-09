@@ -136,7 +136,7 @@ public class EditSubjectInformationTab extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				SubjectController subjectContr = new SubjectController();
+				SubjectController subjectContr = SubjectController.getSubjectController();
 				subjectContr.edit(subject);
 				
 				if(subjectContr.subjectEdited == true) {
