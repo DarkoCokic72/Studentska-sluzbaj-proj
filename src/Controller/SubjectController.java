@@ -62,7 +62,7 @@ public class SubjectController {
 		String espb = EditSubjectInformationTab.getEspbField().getText().trim();
 		Term term = EditSubjectInformationTab.getTerm();
 		
-		if( ValidationSubject.checkName(name) == true &&ValidationSubject.checkYearOfStudy(yearOfStudy) == true && ValidationSubject.checkESPB(espb) == true) {
+		if( ValidationSubject.checkName(name) == true && ValidationSubject.checkYearOfStudy(yearOfStudy) == true && ValidationSubject.checkESPB(espb) == true) {
 			
 			String code = EditSubjectInformationTab.getCodeField().getText().trim();
 			String wrongCode = EditSubjectInformationTab.getCodeField().getText().trim();
@@ -75,6 +75,7 @@ public class SubjectController {
 				subject.setYearOfStudy(year);
 				subject.setESPB(espbs);
 				subject.setTerm(term);
+				//subject.setSubjectProfessor(null);
 				subject.setSubjectCode(code);
 				
 				SubjectJTable subjTable = SubjectJTable.getTable();
