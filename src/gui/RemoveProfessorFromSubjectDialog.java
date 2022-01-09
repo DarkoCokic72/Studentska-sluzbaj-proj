@@ -23,6 +23,7 @@ public class RemoveProfessorFromSubjectDialog extends JDialog{
 	private static JButton no ;
 		
 	public RemoveProfessorFromSubjectDialog() {
+		
 		northPanel = new JPanel();
 		southPanel = new JPanel();
 		
@@ -50,9 +51,9 @@ public class RemoveProfessorFromSubjectDialog extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				
 				
-		}
+			}
 	
-});
+		});
 		
 		southPanel.add(Box.createRigidArea(new Dimension(30, 0)));
 		
