@@ -84,7 +84,7 @@ public class GradeEntryDialog extends JDialog{
 		subjectName.add(subjectNameField);
 		northPanel.add(subjectName);
 		
-		String grades[] = {"5", "6", "7", "8", "9", "10"};
+		String grades[] = {"6", "7", "8", "9", "10"};
 		grade = new JPanel();
 		gradeLab = new JLabel("Ocena*");
 		gradeComboBox = new JComboBox<String>(grades);
@@ -169,25 +169,22 @@ public class GradeEntryDialog extends JDialog{
 	    	
 		switch (gradeIndex) {
 		case 0:
-			grade = 5;
-			break;
-		case 1:
 			grade = 6;
 			break;
-		case 2:
+		case 1:
 			grade = 7;
 			break;
-		case 3:
+		case 2:
 			grade = 8;
 			break;
-		case 4:
+		case 3:
 			grade = 9;
 			break;
-		case 5:
+		case 4:
 			grade = 10;
 			break;
 		default:
-			grade = 5;
+			grade = 6;
 				
 		}
 			

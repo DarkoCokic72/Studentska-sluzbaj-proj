@@ -79,7 +79,6 @@ public class SubjectController {
 				subject.setYearOfStudy(year);
 				subject.setESPB(espbs);
 				subject.setTerm(term);
-				subject.setSubjectProfessor(null);
 				subject.setSubjectCode(code);
 				
 				SubjectJTable subjTable = SubjectJTable.getTable();

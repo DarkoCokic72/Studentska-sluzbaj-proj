@@ -8,6 +8,8 @@ import Model.StudentDatabase;
 import Model.Subject;
 import gui.EditStudentDialog;
 import gui.GradeEntryDialog;
+import gui.PassedExamsTab;
+import gui.PassedExamsTable;
 import gui.StudentTable;
 import gui.UnpassedExamsTable;
 
@@ -38,6 +40,7 @@ public class GradeController {
 			
 			//dodavanje ocene u polozene predmete
 			student.getPassedCourses().add(g);
+			PassedExamsTable.getInstance().updateTable();
 			
 			//brisanje iz nepolozenih predmeta
 			int selectedRowSubject = UnpassedExamsTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow());
@@ -46,6 +49,17 @@ public class GradeController {
 			
 			//promena proseka za studenta
 			student.setAvgMark();
+			double average = student.getAvgMark();
+			String averageTxt = String.format("Prosecna ocena: %.2f", average);
+			PassedExamsTab.getAverageLabel().setText(averageTxt);
+			
+			//promena espb bodova koje je student osvojio
+			String textFromESPBLab = PassedExamsTab.getTotalESPBLabel().getText().trim();
+			String ESPBString = textFromESPBLab.replaceAll("[^\\d]", "");
+			int ESPB = Integer.parseInt(ESPBString);
+			ESPB = ESPB + subject.getESPB();
+			String espbTxt = String.format("Ukupno ESPB: %d", ESPB);
+			PassedExamsTab.getTotalESPBLabel().setText(espbTxt);
 			
 			//dodavanje studenata u listu studenata koji su polozili predmet
 			subject.getStudentWhoPassed().add(student);

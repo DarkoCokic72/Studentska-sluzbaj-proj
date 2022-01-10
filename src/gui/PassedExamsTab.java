@@ -17,8 +17,8 @@ import Model.StudentDatabase;
 
 public class PassedExamsTab extends JPanel{
 	private JButton deleteGradeBtn;
-	private JLabel averageLabel;
-	private JLabel totalESPBLabel;
+	private static JLabel averageLabel;
+	private static JLabel totalESPBLabel;
 	
 	public PassedExamsTab() {
 		deleteGradeBtn = new JButton("Ponisti ocenu");
@@ -75,6 +75,14 @@ public class PassedExamsTab extends JPanel{
 		add(southPanel, BorderLayout.SOUTH);
 		
 		
+	}
+	
+	public static JLabel getAverageLabel() {
+		return averageLabel;
+	}
+	
+	public static JLabel getTotalESPBLabel() {
+		return totalESPBLabel;
 	}
 	
 }

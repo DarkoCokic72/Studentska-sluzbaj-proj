@@ -75,7 +75,7 @@ public class EditSubjectInformationTab extends JPanel {
 		ValidationSubject.fieldsFilled();
 		
 		code = new JPanel();
-		codeLabel = new JLabel("Sifra predemeta*");
+		codeLabel = new JLabel("Sifra predmeta*");
 		codeField = new JTextField();
 		codeLabel.setPreferredSize(new Dimension(200, 25));
 		codeField.setPreferredSize(new Dimension(280, 25));
@@ -87,7 +87,7 @@ public class EditSubjectInformationTab extends JPanel {
 		codeField.addFocusListener(new EditSubjectListener(0, codeField));
 		
 		name = new JPanel();
-		nameLabel = new JLabel("Naziv predemeta*");
+		nameLabel = new JLabel("Naziv predmeta*");
 		nameField = new JTextField();
 		nameLabel.setPreferredSize(new Dimension(200, 25));
 		nameField.setPreferredSize(new Dimension(280, 25));
