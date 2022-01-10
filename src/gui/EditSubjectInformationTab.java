@@ -46,12 +46,20 @@ public class EditSubjectInformationTab extends JPanel {
 	private static JComboBox<String> termComboBox;
 	private JLabel termLabel;
 	
+	private JPanel professor;
+	private static JTextField professorField;
+	private JLabel professorLabel;
+	private static JButton plusBtn;
+	private static JButton minusBtn;
+	
 	private static JButton confirm;
 	private JButton cancel;
 	
+	public static Subject subject;
+	
 	public EditSubjectInformationTab() {
 		int selectedRow = SubjectJTable.getTable().convertRowIndexToModel(SubjectJTable.getTable().getSelectedRow());
-		Subject subject = SubjectDatabase.getDatabase().getSubjectFromRow(selectedRow);
+		subject = SubjectDatabase.getDatabase().getSubjectFromRow(selectedRow);
 		
 		northPanel = new JPanel();
 		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
@@ -126,6 +134,40 @@ public class EditSubjectInformationTab extends JPanel {
 		
 		termComboBox.setSelectedIndex(subject.getTerm().ordinal());
 		
+		professor = new JPanel();
+		professorLabel = new JLabel("Profesor*");
+		professorField = new JTextField();
+		professorLabel.setPreferredSize(new Dimension(200, 25));
+		professorField.setPreferredSize(new Dimension(180, 25));
+		plusBtn = new JButton("+");
+		minusBtn = new JButton("-");
+		plusBtn.setPreferredSize(new Dimension(45, 25));
+		minusBtn.setPreferredSize(new Dimension(45, 25));
+		professor.add(professorLabel);
+		professor.add(professorField);
+		professor.add(plusBtn);
+		professor.add(minusBtn);
+		northPanel.add(professor);
+		
+		professorField.setEditable(false);
+		if(professorField.getText().isEmpty() == false) {
+			plusBtn.setEnabled(false);
+		}
+		else {
+			minusBtn.setEnabled(false);
+		}
+		
+		plusBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				ChooseProfessorDialog chooseProfessorDialog = new ChooseProfessorDialog();
+				chooseProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());		
+				
+			}
+		});
+		
 		confirm = new JButton("Potvrdi");
 		confirm.setPreferredSize(new Dimension(90,30));
 		confirm.setEnabled(false);
@@ -188,13 +230,25 @@ public class EditSubjectInformationTab extends JPanel {
 	public static JTextField getEspbField() {
 		return espbField;
 	}
+	
+	public static JTextField getProfessorField() {
+		return professorField;
+	}
 
 	public static JComboBox<String> getTermComboBox() {
 		return termComboBox;
 	}
-
+	
 	public static JButton getConfirm() {
 		return confirm;
+	}
+
+	public static JButton getPlus() {
+		return plusBtn;
+	}
+	
+	public static JButton getMinus() {
+		return minusBtn;
 	}
 	
 	public static Term getTerm() {
@@ -211,6 +265,7 @@ public class EditSubjectInformationTab extends JPanel {
 		}
 		return term;
 	}
+
 	
 	
 }

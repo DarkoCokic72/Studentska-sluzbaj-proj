@@ -13,10 +13,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
+import Controller.SubjectController;
 import Model.Profesor;
 import Model.ProfessorDatabase;
 
@@ -60,6 +62,31 @@ public class ChooseProfessorDialog extends JDialog{
 			confirm.setEnabled(false);
 		}
 		
+		confirm.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				int selectedRow = list.getSelectedIndex(); 
+				if(selectedRow == - 1) {
+					JOptionPane.showMessageDialog(null, "Niste izabrali profesora");
+					return;
+				}
+				Profesor professor = ProfessorDatabase.getDatabase().getProfessorFromRow(selectedRow);
+				SubjectController subjectController = SubjectController.getSubjectController();
+				subjectController.chooseProfessor(EditSubjectInformationTab.subject, professor);
+				
+				if(SubjectController.professorChoosen == true) {
+					String professorString = professor.getName() + " " + professor.getSurname();
+					EditSubjectInformationTab.getProfessorField().setText(professorString);
+					EditSubjectInformationTab.getPlus().setEnabled(false);
+					EditSubjectInformationTab.getMinus().setEnabled(true);
+					dispose();
+				}
+			}
+
+		});
+		
 		
 		cancel = new JButton("Odustani");
 		cancel.addActionListener(new ActionListener() {
@@ -84,5 +111,4 @@ public class ChooseProfessorDialog extends JDialog{
 		repaint();
 	}
 	
-
 }

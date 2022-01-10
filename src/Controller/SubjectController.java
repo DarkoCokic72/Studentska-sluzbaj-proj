@@ -2,6 +2,7 @@ package Controller;
 
 import java.util.ArrayList;
 
+import Model.Profesor;
 import Model.Subject;
 import Model.Subject.Term;
 import Model.SubjectDatabase;
@@ -14,6 +15,7 @@ public class SubjectController {
 	private static SubjectController subjectContr = null;
 	public boolean subjectAdded = false;
 	public boolean subjectEdited = false;
+	public static boolean professorChoosen;
 	
 	public void delete(Subject subject) {
 		
@@ -95,6 +97,10 @@ public class SubjectController {
     	}
     	return subjectContr;
     }
-        
+       
+    public void chooseProfessor(Subject subject, Profesor professor) {
+    	subject.setSubjectProfessor(professor);
+    	professorChoosen = true;
+    }
 
 }
