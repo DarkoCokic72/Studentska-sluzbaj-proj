@@ -1,8 +1,13 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Grade {
+public class Grade implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3861929198612842747L;
 	private Student student;
 	private Subject passedSubject;
 	private int mark;

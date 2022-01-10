@@ -1,11 +1,16 @@
 package Model;
 
 import java.util.Date;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Profesor extends Person {
-	
+public class Profesor extends Person implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3466257669472568679L;
+
 	public enum Zvanje{SARADNIK_U_NASTAVI, ASISTENT, DOCENT, REDOVNI_PROFESOR, VANREDNI_PROFESOR, EMERITUS}
 	
 	private Address officeAddress;

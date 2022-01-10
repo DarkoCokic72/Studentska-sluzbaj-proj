@@ -1,8 +1,12 @@
 package Model;
 
+import java.io.Serializable;
 
-public class Address {
-	
+public class Address implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4972005054683916373L;
 	protected String streetName;
 	protected int streetNumber;
 	protected String city;

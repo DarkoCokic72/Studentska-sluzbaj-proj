@@ -1,12 +1,18 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ListIterator;
 
 
 
-public class Student extends Person{
+public class Student extends Person implements Serializable{
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = -659548332584837119L;
+
 //<<<<<<< HEAD
 //	public enum StudentStatus {B, S};
 //=======

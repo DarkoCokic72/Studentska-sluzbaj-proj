@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
@@ -14,6 +15,7 @@ import javax.swing.event.MenuKeyEvent;
 import javax.swing.event.MenuKeyListener;
 
 import Controller.MainController;
+import persistence.Serialization;
 
 public class MenuBar extends JMenuBar{
 	public MenuBar() {
@@ -156,8 +158,15 @@ public class MenuBar extends JMenuBar{
 			// https://coderanch.com/t/650766/java/Mnemonic-shortcuts-consumed
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				try {
+					Serialization.serialization();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				System.exit(0);
 			}
+			
 		});
 		
 		miStudent.addActionListener(new ActionListener() {

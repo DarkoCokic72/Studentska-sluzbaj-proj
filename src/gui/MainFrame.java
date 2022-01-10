@@ -4,11 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+
+import Model.ProfessorDatabase;
+import Model.StudentDatabase;
+import Model.SubjectDatabase;
+import persistence.Serialization;
 	
 public class MainFrame extends JFrame {
 		
@@ -30,6 +38,20 @@ public class MainFrame extends JFrame {
 		
 		setVisible(true);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				
+				try {
+					Serialization.serialization();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		
 		MenuBar menu = new MenuBar();
 		this.setJMenuBar(menu);
