@@ -3,6 +3,7 @@ package gui;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -21,21 +22,21 @@ public class MyToolBar extends JToolBar {
 		
 		JButton btnCreate = new JButton();
 		btnCreate.setToolTipText("Create entity");
-		btnCreate.setIcon(new ImageIcon("images/Plus-icon.png"));
+		btnCreate.setIcon(new ImageIcon("images" + File.separator + "Plus-icon.png"));
 		add(btnCreate);
 
 		addSeparator();
 
 		JButton btnEdit = new JButton();
 		btnEdit.setToolTipText("Edit entity");
-		btnEdit.setIcon(new ImageIcon("images/Pen-5-icon.png"));
+		btnEdit.setIcon(new ImageIcon("images" + File.separator +"Pen-5-icon.png"));
 		add(btnEdit);
 
 		addSeparator();
 		
 		JButton btnDelete = new JButton();
 		btnDelete.setToolTipText("Delete entity");
-		btnDelete.setIcon(new ImageIcon("images/Recycle-Bin-icon.png"));
+		btnDelete.setIcon(new ImageIcon("images" + File.separator + "Recycle-Bin-icon.png"));
 		add(btnDelete);
 		
 		add(Box.createGlue());
@@ -52,7 +53,7 @@ public class MyToolBar extends JToolBar {
 		
 		JButton btnSearch = new JButton();
 		btnSearch.setToolTipText("Search entity");
-		btnSearch.setIcon(new ImageIcon("images/search-icon.png"));
+		btnSearch.setIcon(new ImageIcon("images" + File.separator +"search-icon.png"));
 		add(btnSearch);
 				
 		btnCreate.addMouseListener(new MouseListener() {

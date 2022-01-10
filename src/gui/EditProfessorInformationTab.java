@@ -226,7 +226,7 @@ public class EditProfessorInformationTab extends JPanel {
 		officeCountryField.addFocusListener(new EditProfessorListener(officeCountryField, 12));
 		
 		personalId = new JPanel();
-		personalIdLab = new JLabel("Broj licne karte*");
+		personalIdLab = new JLabel("Broj lične karte*");
 		personalIdField = new JTextField();
 		personalIdLab.setPreferredSize(new Dimension(200,25));
 		personalIdField.setPreferredSize(new Dimension(270,25));
@@ -251,7 +251,7 @@ public class EditProfessorInformationTab extends JPanel {
 		zvanjeComboBox.setSelectedIndex(professor.getZvanje().ordinal());
 		
 		yearsOfExperience = new JPanel();
-		yearsOfExperienceLab = new JLabel("Godine staza*");
+		yearsOfExperienceLab = new JLabel("Godine staža*");
 		yearsOfExperienceField = new JTextField();
 		yearsOfExperienceLab.setPreferredSize(new Dimension(200,25));
 		yearsOfExperienceField.setPreferredSize(new Dimension(270,25));

@@ -24,7 +24,7 @@ public class UnpassedExamsTab extends JPanel{
 		btnAdd = new JButton("Dodaj");
 		btnAdd.setPreferredSize(new Dimension(100,25));
 		
-		btnDelete = new JButton("Obrisi");
+		btnDelete = new JButton("Obriši");
 		btnDelete.setPreferredSize(new Dimension(100,25));;
 		
 		btnPassExam = new JButton("Polaganje");

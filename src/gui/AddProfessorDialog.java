@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -85,7 +86,7 @@ public class AddProfessorDialog extends JDialog {
 		int width = d.width;
 		int height = d.height;
 		setSize(width*3/8, height*25/37);
-		ImageIcon img = new ImageIcon("images/Plus-icon.png");
+		ImageIcon img = new ImageIcon("images" + File.separator + "Plus-icon.png");
 		setIconImage(img.getImage());
 		setTitle("Dodavanje profesora");
 		setResizable(false);
@@ -195,7 +196,7 @@ public class AddProfessorDialog extends JDialog {
 		officeCountryField.addFocusListener(new AddProfessorListener(officeCountryField, 12));
 		
 		personalId = new JPanel();
-		personalIdLab = new JLabel("Broj licne karte*");
+		personalIdLab = new JLabel("Broj lične karte*");
 		personalIdField = new JTextField();
 		personalIdLab.setPreferredSize(new Dimension(200,25));
 		personalIdField.setPreferredSize(new Dimension(270,25));

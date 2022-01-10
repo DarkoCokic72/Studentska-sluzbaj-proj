@@ -23,7 +23,7 @@ public class StatusBar extends JPanel {
 		super();
 		setLayout(new BorderLayout());
 		
-		JLabel labTitle = new JLabel("Studentska sluzba");
+		JLabel labTitle = new JLabel("Studentska služba");
 		labTitle.setBorder(BorderFactory.createEmptyBorder(0, 7, 0, 0));
 		Date currDate = new Date();
 		

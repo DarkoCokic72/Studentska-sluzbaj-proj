@@ -198,7 +198,7 @@ public class AddStudentDialog extends JDialog {
 		currYearOfStudies.add(currYearOfStudiesComboBox);
 		northPanel.add(currYearOfStudies);
 		
-		String[] currStats = {"Budzet", "Samofinansiranje"};
+		String[] currStats = {"Budžet", "Samofinansiranje"};
 		currStatus = new JPanel();
 		currStatusLabel = new JLabel("Status Studenta*");
 		currStatusComboBox = new JComboBox<String>(currStats);

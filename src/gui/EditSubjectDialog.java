@@ -18,7 +18,7 @@ public class EditSubjectDialog extends JDialog {
 	public EditSubjectDialog() {
 		selectedRow = SubjectJTable.getTable().getSelectedRow();
 		if(selectedRow == -1) {
-			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi predmet koji zelite da izmenite");
+			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi predmet koji želite da izmenite");
 			return;
 		}
 		

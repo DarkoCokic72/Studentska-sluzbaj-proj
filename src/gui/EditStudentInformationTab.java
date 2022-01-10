@@ -225,7 +225,7 @@ public class EditStudentInformationTab extends JPanel {
 		
 		currYearOfStudiesComboBox.setSelectedIndex(student.getCurrYearOfStudies()-1);
 		
-		String[] currStats = {"Budzet", "Samofinansiranje"};
+		String[] currStats = {"Budžet", "Samofinansiranje"};
 		currStatus = new JPanel();
 		currStatusLabel = new JLabel("Status Studenta*");
 		currStatusComboBox = new JComboBox<String>(currStats);

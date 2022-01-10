@@ -55,7 +55,7 @@ public class GradeController {
 			//promena proseka za studenta
 			student.setAvgMark();
 			double average = student.getAvgMark();
-			String averageTxt = String.format("Prosecna ocena: %.2f", average);
+			String averageTxt = String.format("Prosečna ocena: %.2f", average);
 			PassedExamsTab.getAverageLabel().setText(averageTxt);
 			
 			//promena espb bodova koje je student osvojio
@@ -91,7 +91,7 @@ public class GradeController {
 		
 		student.setAvgMark();
 		double average = student.getAvgMark();
-		String averageTxt = String.format("Prosecna ocena: %.2f", average);
+		String averageTxt = String.format("Prosečna ocena: %.2f", average);
 		PassedExamsTab.getAverageLabel().setText(averageTxt);
 		
 		String textFromESPBLab = PassedExamsTab.getTotalESPBLabel().getText().trim();

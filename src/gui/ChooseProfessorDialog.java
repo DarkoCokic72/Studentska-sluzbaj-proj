@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -39,7 +40,7 @@ public class ChooseProfessorDialog extends JDialog{
 		int width = d.width;
 		int height = d.height;
 		setSize(width*1/3, height*2/5);
-		ImageIcon img = new ImageIcon("images/Plus-icon.png");
+		ImageIcon img = new ImageIcon("images" + File.separator + "Plus-icon.png");
 		setIconImage(img.getImage());
 		setTitle("Odaberi profesora");
 		setResizable(false);

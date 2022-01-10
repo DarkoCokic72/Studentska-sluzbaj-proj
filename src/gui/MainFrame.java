@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -22,9 +23,9 @@ public class MainFrame extends JFrame {
 		int height = d.height;
 		setSize(width*3/4, height*3/4); 
 		
-		setTitle("Studentska sluûba");
+		setTitle("Studentska slu≈æba");
 		setLocationRelativeTo(null);
-		Image img=kit.getImage("images/icon.png");
+		Image img=kit.getImage("images" + File.separator + "icon.png");
 		setIconImage(img);
 		
 		setVisible(true);

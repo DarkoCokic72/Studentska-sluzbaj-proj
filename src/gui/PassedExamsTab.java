@@ -21,7 +21,7 @@ public class PassedExamsTab extends JPanel{
 	private static JLabel totalESPBLabel;
 	
 	public PassedExamsTab() {
-		deleteGradeBtn = new JButton("Ponisti ocenu");
+		deleteGradeBtn = new JButton("Poništi ocenu");
 		deleteGradeBtn.setPreferredSize(new Dimension(150, 25));
 		deleteGradeBtn.addMouseListener(new MouseListener() {
 			
@@ -46,7 +46,7 @@ public class PassedExamsTab extends JPanel{
 		});
 		
 		double average = StudentDatabase.getInstance().getAverageMark(EditStudentInformationTab.getStudent().getIndexID());
-		String averageTxt = String.format("Prosecna ocena: %.2f", average);
+		String averageTxt = String.format("Prosečna ocena: %.2f", average);
 		averageLabel = new JLabel(averageTxt);
 		
 		int espb = StudentDatabase.getInstance().getTotalESPB(EditStudentInformationTab.getStudent().getIndexID());

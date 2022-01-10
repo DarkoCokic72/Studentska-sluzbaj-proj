@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -31,7 +32,7 @@ public class DeleteSubjectDialog extends JDialog {
 		
 		int selectedRow = SubjectJTable.getTable().getSelectedRow();
 		if(selectedRow == -1) {
-			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi predmet kog zelite da obrišete");
+			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi predmet kog zelite da obriÅ¡ete");
 			return;
 		}
 		
@@ -43,13 +44,13 @@ public class DeleteSubjectDialog extends JDialog {
 		int width = d.width;
 		int height = d.height;
 		setSize(width*1/4, height*1/5);
-		ImageIcon img = new ImageIcon("images/Recycle-Bin-icon.png");
+		ImageIcon img = new ImageIcon("images" + File.separator +"Recycle-Bin-icon.png");
 		setIconImage(img.getImage());
 		setTitle("Brisanje profesora");
 		setResizable(false);
 		
 		areYouSureLab = new JLabel();
-		areYouSureLab.setText("Da li ste sigurni da želite da obrišete profesora?");
+		areYouSureLab.setText("Da li ste sigurni da ï¿½elite da obriï¿½ete profesora?");
 		northPanel.add(areYouSureLab);
 		
 		yes = new JButton("DA");

@@ -19,7 +19,7 @@ public class EditStudentDialog extends JDialog{
 	public EditStudentDialog() {
 		selectedRow = StudentTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow());
 		if(selectedRow == -1) {
-			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi student kog zelite da izmenite.");
+			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi student kog želite da izmenite.");
 			return;
 		}
 		

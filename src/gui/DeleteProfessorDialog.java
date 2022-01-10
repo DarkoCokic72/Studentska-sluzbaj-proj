@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -31,7 +32,7 @@ public class DeleteProfessorDialog extends JDialog {
 		
 		int selectedRow = ProfessorJTable.getTable().getSelectedRow();
 		if(selectedRow == -1) {
-			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi profesor kog zelite da obriöete");
+			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi profesor kog ≈æelite da obri≈°ete");
 			return;
 		}
 		
@@ -43,13 +44,13 @@ public class DeleteProfessorDialog extends JDialog {
 		int width = d.width;
 		int height = d.height;
 		setSize(width*1/4, height*1/5);
-		ImageIcon img = new ImageIcon("images/Recycle-Bin-icon.png");
+		ImageIcon img = new ImageIcon("images" + File.separator +"Recycle-Bin-icon.png");
 		setIconImage(img.getImage());
 		setTitle("Brisanje profesora");
 		setResizable(false);
 		
 		areYouSureLab = new JLabel();
-		areYouSureLab.setText("Da li ste sigurni da ûelite da obriöete profesora?");
+		areYouSureLab.setText("Da li ste sigurni da ≈æelite da obri≈°ete profesora?");
 		northPanel.add(areYouSureLab);
 		
 		yes = new JButton("DA");

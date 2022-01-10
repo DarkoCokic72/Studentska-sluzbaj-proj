@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -19,7 +20,7 @@ public class EditProfessorDialog extends JDialog {
 		
 		int selectedRow = ProfessorJTable.getTable().getSelectedRow();
 		if(selectedRow == -1) {
-			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi profesor kog zelite da izmenite");
+			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi profesor kog želite da izmenite");
 			return;
 		}
 		
@@ -28,7 +29,7 @@ public class EditProfessorDialog extends JDialog {
 		int width = d.width;
 		int height = d.height;
 		setSize(width*3/8, height*25/37); 
-		ImageIcon img = new ImageIcon("images/Pen-5-icon.png");
+		ImageIcon img = new ImageIcon("images" + File.separator +"Pen-5-icon.png");
 		setIconImage(img.getImage());
 		setTitle("Izmena profesora");
 		setResizable(false);

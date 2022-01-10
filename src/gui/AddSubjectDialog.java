@@ -65,7 +65,7 @@ public class AddSubjectDialog extends JDialog {
 		ValidationSubject.resetFields();
 		
 		code = new JPanel();
-		codeLabel = new JLabel("Sifra predemeta*");
+		codeLabel = new JLabel("Šifra predemeta*");
 		codeField = new JTextField();
 		codeLabel.setPreferredSize(new Dimension(200, 25));
 		codeField.setPreferredSize(new Dimension(280, 25));

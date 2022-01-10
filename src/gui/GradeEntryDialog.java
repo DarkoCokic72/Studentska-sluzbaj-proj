@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -45,7 +46,7 @@ public class GradeEntryDialog extends JDialog{
 		
 		int selectedRow = UnpassedExamsTable.getTable().convertRowIndexToModel(UnpassedExamsTable.getTable().getSelectedRow());
 		if(selectedRow == -1) {
-			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi predmet za koji zelite da unesete ocenu");
+			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi predmet za koji želite da unesete ocenu");
 			return;
 		}
 		
@@ -58,12 +59,12 @@ public class GradeEntryDialog extends JDialog{
 		int height = d.height;
 		setSize(width*3/16, height*25/72);
 		setTitle("Unos ocene");
-		ImageIcon img = new ImageIcon("images/Plus-icon.png");
+		ImageIcon img = new ImageIcon("images" + File.separator + "Plus-icon.png");
 		setIconImage(img.getImage());
 		setResizable(false);
 		
 		subjectCode = new JPanel();
-		subjectCodeLab = new JLabel("Sifra*");
+		subjectCodeLab = new JLabel("Šifra*");
 		subjectCodeField = new JTextField();
 		subjectCodeLab.setPreferredSize(new Dimension(100,25));
 		subjectCodeField.setPreferredSize(new Dimension(100,25));

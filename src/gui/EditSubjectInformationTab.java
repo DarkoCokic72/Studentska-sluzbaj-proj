@@ -75,7 +75,7 @@ public class EditSubjectInformationTab extends JPanel {
 		ValidationSubject.fieldsFilled();
 		
 		code = new JPanel();
-		codeLabel = new JLabel("Sifra predmeta*");
+		codeLabel = new JLabel("Šifra predmeta*");
 		codeField = new JTextField();
 		codeLabel.setPreferredSize(new Dimension(200, 25));
 		codeField.setPreferredSize(new Dimension(280, 25));

@@ -18,7 +18,7 @@ public class GradeDatabase {
 		grades  = new ArrayList<Grade>();
 		columns = new ArrayList<String>();
 		
-		columns.add("Sifra predmeta");
+		columns.add("Šifra predmeta");
 		columns.add("Naziv predmeta");
 		columns.add("ESPB");
 		columns.add("Ocena");
