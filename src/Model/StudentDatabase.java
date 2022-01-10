@@ -65,6 +65,17 @@ public class StudentDatabase {
 		return students.get(index);
 	}
 	
+	public Student getStudentByIndex(String index) {
+		for(Student s: students) {
+			if(s.getIndexID() == index) {
+				return s;
+			}
+				
+		}
+		
+		return null;
+	}
+	
 	public static StudentDatabase getInstance() {
 		if(studentDatabase == null) {
 			studentDatabase = new StudentDatabase();

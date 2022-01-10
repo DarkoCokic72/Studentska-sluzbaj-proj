@@ -33,7 +33,7 @@ public class Grade {
 		this.passedSubject = passedSubject;
 	}
 
-	public int getMark() {
+	public Integer getMark() {
 		return mark;
 	}
 
