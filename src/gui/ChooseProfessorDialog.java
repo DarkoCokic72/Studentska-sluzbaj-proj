@@ -62,6 +62,8 @@ public class ChooseProfessorDialog extends JDialog{
 			confirm.setEnabled(false);
 		}
 		
+		SubjectController.professorChoosen = false;
+		
 		confirm.addActionListener(new ActionListener() {
 
 			@Override
@@ -81,6 +83,7 @@ public class ChooseProfessorDialog extends JDialog{
 					EditSubjectInformationTab.getProfessorField().setText(professorString);
 					EditSubjectInformationTab.getPlus().setEnabled(false);
 					EditSubjectInformationTab.getMinus().setEnabled(true);
+					EditSubjectInformationTab.getConfirm().setEnabled(true);
 					dispose();
 				}
 			}

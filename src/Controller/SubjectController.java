@@ -16,6 +16,7 @@ public class SubjectController {
 	public boolean subjectAdded = false;
 	public boolean subjectEdited = false;
 	public static boolean professorChoosen;
+	public static boolean professorRemoved;
 	
 	public void delete(Subject subject) {
 		
@@ -67,6 +68,7 @@ public class SubjectController {
 		if( ValidationSubject.checkName(name) == true && ValidationSubject.checkYearOfStudy(yearOfStudy) == true && ValidationSubject.checkESPB(espb) == true) {
 			
 			String code = EditSubjectInformationTab.getCodeField().getText().trim();
+			subject.setSubjectCode("-1");
 			String wrongCode = EditSubjectInformationTab.getCodeField().getText().trim();
 			
 			if(ValidationSubject.checkCode(wrongCode)) {
@@ -77,7 +79,7 @@ public class SubjectController {
 				subject.setYearOfStudy(year);
 				subject.setESPB(espbs);
 				subject.setTerm(term);
-				//subject.setSubjectProfessor(null);
+				subject.setSubjectProfessor(null);
 				subject.setSubjectCode(code);
 				
 				SubjectJTable subjTable = SubjectJTable.getTable();
@@ -99,8 +101,23 @@ public class SubjectController {
     }
        
     public void chooseProfessor(Subject subject, Profesor professor) {
+    	
     	subject.setSubjectProfessor(professor);
+    	ArrayList<Subject> subjectProfessorTeaches = professor.getSubjectsTeaches();
+    	subjectProfessorTeaches.add(subject);
+    	professor.setSubjectsTeaches(subjectProfessorTeaches);
     	professorChoosen = true;
     }
-
+    
+    public void removeProfessor() {
+   
+    	Subject subject = EditSubjectInformationTab.subject;
+    	Profesor professor = subject.getSubjectProfessor();
+    	subject.setSubjectProfessor(null);
+    	ArrayList<Subject> subjectsProfessorTeaches = professor.getSubjectsTeaches();
+    	subjectsProfessorTeaches.remove(subject);
+    	professor.setSubjectsTeaches(subjectsProfessorTeaches);
+    	
+    	professorRemoved = true;
+    }  
 }

@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import Controller.SubjectController;
 import Controller.ValidationSubject;
 import Listeners.EditSubjectListener;
+import Model.Profesor;
 import Model.Subject;
 import Model.SubjectDatabase;
 import Model.Subject.Term;
@@ -149,6 +150,11 @@ public class EditSubjectInformationTab extends JPanel {
 		professor.add(minusBtn);
 		northPanel.add(professor);
 		
+		if(subject.getSubjectProfessor() != null) {
+			String professorString = subject.getSubjectProfessor().getName() + " " + subject.getSubjectProfessor().getSurname();
+			professorField.setText(professorString);
+		}
+		
 		professorField.setEditable(false);
 		if(professorField.getText().isEmpty() == false) {
 			plusBtn.setEnabled(false);
@@ -164,6 +170,17 @@ public class EditSubjectInformationTab extends JPanel {
 				
 				ChooseProfessorDialog chooseProfessorDialog = new ChooseProfessorDialog();
 				chooseProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());		
+				
+			}
+		});
+		
+		minusBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				RemoveProfessorFromSubjectDialog removeProfessorDialog = new RemoveProfessorFromSubjectDialog();
+				removeProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());		
 				
 			}
 		});

@@ -14,6 +14,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Controller.SubjectController;
+
 public class RemoveProfessorFromSubjectDialog extends JDialog{
 	
 	JPanel northPanel;
@@ -45,11 +47,23 @@ public class RemoveProfessorFromSubjectDialog extends JDialog{
 		yes.setPreferredSize(new Dimension(100,30));
 		southPanel.add(yes);
 		
+		
+		SubjectController.professorRemoved = false;
 		yes.addActionListener(new ActionListener() {
 	
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				SubjectController subjectController = SubjectController.getSubjectController();
+				subjectController.removeProfessor();
+				if(SubjectController.professorRemoved) {
+					
+					EditSubjectInformationTab.getProfessorField().setText("");
+					EditSubjectInformationTab.getPlus().setEnabled(true);
+					EditSubjectInformationTab.getMinus().setEnabled(false);
+					EditSubjectInformationTab.getConfirm().setEnabled(true);
+					dispose();
+				}
 				
 			}
 	
