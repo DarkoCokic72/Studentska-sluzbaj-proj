@@ -1,5 +1,6 @@
 package Controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import Model.Grade;
@@ -7,6 +8,8 @@ import Model.Student;
 import Model.StudentDatabase;
 import Model.Subject;
 import gui.EditStudentDialog;
+import gui.GradeAnnulmentDialog;
+import gui.GradeDatabase;
 import gui.GradeEntryDialog;
 import gui.PassedExamsTab;
 import gui.PassedExamsTable;
@@ -17,6 +20,7 @@ public class GradeController {
 	
 	private static GradeController gradeContr = null;
 	public static boolean gradeEntried = false;
+	public static boolean gradeAnnuled = false;
 	
 	public void entry() {
 		
@@ -37,6 +41,7 @@ public class GradeController {
 			
 			Date date = Converter.convertStringToDate(dateString);
 			Grade g = new Grade(student, subject, grade, date);
+			GradeDatabase.getInstance().getGrades().add(g);
 			
 			//dodavanje ocene u polozene predmete
 			student.getPassedCourses().add(g);
@@ -63,10 +68,44 @@ public class GradeController {
 			
 			//dodavanje studenata u listu studenata koji su polozili predmet
 			subject.getStudentWhoPassed().add(student);
+			subject.getStudentWhoDidNotPassed().remove(student);
 			
 			gradeEntried = true;
 				
 		}	
+	}
+	
+	public void annulment() {
+		
+		Student student = StudentDatabase.getInstance().getStudentFromRow(EditStudentDialog.selectedRow);
+		Grade grade = GradeDatabase.getInstance().getGradeFromRow(GradeAnnulmentDialog.selectedRow);
+		Subject subject = grade.getPassedSubject();
+	
+		GradeDatabase.getInstance().getGrades().remove(grade);
+		
+		student.getPassedCourses().remove(grade);
+		PassedExamsTable.getInstance().updateTable();
+		
+		student.getUnpassedCourses().add(subject);
+		UnpassedExamsTable.getTable().updateTable();
+		
+		student.setAvgMark();
+		double average = student.getAvgMark();
+		String averageTxt = String.format("Prosecna ocena: %.2f", average);
+		PassedExamsTab.getAverageLabel().setText(averageTxt);
+		
+		String textFromESPBLab = PassedExamsTab.getTotalESPBLabel().getText().trim();
+		String ESPBString = textFromESPBLab.replaceAll("[^\\d]", "");
+		int ESPB = Integer.parseInt(ESPBString);
+		ESPB = ESPB - subject.getESPB();
+		String espbTxt = String.format("Ukupno ESPB: %d", ESPB);
+		PassedExamsTab.getTotalESPBLabel().setText(espbTxt);
+		
+		subject.getStudentWhoPassed().remove(student);
+		subject.getStudentWhoDidNotPassed().add(student);
+		
+		gradeAnnuled = true;
+		
 	}
 	
 	 public static GradeController getGradeController() {

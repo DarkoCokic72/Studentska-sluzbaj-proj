@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import Model.Grade;
+import Model.Student;
 import Model.StudentDatabase;
 
 public class GradeDatabase {
@@ -69,6 +70,10 @@ public class GradeDatabase {
 	private String dateFormat(Date date) {
 		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy.");
 		return dateFormat.format(date);
+	}
+	
+	public Grade getGradeFromRow(int index) {
+		return grades.get(index);
 	}
 	
 	public static GradeDatabase getInstance() {

@@ -39,7 +39,8 @@ public class PassedExamsTab extends JPanel{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Delete Grade
+				GradeAnnulmentDialog gradeAnnulmentDialog = new GradeAnnulmentDialog();
+				gradeAnnulmentDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 				
 			}
 		});

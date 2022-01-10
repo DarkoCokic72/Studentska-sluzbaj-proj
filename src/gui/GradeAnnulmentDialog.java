@@ -12,7 +12,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import Controller.GradeController;
 
 
 public class GradeAnnulmentDialog extends JDialog {
@@ -22,9 +25,15 @@ public class GradeAnnulmentDialog extends JDialog {
 	private static JLabel areYouSureLab;
 	private static JButton yes;
 	private static JButton no ;
-		
+	public static int selectedRow;
+	
 	public GradeAnnulmentDialog() {
 		
+		selectedRow = PassedExamsTable.getInstance().getSelectedRow();
+		if(selectedRow == -1) {
+			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi ocena koju zelite da ponistite");
+			return;
+		}
 		northPanel = new JPanel();
 		southPanel = new JPanel();
 		
@@ -50,7 +59,14 @@ public class GradeAnnulmentDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				GradeController gradeController = GradeController.getGradeController();
+				gradeController.annulment();
 				
+				if(GradeController.gradeAnnuled) {
+					
+					dispose();
+					GradeController.gradeAnnuled = false;
+				}
 			}
 	
 		});
