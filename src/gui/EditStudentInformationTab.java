@@ -75,9 +75,11 @@ public class EditStudentInformationTab extends JPanel {
 	private static JButton confirm;
 	private JButton cancel;
 	
+	private static Student student;
+	
 	public EditStudentInformationTab() {
 		int selectedRow = StudentTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow());
-		Student student = StudentDatabase.getInstance().getStudentFromRow(selectedRow);
+		student = StudentDatabase.getInstance().getStudentFromRow(selectedRow);
 		
 		
 		northPanel = new JPanel();
@@ -391,6 +393,10 @@ public class EditStudentInformationTab extends JPanel {
 		}
 		
 		return currYear;
+	}
+
+	public static Student getStudent() {
+		return student;
 	}
 
 		

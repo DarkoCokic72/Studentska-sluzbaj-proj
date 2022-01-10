@@ -76,6 +76,38 @@ public class StudentDatabase {
 		return null;
 	}
 	
+	public double getAverageMark(String index) {
+		double average = 0;
+		for(Student s: students) {
+			if(s.getIndexID().equalsIgnoreCase(index)) {
+				for (Grade g: s.getPassedCourses()) {
+					average += g.getMark();
+				}
+				
+				if(s.getPassedCourses().isEmpty() == false) {
+					average = average / s.getPassedCourses().size();
+				}
+				
+				break;
+			}
+		}
+		
+		return average;
+	}
+	
+	public int getTotalESPB(String index) {
+		int espb = 0;
+		for(Student s: students) {
+			if(s.getIndexID().equalsIgnoreCase(index)) {
+				for(Grade g: s.getPassedCourses()) {
+					espb += g.getPassedSubject().getESPB();
+				}
+				break;
+			}
+		}
+		return espb;
+	}
+	
 	public static StudentDatabase getInstance() {
 		if(studentDatabase == null) {
 			studentDatabase = new StudentDatabase();

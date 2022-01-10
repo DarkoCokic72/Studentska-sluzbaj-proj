@@ -17,6 +17,7 @@ public class EditStudentPanel extends JTabbedPane{
 		JPanel passed = new JPanel();
 		addTab("Polozeni", passed);
 		passed.setLayout(new BorderLayout());
+		passed.add(new PassedExamsTab());
 		
 		JPanel unpassed = new JPanel();
 		addTab("Neplozeni", unpassed);
