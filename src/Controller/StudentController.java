@@ -11,6 +11,7 @@ import gui.AddProfessorDialog;
 import gui.AddStudentDialog;
 import gui.EditStudentInformationTab;
 import gui.StudentTable;
+import gui.UnpassedExamsTable;
 
 public class StudentController {
 	public static StudentController studContr = null;
@@ -150,6 +151,16 @@ public class StudentController {
 			}
 		}
 		
+	}
+	
+	public void removeSubject(String indexID) {
+		Student student = StudentDatabase.getInstance().getStudentByIndex(indexID);
+		int removalIndex = UnpassedExamsTable.getTable().convertRowIndexToModel(UnpassedExamsTable.getTable().getSelectedRow());
+		
+		student.getUnpassedCourses().get(removalIndex).getStudentWhoDidNotPassed().remove(student);
+		student.getUnpassedCourses().remove(removalIndex);
+		
+		UnpassedExamsTable.getTable().updateTable();
 	}
 	
 	
