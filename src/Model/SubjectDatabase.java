@@ -13,7 +13,7 @@ public class SubjectDatabase {
 		subjects = new ArrayList<Subject>();
 		columns = new ArrayList<String>();
 		
-	    columns.add("Šifra");
+	    columns.add("Å ifra");
 	    columns.add("Naziv");
 	    columns.add("ESPB");
 	    columns.add("Godina");

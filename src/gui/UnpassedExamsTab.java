@@ -23,6 +23,28 @@ public class UnpassedExamsTab extends JPanel{
 		
 		btnAdd = new JButton("Dodaj");
 		btnAdd.setPreferredSize(new Dimension(100,25));
+		btnAdd.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				AddSubjectToStudent addSubjectToStudent = new AddSubjectToStudent(EditStudentInformationTab.getStudent().getIndexID());
+				addSubjectToStudent.setLocationRelativeTo(MainFrame.getMainFrame());
+				addSubjectToStudent.setVisible(true);
+			}
+		});
 		
 		btnDelete = new JButton("Obriši");
 		btnDelete.setPreferredSize(new Dimension(100,25));;
