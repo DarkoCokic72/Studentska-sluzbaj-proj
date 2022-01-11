@@ -22,7 +22,7 @@ public class RemoveSubjectFromStudent extends JDialog{
 		int width = d.width;
 		int heigth = d.height;
 		
-		setSize(width * 1/4, heigth * 1 /6);
+		setSize(width * 35/100, heigth * 1 /6);
 		setModal(true);
 		setResizable(false);
 		setTitle("Uklanjanje predmeta");
@@ -36,11 +36,11 @@ public class RemoveSubjectFromStudent extends JDialog{
 		central.add(tekst);
 		central.setBorder(BorderFactory.createEmptyBorder(15, 25, 15, 25));
 		
-		JButton yesBtn = new JButton("Ukloni");
-		JButton noBtn = new JButton("Odustani");
+		JButton yesBtn = new JButton("Da");
+		JButton noBtn = new JButton("Ne");
 		
-		yesBtn.setPreferredSize(new Dimension(40, 30));
-		noBtn.setPreferredSize(new Dimension(40, 30));
+		yesBtn.setPreferredSize(new Dimension(60, 30));
+		noBtn.setPreferredSize(new Dimension(60, 30));
 		
 		yesBtn.addActionListener(new ActionListener() {
 			
