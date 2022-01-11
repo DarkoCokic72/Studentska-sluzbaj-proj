@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -64,9 +65,14 @@ public class UnpassedExamsTab extends JPanel{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				RemoveSubjectFromStudent removeSubjectFromStudent = new RemoveSubjectFromStudent(EditStudentDialog.getEditStudentDialog());
-				removeSubjectFromStudent.setLocationRelativeTo(MainFrame.getMainFrame());
-				removeSubjectFromStudent.setVisible(true);
+				if(UnpassedExamsTable.getTable().getSelectedRow() == -1) {
+					JOptionPane.showMessageDialog(null, "Označite predmet u tabeli koji želite da obrišete");
+				} else {
+				
+					RemoveSubjectFromStudent removeSubjectFromStudent = new RemoveSubjectFromStudent(EditStudentDialog.getEditStudentDialog());
+					removeSubjectFromStudent.setLocationRelativeTo(MainFrame.getMainFrame());
+					removeSubjectFromStudent.setVisible(true);
+				}
 			}
 		});
 		

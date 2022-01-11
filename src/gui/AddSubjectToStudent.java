@@ -16,6 +16,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -87,13 +88,18 @@ public class AddSubjectToStudent extends JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Subject s = subjectsToAdd.get(display.getSelectedIndex());
-				subjectsToAdd.remove(display.getSelectedIndex());
-				student.getUnpassedCourses().add(s);
-				UnpassedExamsTable.getTable().updateTable();
-				validate();
-				dispose();
-				
+				int selectedIndex = display.getSelectedIndex();
+				if(selectedIndex == -1) {
+					JOptionPane.showMessageDialog(null, "Selektujte predmet koji zelite da dodate.");
+					return;
+				} else {
+					Subject s = subjectsToAdd.get(display.getSelectedIndex());
+					subjectsToAdd.remove(display.getSelectedIndex());
+					student.getUnpassedCourses().add(s);
+					UnpassedExamsTable.getTable().updateTable();
+					validate();
+					dispose();
+				}
 			}
 		});
 		
