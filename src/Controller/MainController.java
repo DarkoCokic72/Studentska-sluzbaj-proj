@@ -14,6 +14,7 @@ import gui.EditStudentDialog;
 import gui.EditSubjectDialog;
 import gui.MainFrame;
 import gui.ProfessorJTable;
+import gui.StudentTable;
 import gui.SubjectJTable;
 
 public class MainController {
@@ -92,7 +93,7 @@ public class MainController {
 		switch(centralPanel.getSelectedIndex()) {
 		
 		case 0:
-			
+			StudentTable.getTable().search(searchField.getText());
 			break;
 		case 1:
 			ProfessorJTable.getTable().search(searchField.getText());
