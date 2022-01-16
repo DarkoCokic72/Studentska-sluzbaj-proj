@@ -1,13 +1,20 @@
 package gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableRowSorter;
 
+import Model.StudentDatabase;
+
 import javax.swing.RowFilter;
+import javax.swing.Timer;
 
 public class StudentTable extends JTable {
 	private static StudentTable studentTable=null;;
@@ -30,6 +37,8 @@ public class StudentTable extends JTable {
 	
 	public void updateTable() {
 		studentTableModel.fireTableDataChanged();
+		repaint();
+		validate();
 	}
 	
 	public void search(String input) {
@@ -60,5 +69,18 @@ public class StudentTable extends JTable {
 		}
 		
 		return studentTable;
+	}
+	
+	public static void initComponents() {
+		
+		studentTable.getColumnModel().getColumn(0).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("indexNumber"));
+		studentTable.getColumnModel().getColumn(1).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("name"));
+		studentTable.getColumnModel().getColumn(2).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("surname"));
+		studentTable.getColumnModel().getColumn(3).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("yearOfStudy"));
+		studentTable.getColumnModel().getColumn(4).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("status"));
+		studentTable.getColumnModel().getColumn(5).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("avgMark"));
+		
+		studentTable.updateTable();	
+		
 	}
 }

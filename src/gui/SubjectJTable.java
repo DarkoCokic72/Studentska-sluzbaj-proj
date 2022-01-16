@@ -100,5 +100,17 @@ public class SubjectJTable extends JTable {
  		}
  		return subjectTable;
  	}
+     
+     public static void initComponents() {
+ 		
+ 		subjectTable.getColumnModel().getColumn(0).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("subjectCode"));
+ 		subjectTable.getColumnModel().getColumn(1).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("subjectName"));
+ 		subjectTable.getColumnModel().getColumn(2).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("ESPB"));
+		subjectTable.getColumnModel().getColumn(3).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("subjectYear"));
+		subjectTable.getColumnModel().getColumn(4).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("subjectTerm"));
+ 		
+ 		subjectTable.updateTable();	
+ 		
+ 	}
  	
 }

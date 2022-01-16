@@ -8,21 +8,21 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import Model.ProfessorDatabase;
-import Model.StudentDatabase;
-import Model.SubjectDatabase;
 import persistence.Serialization;
 	
 public class MainFrame extends JFrame {
 		
-	    private static MainFrame mf = null;
+	private static MainFrame mf = null;
+	private ResourceBundle resourceBundle;
 	
-		private MainFrame() { 
+	private MainFrame() { 
 			
 		super(); 
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -66,19 +66,36 @@ public class MainFrame extends JFrame {
 		centralPanel.setBorder(BorderFactory.createEmptyBorder(12, 12, 7, 20));
 		add(centralPanel, BorderLayout.CENTER);
 		
+		resourceBundle = ResourceBundle.getBundle("messageResources.MessageResources", Locale.getDefault());
+			
 		revalidate(); 
 		repaint();
 		
-		}
+	}
 		
 
-		public static MainFrame getMainFrame() {
-			if (mf == null) {
-				mf = new MainFrame();
-			}
-			return mf;
+	public static MainFrame getMainFrame() {
+		if (mf == null) {
+			mf = new MainFrame();
 		}
+		return mf;
+	}
 		
+	
+	public void changeLanguage() {
+
+		resourceBundle = ResourceBundle.getBundle("MessageResources.MessageResources", Locale.getDefault());
+		setTitle(resourceBundle.getString("naslovAplikacije"));
+		MenuBar.initComponents();
+		StatusBar.initComponents();
+		CentralPanel.initComponents();
+		validate();
+		
+	}
+
+	public ResourceBundle getResourceBundle() {
+		return resourceBundle;
+	}
 }
 	
 	

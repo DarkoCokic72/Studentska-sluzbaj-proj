@@ -60,5 +60,15 @@ public class ProfessorJTable extends JTable{
 		return professorTable;
 	}
 	
+    public static void initComponents() {
+ 		
+ 		professorTable.getColumnModel().getColumn(0).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("name"));
+ 		professorTable.getColumnModel().getColumn(1).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("surname"));
+ 		professorTable.getColumnModel().getColumn(2).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("professorTitle"));
+ 		professorTable.getColumnModel().getColumn(3).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("emailAddress"));
+ 		
+ 		professorTable.updateTable();	
+ 		
+ 	}
 
 }

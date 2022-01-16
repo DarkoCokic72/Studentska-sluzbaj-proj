@@ -3,31 +3,52 @@ package gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.util.Locale;
 
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
-import javax.swing.event.MenuKeyEvent;
-import javax.swing.event.MenuKeyListener;
 
 import Controller.MainController;
 import persistence.Serialization;
 
 public class MenuBar extends JMenuBar{
+	
+	private static JMenu file;
+	private static JMenuItem miNew;
+	private static JMenuItem miSave;
+	private static JMenuItem miOpen;
+	
+	private static JMenuItem miStudent;
+	private static JMenuItem miProfesor;
+	private static JMenuItem miSubject;
+	private static JMenuItem miChair;
+	private static JMenuItem miClose;
+	
+	private static JMenu edit;
+	private static JMenuItem miEdit;
+	private static JMenuItem miDelete;
+	
+	private static JMenu help;
+	private static JMenuItem miHelp;
+	private static JMenuItem miAbout;
+	private static JCheckBoxMenuItem miEnglish;
+	
 	public MenuBar() {
-		JMenu file = new JMenu("File");
-		JMenuItem miNew = new JMenuItem("New");
-		JMenuItem miSave = new JMenuItem("Save");
-		JMenu miOpen = new JMenu("Open");
 		
-		JMenuItem miStudent = new JMenuItem("Studenti");
-		JMenuItem miProfesor = new JMenuItem("Profesor");
-		JMenuItem miSubject = new JMenuItem("Predmeti");
-		JMenuItem miChair = new JMenuItem("Katedre");
+		file = new JMenu("File");
+		miNew = new JMenuItem("New");
+		miSave = new JMenuItem("Save");
+		miOpen = new JMenu("Open");
+		
+		miStudent = new JMenuItem("Studenti");
+		miProfesor = new JMenuItem("Profesor");
+		miSubject = new JMenuItem("Predmeti");
+		miChair = new JMenuItem("Katedre");
 		
 		miStudent.setIcon(new ImageIcon("images/student.png"));
 		miProfesor.setIcon(new ImageIcon("images/teacher.png"));
@@ -49,7 +70,7 @@ public class MenuBar extends JMenuBar{
 		miOpen.add(miProfesor);
 		miOpen.add(miChair);
 		
-		JMenuItem miClose = new JMenuItem("Close");
+		miClose = new JMenuItem("Close");
 		
 		miNew.setIcon(new ImageIcon("images/new-file-icon.png"));
 		miSave.setIcon(new ImageIcon("images/Save-as-icon.png"));
@@ -77,9 +98,9 @@ public class MenuBar extends JMenuBar{
 		
 		file.setMnemonic('F');
 		
-		JMenu edit = new JMenu("Edit");
-		JMenuItem miEdit = new JMenuItem("Edit");
-		JMenuItem miDelete = new JMenuItem("Delete");
+		edit = new JMenu("Edit");
+		miEdit = new JMenuItem("Edit");
+		miDelete = new JMenuItem("Delete");
 		
 		miEdit.setMnemonic('d');
 		miDelete.setMnemonic('e');
@@ -96,9 +117,9 @@ public class MenuBar extends JMenuBar{
 		
 		edit.setMnemonic('E');
 		
-		JMenu help = new JMenu("Help");
-		JMenuItem miHelp = new JMenuItem("Help");
-		JMenuItem miAbout = new JMenuItem("About");
+		help = new JMenu("Help");
+		miHelp = new JMenuItem("Help");
+		miAbout = new JMenuItem("About");
 		
 		miHelp.setIcon(new ImageIcon("images/Help-icon.png"));
 		miAbout.setIcon(new ImageIcon("images/icons8-about-32.png"));
@@ -109,6 +130,17 @@ public class MenuBar extends JMenuBar{
 		miHelp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, (int) ActionEvent.KEY_EVENT_MASK));
 		miAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
 		
+		miEnglish = new JCheckBoxMenuItem("English");
+		miEnglish.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Locale.setDefault(new Locale("en", "US"));
+				MainFrame.getMainFrame().changeLanguage();
+			}
+		});
+		help.add(miEnglish);
+		help.addSeparator();
 		help.add(miHelp);
 		help.addSeparator();
 		help.add(miAbout);
@@ -195,5 +227,29 @@ public class MenuBar extends JMenuBar{
 				CentralPanel.getCentralPanel().setSelectedIndex(2);
 			}
 		});
+	}
+	
+	public static void initComponents() {
+		
+		file.setText(MainFrame.getMainFrame().getResourceBundle().getString("file"));
+		miNew.setText(MainFrame.getMainFrame().getResourceBundle().getString("miNew"));
+		miSave.setText(MainFrame.getMainFrame().getResourceBundle().getString("miSave"));
+		miOpen.setText(MainFrame.getMainFrame().getResourceBundle().getString("miOpen"));
+		miClose.setText(MainFrame.getMainFrame().getResourceBundle().getString("miClose"));
+		
+		miStudent.setText(MainFrame.getMainFrame().getResourceBundle().getString("miStudent"));
+		miProfesor.setText(MainFrame.getMainFrame().getResourceBundle().getString("miProfessor"));
+		miSubject.setText(MainFrame.getMainFrame().getResourceBundle().getString("miSubject"));
+		miChair.setText(MainFrame.getMainFrame().getResourceBundle().getString("miDepartments"));
+		
+		edit.setText(MainFrame.getMainFrame().getResourceBundle().getString("edit"));
+		miEdit.setText(MainFrame.getMainFrame().getResourceBundle().getString("miEdit"));
+		miDelete.setText(MainFrame.getMainFrame().getResourceBundle().getString("miDelete"));
+		
+		help.setText(MainFrame.getMainFrame().getResourceBundle().getString("help"));
+		miHelp.setText(MainFrame.getMainFrame().getResourceBundle().getString("miHelp"));
+		miAbout.setText(MainFrame.getMainFrame().getResourceBundle().getString("miAbout"));
+		miEnglish.setText(MainFrame.getMainFrame().getResourceBundle().getString("miEnglish"));
+		
 	}
 }

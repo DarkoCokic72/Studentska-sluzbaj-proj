@@ -10,10 +10,11 @@ import javax.swing.event.ChangeListener;
 public class CentralPanel extends JTabbedPane {
 	
 	private static CentralPanel centralPanel = null;
-
+	private static JPanel students;
+	
 	private CentralPanel() {
 		
-		JPanel students = new JPanel();
+		students = new JPanel();
 		addTab("Studenti", students);
 		students.setLayout(new BorderLayout());
 		students.add(new StudentTab());
@@ -28,7 +29,7 @@ public class CentralPanel extends JTabbedPane {
 		subjects.setLayout(new BorderLayout());
 		subjects.add(new SubjectTab());
 		
-
+		
 	}
 	
 	public static CentralPanel getCentralPanel() {
@@ -39,6 +40,17 @@ public class CentralPanel extends JTabbedPane {
 		
 		return centralPanel;
 		
+	}
+	
+	public static void initComponents() {
+		
+		centralPanel.setTitleAt(0, MainFrame.getMainFrame().getResourceBundle().getString("studentTab"));
+		centralPanel.setTitleAt(1, MainFrame.getMainFrame().getResourceBundle().getString("professorsTab"));
+		centralPanel.setTitleAt(2, MainFrame.getMainFrame().getResourceBundle().getString("subjectsTab"));
+		
+		StudentTable.initComponents();
+		SubjectJTable.initComponents();
+		ProfessorJTable.initComponents();
 	}
 	
 

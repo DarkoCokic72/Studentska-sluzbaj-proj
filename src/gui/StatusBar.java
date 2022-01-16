@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -15,15 +16,18 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class StatusBar extends JPanel {
-	private static StatusBar statusBar = null;
 	
+	private static StatusBar statusBar = null;
+	private static JLabel labTitle;
+	private static JLabel labTime;
+	private static Timer timer;
 
 	
 	public StatusBar() {
 		super();
 		setLayout(new BorderLayout());
 		
-		JLabel labTitle = new JLabel("Studentska služba");
+		labTitle = new JLabel("Studentska služba");
 		labTitle.setBorder(BorderFactory.createEmptyBorder(0, 7, 0, 0));
 		Date currDate = new Date();
 		
@@ -33,11 +37,11 @@ public class StatusBar extends JPanel {
 		 *  */
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm dd.MM.YYYY");
-		JLabel labTime = new JLabel(dateFormat.format(currDate));
+		labTime = new JLabel(dateFormat.format(currDate));
 		labTime.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 30));
 		
 		
-		Timer timer = new Timer(1000, new ActionListener() {
+		timer = new Timer(1000, new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -88,6 +92,27 @@ public class StatusBar extends JPanel {
 		}
 		
 		return statusBar;
+	}
+	
+	public static void initComponents() {
+		
+		labTitle.setText(MainFrame.getMainFrame().getResourceBundle().getString("naslovAplikacije"));
+		
+		timer.stop();
+        timer = new Timer(1000, new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				DateFormat df = DateFormat.getDateTimeInstance();
+				Date datum = new Date();
+				datum.setTime(System.currentTimeMillis());
+				labTime.setText(df.format(datum));
+				
+			}
+		});
+		
+		timer.start();
 	}
 	
 }
