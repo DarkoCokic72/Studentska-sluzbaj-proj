@@ -29,7 +29,7 @@ public class MainController {
 			addStudentDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 			break;
 		case 1:
-			AddProfessorDialog addProfessorDialog = new AddProfessorDialog();
+			AddProfessorDialog addProfessorDialog = AddProfessorDialog.getAddProfessorDialog();
 			addProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 			break;
 		case 2:

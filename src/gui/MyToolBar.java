@@ -169,5 +169,10 @@ public class MyToolBar extends JToolBar {
 		});
 		
 	}
+	
+	 public static void initComponents() {
+			
+		
+		}
 
 }

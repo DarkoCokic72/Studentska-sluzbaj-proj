@@ -21,6 +21,7 @@ public class MainFrame extends JFrame {
 		
 	private static MainFrame mf = null;
 	private ResourceBundle resourceBundle;
+	public static boolean languageChanged = false;
 	
 	private MainFrame() { 
 			
@@ -84,11 +85,13 @@ public class MainFrame extends JFrame {
 	
 	public void changeLanguage() {
 
+		languageChanged = true;
 		resourceBundle = ResourceBundle.getBundle("MessageResources.MessageResources", Locale.getDefault());
 		setTitle(resourceBundle.getString("naslovAplikacije"));
 		MenuBar.initComponents();
 		StatusBar.initComponents();
 		CentralPanel.initComponents();
+		MyToolBar.initComponents();
 		validate();
 		
 	}

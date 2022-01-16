@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 
 import javax.swing.Box;
@@ -23,58 +25,60 @@ import Model.Profesor;
 import Model.Profesor.Zvanje;
 
 public class AddProfessorDialog extends JDialog {
+
+	private static AddProfessorDialog addProfessorDialog = null;
 	
 	private JPanel northPanel;
 	private JPanel southPanel;
 	
 	private JPanel name;
 	private static JTextField nameField;
-	private JLabel nameLab;
+	private static JLabel nameLab;
 	
 	private JPanel surname;
 	private static JTextField surnameField;
-	private JLabel surnameLab;
+	private static JLabel surnameLab;
 	
 	private JPanel dateOfBirth;
 	private static JTextField dateOfBirthField;
-	private JLabel dateOfBirthLab;
+	private static JLabel dateOfBirthLab;
 	
 	private JPanel address;
 	private static JTextField streetField;
 	private static JTextField streetNumberField;
 	private static JTextField cityField;
 	private static JTextField countryField;
-	private JLabel addressLab;
+	private static JLabel addressLab;
 	
 	private JPanel mobile;
 	private static JTextField mobileField;
-	private JLabel mobileLab;
+	private static JLabel mobileLab;
 	
 	private JPanel mail;
 	private static JTextField mailField;
-	private JLabel mailLab;
+	private static JLabel mailLab;
 	
 	private JPanel officeAddress;
 	private static JTextField officeStreetField;
 	private static JTextField officeStreetNumberField;
 	private static JTextField officeCityField;
 	private static JTextField officeCountryField;
-	private JLabel officeAddressLab;
+	private static JLabel officeAddressLab;
 	
 	private JPanel personalId;
 	private static JTextField personalIdField;
-	private JLabel personalIdLab;
+	private static JLabel personalIdLab;
 	
 	private JPanel zvanje;
 	private static JComboBox<String> zvanjeComboBox;
-	private JLabel zvanjeLab;
+	private static JLabel zvanjeLab;
 	
 	private JPanel yearsOfExperience;
 	private static JTextField yearsOfExperienceField;
-	private JLabel yearsOfExperienceLab;
+	private static JLabel yearsOfExperienceLab;
 	
 	private static JButton confirm;
-	private JButton cancel;
+	private static JButton cancel;
 	
 	public AddProfessorDialog() {
 		
@@ -269,6 +273,14 @@ public class AddProfessorDialog extends JDialog {
 		add(northPanel,BorderLayout.CENTER);
 		add(southPanel, BorderLayout.SOUTH);
 		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				addProfessorDialog = null;
+			}
+		});
+		
 		revalidate(); 
 		repaint();
 		
@@ -382,6 +394,41 @@ public class AddProfessorDialog extends JDialog {
     public static JButton getConfirm() {
     	return confirm;
     }
+    
+	public static AddProfessorDialog getAddProfessorDialog() {
+		
+		if (addProfessorDialog == null) {
+			addProfessorDialog = new AddProfessorDialog();
+		}
+		
+		if(MainFrame.languageChanged == true) {
+			initComponents();;
+		}
+		
+		return addProfessorDialog;
+	}
+	
+    
+    public static void initComponents() {
+		
+    	addProfessorDialog.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("addProfessorDialogTitle"));
+    	
+		nameLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("name"));
+		surnameLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("surname"));
+		dateOfBirthLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("dateOfBirth"));
+		addressLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("address"));
+		mobileLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("phoneNumber"));
+		mailLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("emailAddress"));
+		officeAddressLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("officeAddress"));
+		personalIdLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("personalId"));
+		zvanjeLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("professorTitle"));
+		yearsOfExperienceLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("yearsOfExperience"));
+		
+		confirm.setText(MainFrame.getMainFrame().getResourceBundle().getString("confirmBtn"));
+		cancel.setText(MainFrame.getMainFrame().getResourceBundle().getString("cancelBtn"));
+
+	}
+    
     
     
 }
