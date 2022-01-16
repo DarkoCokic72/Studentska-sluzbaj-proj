@@ -87,5 +87,9 @@ public class SubjectDatabase {
 		return subjectDatabase;
 	}
 
+	public void setSubjects(ArrayList<Subject> subjects) {
+		this.subjects = subjects;
+	}
+
 	
 }

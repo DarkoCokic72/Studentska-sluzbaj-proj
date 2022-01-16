@@ -116,5 +116,9 @@ public class StudentDatabase {
 		return studentDatabase;
 	}
 
+	public void setStudents(ArrayList<Student> students) {
+		this.students = students;
+	}
+
 
 }

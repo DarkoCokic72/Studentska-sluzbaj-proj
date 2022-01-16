@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CompleteDatabase implements Serializable{
@@ -22,6 +23,20 @@ public class CompleteDatabase implements Serializable{
 		this.grades = grades;
 		
 	}
+	
+	
+
+
+	public CompleteDatabase() {
+		super();
+		
+		students = new ArrayList<Student>();
+		professors = new ArrayList<Profesor>();
+		subjects = new ArrayList<Subject>();
+		grades = new ArrayList<Grade>();
+	}
+
+
 
 
 	public List<Student> getStudents() {

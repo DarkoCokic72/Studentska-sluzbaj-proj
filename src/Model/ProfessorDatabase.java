@@ -78,6 +78,10 @@ public class ProfessorDatabase {
 		}
 		return professorDatabase;
 	}
+
+	public void setProfessors(ArrayList<Profesor> professors) {
+		this.professors = professors;
+	}
 	
 
 }
