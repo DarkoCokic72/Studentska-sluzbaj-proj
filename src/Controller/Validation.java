@@ -76,7 +76,13 @@ public class Validation {
 		String regex = "[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}.";
 		boolean retVal = Pattern.matches(regex, date);
 		
-		if (retVal == false && date.isEmpty() == false) {
+		if(date.isEmpty()) {
+			
+			GradeEntryDialog.getConfirm().setEnabled(false);
+			return false;
+		}
+		
+		if (retVal == false && !date.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Format datuma nije podrzan.\nPodrzani formati su dd.mm.yyyy. ili d.m.yyyy.");
 			return false;
 		}
