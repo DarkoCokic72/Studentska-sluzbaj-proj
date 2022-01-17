@@ -103,7 +103,16 @@ public class UnpassedExamsTab extends JPanel{
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				GradeEntryDialog gradeEntryDialog = new GradeEntryDialog();
+				int selectedRow = UnpassedExamsTable.getTable().convertRowIndexToModel(UnpassedExamsTable.getTable().getSelectedRow());
+				if(selectedRow == -1) {
+					if(MainFrame.languageChanged) {
+						JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));
+						return;
+					}
+					JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi predmet za koji želite da unesete ocenu");
+					return;
+				}
+				GradeEntryDialog gradeEntryDialog = GradeEntryDialog.getGradeEntryDialog();
 				gradeEntryDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 			}
 

@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -130,7 +131,12 @@ public class EditStudentInformationTab extends JPanel {
 		dateOfBirth.add(dateOfBirthField);
 		northPanel.add(dateOfBirth);
 		
-		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy.");
+		DateFormat dateFormat;
+		if(MainFrame.languageChanged) {
+			dateFormat = DateFormat.getDateInstance();
+		} else {
+			dateFormat = new SimpleDateFormat("dd.MM.yyyy.");
+		}
 		dateOfBirthField.setText(dateFormat.format(student.getDateOfBirth()));
 		dateOfBirthField.addFocusListener(new EditStudentListener(2, dateOfBirthField));
 		
@@ -439,6 +445,16 @@ public class EditStudentInformationTab extends JPanel {
 		streetNumberField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("houseNumber"));
 		cityField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("city"));
 		countryField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("country"));
+		
+		if(MainFrame.englishLanguage) {
+			String[] currYears = {"I(first)", "II(second)", "III(third)", "IV(Fourth)"};
+			currYearOfStudiesComboBox.setModel(new DefaultComboBoxModel<String>(currYears));
+			currYearOfStudiesComboBox.setSelectedIndex(student.getCurrStatus().ordinal());
+			
+			String[] currStatus = {"State-financing", "Self-financing"};
+			currStatusComboBox.setModel(new DefaultComboBoxModel<String>(currStatus));
+			currStatusComboBox.setSelectedIndex(student.getCurrStatus().ordinal());
+		}
 		
 		confirm.setText(MainFrame.getMainFrame().getResourceBundle().getString("confirmBtn"));
 		cancel.setText(MainFrame.getMainFrame().getResourceBundle().getString("cancelBtn"));

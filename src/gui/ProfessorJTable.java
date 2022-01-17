@@ -1,12 +1,20 @@
 package gui;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
+
+import Model.Profesor;
+import Model.ProfessorDatabase;
 
 public class ProfessorJTable extends JTable{
 	
@@ -67,8 +75,30 @@ public class ProfessorJTable extends JTable{
  		professorTable.getColumnModel().getColumn(2).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("professorTitle"));
  		professorTable.getColumnModel().getColumn(3).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("emailAddress"));
  		
+ 		ArrayList<Profesor> professorList = ProfessorDatabase.getDatabase().getProfessors();
+ 		for(Profesor p: professorList) {
+ 			
+ 			DateFormat dateFormat = DateFormat.getDateInstance();
+ 			String dateString = dateFormat.format(p.getDateOfBirth());
+ 			
+ 			Date retDate = null;
+ 			
+ 			try {
+				retDate = dateFormat.parse(dateString);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+ 			
+ 			p.setDateOfBirth(retDate);
+ 			
+ 			
+ 		}		
+ 		
  		professorTable.updateTable();	
  		
  	}
 
 }
+    
+

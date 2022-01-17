@@ -10,6 +10,7 @@ import Model.Student;
 import Model.StudentDatabase;
 import gui.AddStudentDialog;
 import gui.EditStudentInformationTab;
+import gui.MainFrame;
 
 public class ValidationStudent {
 	
@@ -31,6 +32,10 @@ public class ValidationStudent {
 					continue;
 				ret = Pattern.matches("\\p{L}+", p);
 				if(ret == false && !name.isEmpty()) {
+					if(MainFrame.languageChanged) {
+						JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatNameError"));
+						return ret;
+					}
 					JOptionPane.showMessageDialog(null, "Greska: Format imena nije podrzan!");
 					return ret;
 				}
@@ -40,6 +45,10 @@ public class ValidationStudent {
 		}
 		
 		if(ret == false && !name.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatNameError"));
+				return ret;
+			}
 			JOptionPane.showMessageDialog(null, "Greska: Format imena nije podrzan!");
 		}
 		
@@ -57,6 +66,10 @@ public class ValidationStudent {
 					continue;
 				ret = Pattern.matches("\\p{L}+", p);
 				if(ret == false && !surname.isEmpty()) {
+					if(MainFrame.languageChanged) {
+						JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatSurnameError"));
+						return ret;
+					}
 					JOptionPane.showMessageDialog(null, "Greska: Format prezimena nije podrzan!");
 					return ret;
 				}
@@ -65,6 +78,10 @@ public class ValidationStudent {
 			ret = Pattern.matches("\\p{L}+", surname);
 		}
 		if(ret == false && !surname.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatSurnameError"));
+				return ret;
+			}
 			JOptionPane.showMessageDialog(null, "Greska: Format prezimena nije podrzan!");
 		}
 		
@@ -73,10 +90,19 @@ public class ValidationStudent {
 	
 	public static boolean checkDate(String date) {
 		//Checked with https://regex101.com/
-		String dateRegex = "^(0?[1-9]|[12]{1}[0-9]|3{1}[01]{1}).(0?[1-9]{1}|10{1}|11{1}|12{1}).((19|20)[0-9][0-9]).";
+		String dateRegex;
+		if(MainFrame.englishLanguage) {
+			dateRegex = "\\w+\\s\\d{1,2},\\s\\d{4}";
+		} else {	
+			dateRegex = "^(0?[1-9]|[12]{1}[0-9]|3{1}[01]{1}).(0?[1-9]{1}|10{1}|11{1}|12{1}).((19|20)[0-9][0-9]).";
+		}
 		boolean ret = Pattern.matches(dateRegex, date);
 		
 		if(ret == false && date.isEmpty() == false) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatDateError"));
+				return false;
+			}
 			JOptionPane.showMessageDialog(null, "Greska: Format datuma nije podrzan! Podrzani formati:"
 					+ "d.m.yyyy. ili dd.mm.yyyy.");
 			return false;
@@ -84,6 +110,10 @@ public class ValidationStudent {
 		
 		Date datOfBirth = Converter.convertStringToDate(date);
 		if(datOfBirth == null && date.isEmpty() == false) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatDateError"));
+				return false;
+			}
 			JOptionPane.showMessageDialog(null, "Greska: Format datuma nije podrzan! Podrzani formati:"
 					+ "d.m.yyyy. ili dd.mm.yyyy.");
 			return false;
@@ -99,6 +129,10 @@ public class ValidationStudent {
 		retVal = Pattern.matches(regex, street);
 		
 		if (retVal == false && !street.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatStreetError"));
+				return retVal;
+			}
 			JOptionPane.showMessageDialog(null, "Pogresan format ulice.");
 		}
 		
@@ -113,6 +147,10 @@ public class ValidationStudent {
 		retVal = Pattern.matches(regex, streetNumber);
 		
 		if (retVal == false && !streetNumber.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatHouseNumberError"));
+				return retVal;
+			}
 			JOptionPane.showMessageDialog(null, "Pogresan format broja kuce.");
 		}
 		
@@ -127,6 +165,10 @@ public class ValidationStudent {
 		retVal = Pattern.matches(regex, city);
 		
 		if (retVal == false && !city.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatCityError"));
+				return retVal;
+			}
 			JOptionPane.showMessageDialog(null, "Pogresan format grada.");
 		}
 		
@@ -141,6 +183,10 @@ public class ValidationStudent {
 		retVal = Pattern.matches(regex, country);
 		
 		if (retVal == false && !country.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatCountryError"));
+				return retVal;
+			}
 			JOptionPane.showMessageDialog(null, "Pogresan format drzave.");
 		}
 		
@@ -164,6 +210,10 @@ public class ValidationStudent {
 		boolean ret = Pattern.matches(phoneNumRegex, phone);
 		
 		if(ret == false && phone.isEmpty() == false) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatPhoneNumberError"));
+				return ret;
+			}
 			JOptionPane.showMessageDialog(null, "Greska: Format broja telefona nije podrzan!");
 		}
 		
@@ -175,6 +225,10 @@ public class ValidationStudent {
 		boolean ret = Pattern.matches(emailRegex, email);
 		
 		if(ret == false && email.isEmpty() == false) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatEmailAddressError"));
+				return ret;
+			}
 			JOptionPane.showMessageDialog(null, "Greska: Neispravan format e-mail adrese.");
 		}
 		
@@ -186,11 +240,19 @@ public class ValidationStudent {
 		boolean ret = Pattern.matches(indexRegex, index);
 		
 		if(ret == false && index.isEmpty() == false) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatIndexNumberError"));
+				return ret;
+			}
 			JOptionPane.showMessageDialog(null, "Greska: neispravan format broja indeksa");
 		}
 		
 		for(Student s: StudentDatabase.getInstance().getStudents()) {
 			if(s.getIndexID().equalsIgnoreCase(index)) {
+				if(MainFrame.languageChanged) {
+					JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatIndexNumberAlreadyExists"));
+					return ret;
+				}
 				JOptionPane.showMessageDialog(null, "Vec postoji student sa tim brojem indeksa!");
 				ret = false;
 			}
@@ -204,6 +266,10 @@ public class ValidationStudent {
 		boolean ret = Pattern.matches(yearEnrRegex, year);
 		
 		if(ret == false && year.isEmpty() == false) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatYearOfEnrollError"));
+				return ret;
+			}
 			JOptionPane.showMessageDialog(null, "Greska: Neispravna godina upisa. Proverite da li ste uneli nedozovoljene karaktere");
 		}
 		

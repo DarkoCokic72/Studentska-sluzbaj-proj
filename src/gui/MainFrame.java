@@ -22,6 +22,7 @@ public class MainFrame extends JFrame {
 	private static MainFrame mf = null;
 	private ResourceBundle resourceBundle;
 	public static boolean languageChanged = false;
+	public static boolean englishLanguage = false;
 	
 	private MainFrame() { 
 			

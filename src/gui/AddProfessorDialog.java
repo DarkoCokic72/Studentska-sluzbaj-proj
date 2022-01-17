@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 
 import javax.swing.Box;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -431,6 +432,10 @@ public class AddProfessorDialog extends JDialog {
 		cityField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("city"));
 		countryField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("country"));
 		
+		if(MainFrame.englishLanguage) {
+			String[] zvanja = {"TEACHING ASSOCIATE", "ASSISTANT", "PROFESSOR", "ASSOCIATE PROFESSOR", "EMERITUS"};
+			zvanjeComboBox.setModel(new DefaultComboBoxModel<String>(zvanja));
+		}
 		
 		confirm.setText(MainFrame.getMainFrame().getResourceBundle().getString("confirmBtn"));
 		cancel.setText(MainFrame.getMainFrame().getResourceBundle().getString("cancelBtn"));

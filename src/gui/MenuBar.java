@@ -136,6 +136,7 @@ public class MenuBar extends JMenuBar{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Locale.setDefault(new Locale("en", "US"));
+				MainFrame.englishLanguage = true;
 				MainFrame.getMainFrame().changeLanguage();
 			}
 		});

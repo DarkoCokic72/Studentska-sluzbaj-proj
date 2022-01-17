@@ -9,6 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.Box;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -423,6 +424,14 @@ public class AddStudentDialog extends JDialog {
 		streetNumberField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("houseNumber"));
 		cityField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("city"));
 		countryField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("country"));
+		
+		if(MainFrame.englishLanguage) {
+			String[] currYears = {"I(first)", "II(second)", "III(third)", "IV(Fourth)"};
+			currYearOfStudiesComboBox.setModel(new DefaultComboBoxModel<String>(currYears));
+			
+			String[] currStatus = {"State-financing", "Self-financing"};
+			currStatusComboBox.setModel(new DefaultComboBoxModel<String>(currStatus));
+		}
 		
 		confirm.setText(MainFrame.getMainFrame().getResourceBundle().getString("confirmBtn"));
 		cancel.setText(MainFrame.getMainFrame().getResourceBundle().getString("cancelBtn"));

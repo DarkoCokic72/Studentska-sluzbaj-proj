@@ -90,7 +90,12 @@ public class Validation {
 	
 	public static boolean checkDate(String date) {
 		
-		String regex = "[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}.";
+		String regex;
+		if(MainFrame.englishLanguage) {
+			regex = "\\w+\\s\\d{1,2},\\s\\d{4}";
+		} else {	
+			regex = "[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}.";
+		}
 		boolean retVal = Pattern.matches(regex, date);
 		
 		if(date.isEmpty()) {
@@ -245,7 +250,7 @@ public class Validation {
 		for (Profesor p : ProfessorDatabase.getDatabase().getProfessors()) {
 			if (Integer.parseInt(number) == p.getPersonalID()) {
 				if(MainFrame.languageChanged) {
-					JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatHouseNumberError"));
+					JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("personalIdAlreadyExists"));
 					
 					return false;
 				}

@@ -11,7 +11,7 @@ public class Profesor extends Person implements Serializable{
 	 */
 	private static final long serialVersionUID = -3466257669472568679L;
 
-	public enum Zvanje{SARADNIK_U_NASTAVI, ASISTENT, DOCENT, REDOVNI_PROFESOR, VANREDNI_PROFESOR, EMERITUS}
+	public static enum Zvanje{SARADNIK_U_NASTAVI, ASISTENT, DOCENT, REDOVNI_PROFESOR, VANREDNI_PROFESOR, EMERITUS}
 	
 	private Address officeAddress;
 	private int personalID;

@@ -9,6 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.Box;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -279,6 +280,10 @@ public class AddSubjectDialog extends JDialog {
     	yearOfStudyLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("yearOfStudy"));
     	espbLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("ESPB"));
     	termLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("subjectTerm"));
+    	if(MainFrame.englishLanguage) {
+    		String[] terms = {"Winter", "Summer"};
+    		termComboBox.setModel(new DefaultComboBoxModel<String>(terms));
+    	}
     		
 		confirm.setText(MainFrame.getMainFrame().getResourceBundle().getString("confirmBtn"));
 		cancel.setText(MainFrame.getMainFrame().getResourceBundle().getString("cancelBtn"));

@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -124,7 +125,7 @@ public class EditSubjectInformationTab extends JPanel {
 		espbField.setText(Integer.toString(subject.getESPB()));
 		espbField.addFocusListener(new EditSubjectListener(3, espbField));
 		
-		String[] terms = {"Zimski", "Letnji"};
+		String[] terms = {"Letnji", "Zimski"};
 		term = new JPanel();
 		termLabel = new JLabel("Semestar*");
 		termComboBox = new JComboBox<String>(terms);
@@ -315,6 +316,11 @@ public class EditSubjectInformationTab extends JPanel {
     	espbLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("ESPB"));
     	termLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("subjectTerm"));
     	professorLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("subjectProfessor"));
+    	if(MainFrame.englishLanguage) {
+    		String[] terms = {"Summer", "Winter"};
+    		termComboBox.setModel(new DefaultComboBoxModel<String>(terms));
+    		termComboBox.setSelectedIndex(subject.getTerm().ordinal());
+    	}
     		
 		confirm.setText(MainFrame.getMainFrame().getResourceBundle().getString("confirmBtn"));
 		cancel.setText(MainFrame.getMainFrame().getResourceBundle().getString("cancelBtn"));

@@ -1,8 +1,8 @@
 package gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -11,10 +11,10 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableRowSorter;
 
+import Model.Student;
 import Model.StudentDatabase;
 
 import javax.swing.RowFilter;
-import javax.swing.Timer;
 
 public class StudentTable extends JTable {
 	private static StudentTable studentTable=null;;
@@ -79,6 +79,26 @@ public class StudentTable extends JTable {
 		studentTable.getColumnModel().getColumn(3).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("yearOfStudy"));
 		studentTable.getColumnModel().getColumn(4).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("status"));
 		studentTable.getColumnModel().getColumn(5).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("avgMark"));
+		
+		ArrayList<Student> studentList = StudentDatabase.getInstance().getStudents();
+ 		for(Student s: studentList) {
+ 			
+ 			DateFormat dateFormat = DateFormat.getDateInstance();
+ 			String dateString = dateFormat.format(s.getDateOfBirth());
+ 			
+ 			Date retDate = null;
+ 			
+ 			try {
+				retDate = dateFormat.parse(dateString);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+ 			
+ 			s.setDateOfBirth(retDate);
+ 			
+ 			
+ 		}		
 		
 		studentTable.updateTable();	
 		

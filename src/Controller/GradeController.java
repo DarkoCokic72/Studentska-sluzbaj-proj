@@ -1,6 +1,5 @@
 package Controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import Model.Grade;
@@ -11,6 +10,7 @@ import gui.EditStudentDialog;
 import gui.GradeAnnulmentDialog;
 import gui.GradeDatabase;
 import gui.GradeEntryDialog;
+import gui.MainFrame;
 import gui.PassedExamsTab;
 import gui.PassedExamsTable;
 import gui.StudentTable;
@@ -36,7 +36,6 @@ public class GradeController {
 		
 		int grade = GradeEntryDialog.getGrade();
 		String dateString = GradeEntryDialog.getDate().getText().trim();
-		
 		if(Validation.checkDate(dateString) == true) {
 			
 			Date date = Converter.convertStringToDate(dateString);
@@ -55,7 +54,12 @@ public class GradeController {
 			//promena proseka za studenta
 			student.setAvgMark();
 			double average = student.getAvgMark();
-			String averageTxt = String.format("Prosečna ocena: %.2f", average);
+			String averageTxt;
+			if(MainFrame.languageChanged) {
+				averageTxt = MainFrame.getMainFrame().getResourceBundle().getString("avgMark") + " : " + String.format("%.2f", average);
+			} else {
+				averageTxt = String.format("Prosečna ocena: %.2f", average);
+			}
 			PassedExamsTab.getAverageLabel().setText(averageTxt);
 			
 			//promena espb bodova koje je student osvojio
@@ -63,7 +67,12 @@ public class GradeController {
 			String ESPBString = textFromESPBLab.replaceAll("[^\\d]", "");
 			int ESPB = Integer.parseInt(ESPBString);
 			ESPB = ESPB + subject.getESPB();
-			String espbTxt = String.format("Ukupno ESPB: %d", ESPB);
+			String espbTxt;
+			if(MainFrame.languageChanged) {
+				espbTxt = MainFrame.getMainFrame().getResourceBundle().getString("totalESPBLabel") + " : " +String.format("%d", ESPB);
+			} else {
+				espbTxt = String.format("Ukupno ESPB: %d", ESPB);
+			}
 			PassedExamsTab.getTotalESPBLabel().setText(espbTxt);
 			
 			//dodavanje studenata u listu studenata koji su polozili predmet
@@ -91,14 +100,24 @@ public class GradeController {
 		
 		student.setAvgMark();
 		double average = student.getAvgMark();
-		String averageTxt = String.format("Prosečna ocena: %.2f", average);
+		String averageTxt;
+		if(MainFrame.languageChanged) {
+			averageTxt = MainFrame.getMainFrame().getResourceBundle().getString("avgMark") + " : " + String.format("%.2f", average);
+		} else {
+			averageTxt = String.format("Prosečna ocena: %.2f", average);
+		}
 		PassedExamsTab.getAverageLabel().setText(averageTxt);
 		
 		String textFromESPBLab = PassedExamsTab.getTotalESPBLabel().getText().trim();
 		String ESPBString = textFromESPBLab.replaceAll("[^\\d]", "");
 		int ESPB = Integer.parseInt(ESPBString);
 		ESPB = ESPB - subject.getESPB();
-		String espbTxt = String.format("Ukupno ESPB: %d", ESPB);
+		String espbTxt;
+		if(MainFrame.languageChanged) {
+			espbTxt = MainFrame.getMainFrame().getResourceBundle().getString("totalESPBLabel") + " : " +String.format("%d", ESPB);
+		} else {
+			espbTxt = String.format("Ukupno ESPB: %d", ESPB);
+		}
 		PassedExamsTab.getTotalESPBLabel().setText(espbTxt);
 		
 		subject.getStudentWhoPassed().remove(student);

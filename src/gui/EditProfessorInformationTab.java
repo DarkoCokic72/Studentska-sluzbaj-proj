@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -137,7 +138,12 @@ public class EditProfessorInformationTab extends JPanel {
 		dateOfBirth.add(dateOfBirthField);
 		northPanel.add(dateOfBirth);
 		
-		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy.");
+		DateFormat dateFormat;
+		if(MainFrame.languageChanged) {
+			dateFormat = DateFormat.getDateInstance();
+		} else {
+			dateFormat = new SimpleDateFormat("dd.MM.yyyy.");
+		}
 		dateOfBirthField.setText(dateFormat.format(professor.getDateOfBirth()));
 		dateOfBirthField.addFocusListener(new EditProfessorListener(dateOfBirthField, 2));
 		
@@ -419,6 +425,7 @@ public class EditProfessorInformationTab extends JPanel {
 		return zvanje;
     }
     
+    
     public static JTextField getYearsOfExpirienceField() {
     	return yearsOfExperienceField;
     }
@@ -460,6 +467,12 @@ public class EditProfessorInformationTab extends JPanel {
 		streetNumberField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("houseNumber"));
 		cityField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("city"));
 		countryField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("country"));
+		
+		if(MainFrame.englishLanguage) {
+			String[] zvanja = {"TEACHING ASSOCIATE", "ASSISTANT", "DOCENT", "PROFESSOR", "ASSOCIATE PROFESSOR", "EMERITUS"};
+			zvanjeComboBox.setModel(new DefaultComboBoxModel<String>(zvanja));
+			zvanjeComboBox.setSelectedIndex(professor.getZvanje().ordinal());
+		}
 		
 		
 		confirm.setText(MainFrame.getMainFrame().getResourceBundle().getString("confirmBtn"));

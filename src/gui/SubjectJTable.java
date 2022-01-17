@@ -9,6 +9,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
+
 public class SubjectJTable extends JTable {
 
 	 private SubjectAbstractTable subjectTableModel; 
@@ -108,6 +109,7 @@ public class SubjectJTable extends JTable {
  		subjectTable.getColumnModel().getColumn(2).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("ESPB"));
 		subjectTable.getColumnModel().getColumn(3).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("subjectYear"));
 		subjectTable.getColumnModel().getColumn(4).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("subjectTerm"));
+		
  		
  		subjectTable.updateTable();	
  		

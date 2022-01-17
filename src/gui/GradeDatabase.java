@@ -68,7 +68,12 @@ public class GradeDatabase {
 	}
 
 	private String dateFormat(Date date) {
-		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy.");
+		DateFormat dateFormat;
+		if(MainFrame.languageChanged) {
+			dateFormat = DateFormat.getDateInstance();
+		} else {
+			dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+		}
 		return dateFormat.format(date);
 	}
 	

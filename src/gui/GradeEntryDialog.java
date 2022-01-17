@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 
 import javax.swing.Box;
@@ -13,7 +15,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -23,32 +24,28 @@ import Listeners.GradeEntryListener;
 
 public class GradeEntryDialog extends JDialog{
 	
+	private static GradeEntryDialog gradeEntryDialog = null;
+	
 	private JPanel subjectCode;
 	private static JTextField subjectCodeField;
-	private JLabel subjectCodeLab;
+	private static JLabel subjectCodeLab;
 	
 	private JPanel subjectName;
 	private static JTextField subjectNameField;
-	private JLabel subjectNameLab;
+	private static JLabel subjectNameLab;
 	
 	private JPanel grade;
 	private static JComboBox<String> gradeComboBox;
-	private JLabel gradeLab;
+	private static JLabel gradeLab;
 	
 	private JPanel date;
 	private static JTextField dateField;
-	private JLabel dateLab;
+	private static JLabel dateLab;
 	
 	private static JButton confirm;
-	private JButton cancel;
+	private static JButton cancel;
 	
 	public GradeEntryDialog() {
-		
-		int selectedRow = UnpassedExamsTable.getTable().convertRowIndexToModel(UnpassedExamsTable.getTable().getSelectedRow());
-		if(selectedRow == -1) {
-			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi predmet za koji želite da unesete ocenu");
-			return;
-		}
 		
 		JPanel northPanel = new JPanel();
 		JPanel southPanel = new JPanel();
@@ -125,6 +122,7 @@ public class GradeEntryDialog extends JDialog{
 						Validation.textFieldFilledGradeEntry = false;
 						dispose();
 						GradeController.gradeEntried = false;
+						gradeEntryDialog = null;
 					}
 
 			}
@@ -143,12 +141,21 @@ public class GradeEntryDialog extends JDialog{
 		    	
 		    	Validation.textFieldFilledGradeEntry = false;
 				dispose();
+				gradeEntryDialog = null;
 			}
 
 		});
 		
 		add(northPanel,BorderLayout.CENTER);
 		add(southPanel, BorderLayout.SOUTH);
+		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				gradeEntryDialog = null;
+			}
+		});
 		
 		revalidate(); 
 		repaint();
@@ -199,6 +206,32 @@ public class GradeEntryDialog extends JDialog{
     public static JButton getConfirm() {
     	return confirm;
     }
+    
+    public static GradeEntryDialog getGradeEntryDialog() {
+		
+		if (gradeEntryDialog == null) {
+			gradeEntryDialog = new GradeEntryDialog();
+		}
+		
+		if(MainFrame.languageChanged == true) {
+			initComponents();;
+		}
+		
+		return gradeEntryDialog;
+	}
+	
+    public static void initComponents() {
+		
+    	gradeEntryDialog.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("gradeEntryDialogTitle"));
+    	subjectCodeLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("subjectCode"));
+    	subjectNameLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("subjectName"));
+    	gradeLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("grade"));
+    	dateLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("date"));
+    	
+		confirm.setText(MainFrame.getMainFrame().getResourceBundle().getString("confirmBtn"));
+		cancel.setText(MainFrame.getMainFrame().getResourceBundle().getString("cancelBtn"));
+		
+	}
     
 	
 }

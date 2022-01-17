@@ -9,6 +9,7 @@ import Model.Subject;
 import Model.SubjectDatabase;
 import gui.AddSubjectDialog;
 import gui.EditSubjectInformationTab;
+import gui.MainFrame;
 
 
 
@@ -27,6 +28,10 @@ public class ValidationSubject {
 		boolean ret = Pattern.matches(nameRegex, name);
 		
 		if(ret == false && !name.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatSubjectNameError"));
+				return ret;
+			}
 			JOptionPane.showMessageDialog(null, "Pogresan format imena predmeta!");
 		}
 		
@@ -40,11 +45,19 @@ public class ValidationSubject {
 		// matches: E231, RI43A
 		boolean ret = Pattern.matches(codeRegex, code);
 		
-		if(ret == false && !code.isEmpty())
+		if(ret == false && !code.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatSubjectCodeError"));
+				return ret;
+			}
 			JOptionPane.showMessageDialog(null, "Pogresan format sifre predmeta!");
-		
+		}
 		for(Subject s: SubjectDatabase.getDatabase().getSubjects()) {
 			if(s.getSubjectCode().equalsIgnoreCase(code)) {
+				if(MainFrame.languageChanged) {
+					JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("subjectCodeAlreadyExists"));
+					return ret;
+				}
 				JOptionPane.showMessageDialog(null, "Greska! Vec postoji predmet sa tom sifrom!");
 				ret = false;
 			}
@@ -58,8 +71,13 @@ public class ValidationSubject {
 		String yearRegex = "[1-4]";
 		boolean ret = Pattern.matches(yearRegex, year);
 		
-		if(ret == false && !year.isEmpty())
+		if(ret == false && !year.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatYearOfStudyError"));
+				return ret;
+			}
 			JOptionPane.showMessageDialog(null, "Pogresan format godine u kojoj se izvodi predmet!");
+		}
 		
 		return ret;
 	} 
@@ -67,9 +85,13 @@ public class ValidationSubject {
 	public static boolean checkESPB(String espb) {
 		String espbRegex = "[2-9]";
 		boolean ret = Pattern.matches(espbRegex, espb);
-		if(ret == false && !espb.isEmpty())
+		if(ret == false && !espb.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatESPBError"));
+				return ret;
+			}
 			JOptionPane.showMessageDialog(null, "Pogresan format ESPB bodova!");
-		
+		}
 		return ret;
 	}
 	
