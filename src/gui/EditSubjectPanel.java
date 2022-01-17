@@ -12,7 +12,7 @@ public class EditSubjectPanel extends JTabbedPane {
 		JPanel info = new JPanel();
 		addTab("Informacije", info);
 		info.setLayout(new BorderLayout());
-		info.add(new EditSubjectInformationTab());
+		info.add(EditSubjectInformationTab.getEditSubjectInformationTab());
 	}
 	
 	public static EditSubjectPanel getInstance() {

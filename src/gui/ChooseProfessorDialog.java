@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -25,13 +27,15 @@ import Model.ProfessorDatabase;
 
 public class ChooseProfessorDialog extends JDialog{
 	
+	private static ChooseProfessorDialog chooseProfessorDialog = null;
+	
 	private JList<String> list;
 	private DefaultListModel<String> listModel;
 	private JScrollPane scrollPane;
 	private JPanel south;
 	
-	private JButton confirm;
-	private JButton cancel;
+	private static JButton confirm;
+	private static JButton cancel;
 	
 	public ChooseProfessorDialog() {
 		
@@ -86,6 +90,7 @@ public class ChooseProfessorDialog extends JDialog{
 					EditSubjectInformationTab.getMinus().setEnabled(true);
 					EditSubjectInformationTab.getConfirm().setEnabled(true);
 					dispose();
+					chooseProfessorDialog = null;
 				}
 			}
 
@@ -99,6 +104,7 @@ public class ChooseProfessorDialog extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				
 				dispose();
+				chooseProfessorDialog = null;
 				
 			}
 
@@ -111,8 +117,40 @@ public class ChooseProfessorDialog extends JDialog{
 		add(scrollPane, BorderLayout.CENTER);
 		add(south, BorderLayout.SOUTH);
 		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				chooseProfessorDialog = null;
+			}
+		});
+		
 		revalidate();
 		repaint();
 	}
+	
+	public static ChooseProfessorDialog getChooseProfessorDialog() {
+		
+		if (chooseProfessorDialog == null) {
+			chooseProfessorDialog = new ChooseProfessorDialog();
+		}
+		
+		if(MainFrame.languageChanged == true) {
+			initComponents();;
+		}
+		
+		return chooseProfessorDialog;
+	}
+	
+    
+    public static void initComponents() {
+		
+    	chooseProfessorDialog.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("chooseProfessorDialogTitle"));
+    	
+    	confirm.setText(MainFrame.getMainFrame().getResourceBundle().getString("confirmBtn"));
+		cancel.setText(MainFrame.getMainFrame().getResourceBundle().getString("cancelBtn"));
+		
+	}
+    
 	
 }

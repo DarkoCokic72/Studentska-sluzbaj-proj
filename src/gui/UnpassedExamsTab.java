@@ -11,13 +11,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import Controller.MainController;
 
 public class UnpassedExamsTab extends JPanel{
 	
-	private JButton btnDelete;
-	private JButton btnAdd;
-	private JButton btnPassExam;
+	private static UnpassedExamsTab unpassedExamsTab = null;
+	
+	private static JButton btnDelete;
+	private static JButton btnAdd;
+	private static JButton btnPassExam;
 	
 	
 	public UnpassedExamsTab() {
@@ -41,7 +42,7 @@ public class UnpassedExamsTab extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				AddSubjectToStudent addSubjectToStudent = new AddSubjectToStudent(EditStudentInformationTab.getStudent().getIndexID());
+				AddSubjectToStudent addSubjectToStudent = AddSubjectToStudent.getAddSubjectToStudentDialog(EditStudentInformationTab.getStudent().getIndexID());
 				addSubjectToStudent.setLocationRelativeTo(MainFrame.getMainFrame());
 				addSubjectToStudent.setVisible(true);
 			}
@@ -66,10 +67,14 @@ public class UnpassedExamsTab extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(UnpassedExamsTable.getTable().getSelectedRow() == -1) {
+					if(MainFrame.languageChanged) {
+						JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));
+						return;
+					}
 					JOptionPane.showMessageDialog(null, "Označite predmet u tabeli koji želite da obrišete");
 				} else {
 				
-					RemoveSubjectFromStudent removeSubjectFromStudent = new RemoveSubjectFromStudent(EditStudentDialog.getEditStudentDialog());
+					RemoveSubjectFromStudent removeSubjectFromStudent = RemoveSubjectFromStudent.getRemoveSubjectFromStudentDialog(EditStudentDialog.getEditStudentDialog());
 					removeSubjectFromStudent.setLocationRelativeTo(MainFrame.getMainFrame());
 					removeSubjectFromStudent.setVisible(true);
 				}
@@ -118,6 +123,28 @@ public class UnpassedExamsTab extends JPanel{
 		add(northPanel, BorderLayout.NORTH);
 		add(scrollPane, BorderLayout.CENTER);
 			
+		
+	}
+	
+	public static UnpassedExamsTab getUnpassedExamsTab() {
+		if(unpassedExamsTab == null) {
+			unpassedExamsTab = new UnpassedExamsTab();
+		}
+		
+		if(MainFrame.languageChanged == true) {
+			initComponents();
+		}
+		
+		return unpassedExamsTab;
+	}
+	
+	public static void initComponents() {
+		
+		btnDelete.setText(MainFrame.getMainFrame().getResourceBundle().getString("deleteBtn"));
+		btnAdd.setText(MainFrame.getMainFrame().getResourceBundle().getString("addBtn"));
+		btnPassExam.setText(MainFrame.getMainFrame().getResourceBundle().getString("passExamBtn"));
+		
+		UnpassedExamsTable.initComponents();
 		
 	}
 

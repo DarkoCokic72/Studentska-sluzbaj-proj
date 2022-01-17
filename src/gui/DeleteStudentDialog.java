@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -12,7 +14,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Controller.StudentController;
@@ -20,6 +21,9 @@ import Model.Student;
 import Model.StudentDatabase;
 
 public class DeleteStudentDialog extends JDialog {
+	
+	private static DeleteStudentDialog deleteStudentDialog = null;
+	
 	private JPanel northPanel;
 	private JPanel southPanel;
 	
@@ -29,14 +33,6 @@ public class DeleteStudentDialog extends JDialog {
 	
 	public DeleteStudentDialog() {
 		int selectedRow = StudentTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow());
-		if(selectedRow == -1) {
-			if(MainFrame.languageChanged) {
-				JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));
-				return;
-			}
-			JOptionPane.showMessageDialog(null, "Selektujte vrstu koju zelite da izbrisete");
-			return;
-		}
 		
 		northPanel = new JPanel();
 		southPanel = new JPanel();
@@ -69,6 +65,7 @@ public class DeleteStudentDialog extends JDialog {
 				StudentController controler = StudentController.getStudentConstroler();
 				controler.delete(student);
 				dispose();
+				deleteStudentDialog = null;
 			}
 		});
 		
@@ -84,6 +81,7 @@ public class DeleteStudentDialog extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				dispose();
+				deleteStudentDialog = null;
 			}
 		});
 
@@ -92,7 +90,38 @@ public class DeleteStudentDialog extends JDialog {
 		southPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		add(southPanel, BorderLayout.SOUTH);
 		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				deleteStudentDialog = null;
+			}
+		});
+		
 		revalidate();
 		repaint();
+	}
+	
+	public static DeleteStudentDialog getDeleteStudentDialog() {
+		
+		if (deleteStudentDialog == null) {
+			deleteStudentDialog = new DeleteStudentDialog();
+		}
+		
+		if(MainFrame.languageChanged == true) {
+			initComponents();;
+		}
+		
+		return deleteStudentDialog;
+	}
+	
+	 public static void initComponents() {
+	    	
+		deleteStudentDialog.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("deleteStudentDialogTitle"));
+		areYouSureLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("areYouSureLabStudent"));
+			
+		yes.setText(MainFrame.getMainFrame().getResourceBundle().getString("yesBtn"));
+		no.setText(MainFrame.getMainFrame().getResourceBundle().getString("noBtn"));
+
 	}
 }

@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 
 import javax.swing.BorderFactory;
@@ -18,6 +20,8 @@ import javax.swing.JPanel;
 import Controller.SubjectController;
 
 public class RemoveProfessorFromSubjectDialog extends JDialog{
+	
+	private static RemoveProfessorFromSubjectDialog removeProfessorDialog = null;
 	
 	JPanel northPanel;
 	JPanel southPanel;
@@ -64,6 +68,7 @@ public class RemoveProfessorFromSubjectDialog extends JDialog{
 					EditSubjectInformationTab.getMinus().setEnabled(false);
 					EditSubjectInformationTab.getConfirm().setEnabled(true);
 					dispose();
+					removeProfessorDialog = null;
 				}
 				
 			}
@@ -82,9 +87,10 @@ public class RemoveProfessorFromSubjectDialog extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				
 				dispose();
+				removeProfessorDialog = null;
 				
 			}
-	
+			
 		});
 		
 		northPanel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
@@ -92,8 +98,39 @@ public class RemoveProfessorFromSubjectDialog extends JDialog{
 		southPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		add(southPanel, BorderLayout.SOUTH);
 		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				removeProfessorDialog = null;
+			}
+		});
+		
 		revalidate(); 
 		repaint();
+	}
+	
+	public static RemoveProfessorFromSubjectDialog getRemoveProfessorDialog() {
+		
+		if (removeProfessorDialog == null) {
+			removeProfessorDialog = new RemoveProfessorFromSubjectDialog();
+		}
+		
+		if(MainFrame.languageChanged == true) {
+			initComponents();;
+		}
+		
+		return removeProfessorDialog;
+	}
+	
+	public static void initComponents() {
+		
+    	removeProfessorDialog.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("removeProfessorFromSubjectDialogTitle"));
+    	areYouSureLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("areYouSureLab"));
+    	
+    	yes.setText(MainFrame.getMainFrame().getResourceBundle().getString("confirmBtn"));
+		no.setText(MainFrame.getMainFrame().getResourceBundle().getString("cancelBtn"));
+		
 	}
 
 }
