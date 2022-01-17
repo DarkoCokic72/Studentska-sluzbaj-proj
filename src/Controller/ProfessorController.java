@@ -165,6 +165,14 @@ public class ProfessorController {
 	    }
 	        
 			
+		public void removeSubject(int id) {
+			int row = ProfessorJTable.getTable().convertRowIndexToModel(ProfessorJTable.getTable().getSelectedRow());
+			Profesor prof = ProfessorDatabase.getDatabase().getByPersonalID(id);
+			prof.getSubjectsTeaches().get(row).setSubjectProfessor(null);
+			prof.getSubjectsTeaches().remove(row);
 			
+			ProfessorJTable.getTable().updateTable();
+			
+		}	
 	
 }

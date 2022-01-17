@@ -90,6 +90,23 @@ public class SubjectDatabase {
 	public void setSubjects(ArrayList<Subject> subjects) {
 		this.subjects = subjects;
 	}
+	
+	public String getProfValueAt(int row, int column, int IDNum) {
+		Subject s = ProfessorDatabase.getDatabase().getByPersonalID(IDNum).getSubjectsTeaches().get(row);
+		
+		switch(column) {
+		case 0:
+			return s.getSubjectCode();
+		case 1:
+			return s.getSubjectName();
+		case 2:
+			return s.getYearOfStudy().toString();
+		case 3:
+			return s.getTerm().name();
+		default:
+			return null;
+		}
+	}
 
 	
 }

@@ -19,6 +19,7 @@ public class EditProfessorPanel extends JTabbedPane {
 		JPanel subjects = new JPanel();
 		addTab("Predmeti", subjects);
 		subjects.setLayout(new BorderLayout());
+		subjects.add(ProfesorSubjectsPanel.getInstance());
 				
 	}
 	

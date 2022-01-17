@@ -1,6 +1,10 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import gui.AddSubjectToProfessorTable;
+import gui.ProfessorJTable;
 
 public class ProfessorDatabase {
 	
@@ -83,5 +87,45 @@ public class ProfessorDatabase {
 		this.professors = professors;
 	}
 	
+	public List<Subject> getDoesNotTeachSubjects(){
+		ArrayList<Subject> subjects = new ArrayList<Subject>(SubjectDatabase.getDatabase().getSubjects());
+		for(Profesor p: professors) {
+			for(Subject s: p.getSubjectsTeaches()) {
+				if(subjects.contains(s)) {
+					subjects.remove(s);
+				}
+			}
+		}
+		
+		return subjects;
+	}
+	
+	public Profesor getByPersonalID(int id) {
+		for(Profesor p: professors) {
+			if(p.getPersonalID() == id) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
+	public void addSubject() {
+		int row  = ProfessorJTable.getTable().convertRowIndexToModel(ProfessorJTable.getTable().getSelectedRow());
+		Profesor p = ProfessorDatabase.getDatabase().getProfessorFromRow(row);
+		
+		int id = p.getPersonalID();
+		Subject s = getDoesNotTeachSubjects().get(AddSubjectToProfessorTable.getInstance().getSelectedRow());
+		
+		for(Profesor prof: professors) {
+			if(prof.getPersonalID() == id) {
+				if(!prof.getSubjectsTeaches().contains(s)) {
+					prof.getSubjectsTeaches().add(s);
+				}
+				
+				s.setSubjectProfessor(prof);
+				return;
+			}
+		}
+	}
 
 }
