@@ -28,7 +28,22 @@ public class ProffesorTeachesSubjectTable extends JTable{
 		if(teachesInstance == null)
 			teachesInstance = new ProffesorTeachesSubjectTable();
 		
+		if(MainFrame.languageChanged) {
+			initComponents();
+		}
+		
 		return teachesInstance;
 	}
+	
+	 public static void initComponents() {
+	 		
+	 		teachesInstance.getColumnModel().getColumn(0).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("subjectCode"));
+	 		teachesInstance.getColumnModel().getColumn(1).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("subjectName"));
+			teachesInstance.getColumnModel().getColumn(2).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("subjectYear"));
+			teachesInstance.getColumnModel().getColumn(3).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("subjectTerm"));
+			 		
+	 		teachesInstance.updateTable();	
+	 		
+	 	}
 
 }

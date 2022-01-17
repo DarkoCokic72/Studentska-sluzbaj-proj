@@ -16,25 +16,31 @@ import Controller.MainController;
 
 public class MyToolBar extends JToolBar {
 	
+	private static JButton btnCreate;
+	private static JButton btnDelete;
+	private static JButton btnEdit;
+	private static JButton btnSearch;
+	private static JTextField textField;
+	
 	public MyToolBar() {
 		
 		super(SwingConstants.HORIZONTAL);
 		
-		JButton btnCreate = new JButton();
+		btnCreate = new JButton();
 		btnCreate.setToolTipText("Create entity");
 		btnCreate.setIcon(new ImageIcon("images" + File.separator + "Plus-icon.png"));
 		add(btnCreate);
 
 		addSeparator();
 
-		JButton btnEdit = new JButton();
+		btnEdit = new JButton();
 		btnEdit.setToolTipText("Edit entity");
 		btnEdit.setIcon(new ImageIcon("images" + File.separator +"Pen-5-icon.png"));
 		add(btnEdit);
 
 		addSeparator();
 		
-		JButton btnDelete = new JButton();
+		btnDelete = new JButton();
 		btnDelete.setToolTipText("Delete entity");
 		btnDelete.setIcon(new ImageIcon("images" + File.separator + "Recycle-Bin-icon.png"));
 		add(btnDelete);
@@ -43,7 +49,7 @@ public class MyToolBar extends JToolBar {
 		
 		Dimension dim = new Dimension(150,20);
 		
-		JTextField textField = new JTextField();
+		textField = new JTextField();
 		textField.setPreferredSize(dim);
 		textField.setMaximumSize(textField.getPreferredSize());
 		textField.setToolTipText("Type entity");
@@ -51,7 +57,7 @@ public class MyToolBar extends JToolBar {
 		
 		addSeparator();
 		
-		JButton btnSearch = new JButton();
+		btnSearch = new JButton();
 		btnSearch.setToolTipText("Search entity");
 		btnSearch.setIcon(new ImageIcon("images" + File.separator +"search-icon.png"));
 		add(btnSearch);
@@ -171,8 +177,11 @@ public class MyToolBar extends JToolBar {
 	}
 	
 	 public static void initComponents() {
-			
-		
-		}
+		btnCreate.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("btnCreateText"));
+		btnEdit.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("btnEditText"));
+		btnDelete.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("btnDeleteText"));
+		btnSearch.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("btnSearchText"));
+		textField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("btnSearchText"));
+	 }
 
 }

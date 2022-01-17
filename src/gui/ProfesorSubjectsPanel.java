@@ -17,7 +17,7 @@ import javax.swing.JScrollPane;
 public class ProfesorSubjectsPanel extends JPanel {
 	
 	private static JButton removeBtn;
-	private JButton addBtn;
+	private static JButton addBtn;
 	private static ProfesorSubjectsPanel profsubjInstance = null;
 	
 	public ProfesorSubjectsPanel() {
@@ -95,7 +95,18 @@ public class ProfesorSubjectsPanel extends JPanel {
 		if(profsubjInstance == null)
 			profsubjInstance = new ProfesorSubjectsPanel();
 		
+		if(MainFrame.languageChanged) {
+			initComponents();
+		}
+		
 		return profsubjInstance;
 	}
+	
+	 public static void initComponents() {
+	 		
+		 removeBtn.setText(MainFrame.getMainFrame().getResourceBundle().getString("removeSubjectBtn"));
+		 addBtn.setText(MainFrame.getMainFrame().getResourceBundle().getString("addSubjectBtn"));
+	 		
+	 }
 
 }
