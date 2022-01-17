@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -22,31 +24,34 @@ import Model.Subject;
 import Model.Subject.Term;
 
 public class AddSubjectDialog extends JDialog {
+	
+	private static AddSubjectDialog addSubjectDialog = null;
+	
 	private JPanel northPanel;
 	private JPanel southPanel;
 	
 	private JPanel code;
 	private static JTextField codeField;
-	private JLabel codeLabel;
+	private static JLabel codeLabel;
 	
 	private JPanel name;
 	private static JTextField nameField;
-	private JLabel nameLabel;
+	private static JLabel nameLabel;
 	
 	private JPanel yearOfStudy;
 	private static JTextField yearOfStudyField;
-	private JLabel yearOfStudyLabel;
+	private static JLabel yearOfStudyLabel;
 	
 	private JPanel espb;
 	private static JTextField espbField;
-	private JLabel espbLabel;
+	private static JLabel espbLabel;
 	
 	private JPanel term;
 	private static JComboBox<String> termComboBox;
-	private JLabel termLabel;
+	private static JLabel termLabel;
 	
 	private static JButton confirm;
-	private JButton cancel;
+	private static JButton cancel;
 	
 	public AddSubjectDialog() {
 		northPanel = new JPanel();
@@ -131,6 +136,7 @@ public class AddSubjectDialog extends JDialog {
 					ValidationSubject.resetFields();
 					dispose();
 					subjController.subjectAdded = false;
+					addSubjectDialog = null;
 				}
 				
 			}
@@ -149,12 +155,22 @@ public class AddSubjectDialog extends JDialog {
 				// TODO Auto-generated method stub
 				ValidationSubject.resetFields();
 				dispose();
+				addSubjectDialog = null;
 				
 			}
 		});
 		
 		add(northPanel, BorderLayout.CENTER);
 		add(southPanel, BorderLayout.SOUTH);
+		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				addSubjectDialog = null;
+			}
+		});
+		
 		
 		revalidate();
 		repaint();
@@ -240,6 +256,33 @@ public class AddSubjectDialog extends JDialog {
 			break;
 		}
 		return term;
+	}
+	
+	public static AddSubjectDialog getAddSubjectDialog() {
+		
+		if (addSubjectDialog == null) {
+			addSubjectDialog = new AddSubjectDialog();
+		}
+		
+		if(MainFrame.languageChanged == true) {
+			initComponents();;
+		}
+		
+		return addSubjectDialog;
+	}
+	
+	public static void initComponents() {
+		
+    	addSubjectDialog.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("addSubjectDialogTitle"));
+    	codeLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("subjectCode"));
+    	nameLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("subjectName"));
+    	yearOfStudyLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("yearOfStudy"));
+    	espbLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("ESPB"));
+    	termLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("subjectTerm"));
+    		
+		confirm.setText(MainFrame.getMainFrame().getResourceBundle().getString("confirmBtn"));
+		cancel.setText(MainFrame.getMainFrame().getResourceBundle().getString("cancelBtn"));
+
 	}
 	
 }

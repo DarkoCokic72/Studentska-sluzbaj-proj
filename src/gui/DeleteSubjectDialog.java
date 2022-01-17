@@ -32,6 +32,10 @@ public class DeleteSubjectDialog extends JDialog {
 		
 		int selectedRow = SubjectJTable.getTable().getSelectedRow();
 		if(selectedRow == -1) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));
+				return;
+			}
 			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi predmet kog zelite da obrišete");
 			return;
 		}
@@ -50,7 +54,7 @@ public class DeleteSubjectDialog extends JDialog {
 		setResizable(false);
 		
 		areYouSureLab = new JLabel();
-		areYouSureLab.setText("Da li ste sigurni da �elite da obri�ete profesora?");
+		areYouSureLab.setText("Da li ste sigurni da želite da obrišete predmet?");
 		northPanel.add(areYouSureLab);
 		
 		yes = new JButton("DA");

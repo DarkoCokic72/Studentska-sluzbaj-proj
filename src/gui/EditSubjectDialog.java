@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -17,10 +18,6 @@ public class EditSubjectDialog extends JDialog {
 	
 	public EditSubjectDialog() {
 		selectedRow = SubjectJTable.getTable().getSelectedRow();
-		if(selectedRow == -1) {
-			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi predmet koji želite da izmenite");
-			return;
-		}
 		
 		setVisible(true);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -62,6 +59,14 @@ public class EditSubjectDialog extends JDialog {
 			public void windowActivated(WindowEvent e) {}
 		});
 		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				editSubjectDialog = null;
+			}
+		});
+		
 		revalidate();
 		repaint();
 	}
@@ -69,6 +74,10 @@ public class EditSubjectDialog extends JDialog {
 	public static EditSubjectDialog getInstance() {
 		if(editSubjectDialog == null)
 			editSubjectDialog = new EditSubjectDialog();
+		
+		if(MainFrame.languageChanged == true) {
+			initComponents();
+		}
 		
 		return editSubjectDialog;
 	}
@@ -78,6 +87,14 @@ public class EditSubjectDialog extends JDialog {
 	}
 
 	public static EditSubjectDialog getEditSubjectDialog() {
+		if (editSubjectDialog == null) {
+			editSubjectDialog = new EditSubjectDialog();
+		}
+		
+		if(MainFrame.languageChanged == true) {
+			initComponents();
+		}
+		
 		return editSubjectDialog;
 	}
 
@@ -85,5 +102,8 @@ public class EditSubjectDialog extends JDialog {
 		EditSubjectDialog.editSubjectDialog = editSubjectDialog;
 	}
 	
-	
+	public static void initComponents() {
+		
+		editSubjectDialog.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("editSubjectDialogTitle"));
+	}
 }

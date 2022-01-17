@@ -19,6 +19,10 @@ public class EditStudentDialog extends JDialog{
 	public EditStudentDialog() {
 		selectedRow = StudentTable.getTable().getSelectedRow();
 		if(selectedRow == -1) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));
+				return;
+			}
 			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi student kog želite da izmenite.");
 			return;
 		}
@@ -84,6 +88,7 @@ public class EditStudentDialog extends JDialog{
 	public static void deleteEditStudentDialog() {
 		editStudentDialog = null;
 	}
+	
 	
 	
 }

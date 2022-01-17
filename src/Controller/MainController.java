@@ -1,5 +1,6 @@
 package Controller;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import gui.AddProfessorDialog;
@@ -25,7 +26,7 @@ public class MainController {
 		switch(centralPanel.getSelectedIndex()) {
 		
 		case 0:
-			AddStudentDialog addStudentDialog = new AddStudentDialog();
+			AddStudentDialog addStudentDialog = AddStudentDialog.getAddStudentDialog();
 			addStudentDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 			break;
 		case 1:
@@ -33,7 +34,7 @@ public class MainController {
 			addProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 			break;
 		case 2:
-			AddSubjectDialog addSubjectDialog = new AddSubjectDialog();
+			AddSubjectDialog addSubjectDialog = AddSubjectDialog.getAddSubjectDialog();
 			addSubjectDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 		    break;
 
@@ -51,17 +52,39 @@ public class MainController {
 			EditStudentDialog.setEditStudentDialog(editStudentDialog);
 			break;
 		case 1:
-			EditProfessorDialog editProfessorDialog = new EditProfessorDialog();
+			
+			int selectedRow = ProfessorJTable.getTable().getSelectedRow();
+			if(selectedRow == -1) {
+				
+				if(MainFrame.languageChanged) {
+					JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));
+					return;
+				}
+				
+				JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi profesor kog želite da izmenite");
+				return;
+			} else {
+			EditProfessorDialog editProfessorDialog = EditProfessorDialog.getEditProfessorDialog();
 			editProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());
-			EditProfessorDialog.setDialog(editProfessorDialog);
+			}
 			break;
+			
 		case 2:
-			//EditSubjectDialog
-			EditSubjectDialog editSubjectDialog = new EditSubjectDialog();
+			
+			selectedRow = SubjectJTable.getTable().getSelectedRow();
+			if(selectedRow == -1) {
+				if(MainFrame.languageChanged) {
+					JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));
+					return;
+				}
+				JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi predmet koji želite da izmenite");
+				return;
+			} else {
+			
+			EditSubjectDialog editSubjectDialog = EditSubjectDialog.getEditSubjectDialog();
 			editSubjectDialog.setLocationRelativeTo(MainFrame.getMainFrame());
-			EditSubjectDialog.setEditSubjectDialog(editSubjectDialog);
 		    break;
-
+			}
 		}
 		
 	}
@@ -76,8 +99,18 @@ public class MainController {
 			deleteStudDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 			break;
 		case 1:
-			DeleteProfessorDialog deleteProfessorDialog = new DeleteProfessorDialog();
+			int selectedRow = ProfessorJTable.getTable().getSelectedRow();
+			if(selectedRow == -1) {
+				if(MainFrame.languageChanged) {
+					JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));
+					return;
+				}
+				JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi profesor kog želite da obrišete");
+				return;
+			} else {
+			DeleteProfessorDialog deleteProfessorDialog =  DeleteProfessorDialog.getDeleteProfessorDialog();
 			deleteProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());
+			}
 			break;
 		case 2:
 			DeleteSubjectDialog deleteSubjectDialog = new DeleteSubjectDialog();

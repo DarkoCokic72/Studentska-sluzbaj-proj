@@ -247,6 +247,7 @@ public class AddProfessorDialog extends JDialog {
 						Validation.resetFieldsProfessor();
 					    dispose();
 					    professorContr.professorAdded = false;
+					    addProfessorDialog = null;
 					}
 
 			}
@@ -266,6 +267,7 @@ public class AddProfessorDialog extends JDialog {
 		    	
 		    	Validation.resetFieldsProfessor();
 				dispose();
+				addProfessorDialog = null;
 			}
 
 		});
@@ -423,6 +425,12 @@ public class AddProfessorDialog extends JDialog {
 		personalIdLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("personalId"));
 		zvanjeLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("professorTitle"));
 		yearsOfExperienceLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("yearsOfExperience"));
+		
+		streetField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("street"));
+		streetNumberField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("houseNumber"));
+		cityField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("city"));
+		countryField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("country"));
+		
 		
 		confirm.setText(MainFrame.getMainFrame().getResourceBundle().getString("confirmBtn"));
 		cancel.setText(MainFrame.getMainFrame().getResourceBundle().getString("cancelBtn"));

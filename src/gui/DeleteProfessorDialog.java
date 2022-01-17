@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 
 import javax.swing.BorderFactory;
@@ -13,7 +15,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Controller.ProfessorController;
@@ -21,6 +22,8 @@ import Model.Profesor;
 import Model.ProfessorDatabase;
 
 public class DeleteProfessorDialog extends JDialog {
+	
+	private static DeleteProfessorDialog deleteProfessorDialog = null;
 	
 	JPanel northPanel;
 	JPanel southPanel;
@@ -31,10 +34,6 @@ public class DeleteProfessorDialog extends JDialog {
 	public DeleteProfessorDialog() {
 		
 		int selectedRow = ProfessorJTable.getTable().getSelectedRow();
-		if(selectedRow == -1) {
-			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi profesor kog želite da obrišete");
-			return;
-		}
 		
 		northPanel = new JPanel();
 		southPanel = new JPanel();
@@ -66,6 +65,7 @@ public class DeleteProfessorDialog extends JDialog {
 				ProfessorController professorContr = ProfessorController.getProfessorController();
 				professorContr.delete(professor);
 				dispose();
+				deleteProfessorDialog = null;
 				
 			}
 
@@ -83,6 +83,7 @@ public class DeleteProfessorDialog extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				
 				dispose();
+				deleteProfessorDialog = null;
 				
 			}
 
@@ -93,10 +94,43 @@ public class DeleteProfessorDialog extends JDialog {
 		southPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		add(southPanel, BorderLayout.SOUTH);
 		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				deleteProfessorDialog = null;
+			}
+		});
+		
+		
 		revalidate(); 
 		repaint();
 		
 		
 	}
 
+	
+	public static DeleteProfessorDialog getDeleteProfessorDialog() {
+		
+		if (deleteProfessorDialog == null) {
+			deleteProfessorDialog = new DeleteProfessorDialog();
+		}
+		
+		if(MainFrame.languageChanged == true) {
+			initComponents();;
+		}
+		
+		return deleteProfessorDialog;
+	}
+	
+	 public static void initComponents() {
+	    	
+		deleteProfessorDialog.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("deleteProfessorDialogTitle"));
+		areYouSureLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("areYouSureLabProfessor"));
+		
+		yes.setText(MainFrame.getMainFrame().getResourceBundle().getString("yesBtn"));
+		no.setText(MainFrame.getMainFrame().getResourceBundle().getString("noBtn"));
+
+	}
+	    
 }

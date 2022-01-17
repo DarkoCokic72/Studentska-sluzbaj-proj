@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -24,54 +26,57 @@ import Model.Student.Status;
 
 
 public class AddStudentDialog extends JDialog {
+	
+	public static AddStudentDialog addStudentDialog = null;
+	
 	private JPanel northPanel;
 	private JPanel southPanel;
 	
 	private JPanel name;
 	private static JTextField nameField;
-	private JLabel nameLabel;
+	private static JLabel nameLabel;
 	
 	private JPanel surname;
 	private static JTextField surnameField;
-	private JLabel surnameLabel;
+	private static JLabel surnameLabel;
 	
 	private JPanel dateOfBirth;
 	private static JTextField dateOfBirthField;
-	private JLabel dateOfBirthLabel;
+	private static JLabel dateOfBirthLabel;
 	
 	private JPanel address;
 	private static JTextField streetField;
 	private static JTextField streetNumberField;
 	private static JTextField cityField;
 	private static JTextField countryField;
-	private JLabel addressLabel;
+	private static JLabel addressLabel;
 	
 	private JPanel phoneNumber;
 	private static JTextField phoneNumberField;
-	private JLabel phoneNumberLabel;
+	private static JLabel phoneNumberLabel;
 	
 	private JPanel email;
 	private static JTextField emailField;
-	private JLabel emailLabel;
+	private static JLabel emailLabel;
 	
 	private JPanel index;
 	private static JTextField indexField;
-	private JLabel indexLabel;
+	private static JLabel indexLabel;
 	
 	private JPanel yearOfEnroll;
 	private static JTextField yearOfEnrollField;
-	private JLabel yearOfEnrollLabel;
+	private static JLabel yearOfEnrollLabel;
 	
 	private JPanel currYearOfStudies;
 	private static JComboBox<String> currYearOfStudiesComboBox;
-	private JLabel currYearOfStudiesLabel;
+	private static JLabel currYearOfStudiesLabel;
 	
 	private JPanel currStatus;
 	private static JComboBox<String> currStatusComboBox;
-	private JLabel currStatusLabel;
+	private static JLabel currStatusLabel;
 	
 	private static JButton confirm;
-	private JButton cancel;
+	private static JButton cancel;
 	
 	//Embrace the boredom
 	
@@ -225,6 +230,7 @@ public class AddStudentDialog extends JDialog {
 					ValidationStudent.resetFields();
 					dispose();
 					studContr.studentAdded = false;
+					addStudentDialog = null;
 				}
 				
 			}
@@ -243,11 +249,20 @@ public class AddStudentDialog extends JDialog {
 				// TODO Auto-generated method stub
 				ValidationStudent.resetFields();
 				dispose();
+				addStudentDialog = null;
 			}
 		});
 		
 		add(northPanel, BorderLayout.CENTER);
 		add(southPanel, BorderLayout.SOUTH);
+		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				addStudentDialog = null;
+			}
+		});
 		
 		revalidate();
 		repaint();
@@ -376,5 +391,42 @@ public class AddStudentDialog extends JDialog {
 		return currStatusComboBox;
 	}
 	
+	public static AddStudentDialog getAddStudentDialog() {
+		
+		if (addStudentDialog == null) {
+			addStudentDialog = new AddStudentDialog();
+		}
+		
+		if(MainFrame.languageChanged == true) {
+			initComponents();;
+		}
+		
+		return addStudentDialog;
+	}
+	
+	public static void initComponents() {
+		
+    	addStudentDialog.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("addStudentDialogTitle"));
+    	
+		nameLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("name"));
+		surnameLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("surname"));
+		dateOfBirthLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("dateOfBirth"));
+		addressLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("address"));
+		phoneNumberLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("phoneNumber"));
+		emailLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("emailAddress"));
+		indexLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("indexNumber"));
+		yearOfEnrollLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("yearOfEnroll"));
+		currYearOfStudiesLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("currYearOfStudies"));
+		currStatusLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("currStatusStudent"));
+		
+		streetField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("street"));
+		streetNumberField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("houseNumber"));
+		cityField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("city"));
+		countryField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("country"));
+		
+		confirm.setText(MainFrame.getMainFrame().getResourceBundle().getString("confirmBtn"));
+		cancel.setText(MainFrame.getMainFrame().getResourceBundle().getString("cancelBtn"));
+
+	}
 	
 }

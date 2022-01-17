@@ -3,26 +3,19 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-
-import Model.Profesor;
 
 public class EditProfessorDialog extends JDialog {
 
 	private static EditProfessorDialog editProfessorDialog = null;
 	
 	public EditProfessorDialog() {
-		
-		int selectedRow = ProfessorJTable.getTable().getSelectedRow();
-		if(selectedRow == -1) {
-			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi profesor kog želite da izmenite");
-			return;
-		}
 		
 		setVisible(true);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -38,6 +31,16 @@ public class EditProfessorDialog extends JDialog {
 		editProfessorPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
 		add(editProfessorPanel,BorderLayout.CENTER);
 		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				EditProfessorPanel.deleteEditProfessorPanel();
+		    	EditProfessorDialog.deleteEditProfessorDialog();
+				EditProfessorInformationTab.deleteEditProfessorInformationTab();
+			}
+		});
+		
 		revalidate(); 
 		repaint();
 		
@@ -49,14 +52,21 @@ public class EditProfessorDialog extends JDialog {
 			editProfessorDialog = new EditProfessorDialog();
 		}
 		
+		if(MainFrame.languageChanged == true) {
+			initComponents();
+		}
+		
 		return editProfessorDialog;
-	}
-	
-	public static void setDialog(EditProfessorDialog dialog) {
-		editProfessorDialog = dialog;
 	}
 	
 	public static void deleteEditProfessorDialog() {
 		editProfessorDialog = null;
+	}
+	
+	
+	public static void initComponents() {
+		
+		editProfessorDialog.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("editProfessorDialogTitle"));
+		
 	}
 }

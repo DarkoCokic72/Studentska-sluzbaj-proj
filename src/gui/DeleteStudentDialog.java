@@ -30,6 +30,10 @@ public class DeleteStudentDialog extends JDialog {
 	public DeleteStudentDialog() {
 		int selectedRow = StudentTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow());
 		if(selectedRow == -1) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));
+				return;
+			}
 			JOptionPane.showMessageDialog(null, "Selektujte vrstu koju zelite da izbrisete");
 			return;
 		}

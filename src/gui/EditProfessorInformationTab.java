@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -28,57 +30,59 @@ import Model.Profesor.Zvanje;
 
 public class EditProfessorInformationTab extends JPanel {
 	
+	private static EditProfessorInformationTab editProfessorInformationTab = null;
+	
 	private JPanel northPanel;
 	private JPanel southPanel;
 	
 	private JPanel name;
 	private static JTextField nameField;
-	private JLabel nameLab;
+	private static JLabel nameLab;
 	
 	private JPanel surname;
 	private static JTextField surnameField;
-	private JLabel surnameLab;
+	private static JLabel surnameLab;
 	
 	private JPanel dateOfBirth;
 	private static JTextField dateOfBirthField;
-	private JLabel dateOfBirthLab;
+	private static JLabel dateOfBirthLab;
 	
 	private JPanel address;
 	private static JTextField streetField;
 	private static JTextField streetNumberField;
 	private static JTextField cityField;
 	private static JTextField countryField;
-	private JLabel addressLab;
+	private static JLabel addressLab;
 	
 	private JPanel mobile;
 	private static JTextField mobileField;
-	private JLabel mobileLab;
+	private static JLabel mobileLab;
 	
 	private JPanel mail;
 	private static JTextField mailField;
-	private JLabel mailLab;
+	private static JLabel mailLab;
 	
 	private JPanel officeAddress;
 	private static JTextField officeStreetField;
 	private static JTextField officeStreetNumberField;
 	private static JTextField officeCityField;
 	private static JTextField officeCountryField;
-	private JLabel officeAddressLab;
+	private static JLabel officeAddressLab;
 	
 	private JPanel personalId;
 	private static JTextField personalIdField;
-	private JLabel personalIdLab;
+	private static JLabel personalIdLab;
 	
 	private JPanel zvanje;
 	private static JComboBox<String> zvanjeComboBox;
-	private JLabel zvanjeLab;
+	private static JLabel zvanjeLab;
 	
 	private JPanel yearsOfExperience;
 	private static JTextField yearsOfExperienceField;
-	private JLabel yearsOfExperienceLab;
+	private static JLabel yearsOfExperienceLab;
 	
 	private static JButton confirm;
-	private JButton cancel;
+	private static JButton cancel;
 	
 	private static Profesor professor;
 	
@@ -279,6 +283,7 @@ public class EditProfessorInformationTab extends JPanel {
 					EditProfessorDialog.getEditProfessorDialog().dispose();
 			    	EditProfessorPanel.deleteEditProfessorPanel();
 			    	EditProfessorDialog.deleteEditProfessorDialog();
+			    	editProfessorInformationTab = null;
 				    professorContr.professorEdited = false;
 				}
 				
@@ -301,10 +306,12 @@ public class EditProfessorInformationTab extends JPanel {
 		    	EditProfessorDialog.getEditProfessorDialog().dispose();
 		    	EditProfessorPanel.deleteEditProfessorPanel();
 		    	EditProfessorDialog.deleteEditProfessorDialog();
+		    	editProfessorInformationTab = null;
 		    	
 			}
 
 		});
+		
 		
 		add(northPanel,BorderLayout.CENTER);
 		add(southPanel, BorderLayout.SOUTH);
@@ -419,6 +426,46 @@ public class EditProfessorInformationTab extends JPanel {
     public static JButton getConfirm() {
     	return confirm;
     }
-	
+    
+	public static EditProfessorInformationTab getEditProfessorInformationTab() {
+		
+		if (editProfessorInformationTab == null) {
+			editProfessorInformationTab = new EditProfessorInformationTab();
+		}
+		
+		if(MainFrame.languageChanged == true) {
+			initComponents();;
+		}
+		
+		return editProfessorInformationTab;
+	}
+    
+	public static void deleteEditProfessorInformationTab() {
+		editProfessorInformationTab = null;
+	}
+    public static void initComponents() {
+    	
+		nameLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("name"));
+		surnameLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("surname"));
+		dateOfBirthLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("dateOfBirth"));
+		addressLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("address"));
+		mobileLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("phoneNumber"));
+		mailLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("emailAddress"));
+		officeAddressLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("officeAddress"));
+		personalIdLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("personalId"));
+		zvanjeLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("professorTitle"));
+		yearsOfExperienceLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("yearsOfExperience"));
+		
+		streetField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("street"));
+		streetNumberField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("houseNumber"));
+		cityField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("city"));
+		countryField.setToolTipText(MainFrame.getMainFrame().getResourceBundle().getString("country"));
+		
+		
+		confirm.setText(MainFrame.getMainFrame().getResourceBundle().getString("confirmBtn"));
+		cancel.setText(MainFrame.getMainFrame().getResourceBundle().getString("cancelBtn"));
+
+	}
+    
 
 }

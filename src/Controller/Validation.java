@@ -11,6 +11,7 @@ import Model.ProfessorDatabase;
 import gui.AddProfessorDialog;
 import gui.EditProfessorInformationTab;
 import gui.GradeEntryDialog;
+import gui.MainFrame;
 
 public class Validation {
 	
@@ -30,6 +31,10 @@ public class Validation {
 					continue;
 				retVal = Pattern.matches("\\p{L}+", p);
 				if (retVal == false && !name.isEmpty()) {
+					if(MainFrame.languageChanged) {
+						JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatNameError"));
+						return retVal;
+					}
 					JOptionPane.showMessageDialog(null, "Format imena nije podrzan");
 					return retVal;
 				}
@@ -39,6 +44,10 @@ public class Validation {
 
 		}
 		if (retVal == false && !name.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatNameError"));
+				return retVal;
+			}
 			JOptionPane.showMessageDialog(null, "Format imena nije podrzan");
 		}
 		return retVal;
@@ -55,6 +64,10 @@ public class Validation {
 				p = p.trim();
 				retVal = Pattern.matches("\\p{L}+", p);
 				if (retVal == false && !surname.isEmpty()) {
+					if(MainFrame.languageChanged) {
+						JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatSurnameError"));
+						return retVal;
+					}
 					JOptionPane.showMessageDialog(null, "Neispravan format prezimena");
 					return retVal;
 				}
@@ -63,6 +76,10 @@ public class Validation {
 			retVal = Pattern.matches("\\p{L}+", surname);
 		}
 		if (retVal == false && !surname.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatSurnameError"));
+				return retVal;
+			}
 			JOptionPane.showMessageDialog(null, "Neispravan format prezimena");
 		}
 
@@ -83,12 +100,20 @@ public class Validation {
 		}
 		
 		if (retVal == false && !date.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatDateError"));
+				return retVal;
+			}
 			JOptionPane.showMessageDialog(null, "Format datuma nije podrzan.\nPodrzani formati su dd.mm.yyyy. ili d.m.yyyy.");
 			return false;
 		}
 		
 		Date datumRod = Converter.convertStringToDate(date);
 		if (datumRod == null && date.isEmpty() == false) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatDateError"));
+				return retVal;
+			}
 			JOptionPane.showMessageDialog(null, "Format datuma nije podrzan.\nPodrzani formati su dd.mm.yyyy. ili d.m.yyyy.");
 			return false;
 		}
@@ -104,6 +129,10 @@ public class Validation {
 		retVal = Pattern.matches(regex, street);
 		
 		if (retVal == false && !street.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatStreetError"));
+				return retVal;
+			}
 			JOptionPane.showMessageDialog(null, "Pogresan format ulice.");
 		}
 		
@@ -118,6 +147,10 @@ public class Validation {
 		retVal = Pattern.matches(regex, streetNumber);
 		
 		if (retVal == false && !streetNumber.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatHouseNumberError"));
+				return retVal;
+			}
 			JOptionPane.showMessageDialog(null, "Pogresan format broja kuce.");
 		}
 		
@@ -132,6 +165,10 @@ public class Validation {
 		retVal = Pattern.matches(regex, city);
 		
 		if (retVal == false && !city.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatCityError"));
+				return retVal;
+			}
 			JOptionPane.showMessageDialog(null, "Pogresan format grada.");
 		}
 		
@@ -146,6 +183,10 @@ public class Validation {
 		retVal = Pattern.matches(regex, country);
 		
 		if (retVal == false && !country.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatCountryError"));
+				return retVal;
+			}
 			JOptionPane.showMessageDialog(null, "Pogresan format drzave.");
 		}
 		
@@ -159,6 +200,10 @@ public class Validation {
 		String regex = "\\+?[0-9][0-9/-]+";
 		retVal = Pattern.matches(regex, number);
 		if (retVal == false && !number.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatPhoneNumberError"));
+				return retVal;
+			}
 			JOptionPane.showMessageDialog(null, "Neispravan format broja telefona.");
 		}
 		return retVal;
@@ -174,6 +219,10 @@ public class Validation {
 		retVal = Pattern.matches(emailRegex, email);
 		
 		if(retVal == false && email.isEmpty() == false) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatEmailAddressError"));
+				return retVal;
+			}
 			JOptionPane.showMessageDialog(null, "Neispravan format e-mail adrese.");
 		}
 		
@@ -195,6 +244,11 @@ public class Validation {
 	
 		for (Profesor p : ProfessorDatabase.getDatabase().getProfessors()) {
 			if (Integer.parseInt(number) == p.getPersonalID()) {
+				if(MainFrame.languageChanged) {
+					JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatHouseNumberError"));
+					
+					return false;
+				}
 				
 				JOptionPane.showMessageDialog(null, "Vec postoji profesor sa unetim brojem licne karte");	
 				retVal = false;
@@ -212,6 +266,10 @@ public class Validation {
 		retVal = Pattern.matches("[1-9][0-9]?", years); 
 		
 		if (retVal == false && !years.isEmpty()) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatYearsOfExpError"));
+				return retVal;
+			}
 			JOptionPane.showMessageDialog(null, "Uneli ste pogresan broj godina iskustva");
 		}
 		

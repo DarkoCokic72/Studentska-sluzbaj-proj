@@ -278,6 +278,7 @@ public class EditStudentInformationTab extends JPanel {
 				EditStudentPanel.deleteEditStudPanel();
 				EditStudentDialog.deleteEditStudentDialog();
 				StudentTable.getTable().updateTable();
+				
 			}
 		});
 		

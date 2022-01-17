@@ -23,15 +23,15 @@ public class Deserialization {
 	
 	public Deserialization() {}
 	
-	public Deserialization getInstance() {
+	public static Deserialization getInstance() {
 		if(deserInstance == null)
 			deserInstance = new Deserialization();
 		
 		return deserInstance;
 	}
 	
-	private void deserialize() {
-		String name = "Databse.txt";
+	public void deserialize() {
+		String name = "Database.txt";
 		CompleteDatabase database = new CompleteDatabase();
 		
 		try {

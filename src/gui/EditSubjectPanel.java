@@ -19,10 +19,20 @@ public class EditSubjectPanel extends JTabbedPane {
 		if(editSubjPanel == null)
 			editSubjPanel = new EditSubjectPanel();
 		
+		if(MainFrame.languageChanged == true) {
+			initComponents();
+		}
+		
 		return editSubjPanel;
 	}
 	
 	public static void deleteInstance() {
 		editSubjPanel = null;
+	}
+	
+	public static void initComponents() {
+		
+		editSubjPanel.setTitleAt(0, MainFrame.getMainFrame().getResourceBundle().getString("informationTab"));
+
 	}
 }
