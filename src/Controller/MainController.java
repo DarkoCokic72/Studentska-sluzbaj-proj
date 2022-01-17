@@ -133,8 +133,18 @@ public class MainController {
 			}
 			break;
 		case 2:
-			DeleteSubjectDialog deleteSubjectDialog = new DeleteSubjectDialog();
+			selectedRow = SubjectJTable.getTable().getSelectedRow();
+			if(selectedRow == -1) {
+				if(MainFrame.languageChanged) {
+					JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));
+					return;
+				}
+				JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi predmet kog zelite da obrišete");
+				return;
+			} else {
+			DeleteSubjectDialog deleteSubjectDialog = DeleteSubjectDialog.getDeleteSubjectDialog();
 			deleteSubjectDialog.setLocationRelativeTo(MainFrame.getMainFrame());
+			}
 			break;
 
 		}
