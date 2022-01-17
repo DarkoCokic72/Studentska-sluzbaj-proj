@@ -1,12 +1,13 @@
 package gui;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +29,14 @@ import Model.Subject;
 import Model.SubjectDatabase;
 
 public class AddSubjectToStudent extends JDialog{
+	
+	private static AddSubjectToStudent addSubjectToStudent = null;
+	
 	private List<Subject> subjectsToAdd;
 	private Student student;
+	
+	private static JButton addBtn;
+	private static JButton cancelBtn;
 	
 	public AddSubjectToStudent(String indexID) {
 		setTitle("Dodavanje predmeta");
@@ -61,8 +68,8 @@ public class AddSubjectToStudent extends JDialog{
 		JPanel central = new JPanel();
 		JPanel south = new JPanel();
 		
-		JButton addBtn = new JButton("Dodaj");
-		JButton cancelBtn = new JButton("Odustani");
+		addBtn = new JButton("Dodaj");
+		cancelBtn = new JButton("Odustani");
 		
 		addBtn.setSize(new Dimension(60, 30));
 		cancelBtn.setSize(new Dimension(60, 30));
@@ -90,6 +97,10 @@ public class AddSubjectToStudent extends JDialog{
 				// TODO Auto-generated method stub
 				int selectedIndex = display.getSelectedIndex();
 				if(selectedIndex == -1) {
+					if(MainFrame.languageChanged) {
+						JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));
+						return;
+					}
 					JOptionPane.showMessageDialog(null, "Selektujte predmet koji zelite da dodate.");
 					return;
 				} else {
@@ -99,6 +110,7 @@ public class AddSubjectToStudent extends JDialog{
 					UnpassedExamsTable.getTable().updateTable();
 					validate();
 					dispose();
+					addSubjectToStudent = null;
 				}
 			}
 		});
@@ -109,11 +121,21 @@ public class AddSubjectToStudent extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				dispose();
+				addSubjectToStudent = null;
 			}
 		});
 		
 		add(central, BorderLayout.CENTER);
 		add(south,BorderLayout.SOUTH);
+		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				addSubjectToStudent = null;
+			}
+		});
+		
 		
 	}
 	
@@ -167,6 +189,29 @@ public class AddSubjectToStudent extends JDialog{
 		return subjects;
 	}
 	
+	
+	public static AddSubjectToStudent getAddSubjectToStudentDialog(String parent) {
+		
+		if (addSubjectToStudent == null) {
+			addSubjectToStudent = new AddSubjectToStudent(parent);
+		}
+		
+		if(MainFrame.languageChanged == true) {
+			initComponents();;
+		}
+		
+		return addSubjectToStudent;
+	}
+	
+	public static void initComponents() {
+		
+    	addSubjectToStudent.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("addSubjectToStudentDialogTitle"));
+    	
+    	addBtn.setText(MainFrame.getMainFrame().getResourceBundle().getString("yesBtn"));
+		cancelBtn.setText(MainFrame.getMainFrame().getResourceBundle().getString("noBtn"));
+		
+	}
+
 	
 
 }

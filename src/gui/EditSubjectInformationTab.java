@@ -207,6 +207,7 @@ public class EditSubjectInformationTab extends JPanel {
 					EditSubjectDialog.deleteInstance();
 					subjectContr.subjectEdited = false;
 					editSubjectInformationTab = null;
+					PassedExamsTab.deletePassedExamsTab();
 				}
 				
 			}
@@ -228,6 +229,7 @@ public class EditSubjectInformationTab extends JPanel {
 				EditSubjectDialog.deleteInstance();
 				SubjectJTable.getTable().updateTable();
 				editSubjectInformationTab = null;
+				PassedExamsTab.deletePassedExamsTab();
 				
 			}
 		});

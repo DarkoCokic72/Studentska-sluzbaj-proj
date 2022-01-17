@@ -66,6 +66,7 @@ public class EditSubjectDialog extends JDialog {
 				EditSubjectPanel.deleteInstance();
 				editSubjectDialog = null;
 				EditSubjectInformationTab.deleteEditSubjectInformationTab();
+				PassedExamsTab.deletePassedExamsTab();
 			}
 		});
 		

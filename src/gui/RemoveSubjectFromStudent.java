@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -16,6 +18,12 @@ import javax.swing.JPanel;
 import Controller.StudentController;
 
 public class RemoveSubjectFromStudent extends JDialog{
+	
+	private static RemoveSubjectFromStudent removeSubjectFromStudent = null;
+	
+	private static JLabel tekst;
+	private static JButton yesBtn;
+	private static JButton noBtn;
 	
 	public RemoveSubjectFromStudent(EditStudentDialog parent) {
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -32,12 +40,12 @@ public class RemoveSubjectFromStudent extends JDialog{
 		JPanel central = new JPanel();
 		JPanel south = new JPanel();
 		
-		JLabel tekst = new JLabel("Da li ste sigurni da želite da izvršite radnju uklanjanja predmeta sa studenta?");
+		tekst = new JLabel("Da li ste sigurni da želite da izvršite radnju uklanjanja predmeta sa studenta?");
 		central.add(tekst);
 		central.setBorder(BorderFactory.createEmptyBorder(15, 25, 15, 25));
 		
-		JButton yesBtn = new JButton("Da");
-		JButton noBtn = new JButton("Ne");
+		yesBtn = new JButton("Da");
+		noBtn = new JButton("Ne");
 		
 		yesBtn.setPreferredSize(new Dimension(60, 30));
 		noBtn.setPreferredSize(new Dimension(60, 30));
@@ -50,6 +58,7 @@ public class RemoveSubjectFromStudent extends JDialog{
 				StudentController.getStudentConstroler().removeSubject(EditStudentInformationTab.getStudent().getIndexID());
 				validate();
 				dispose();
+				removeSubjectFromStudent = null;
 			}
 		});
 		
@@ -60,6 +69,7 @@ public class RemoveSubjectFromStudent extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				dispose();
+				removeSubjectFromStudent = null;
 			}
 		});
 		
@@ -71,6 +81,37 @@ public class RemoveSubjectFromStudent extends JDialog{
 		
 		add(central, BorderLayout.CENTER);
 		add(south, BorderLayout.SOUTH);
+		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				removeSubjectFromStudent = null;
+			}
+		});
+	}
+	
+	public static RemoveSubjectFromStudent getRemoveSubjectFromStudentDialog(EditStudentDialog parent) {
+		
+		if (removeSubjectFromStudent == null) {
+			removeSubjectFromStudent = new RemoveSubjectFromStudent(parent);
+		}
+		
+		if(MainFrame.languageChanged == true) {
+			initComponents();;
+		}
+		
+		return removeSubjectFromStudent;
+	}
+	
+	public static void initComponents() {
+		
+    	removeSubjectFromStudent.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("removeSubjectFromStudentDialogTitle"));
+    	tekst.setText(MainFrame.getMainFrame().getResourceBundle().getString("areYouSureLabRemoveSubjectFromStudent"));
+    	
+    	yesBtn.setText(MainFrame.getMainFrame().getResourceBundle().getString("yesBtn"));
+		noBtn.setText(MainFrame.getMainFrame().getResourceBundle().getString("noBtn"));
+		
 	}
 
 }

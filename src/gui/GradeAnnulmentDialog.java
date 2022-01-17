@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 
 import javax.swing.BorderFactory;
@@ -21,6 +23,8 @@ import Controller.GradeController;
 
 public class GradeAnnulmentDialog extends JDialog {
 	
+	private static GradeAnnulmentDialog gradeAnnulmentDialog = null;
+	
 	JPanel northPanel;
 	JPanel southPanel;
 	private static JLabel areYouSureLab;
@@ -31,10 +35,7 @@ public class GradeAnnulmentDialog extends JDialog {
 	public GradeAnnulmentDialog() {
 		
 		selectedRow = PassedExamsTable.getInstance().getSelectedRow();
-		if(selectedRow == -1) {
-			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi ocena koju zelite da poništite");
-			return;
-		}
+	
 		northPanel = new JPanel();
 		southPanel = new JPanel();
 		
@@ -67,6 +68,7 @@ public class GradeAnnulmentDialog extends JDialog {
 					
 					dispose();
 					GradeController.gradeAnnuled = false;
+					gradeAnnulmentDialog = null;
 				}
 			}
 	
@@ -83,6 +85,7 @@ public class GradeAnnulmentDialog extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				
 				dispose();
+				gradeAnnulmentDialog = null;
 				
 			}
 	
@@ -93,8 +96,39 @@ public class GradeAnnulmentDialog extends JDialog {
 		southPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		add(southPanel, BorderLayout.SOUTH);
 		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				gradeAnnulmentDialog = null;
+			}
+		});
+		
 		revalidate(); 
 		repaint();
+	}
+	
+	public static GradeAnnulmentDialog getGradeAnnulmentDialog() {
+		
+		if (gradeAnnulmentDialog == null) {
+			gradeAnnulmentDialog = new GradeAnnulmentDialog();
+		}
+		
+		if(MainFrame.languageChanged == true) {
+			initComponents();;
+		}
+		
+		return gradeAnnulmentDialog;
+	}
+	
+    public static void initComponents() {
+		
+    	gradeAnnulmentDialog.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("gradeAnnulmentDialogTitle"));
+		areYouSureLab.setText(MainFrame.getMainFrame().getResourceBundle().getString("areYouSureLabGradeAnnulment"));
+		
+		yes.setText(MainFrame.getMainFrame().getResourceBundle().getString("yesBtn"));
+		no.setText(MainFrame.getMainFrame().getResourceBundle().getString("noBtn"));
+		
 	}
 
 }

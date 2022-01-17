@@ -10,6 +10,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -42,7 +43,16 @@ public class PassedExamsTab extends JPanel{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GradeAnnulmentDialog gradeAnnulmentDialog = new GradeAnnulmentDialog();
+				int selectedRow = PassedExamsTable.getInstance().getSelectedRow();
+				if(selectedRow == -1) {
+					if(MainFrame.languageChanged) {
+						JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));
+						return;
+					}
+					JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi ocena koju zelite da poništite");
+					return;
+				}
+				GradeAnnulmentDialog gradeAnnulmentDialog = GradeAnnulmentDialog.getGradeAnnulmentDialog();
 				gradeAnnulmentDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 				
 			}
@@ -99,6 +109,10 @@ public class PassedExamsTab extends JPanel{
 		}
 		
 		return passedExamsTab;
+	}
+	
+	public static void deletePassedExamsTab() {
+		passedExamsTab = null;
 	}
 	
 	public static void initComponents() {
