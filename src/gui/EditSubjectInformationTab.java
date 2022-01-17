@@ -18,43 +18,45 @@ import javax.swing.JTextField;
 import Controller.SubjectController;
 import Controller.ValidationSubject;
 import Listeners.EditSubjectListener;
-import Model.Profesor;
 import Model.Subject;
 import Model.SubjectDatabase;
 import Model.Subject.Term;
 
 public class EditSubjectInformationTab extends JPanel {
+	
+	private static EditSubjectInformationTab editSubjectInformationTab = null;
+	
 	private JPanel northPanel;
 	private JPanel southPanel;
 	
 	private JPanel code;
 	private static JTextField codeField;
-	private JLabel codeLabel;
+	private static JLabel codeLabel;
 	
 	private JPanel name;
 	private static JTextField nameField;
-	private JLabel nameLabel;
+	private static JLabel nameLabel;
 	
 	private JPanel yearOfStudy;
 	private static JTextField yearOfStudyField;
-	private JLabel yearOfStudyLabel;
+	private static JLabel yearOfStudyLabel;
 	
 	private JPanel espb;
 	private static JTextField espbField;
-	private JLabel espbLabel;
+	private static JLabel espbLabel;
 	
 	private JPanel term;
 	private static JComboBox<String> termComboBox;
-	private JLabel termLabel;
+	private static JLabel termLabel;
 	
 	private JPanel professor;
 	private static JTextField professorField;
-	private JLabel professorLabel;
+	private static JLabel professorLabel;
 	private static JButton plusBtn;
 	private static JButton minusBtn;
 	
 	private static JButton confirm;
-	private JButton cancel;
+	private static JButton cancel;
 	
 	public static Subject subject;
 	
@@ -168,7 +170,7 @@ public class EditSubjectInformationTab extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				ChooseProfessorDialog chooseProfessorDialog = new ChooseProfessorDialog();
+				ChooseProfessorDialog chooseProfessorDialog = ChooseProfessorDialog.getChooseProfessorDialog();
 				chooseProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());		
 				
 			}
@@ -179,7 +181,7 @@ public class EditSubjectInformationTab extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				RemoveProfessorFromSubjectDialog removeProfessorDialog = new RemoveProfessorFromSubjectDialog();
+				RemoveProfessorFromSubjectDialog removeProfessorDialog = RemoveProfessorFromSubjectDialog.getRemoveProfessorDialog();
 				removeProfessorDialog.setLocationRelativeTo(MainFrame.getMainFrame());		
 				
 			}
@@ -204,6 +206,7 @@ public class EditSubjectInformationTab extends JPanel {
 					EditSubjectPanel.deleteInstance();
 					EditSubjectDialog.deleteInstance();
 					subjectContr.subjectEdited = false;
+					editSubjectInformationTab = null;
 				}
 				
 			}
@@ -224,6 +227,7 @@ public class EditSubjectInformationTab extends JPanel {
 				EditSubjectPanel.deleteInstance();
 				EditSubjectDialog.deleteInstance();
 				SubjectJTable.getTable().updateTable();
+				editSubjectInformationTab = null;
 				
 			}
 		});
@@ -283,6 +287,37 @@ public class EditSubjectInformationTab extends JPanel {
 		return term;
 	}
 
+	
+	public static EditSubjectInformationTab getEditSubjectInformationTab() {
+		
+		if (editSubjectInformationTab == null) {
+			editSubjectInformationTab = new EditSubjectInformationTab();
+		}
+		
+		if(MainFrame.languageChanged == true) {
+			initComponents();;
+		}
+		
+		return editSubjectInformationTab;
+	}
+	
+	public static void deleteEditSubjectInformationTab() {
+		editSubjectInformationTab = null;
+	}
+	
+	public static void initComponents() {
+		
+    	codeLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("subjectCode"));
+    	nameLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("subjectName"));
+    	yearOfStudyLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("yearOfStudy"));
+    	espbLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("ESPB"));
+    	termLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("subjectTerm"));
+    	professorLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("subjectProfessor"));
+    		
+		confirm.setText(MainFrame.getMainFrame().getResourceBundle().getString("confirmBtn"));
+		cancel.setText(MainFrame.getMainFrame().getResourceBundle().getString("cancelBtn"));
+
+	}
 	
 	
 }

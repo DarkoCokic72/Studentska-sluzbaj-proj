@@ -63,9 +63,12 @@ public class EditSubjectDialog extends JDialog {
 			
 			@Override
 			public void windowClosing(WindowEvent e) {
+				EditSubjectPanel.deleteInstance();
 				editSubjectDialog = null;
+				EditSubjectInformationTab.deleteEditSubjectInformationTab();
 			}
 		});
+		
 		
 		revalidate();
 		repaint();
