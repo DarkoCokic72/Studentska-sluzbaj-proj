@@ -3,29 +3,19 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import javax.management.remote.TargetedNotification;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 
 public class EditStudentDialog extends JDialog{
 	private static EditStudentDialog editStudentDialog = null;
 	public static int selectedRow;
 	
 	public EditStudentDialog() {
-		selectedRow = StudentTable.getTable().getSelectedRow();
-		if(selectedRow == -1) {
-			if(MainFrame.languageChanged) {
-				JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));
-				return;
-			}
-			JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi student kog želite da izmenite.");
-			return;
-		}
 		
 		setVisible(true);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -68,6 +58,17 @@ public class EditStudentDialog extends JDialog{
 			
 		});
 		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				EditStudentPanel.deleteEditStudPanel();
+		    	EditStudentDialog.deleteEditStudentDialog();
+				EditStudentInformationTab.deleteEditStudentInformationTab();
+			}
+		});
+		
+		
 		revalidate();
 		repaint();
 
@@ -78,17 +79,23 @@ public class EditStudentDialog extends JDialog{
 			editStudentDialog = new EditStudentDialog();
 		}
 		
+		if(MainFrame.languageChanged == true) {
+			initComponents();
+		}
+		
 		return editStudentDialog;
 	}
 
-	public static void setEditStudentDialog(EditStudentDialog dialog) {
-		editStudentDialog = dialog;
-	}
 	
 	public static void deleteEditStudentDialog() {
 		editStudentDialog = null;
 	}
 	
+	public static void initComponents() {
+		
+		editStudentDialog.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("editStudentDialogTitle"));
+		
+	}
 	
 	
 }

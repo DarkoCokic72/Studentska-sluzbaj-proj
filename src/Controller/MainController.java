@@ -47,13 +47,22 @@ public class MainController {
 		switch(centralPanel.getSelectedIndex()) {
 		
 		case 0:
-			EditStudentDialog editStudentDialog = new EditStudentDialog();
+			int selectedRow = StudentTable.getTable().getSelectedRow();
+			if(selectedRow == -1) {
+				if(MainFrame.languageChanged) {
+					JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));
+					return;
+				}
+				JOptionPane.showMessageDialog(null, "Selektujte vrstu u kojoj se nalazi student kog želite da izmenite.");
+				return;
+			} else {
+			EditStudentDialog editStudentDialog = EditStudentDialog.getEditStudentDialog();
 			editStudentDialog.setLocationRelativeTo(MainFrame.getMainFrame());
-			EditStudentDialog.setEditStudentDialog(editStudentDialog);
+			}
 			break;
 		case 1:
 			
-			int selectedRow = ProfessorJTable.getTable().getSelectedRow();
+			selectedRow = ProfessorJTable.getTable().getSelectedRow();
 			if(selectedRow == -1) {
 				
 				if(MainFrame.languageChanged) {
@@ -95,11 +104,22 @@ public class MainController {
 		switch(centralPanel.getSelectedIndex()) {
 		
 		case 0:
-			DeleteStudentDialog deleteStudDialog = new DeleteStudentDialog();
+			int selectedRow = StudentTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow());
+			if(selectedRow == -1) {
+				if(MainFrame.languageChanged) {
+					JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));
+					return;
+				}
+				JOptionPane.showMessageDialog(null, "Selektujte vrstu koju zelite da izbrisete");
+				return;
+			}
+			else {
+			DeleteStudentDialog deleteStudDialog = DeleteStudentDialog.getDeleteStudentDialog();
 			deleteStudDialog.setLocationRelativeTo(MainFrame.getMainFrame());
+		}
 			break;
 		case 1:
-			int selectedRow = ProfessorJTable.getTable().getSelectedRow();
+			selectedRow = ProfessorJTable.getTable().getSelectedRow();
 			if(selectedRow == -1) {
 				if(MainFrame.languageChanged) {
 					JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));

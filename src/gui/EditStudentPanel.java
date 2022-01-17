@@ -12,22 +12,26 @@ public class EditStudentPanel extends JTabbedPane{
 		JPanel info = new JPanel();
 		addTab("Informacije", info);
 		info.setLayout(new BorderLayout());
-		info.add(new EditStudentInformationTab());
+		info.add(EditStudentInformationTab.getEditStudentInformationTab());
 		
 		JPanel passed = new JPanel();
 		addTab("Položeni", passed);
 		passed.setLayout(new BorderLayout());
-		passed.add(new PassedExamsTab());
+		passed.add(PassedExamsTab.getPassedExamsTab());
 		
 		JPanel unpassed = new JPanel();
 		addTab("Neploženi", unpassed);
 		unpassed.setLayout(new BorderLayout());
-		unpassed.add(new UnpassedExamsTab());
+		unpassed.add(UnpassedExamsTab.getUnpassedExamsTab());
 	}
 	
 	public static EditStudentPanel getEditStudentPanel() {
 		if(editStudPanel == null) {
 			editStudPanel = new EditStudentPanel();
+		}
+		
+		if(MainFrame.languageChanged == true) {
+			initComponents();;
 		}
 		
 		return editStudPanel;
@@ -36,4 +40,13 @@ public class EditStudentPanel extends JTabbedPane{
 	public static void deleteEditStudPanel() {
 		editStudPanel = null;
 	}
+	
+	public static void initComponents() {
+		
+		editStudPanel.setTitleAt(0, MainFrame.getMainFrame().getResourceBundle().getString("informationTab"));
+		editStudPanel.setTitleAt(1, MainFrame.getMainFrame().getResourceBundle().getString("passedSubjectsTab"));
+		editStudPanel.setTitleAt(2, MainFrame.getMainFrame().getResourceBundle().getString("unpassedSubjectsTab"));
+	
+	}
 }
+
