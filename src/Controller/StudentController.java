@@ -39,8 +39,7 @@ public class StudentController {
 		//street, streetNumberString, city, country
 		if(checkFields(name, surname, dateStr, street, streetNumberString, city, country, phoneNum, email, index, yearOfEnroll) == true) {
 			Date date = Converter.convertStringToDate(dateStr);
-			int streetNumber = Integer.parseInt(streetNumberString);
-			Address adr = new Address(street, streetNumber, city, country); 
+			Address adr = new Address(street, streetNumberString, city, country); 
 			
 			int yearEnr = Integer.parseInt(yearOfEnroll);
 			
@@ -127,8 +126,7 @@ public class StudentController {
 			
 			if(ValidationStudent.checkIndex(wrongIndex)) {
 				Date date = Converter.convertStringToDate(dateStr);
-				int streetNumber = Integer.parseInt(streetNumberString);
-				Address adr = new Address(street, streetNumber, city, country); 
+				Address adr = new Address(street, streetNumberString, city, country); 
 				int yearEnr = Integer.parseInt(yearOfEnroll);
 				
 				student.setName(name);

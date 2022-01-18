@@ -171,7 +171,7 @@ public class EditProfessorInformationTab extends JPanel {
 		
 		Address address = professor.getAddress();
 		streetField.setText(address.getStreetName());
-		streetNumberField.setText(Integer.toString(address.getStreetNumber()));
+		streetNumberField.setText(address.getStreetNumber());
 		cityField.setText(address.getCity());
 		countryField.setText(address.getCountry());
 		streetField.addFocusListener(new EditProfessorListener(streetField, 3));
@@ -227,7 +227,7 @@ public class EditProfessorInformationTab extends JPanel {
 		
 		Address officeAddress = professor.getOfficeAddress();
 		officeStreetField.setText(officeAddress.getStreetName());
-		officeStreetNumberField.setText(Integer.toString(officeAddress.getStreetNumber()));
+		officeStreetNumberField.setText(officeAddress.getStreetNumber());
 		officeCityField.setText(officeAddress.getCity());
 		officeCountryField.setText(officeAddress.getCountry());
 		officeStreetField.addFocusListener(new EditProfessorListener(officeStreetField, 9));

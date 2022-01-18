@@ -148,7 +148,7 @@ public class Validation {
 	public static boolean checkStreetNumber(String streetNumber) {
 		
 		boolean retVal;
-		String regex = "[0-9]+";
+		String regex = "[0-9\\p{L}]+";
 		retVal = Pattern.matches(regex, streetNumber);
 		
 		if (retVal == false && !streetNumber.isEmpty()) {

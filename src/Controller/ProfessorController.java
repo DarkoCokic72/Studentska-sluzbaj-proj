@@ -49,10 +49,8 @@ public class ProfessorController {
 				&& Validation.checkPersonalId(personalIdString) == true && Validation.checkYearsOfExp(yearsOfExperienceString) == true) {
 			
 				Date date = Converter.convertStringToDate(dateString);
-				int streetNumber = Integer.parseInt(streetNumberString);
-				Address address = new Address(street, streetNumber, city, country);
-				int officeStreetNumber = Integer.parseInt(officeStreetNumberString);
-				Address officeAddress = new Address(officeStreet, officeStreetNumber, officeCity, officeCountry);
+				Address address = new Address(street, streetNumberString, city, country);
+				Address officeAddress = new Address(officeStreet, officeStreetNumberString, officeCity, officeCountry);
 				int personalId = Integer.parseInt(personalIdString);
 				int yearsOfExperience = Integer.parseInt(yearsOfExperienceString);
 				
@@ -103,10 +101,8 @@ public class ProfessorController {
 				if(Validation.checkPersonalId(personalIdStringWrong)) {
 			
 					Date date = Converter.convertStringToDate(dateString);
-					int streetNumber = Integer.parseInt(streetNumberString);
-					Address address = new Address(street, streetNumber, city, country);
-					int officeStreetNumber = Integer.parseInt(officeStreetNumberString);
-					Address officeAddress = new Address(officeStreet, officeStreetNumber, officeCity, officeCountry);
+					Address address = new Address(street, streetNumberString, city, country);
+					Address officeAddress = new Address(officeStreet, officeStreetNumberString, officeCity, officeCountry);
 					int personalId = Integer.parseInt(personalIdString);
 					int yearsOfExperience = Integer.parseInt(yearsOfExperienceString);
 				
