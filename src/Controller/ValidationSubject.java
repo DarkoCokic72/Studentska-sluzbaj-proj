@@ -41,7 +41,7 @@ public class ValidationSubject {
 	}
 	
 	public static boolean checkCode(String code) {
-		String codeRegex = "^[A-Z]{1,2}[0-9]{2}[A-Z0-9]{1}$";
+		String codeRegex = "^[A-Za-z]{1,2}[0-9]+$";
 		// matches: E231, RI43A
 		boolean ret = Pattern.matches(codeRegex, code);
 		
@@ -68,7 +68,7 @@ public class ValidationSubject {
 	}
 	
 	public static boolean checkYearOfStudy(String year) {
-		String yearRegex = "[1-4]";
+		String yearRegex = "[1-4]{1}[0-9]?";
 		boolean ret = Pattern.matches(yearRegex, year);
 		
 		if(ret == false && !year.isEmpty()) {
