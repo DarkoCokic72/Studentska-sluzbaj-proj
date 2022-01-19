@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+import Model.ChairDatabase;
 import Model.CompleteDatabase;
 import Model.ProfessorDatabase;
 import Model.StudentDatabase;
@@ -21,8 +22,10 @@ public class Serialization {
 		ProfessorDatabase professorDatabase = ProfessorDatabase.getDatabase();
 		SubjectDatabase subjectDatabase = SubjectDatabase.getDatabase();
 		GradeDatabase gradeDatabase = GradeDatabase.getInstance();
+		ChairDatabase chairDatabase = ChairDatabase.getInstance();
 		
-		CompleteDatabase database = new CompleteDatabase(studentDatabase.getStudents(), professorDatabase.getProfessors(), subjectDatabase.getSubjects(), gradeDatabase.getGrades());
+		CompleteDatabase database = new CompleteDatabase(studentDatabase.getStudents(), professorDatabase.getProfessors(), subjectDatabase.getSubjects(),
+				gradeDatabase.getGrades(), chairDatabase.getChairs());
 		
 		File file = new File("Database.txt");
 		ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));

@@ -6,7 +6,7 @@
 
 JDK  verzija: 15.0.1
 
-Eclipse verzija: 2020-09
+Eclipse verzija: 2020-09 (4.17.0)
 
 Darko je implementirao sledeće:
 - student

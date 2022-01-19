@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
+import Model.Chair;
+import Model.ChairDatabase;
 import Model.CompleteDatabase;
 import Model.Grade;
 import Model.Profesor;
@@ -50,6 +52,7 @@ public class Deserialization {
 				ProfessorDatabase.getDatabase().setProfessors((ArrayList<Profesor>)database.getProfessors());
 				SubjectDatabase.getDatabase().setSubjects((ArrayList<Subject>)database.getSubjects());
 				GradeDatabase.getInstance().setGrades((ArrayList<Grade>)database.getGrades());
+				ChairDatabase.getInstance().setChairs((ArrayList<Chair>) database.getChairs());
 				
 				ois.close();
 				

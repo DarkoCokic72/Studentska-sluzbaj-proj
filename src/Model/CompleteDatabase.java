@@ -8,6 +8,7 @@ import Controller.Converter;
 import Model.Profesor.Zvanje;
 import Model.Student.Status;
 import Model.Subject.Term;
+import gui.ChairTable;
 import gui.GradeDatabase;
 import gui.PassedExamsTable;
 import gui.ProfessorJTable;
@@ -27,13 +28,15 @@ public class CompleteDatabase implements Serializable{
 	private List<Profesor> professors;
 	private List<Subject> subjects;
 	private List<Grade> grades;
+	private List<Chair> chairs;
 	
-	public CompleteDatabase(List<Student> students, List<Profesor> professors, List<Subject> subjects, List<Grade> grades) {
+	public CompleteDatabase(List<Student> students, List<Profesor> professors, List<Subject> subjects, List<Grade> grades, List<Chair> chairs) {
 		
 		this.students = students;
 		this.professors = professors;
 		this.subjects = subjects;
 		this.grades = grades;
+		this.chairs = chairs;
 		
 	}
 	
@@ -47,6 +50,7 @@ public class CompleteDatabase implements Serializable{
 		professors = new ArrayList<Profesor>();
 		subjects = new ArrayList<Subject>();
 		grades = new ArrayList<Grade>();
+		chairs  = new ArrayList<Chair>();
 	}
 
 
@@ -84,6 +88,22 @@ public class CompleteDatabase implements Serializable{
 		this.grades = grades;
 	}
 	
+	
+	
+	public List<Chair> getChairs() {
+		return chairs;
+	}
+
+
+
+
+	public void setChairs(List<Chair> chairs) {
+		this.chairs = chairs;
+	}
+
+
+
+
 	public static void fillDatabase() {
 		
 		ProfessorDatabase professorDatabase = ProfessorDatabase.getDatabase();
@@ -361,6 +381,14 @@ public class CompleteDatabase implements Serializable{
 		c6.getProfOnChair().add(p18);
 		c1.getProfOnChair().add(p19);
 		
+		ChairDatabase chairDatabase = ChairDatabase.getInstance();
+		chairDatabase.addChairIntoTable(c1);
+		chairDatabase.addChairIntoTable(c2);
+		chairDatabase.addChairIntoTable(c3);
+		chairDatabase.addChairIntoTable(c4);
+		chairDatabase.addChairIntoTable(c5);
+		chairDatabase.addChairIntoTable(c6);
+		
 		professorTable.updateTable();
 		studentTable.updateTable();
 		subjectTable.updateTable();
@@ -370,6 +398,8 @@ public class CompleteDatabase implements Serializable{
 		professorTeachesSubjectTable.updateTable();
 		passedExamsTable.updateTable();
 		unpassedExamsTable.updateTable();
+		ChairTable chairTable = ChairTable.getInstance();
+		chairTable.updateTable();
 	}
 
 }

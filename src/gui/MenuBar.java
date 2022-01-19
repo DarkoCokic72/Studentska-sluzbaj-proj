@@ -228,6 +228,17 @@ public class MenuBar extends JMenuBar{
 				CentralPanel.getCentralPanel().setSelectedIndex(2);
 			}
 		});
+		
+		miChair.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				ChairDialog chairDialog = ChairDialog.getInstance();
+				chairDialog.setLocationRelativeTo(MainFrame.getMainFrame());
+				
+			}
+		});
 	}
 	
 	public static void initComponents() {

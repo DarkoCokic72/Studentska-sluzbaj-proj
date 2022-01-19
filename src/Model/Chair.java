@@ -1,8 +1,13 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Chair {
+public class Chair implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8565282543514280259L;
 	private String code;
 	private String nameOfChair;
 	private Profesor directorOfChair;
