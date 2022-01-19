@@ -74,5 +74,16 @@ public class ChairDatabase {
 	}
 	
 	
+	public Chair getByCode(String code) {
+		for(Chair c: chairs) {
+			if(c.getCode().equalsIgnoreCase(code)) {
+				return c;
+			}
+		}
+		
+		return null;
+	}
+	
+	
 
 }

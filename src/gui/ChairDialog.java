@@ -3,6 +3,9 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -10,8 +13,11 @@ import java.awt.event.WindowListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import Model.ChairDatabase;
 
 public class ChairDialog extends JDialog{
 	private static ChairDialog chairDialog = null;
@@ -30,6 +36,21 @@ public class ChairDialog extends JDialog{
 		
 		setBtn = new JButton("Postavi šefa katedre");
 		setBtn.setPreferredSize(new Dimension(150, 30));
+		
+		setBtn.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				int selectedRow = ChairTable.getInstance().getSelectedRow();
+				if(selectedRow != -1) {
+					SetDirectorOfChairDialog setDialog = SetDirectorOfChairDialog.getInstance(ChairDatabase.getInstance().
+							getChairFromRow(selectedRow).getCode());
+					setDialog.setLocationRelativeTo(MainFrame.getMainFrame());
+					setDialog.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(null, "Izaberite vrstu za katedru kome postavljate šefa.");
+					return;
+				}
+			}
+		});
 		
 		JPanel north = new JPanel();
 		north.add(setBtn, BorderLayout.WEST);
