@@ -4,12 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import Model.Subject;
+import Model.SubjectDatabase;
 
 
 public class UnpassedExamsTab extends JPanel{

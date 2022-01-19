@@ -15,7 +15,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Controller.GradeController;
@@ -64,11 +63,12 @@ public class GradeAnnulmentDialog extends JDialog {
 				GradeController gradeController = GradeController.getGradeController();
 				gradeController.annulment();
 				
-				if(GradeController.gradeAnnuled) {
+				if(GradeController.gradeAnnuled || GradeController.exists == false) {
 					
 					dispose();
 					GradeController.gradeAnnuled = false;
 					gradeAnnulmentDialog = null;
+					GradeController.exists = false;
 				}
 			}
 	

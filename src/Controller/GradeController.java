@@ -2,10 +2,13 @@ package Controller;
 
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
 import Model.Grade;
 import Model.Student;
 import Model.StudentDatabase;
 import Model.Subject;
+import Model.SubjectDatabase;
 import gui.GradeAnnulmentDialog;
 import gui.GradeDatabase;
 import gui.GradeEntryDialog;
@@ -20,6 +23,7 @@ public class GradeController {
 	private static GradeController gradeContr = null;
 	public static boolean gradeEntried = false;
 	public static boolean gradeAnnuled = false;
+	public static boolean exists = false;
 	
 	public void entry() {
 		
@@ -34,6 +38,20 @@ public class GradeController {
 			} 
 		}
 		
+		
+		for(Subject s: SubjectDatabase.getDatabase().getSubjects()) {
+			if(s.getSubjectCode().equals(subject.getSubjectCode())) {
+				exists = true;
+			}
+		}
+		if(exists == false) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("subjectDoesntExist"));
+				return;
+			}
+			JOptionPane.showMessageDialog(null, "Izabrani predmet više ne postoji.");
+			return;
+		}
 		
 		int grade = GradeEntryDialog.getGrade();
 		String dateString = GradeEntryDialog.getDate().getText().trim();
@@ -91,6 +109,21 @@ public class GradeController {
 		int selectedRow = StudentTable.getTable().getSelectedRow();
 		Student student = StudentDatabase.getInstance().getStudentFromRow(selectedRow);
 		Grade grade = GradeDatabase.getInstance().getGradeFromRow(GradeAnnulmentDialog.selectedRow);
+		Subject subjectCheck = grade.getPassedSubject();
+	
+		for(Subject s: SubjectDatabase.getDatabase().getSubjects()) {
+			if(s.getSubjectCode().equals(subjectCheck.getSubjectCode())) {
+				exists = true;
+			}
+		}
+		if(exists == false) {
+			if(MainFrame.languageChanged) {
+				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("subjectDoesntExist"));
+				return;
+			}
+			JOptionPane.showMessageDialog(null, "Izabrani predmet više ne postoji.");
+			return;
+		}
 		Subject subject = grade.getPassedSubject();
 	
 		GradeDatabase.getInstance().getGrades().remove(grade);
