@@ -8,6 +8,7 @@ import Controller.Converter;
 import Model.Profesor.Zvanje;
 import Model.Student.Status;
 import Model.Subject.Term;
+import gui.GradeDatabase;
 import gui.PassedExamsTable;
 import gui.ProfessorJTable;
 import gui.ProffesorTeachesSubjectTable;
@@ -306,6 +307,17 @@ public class CompleteDatabase implements Serializable{
 		Grade g7 = new Grade(s16, subj15, 10, Converter.convertStringToDate("12.01.2018"));
 		Grade g8 = new Grade(s15, subj16, 10, Converter.convertStringToDate("01.01.2021"));
 		Grade g9 = new Grade(s16, subj16, 9, Converter.convertStringToDate("04.02.2019"));
+		
+		GradeDatabase gradeDatabase = GradeDatabase.getInstance();
+		gradeDatabase.addGrade(g1);
+		gradeDatabase.addGrade(g2);
+		gradeDatabase.addGrade(g3);
+		gradeDatabase.addGrade(g4);
+		gradeDatabase.addGrade(g5);
+		gradeDatabase.addGrade(g6);
+		gradeDatabase.addGrade(g7);
+		gradeDatabase.addGrade(g8);
+		gradeDatabase.addGrade(g9);
 		
 		s4.getPassedCourses().add(g1);
 		s4.getPassedCourses().add(g2);

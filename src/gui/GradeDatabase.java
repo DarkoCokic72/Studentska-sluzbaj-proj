@@ -8,6 +8,7 @@ import java.util.Date;
 import Model.Grade;
 import Model.Student;
 import Model.StudentDatabase;
+import Model.Subject;
 
 public class GradeDatabase {
 	private static GradeDatabase gradeDatabase = null;
@@ -66,6 +67,11 @@ public class GradeDatabase {
 	public void setGrades(ArrayList<Grade> grades) {
 		this.grades = grades;
 	}
+	
+	public void addGrade(Grade grade) {
+		grades.add(grade);
+	}
+	
 
 	private String dateFormat(Date date) {
 		DateFormat dateFormat;

@@ -41,7 +41,8 @@ public class GradeController {
 			
 		Date date = Converter.convertStringToDate(dateString);
 		Grade g = new Grade(student, subject, grade, date);
-		GradeDatabase.getInstance().getGrades().add(g);
+		GradeDatabase gradeDatabase = GradeDatabase.getInstance();
+		gradeDatabase.addGrade(g);
 			
 		//dodavanje ocene u polozene predmete
 		student.getPassedCourses().add(g);
@@ -95,10 +96,8 @@ public class GradeController {
 		GradeDatabase.getInstance().getGrades().remove(grade);
 		
 		student.getPassedCourses().remove(grade);
-		PassedExamsTable.getInstance().updateTable();
 		
 		student.getUnpassedCourses().add(subject);
-		UnpassedExamsTable.getTable().updateTable();
 		
 		student.setAvgMark();
 		double average = student.getAvgMark();
@@ -124,6 +123,9 @@ public class GradeController {
 		
 		subject.getStudentWhoPassed().remove(student);
 		subject.getStudentWhoDidNotPassed().add(student);
+		
+		PassedExamsTable.getInstance().updateTable();
+		UnpassedExamsTable.getTable().updateTable();
 		
 		gradeAnnuled = true;
 		

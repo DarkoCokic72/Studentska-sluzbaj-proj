@@ -27,6 +27,8 @@ public class PassedExamsTable extends JTable{
 	
 	public void updateTable() {
     	model.fireTableDataChanged();
+    	repaint();
+    	validate();
     }
 	
 	public static PassedExamsTable getInstance() {
