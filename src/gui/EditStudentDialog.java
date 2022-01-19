@@ -17,6 +17,8 @@ public class EditStudentDialog extends JDialog{
 	
 	public EditStudentDialog() {
 		
+		int selectedRow = StudentTable.getTable().getSelectedRow();
+		
 		setVisible(true);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int heigth = d.height;

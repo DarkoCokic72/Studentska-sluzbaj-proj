@@ -164,10 +164,12 @@ public class EditStudentInformationTab extends JPanel {
 		northPanel.add(address);
 		
 		Address address = student.getAddress();
-		streetField.setText(address.getStreetName());
-		streetNumberField.setText(address.getStreetNumber());
-		cityField.setText(address.getCity());
-		countryField.setText(address.getCountry());
+		if(address!= null) {
+			streetField.setText(address.getStreetName());
+			streetNumberField.setText(address.getStreetNumber());
+			cityField.setText(address.getCity());
+			countryField.setText(address.getCountry());
+		}
 		streetField.addFocusListener(new EditStudentListener(3, streetField));
 		streetNumberField.addFocusListener(new EditStudentListener(4, streetNumberField));
 		cityField.addFocusListener(new EditStudentListener(5, cityField));

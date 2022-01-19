@@ -8,7 +8,9 @@ import Controller.Converter;
 import Model.Profesor.Zvanje;
 import Model.Student.Status;
 import Model.Subject.Term;
+import gui.PassedExamsTable;
 import gui.ProfessorJTable;
+import gui.ProffesorTeachesSubjectTable;
 import gui.StudentTable;
 import gui.SubjectJTable;
 import gui.UnpassedExamsTable;
@@ -108,7 +110,7 @@ public class CompleteDatabase implements Serializable{
 		Profesor p3 = new Profesor("Ilija", "Petkovic", Converter.convertStringToDate("03.09.1988."), "ilija.petkovic@malinator.com", "021/215-314", a3, a10, 456456456, 22, Zvanje.VANREDNI_PROFESOR);
 		Profesor p4 = new Profesor("Mitar", "Petrovic", Converter.convertStringToDate("25.07.1976."), "mitar.petrovic@malinator.com", "021/884-640", a4, a10, 789789789, 27, Zvanje.VANREDNI_PROFESOR);
 		Profesor p5 = new Profesor("Vasa", "Micic", Converter.convertStringToDate("14.02.1970."), "vasa.micic@malinator.com", "021/212-114", a5, a10, 100100144, 24, Zvanje.DOCENT);
-		Profesor p6 = new Profesor("Srdjan", "Miletic", Converter.convertStringToDate("20.04.1966."), "mitar.petrovic@malinator.com", "021/978-225", a6, a10, 200020244, 31, Zvanje.DOCENT);
+		Profesor p6 = new Profesor("Srdjan", "Miletic", Converter.convertStringToDate("20.04.1966."), "srdjan.miletic@malinator.com", "021/978-225", a6, a10, 200020244, 31, Zvanje.DOCENT);
 		Profesor p7 = new Profesor("Branislav", "Mihajlovic", Converter.convertStringToDate("28.06.1980."), "branislav.mihajlovic@malinator.com", "021/778-323", a7, a10, 559585632, 13, Zvanje.REDOVNI_PROFESOR);
 		Profesor p8 = new Profesor("Marko", "Markovic", Converter.convertStringToDate("31.01.1985."), "marko.markovic@malinator.com", "021/899-659", a8, a10, 334968855, 17, Zvanje.REDOVNI_PROFESOR);
 		Profesor p9 = new Profesor("Milos", "Milakovic", Converter.convertStringToDate("21.09.1975."), "milos.milakovic@malinator.com", "021/122-326", a9, a10, 730703654, 12, Zvanje.VANREDNI_PROFESOR);
@@ -181,6 +183,8 @@ public class CompleteDatabase implements Serializable{
 		Subject subj28 = new Subject("p28", "Projektovanje softvera", Term.WINTER, 3, p18, 5);
 		Subject subj29 = new Subject("p29", "Informacioni sistemi", Term.WINTER, 4, p17, 6);
 		Subject subj30 = new Subject("p30", "Masinsko ucenje", Term.SUMMER, 4, null, 7);
+		
+		
 		
 		p2.getSubjectsTeaches().add(subj1);
 		p2.getSubjectsTeaches().add(subj2);
@@ -318,11 +322,42 @@ public class CompleteDatabase implements Serializable{
 		s15.setAvgMark();
 		s16.setAvgMark();
 		
-		UnpassedExamsTable unpassedExamsTable = UnpassedExamsTable.getTable();
-		unpassedExamsTable.updateTable();
+		Chair c1 = new Chair("e42", "Katedra za matematiku", p2);
+		Chair c2 = new Chair("e43", "Katedra za fiziku", p3);
+		Chair c3 = new Chair("e44", "Katedra za elektrotehniku", p4);
+		Chair c4 = new Chair("e45", "Katedra za primenjene racunarske nauke", p7);
+		Chair c5 = new Chair("e46", "Katedra za informatiku", p13);
+		Chair c6 = new Chair("e47", "Katedra za automatiku", p18);
+		
+		c1.getProfOnChair().add(p1);
+		c2.getProfOnChair().add(p2);
+		c3.getProfOnChair().add(p3);
+		c4.getProfOnChair().add(p4);
+		c5.getProfOnChair().add(p5);
+		c6.getProfOnChair().add(p6);
+		c1.getProfOnChair().add(p7);
+		c2.getProfOnChair().add(p8);
+		c3.getProfOnChair().add(p9);
+		c4.getProfOnChair().add(p10);
+		c5.getProfOnChair().add(p11);
+		c6.getProfOnChair().add(p12);
+		c1.getProfOnChair().add(p13);
+		c2.getProfOnChair().add(p14);
+		c3.getProfOnChair().add(p15);
+		c4.getProfOnChair().add(p16);
+		c5.getProfOnChair().add(p17);
+		c6.getProfOnChair().add(p18);
+		c1.getProfOnChair().add(p19);
+		
 		professorTable.updateTable();
 		studentTable.updateTable();
 		subjectTable.updateTable();
+		UnpassedExamsTable unpassedExamsTable = UnpassedExamsTable.getTable();
+		PassedExamsTable passedExamsTable = PassedExamsTable.getInstance();
+		ProffesorTeachesSubjectTable professorTeachesSubjectTable = ProffesorTeachesSubjectTable.getInstance();
+		professorTeachesSubjectTable.updateTable();
+		passedExamsTable.updateTable();
+		unpassedExamsTable.updateTable();
 	}
 
 }

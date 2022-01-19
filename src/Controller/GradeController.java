@@ -6,7 +6,6 @@ import Model.Grade;
 import Model.Student;
 import Model.StudentDatabase;
 import Model.Subject;
-import gui.EditStudentDialog;
 import gui.GradeAnnulmentDialog;
 import gui.GradeDatabase;
 import gui.GradeEntryDialog;
@@ -24,51 +23,53 @@ public class GradeController {
 	
 	public void entry() {
 		
-		Student student = StudentDatabase.getInstance().getStudentFromRow(EditStudentDialog.selectedRow);
-		
+		int selectedRow = StudentTable.getTable().getSelectedRow();
+		Student student = StudentDatabase.getInstance().getStudentFromRow(selectedRow);
+	
 		String subjectCode = GradeEntryDialog.getSubjectCodeField().getText();
 		Subject subject = null;
 		for(Subject s: student.getUnpassedCourses()) {
 			if(s.getSubjectCode().equals(subjectCode)) {
 				subject = s;
-			}
+			} 
 		}
+		
 		
 		int grade = GradeEntryDialog.getGrade();
 		String dateString = GradeEntryDialog.getDate().getText().trim();
 		if(Validation.checkDate(dateString) == true) {
 			
-			Date date = Converter.convertStringToDate(dateString);
-			Grade g = new Grade(student, subject, grade, date);
-			GradeDatabase.getInstance().getGrades().add(g);
+		Date date = Converter.convertStringToDate(dateString);
+		Grade g = new Grade(student, subject, grade, date);
+		GradeDatabase.getInstance().getGrades().add(g);
 			
-			//dodavanje ocene u polozene predmete
-			student.getPassedCourses().add(g);
-			PassedExamsTable.getInstance().updateTable();
+		//dodavanje ocene u polozene predmete
+		student.getPassedCourses().add(g);
+		PassedExamsTable.getInstance().updateTable();
 			
-			//brisanje iz nepolozenih predmeta
-			int selectedRowSubject = UnpassedExamsTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow());
-			student.getUnpassedCourses().remove(selectedRowSubject);
-			UnpassedExamsTable.getTable().updateTable();
+		//brisanje iz nepolozenih predmeta
+		//int selectedRowSubject = UnpassedExamsTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow());
+		student.getUnpassedCourses().remove(subject);
+		UnpassedExamsTable.getTable().updateTable();
 			
-			//promena proseka za studenta
-			student.setAvgMark();
-			double average = student.getAvgMark();
-			String averageTxt;
-			if(MainFrame.languageChanged) {
-				averageTxt = MainFrame.getMainFrame().getResourceBundle().getString("avgMark") + " : " + String.format("%.2f", average);
-			} else {
-				averageTxt = String.format("Prosečna ocena: %.2f", average);
-			}
-			PassedExamsTab.getAverageLabel().setText(averageTxt);
+		//promena proseka za studenta
+		student.setAvgMark();
+		double average = student.getAvgMark();
+		String averageTxt;
+		if(MainFrame.languageChanged) {
+			averageTxt = MainFrame.getMainFrame().getResourceBundle().getString("avgMark") + " : " + String.format("%.2f", average);
+		} else {
+			averageTxt = String.format("Prosečna ocena: %.2f", average);
+		}
+		PassedExamsTab.getAverageLabel().setText(averageTxt);
 			
-			//promena espb bodova koje je student osvojio
-			String textFromESPBLab = PassedExamsTab.getTotalESPBLabel().getText().trim();
-			String ESPBString = textFromESPBLab.replaceAll("[^\\d]", "");
-			int ESPB = Integer.parseInt(ESPBString);
-			ESPB = ESPB + subject.getESPB();
-			String espbTxt;
-			if(MainFrame.languageChanged) {
+		//promena espb bodova koje je student osvojio
+		String textFromESPBLab = PassedExamsTab.getTotalESPBLabel().getText().trim();
+		String ESPBString = textFromESPBLab.replaceAll("[^\\d]", "");
+		int ESPB = Integer.parseInt(ESPBString);
+		ESPB = ESPB + subject.getESPB();
+		String espbTxt;
+		if(MainFrame.languageChanged) {
 				espbTxt = MainFrame.getMainFrame().getResourceBundle().getString("totalESPBLabel") + " : " +String.format("%d", ESPB);
 			} else {
 				espbTxt = String.format("Ukupno ESPB: %d", ESPB);
@@ -86,7 +87,8 @@ public class GradeController {
 	
 	public void annulment() {
 		
-		Student student = StudentDatabase.getInstance().getStudentFromRow(EditStudentDialog.selectedRow);
+		int selectedRow = StudentTable.getTable().getSelectedRow();
+		Student student = StudentDatabase.getInstance().getStudentFromRow(selectedRow);
 		Grade grade = GradeDatabase.getInstance().getGradeFromRow(GradeAnnulmentDialog.selectedRow);
 		Subject subject = grade.getPassedSubject();
 	

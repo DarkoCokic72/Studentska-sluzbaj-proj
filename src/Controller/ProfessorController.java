@@ -13,6 +13,7 @@ import Model.Address;
 import Model.Profesor;
 import Model.Profesor.Zvanje;
 import Model.ProfessorDatabase;
+import Model.Subject;
 import gui.AddProfessorDialog;
 import gui.EditProfessorInformationTab;
 import gui.ProfessorJTable;
@@ -141,6 +142,11 @@ public class ProfessorController {
 			for(Profesor p: professorList) {
 				if(p.getPersonalID() == id) {
 					professorList.remove(i);
+					ProfessorDatabase.getDatabase().setProfessors(professorList);
+					ArrayList<Subject> subjectTeaches = p.getSubjectsTeaches();
+					for(Subject s: subjectTeaches) {
+						s.setSubjectProfessor(null);
+					}
 					break;
 				}
 				i++;
@@ -148,6 +154,7 @@ public class ProfessorController {
 			
 			ProfessorJTable professorTable = ProfessorJTable.getTable();
 			professorTable.updateTable();
+			
 					
 		}
 		

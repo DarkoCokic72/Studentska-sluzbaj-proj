@@ -103,7 +103,7 @@ public class UnpassedExamsTab extends JPanel{
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				int selectedRow = UnpassedExamsTable.getTable().convertRowIndexToModel(UnpassedExamsTable.getTable().getSelectedRow());
+				int selectedRow = UnpassedExamsTable.getTable().getSelectedRow();
 				if(selectedRow == -1) {
 					if(MainFrame.languageChanged) {
 						JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));

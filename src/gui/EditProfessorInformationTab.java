@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -170,10 +168,12 @@ public class EditProfessorInformationTab extends JPanel {
 		northPanel.add(address);
 		
 		Address address = professor.getAddress();
-		streetField.setText(address.getStreetName());
-		streetNumberField.setText(address.getStreetNumber());
-		cityField.setText(address.getCity());
-		countryField.setText(address.getCountry());
+		if(address != null) {
+			streetField.setText(address.getStreetName());
+			streetNumberField.setText(address.getStreetNumber());
+			cityField.setText(address.getCity());
+			countryField.setText(address.getCountry());
+		}
 		streetField.addFocusListener(new EditProfessorListener(streetField, 3));
 		streetNumberField.addFocusListener(new EditProfessorListener(streetNumberField, 4));
 		cityField.addFocusListener(new EditProfessorListener(cityField, 5));
@@ -226,10 +226,12 @@ public class EditProfessorInformationTab extends JPanel {
 		northPanel.add(officeAddress);
 		
 		Address officeAddress = professor.getOfficeAddress();
-		officeStreetField.setText(officeAddress.getStreetName());
-		officeStreetNumberField.setText(officeAddress.getStreetNumber());
-		officeCityField.setText(officeAddress.getCity());
-		officeCountryField.setText(officeAddress.getCountry());
+		if(officeAddress != null) {
+			officeStreetField.setText(officeAddress.getStreetName());
+			officeStreetNumberField.setText(officeAddress.getStreetNumber());
+			officeCityField.setText(officeAddress.getCity());
+			officeCountryField.setText(officeAddress.getCountry());
+		}
 		officeStreetField.addFocusListener(new EditProfessorListener(officeStreetField, 9));
 		officeStreetNumberField.addFocusListener(new EditProfessorListener(officeStreetNumberField, 10));
 		officeCityField.addFocusListener(new EditProfessorListener(officeCityField, 11));

@@ -41,8 +41,8 @@ public class PassedExamsTable extends JTable{
 		passedExamsTable.getColumnModel().getColumn(0).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("subjectCode"));
  		passedExamsTable.getColumnModel().getColumn(1).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("subjectName"));
  		passedExamsTable.getColumnModel().getColumn(2).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("ESPB"));
- 		passedExamsTable.getColumnModel().getColumn(3).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("date"));
- 		passedExamsTable.getColumnModel().getColumn(4).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("grade"));
+ 		passedExamsTable.getColumnModel().getColumn(3).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("grade"));
+ 		passedExamsTable.getColumnModel().getColumn(4).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("date"));
  		
  		ArrayList<Grade> gradeList = GradeDatabase.getInstance().getGrades();
  		for(Grade g: gradeList) {

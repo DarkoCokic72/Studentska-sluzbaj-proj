@@ -3,12 +3,14 @@ package Controller;
 import java.util.ArrayList;
 
 import Model.Profesor;
+import Model.Student;
 import Model.Subject;
 import Model.Subject.Term;
 import Model.SubjectDatabase;
 import gui.AddSubjectDialog;
 import gui.EditSubjectInformationTab;
 import gui.SubjectJTable;
+import gui.UnpassedExamsTable;
 
 public class SubjectController {
 	
@@ -26,14 +28,27 @@ public class SubjectController {
 		
 		for(Subject s: subjectList) {
 			if(s.getSubjectCode().equals(code)) {
+				
+				ArrayList<Student> students = s.getStudentWhoDidNotPassed();
+				for(Student stud: students) {
+					stud.getUnpassedCourses().remove(s);
+				}
 				subjectList.remove(i);
+				SubjectDatabase.getDatabase().setSubjects(subjectList);
+				Profesor p = s.getSubjectProfessor();
+				if(p != null) {
+					p.getSubjectsTeaches().remove(s);
+				}
+				
 				break;
+				
 			}
 			i++;
 		}
 		
 		SubjectJTable subjectTable = SubjectJTable.getTable();
 		subjectTable.updateTable();
+		UnpassedExamsTable.getTable().updateTable();
 				
 	}
 	

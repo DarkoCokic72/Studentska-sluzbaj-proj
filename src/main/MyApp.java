@@ -10,9 +10,8 @@ public class MyApp {
 		
 		Deserialization deserialization = Deserialization.getInstance();
 		deserialization.deserialize();
-		MainFrame mf = MainFrame.getMainFrame();
-		
 		//CompleteDatabase.fillDatabase();
+		MainFrame mf = MainFrame.getMainFrame();
 		
 	}
 	
