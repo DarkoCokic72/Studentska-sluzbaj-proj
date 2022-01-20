@@ -3,6 +3,7 @@ package gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 
@@ -53,10 +54,10 @@ public class MenuBar extends JMenuBar{
 		miSubject = new JMenuItem("Predmeti");
 		miChair = new JMenuItem("Katedre");
 		
-		miStudent.setIcon(new ImageIcon("images/student.png"));
-		miProfesor.setIcon(new ImageIcon("images/teacher.png"));
-		miSubject.setIcon(new ImageIcon("images/books-icon.png"));
-		miChair.setIcon(new ImageIcon("images/university.png"));
+		miStudent.setIcon(new ImageIcon("images" + File.separator + "student.png"));
+		miProfesor.setIcon(new ImageIcon("images" + File.separator + "teacher.png"));
+		miSubject.setIcon(new ImageIcon("images" + File.separator + "books-icon.png"));
+		miChair.setIcon(new ImageIcon("images" + File.separator + "university.png"));
 		
 		miStudent.setMnemonic('t');
 		miProfesor.setMnemonic('P');
@@ -75,10 +76,10 @@ public class MenuBar extends JMenuBar{
 		
 		miClose = new JMenuItem("Close");
 		
-		miNew.setIcon(new ImageIcon("images/new-file-icon.png"));
-		miSave.setIcon(new ImageIcon("images/Save-as-icon.png"));
-		miOpen.setIcon(new ImageIcon("images/open-file-icon.png"));
-		miClose.setIcon(new ImageIcon("images/Close-2-icon.png"));
+		miNew.setIcon(new ImageIcon("images" + File.separator + "new-file-icon.png"));
+		miSave.setIcon(new ImageIcon("images" + File.separator + "Save-as-icon.png"));
+		miOpen.setIcon(new ImageIcon("images" + File.separator + "open-file-icon.png"));
+		miClose.setIcon(new ImageIcon("images" + File.separator + "Close-2-icon.png"));
 		
 		miNew.setMnemonic('N');
 		miSave.setMnemonic('S');
@@ -112,8 +113,8 @@ public class MenuBar extends JMenuBar{
 		miEdit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
 		miDelete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, ActionEvent.SHIFT_MASK));
 		
-		miEdit.setIcon(new ImageIcon("images/edit-icon.png"));
-		miDelete.setIcon(new ImageIcon("images/trash-icon.png"));
+		miEdit.setIcon(new ImageIcon("images" + File.separator + "edit-icon.png"));
+		miDelete.setIcon(new ImageIcon("images" + File.separator + "trash-icon.png"));
 		
 		edit.add(miEdit);
 		edit.addSeparator();
@@ -125,14 +126,24 @@ public class MenuBar extends JMenuBar{
 		miHelp = new JMenuItem("Help");
 		miAbout = new JMenuItem("About");
 		
-		miHelp.setIcon(new ImageIcon("images/Help-icon.png"));
-		miAbout.setIcon(new ImageIcon("images/icons8-about-32.png"));
+		miHelp.setIcon(new ImageIcon("images" + File.separator + "Help-icon.png"));
+		miAbout.setIcon(new ImageIcon("images" + File.separator + "icons8-about-32.png"));
 		
 		miHelp.setMnemonic('H');
 		miAbout.setMnemonic('A');
 		
 		miHelp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, (int) ActionEvent.KEY_EVENT_MASK));
 		miAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
+		
+		miAbout.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				AboutDialog aboutDialog = AboutDialog.getInstance();
+				aboutDialog.setLocationRelativeTo(MainFrame.getMainFrame());
+			}
+		});
 		
 		miEnglish = new JRadioButtonMenuItem("English");
 		miEnglish.addActionListener(new ActionListener() {
