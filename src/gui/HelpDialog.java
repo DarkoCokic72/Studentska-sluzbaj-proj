@@ -2,7 +2,9 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.io.File;
 
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -10,20 +12,25 @@ import javax.swing.JTextArea;
 
 public class HelpDialog extends JDialog{
 	private static HelpDialog instace = null;
+	private static JLabel infoLabel;
+	private static JTextArea tekst;
 	
 	public HelpDialog() {
+		
 		setVisible(true);
 		setTitle("Pomoć");
 		setSize(600, 500);
 		setLocationRelativeTo(MainFrame.getMainFrame());
 		setLayout(new BorderLayout());
+		ImageIcon img = new ImageIcon("images" + File.separator + "Help-icon.png");
+		setIconImage(img.getImage());
 		
-		JLabel infoLabel = new JLabel();
+		infoLabel = new JLabel();
 		infoLabel.setText("Dobro došli! U ovom prozoru možete naći sve što je potrebno za rad u ovoj aplikaciji.");
 		infoLabel.setBounds(12, 12, 0, 0);
 		add(infoLabel, BorderLayout.NORTH);
 		
-		JTextArea tekst = new JTextArea();
+		tekst = new JTextArea();
 		tekst.setEditable(false);
 		tekst.setSize(540, 450);
 		
@@ -99,6 +106,20 @@ public class HelpDialog extends JDialog{
 		if(instace == null)
 			instace = new HelpDialog();
 		
+		if(MainFrame.languageChanged) {
+			initComponents();
+		}
+		
 		return instace;
+	}
+	
+	public static void initComponents() {
+		
+		instace.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("helpDialogTitle"));
+		infoLabel.setText(MainFrame.getMainFrame().getResourceBundle().getString("infoLabelAboutDialog"));
+		tekst.setText(MainFrame.getMainFrame().getResourceBundle().getString("helpDialogText"));
+		
+		
+		
 	}
 }
