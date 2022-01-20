@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -24,7 +25,7 @@ public class EditSubjectDialog extends JDialog {
 		int heigth = d.height;
 		int width = d.width;
 		setSize(width * 3/8, heigth* 25/37);		
-		ImageIcon img = new ImageIcon("images/Pen-5-icon.png");
+		ImageIcon img = new ImageIcon("images" + File.separator + "Pen-5-icon.png");
 		setIconImage(img.getImage());
 		setTitle("Izmena predmeta");
 		setResizable(false);

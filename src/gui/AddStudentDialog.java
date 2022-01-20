@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
@@ -90,7 +91,7 @@ public class AddStudentDialog extends JDialog {
 		int width = d.width;
 		int height = d.height;
 		setSize(width * 3/8, height * 300 /444);
-		ImageIcon img = new ImageIcon("images/Plus-icon.png");
+		ImageIcon img = new ImageIcon("images" + File.separator + "Plus-icon.png");
 		setIconImage(img.getImage());
 		setTitle("Dodavanje studenta");
 		setResizable(false);
