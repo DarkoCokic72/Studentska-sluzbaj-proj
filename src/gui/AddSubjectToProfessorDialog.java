@@ -27,14 +27,14 @@ public class AddSubjectToProfessorDialog extends JDialog{
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;
 		int width = d.width;
-		setSize(width / 4 , height * 3/8);
+		setSize(width / 4 , height * 4/8);
 		setLocationRelativeTo(EditProfessorDialog.getEditProfessorDialog());
 		setResizable(false);
 		setModal(true);
 		setLayout(new BorderLayout());
 		
 		JPanel north = new JPanel();
-		JPanel south = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		JPanel south = new JPanel();
 		
 		north.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
@@ -43,7 +43,7 @@ public class AddSubjectToProfessorDialog extends JDialog{
 		AddSubjectToProfessorTable table = AddSubjectToProfessorTable.getInstance();
 		
 		JScrollPane scroll = new JScrollPane(table);
-		scroll.setPreferredSize(new Dimension(400, 400));
+		//scroll.setPreferredSize(new Dimension(400, 400));
 		scroll.setBorder(BorderFactory.createEmptyBorder(21,21,11,21));
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
@@ -56,7 +56,7 @@ public class AddSubjectToProfessorDialog extends JDialog{
 		confirm.setPreferredSize(new Dimension(90, 30));
 		cancel.setPreferredSize(new Dimension(90, 30));
 		
-		north.add(table);
+		north.add(scroll);
 		
 		
 		
