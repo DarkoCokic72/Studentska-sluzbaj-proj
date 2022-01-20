@@ -12,6 +12,7 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 
 import Controller.MainController;
@@ -37,8 +38,8 @@ public class MenuBar extends JMenuBar{
 	private static JMenu help;
 	private static JMenuItem miHelp;
 	private static JMenuItem miAbout;
-	private static JCheckBoxMenuItem miEnglish;
-	private static JCheckBoxMenuItem miSerbian;
+	private static JRadioButtonMenuItem miEnglish;
+	private static JRadioButtonMenuItem miSerbian;
 	
 	public MenuBar() {
 		
@@ -133,7 +134,7 @@ public class MenuBar extends JMenuBar{
 		miHelp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, (int) ActionEvent.KEY_EVENT_MASK));
 		miAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
 		
-		miEnglish = new JCheckBoxMenuItem("English");
+		miEnglish = new JRadioButtonMenuItem("English");
 		miEnglish.addActionListener(new ActionListener() {
 
 			@Override
@@ -145,7 +146,7 @@ public class MenuBar extends JMenuBar{
 			}
 		});
 		
-		miSerbian = new JCheckBoxMenuItem("Serbian");
+		miSerbian = new JRadioButtonMenuItem("Serbian");
 		miSerbian.addActionListener(new ActionListener() {
 			
 			@Override
@@ -156,10 +157,11 @@ public class MenuBar extends JMenuBar{
 				MainFrame.getMainFrame().changeLanguage();
 			}
 		});
-			
-		ButtonGroup bg = new ButtonGroup();
-		bg.add(miSerbian);
-		bg.add(miEnglish);
+
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(miEnglish);
+		group.add(miSerbian);
 		
 		help.add(miEnglish);
 		help.add(miSerbian);
