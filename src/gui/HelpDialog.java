@@ -9,7 +9,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class HelpDialog extends JDialog{
+	private static HelpDialog instace = null;
+	
 	public HelpDialog() {
+		setVisible(true);
 		setTitle("Pomoć");
 		setSize(600, 500);
 		setLocationRelativeTo(MainFrame.getMainFrame());
@@ -90,5 +93,12 @@ public class HelpDialog extends JDialog{
 		
 		
 		
+	}
+	
+	public static HelpDialog getInstance() {
+		if(instace == null)
+			instace = new HelpDialog();
+		
+		return instace;
 	}
 }

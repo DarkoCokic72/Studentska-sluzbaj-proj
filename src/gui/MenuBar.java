@@ -145,6 +145,17 @@ public class MenuBar extends JMenuBar{
 			}
 		});
 		
+		miHelp.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				HelpDialog help = HelpDialog.getInstance();
+				help.setLocationRelativeTo(MainFrame.getMainFrame());
+				
+			}
+		});
+		
 		miEnglish = new JRadioButtonMenuItem("English");
 		miEnglish.addActionListener(new ActionListener() {
 
