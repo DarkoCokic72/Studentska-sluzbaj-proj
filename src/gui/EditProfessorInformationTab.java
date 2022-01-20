@@ -293,6 +293,8 @@ public class EditProfessorInformationTab extends JPanel {
 			    	EditProfessorDialog.deleteEditProfessorDialog();
 			    	editProfessorInformationTab = null;
 				    professorContr.professorEdited = false;
+				    ProfesorSubjectsPanel.deleteInstance();
+					RemoveSubjectFromProfessor.deleteInstance();
 				}
 				
 
@@ -315,6 +317,8 @@ public class EditProfessorInformationTab extends JPanel {
 		    	EditProfessorPanel.deleteEditProfessorPanel();
 		    	EditProfessorDialog.deleteEditProfessorDialog();
 		    	editProfessorInformationTab = null;
+		    	ProfesorSubjectsPanel.deleteInstance();
+				RemoveSubjectFromProfessor.deleteInstance();
 		    	
 			}
 

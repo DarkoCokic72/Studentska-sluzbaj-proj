@@ -70,9 +70,13 @@ public class ProfesorSubjectsPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				//RemoveSubjectFromProf
 				if(ProffesorTeachesSubjectTable.getInstance().getSelectedRow() != -1) {
-					RemoveSubjectFromProfessor remSubjFromProf = new RemoveSubjectFromProfessor();
+					RemoveSubjectFromProfessor remSubjFromProf = RemoveSubjectFromProfessor.getRemoveSubjectFromProfessor();
 					remSubjFromProf.setVisible(true);
 				} else {
+					if(MainFrame.languageChanged) {
+						JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));
+						return;
+					}
 					JOptionPane.showMessageDialog(EditProfessorDialog.getEditProfessorDialog(), "Označite vrstu koju želite da izbrišete");
 				}
 				
@@ -89,6 +93,10 @@ public class ProfesorSubjectsPanel extends JPanel {
 
 	public static void setRemoveBtn(JButton removeBtn) {
 		ProfesorSubjectsPanel.removeBtn = removeBtn;
+	}
+	
+	public static void deleteInstance() {
+		profsubjInstance = null;
 	}
 	
 	public static ProfesorSubjectsPanel getInstance() {
