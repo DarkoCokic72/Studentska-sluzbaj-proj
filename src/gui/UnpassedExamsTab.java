@@ -76,6 +76,7 @@ public class UnpassedExamsTab extends JPanel{
 						return;
 					}
 					JOptionPane.showMessageDialog(null, "Označite predmet u tabeli koji želite da obrišete");
+					return;
 				} else {
 				
 					RemoveSubjectFromStudent removeSubjectFromStudent = RemoveSubjectFromStudent.getRemoveSubjectFromStudentDialog(EditStudentDialog.getEditStudentDialog());

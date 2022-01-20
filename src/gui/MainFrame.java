@@ -23,6 +23,7 @@ public class MainFrame extends JFrame {
 	private ResourceBundle resourceBundle;
 	public static boolean languageChanged = false;
 	public static boolean englishLanguage = false;
+	public static boolean serbianLanguage = false;
 	
 	private MainFrame() { 
 			

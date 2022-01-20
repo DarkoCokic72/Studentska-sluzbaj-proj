@@ -48,11 +48,13 @@ public class ChairDialog extends JDialog{
 					setDialog.setVisible(true);
 				} else {
 					if(MainFrame.languageChanged) {
-						JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));
+						JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("dirOfChairMsgErr"));
+						return;
+					} else {
+						JOptionPane.showMessageDialog(null, "Izaberite vrstu za katedru kome postavljate šefa.");
 						return;
 					}
-					JOptionPane.showMessageDialog(null, "Izaberite vrstu za katedru kome postavljate šefa.");
-					return;
+
 				}
 			}
 		});
@@ -82,19 +84,21 @@ public class ChairDialog extends JDialog{
 		if(chairDialog == null)
 			chairDialog = new ChairDialog();
 		
-		if(MainFrame.languageChanged == true) {
-			initComponents();;
-		}
+
+		if(MainFrame.languageChanged == true)
+			initComponents();
+
 		
 		return chairDialog;
 	}
 	
 	public static void initComponents() {
-		
-		chairDialog.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("chairDialogTitle"));
-		setBtn.setText(MainFrame.getMainFrame().getResourceBundle().getString("setChairmanBtn"));
-		ChairTable.initComponents();
 
+		chairDialog.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("chairDialog"));
+		setBtn.setText(MainFrame.getMainFrame().getResourceBundle().getString("setDirOfChairBtn"));
+		
+		ChairTable.initComponents();
 	}
-    
 }
+    
+
