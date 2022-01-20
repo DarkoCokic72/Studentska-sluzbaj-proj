@@ -10,6 +10,7 @@ import Model.Student.Status;
 import Model.Subject.Term;
 import gui.ChairTable;
 import gui.GradeDatabase;
+import gui.GradeTable;
 import gui.PassedExamsTable;
 import gui.ProfessorJTable;
 import gui.ProffesorTeachesSubjectTable;
@@ -246,6 +247,79 @@ public class CompleteDatabase implements Serializable{
 		professorDatabase.addProfessorToTable(p19);
 		
 		
+		Grade g1 = new Grade(s4, subj5, 10, Converter.convertStringToDate("12.12.2017"));
+		Grade g2 = new Grade(s4, subj3, 9, Converter.convertStringToDate("10.11.2019"));
+		Grade g3 = new Grade(s4, subj1, 8, Converter.convertStringToDate("11.11.2020"));
+		Grade g4 = new Grade(s2, subj1, 10, Converter.convertStringToDate("20.11.2020"));
+		Grade g5 = new Grade(s2, subj5, 10, Converter.convertStringToDate("30.10.2021"));
+		Grade g6 = new Grade(s15, subj15, 7, Converter.convertStringToDate("10.11.2021"));
+		Grade g7 = new Grade(s16, subj15, 10, Converter.convertStringToDate("12.01.2018"));
+		Grade g8 = new Grade(s15, subj16, 10, Converter.convertStringToDate("01.01.2021"));
+		Grade g9 = new Grade(s16, subj16, 9, Converter.convertStringToDate("04.02.2019"));
+		
+		
+		GradeDatabase gradeDatabase = GradeDatabase.getInstance();
+		gradeDatabase.addGrade(g1);
+		gradeDatabase.addGrade(g2);
+		gradeDatabase.addGrade(g3);
+		gradeDatabase.addGrade(g4);
+		gradeDatabase.addGrade(g5);
+		gradeDatabase.addGrade(g6);
+		gradeDatabase.addGrade(g7);
+		gradeDatabase.addGrade(g8);
+		gradeDatabase.addGrade(g9);
+		
+		s4.getPassedCourses().add(g1);
+		s4.getPassedCourses().add(g2);
+		s4.getPassedCourses().add(g3);
+		s2.getPassedCourses().add(g4);
+		s2.getPassedCourses().add(g5);
+		s15.getPassedCourses().add(g6);
+		s16.getPassedCourses().add(g7);
+		s15.getPassedCourses().add(g8);
+		s16.getPassedCourses().add(g9);
+		
+		s4.getUnpassedCourses().add(subj2);
+		s4.getUnpassedCourses().add(subj4);
+		s17.getUnpassedCourses().add(subj15);
+		s18.getUnpassedCourses().add(subj15);
+		s22.getUnpassedCourses().add(subj18);
+		s23.getUnpassedCourses().add(subj18);
+		s24.getUnpassedCourses().add(subj18);
+		s26.getUnpassedCourses().add(subj18);
+		s22.getUnpassedCourses().add(subj19);
+		s23.getUnpassedCourses().add(subj19);
+		s24.getUnpassedCourses().add(subj19);
+		s26.getUnpassedCourses().add(subj19);
+		
+		s4.setAvgMark();
+		s2.setAvgMark();
+		s15.setAvgMark();
+		s16.setAvgMark();
+		
+		subj5.getStudentWhoPassed().add(s4);
+		subj3.getStudentWhoPassed().add(s4);
+		subj1.getStudentWhoPassed().add(s4);
+		subj1.getStudentWhoPassed().add(s2);
+		subj5.getStudentWhoPassed().add(s2);
+		subj15.getStudentWhoPassed().add(s15);
+		subj15.getStudentWhoPassed().add(s16);
+		subj16.getStudentWhoPassed().add(s15);
+		subj16.getStudentWhoPassed().add(s16);
+		
+		subj2.getStudentWhoDidNotPassed().add(s4);
+		subj4.getStudentWhoDidNotPassed().add(s4);
+		subj15.getStudentWhoDidNotPassed().add(s17);
+		subj15.getStudentWhoDidNotPassed().add(s18);
+		subj18.getStudentWhoDidNotPassed().add(s22);
+		subj18.getStudentWhoDidNotPassed().add(s23);
+		subj18.getStudentWhoDidNotPassed().add(s24);
+		subj18.getStudentWhoDidNotPassed().add(s26);
+		subj19.getStudentWhoDidNotPassed().add(s22);
+		subj19.getStudentWhoDidNotPassed().add(s23);
+		subj19.getStudentWhoDidNotPassed().add(s24);
+		subj19.getStudentWhoDidNotPassed().add(s26);
+		
 		studentDatabase.addStudentsIntoTable(s1);
 		studentDatabase.addStudentsIntoTable(s2);
 		studentDatabase.addStudentsIntoTable(s3);
@@ -305,54 +379,6 @@ public class CompleteDatabase implements Serializable{
 		subjectDatabase.addSubjectIntoTable(subj29);
 		subjectDatabase.addSubjectIntoTable(subj30);
 		
-		s4.getUnpassedCourses().add(subj2);
-		s4.getUnpassedCourses().add(subj4);
-		s17.getUnpassedCourses().add(subj15);
-		s18.getUnpassedCourses().add(subj15);
-		s22.getUnpassedCourses().add(subj18);
-		s23.getUnpassedCourses().add(subj18);
-		s24.getUnpassedCourses().add(subj18);
-		s26.getUnpassedCourses().add(subj18);
-		s22.getUnpassedCourses().add(subj19);
-		s23.getUnpassedCourses().add(subj19);
-		s24.getUnpassedCourses().add(subj19);
-		s26.getUnpassedCourses().add(subj19);
-		
-		Grade g1 = new Grade(s4, subj5, 10, Converter.convertStringToDate("12.12.2017"));
-		Grade g2 = new Grade(s4, subj3, 9, Converter.convertStringToDate("10.11.2019"));
-		Grade g3 = new Grade(s4, subj1, 8, Converter.convertStringToDate("11.11.2020"));
-		Grade g4 = new Grade(s2, subj1, 10, Converter.convertStringToDate("20.11.2020"));
-		Grade g5 = new Grade(s2, subj5, 10, Converter.convertStringToDate("30.10.2021"));
-		Grade g6 = new Grade(s15, subj15, 7, Converter.convertStringToDate("10.11.2021"));
-		Grade g7 = new Grade(s16, subj15, 10, Converter.convertStringToDate("12.01.2018"));
-		Grade g8 = new Grade(s15, subj16, 10, Converter.convertStringToDate("01.01.2021"));
-		Grade g9 = new Grade(s16, subj16, 9, Converter.convertStringToDate("04.02.2019"));
-		
-		GradeDatabase gradeDatabase = GradeDatabase.getInstance();
-		gradeDatabase.addGrade(g1);
-		gradeDatabase.addGrade(g2);
-		gradeDatabase.addGrade(g3);
-		gradeDatabase.addGrade(g4);
-		gradeDatabase.addGrade(g5);
-		gradeDatabase.addGrade(g6);
-		gradeDatabase.addGrade(g7);
-		gradeDatabase.addGrade(g8);
-		gradeDatabase.addGrade(g9);
-		
-		s4.getPassedCourses().add(g1);
-		s4.getPassedCourses().add(g2);
-		s4.getPassedCourses().add(g3);
-		s2.getPassedCourses().add(g4);
-		s2.getPassedCourses().add(g5);
-		s15.getPassedCourses().add(g6);
-		s16.getPassedCourses().add(g7);
-		s15.getPassedCourses().add(g8);
-		s16.getPassedCourses().add(g9);
-		
-		s4.setAvgMark();
-		s2.setAvgMark();
-		s15.setAvgMark();
-		s16.setAvgMark();
 		
 		Chair c1 = new Chair("e42", "Katedra za matematiku", p2);
 		Chair c2 = new Chair("e43", "Katedra za fiziku", p3);
@@ -392,14 +418,14 @@ public class CompleteDatabase implements Serializable{
 		professorTable.updateTable();
 		studentTable.updateTable();
 		subjectTable.updateTable();
-		UnpassedExamsTable unpassedExamsTable = UnpassedExamsTable.getTable();
-		PassedExamsTable passedExamsTable = PassedExamsTable.getInstance();
+		UnpassedExamsTable.getTable().updateTable();
+		PassedExamsTable.getInstance().updateTable();
 		ProffesorTeachesSubjectTable professorTeachesSubjectTable = ProffesorTeachesSubjectTable.getInstance();
 		professorTeachesSubjectTable.updateTable();
-		passedExamsTable.updateTable();
-		unpassedExamsTable.updateTable();
 		ChairTable chairTable = ChairTable.getInstance();
 		chairTable.updateTable();
+		GradeTable.getInstance().updateTable();
+		
 	}
 
 }

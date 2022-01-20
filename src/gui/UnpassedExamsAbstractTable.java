@@ -12,7 +12,7 @@ public class UnpassedExamsAbstractTable extends AbstractTableModel{
 	@Override
 	public int getRowCount() {
 		StudentDatabase studentDatabase = StudentDatabase.getInstance();
-		Student student = new Student(studentDatabase.getStudentFromRow(StudentTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow())));
+		Student student = studentDatabase.getStudentFromRow(EditStudentDialog.selectedRow);
 		return student.getUnpassedCourses().size();
 	}
 
@@ -33,7 +33,7 @@ public class UnpassedExamsAbstractTable extends AbstractTableModel{
 	@Override
 	public String getValueAt(int rowIndex, int columnIndex) {
 		
-		int rowStudent = StudentTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow());
+		int rowStudent = EditStudentDialog.selectedRow;
 		Subject subject = StudentDatabase.getInstance().getStudentFromRow(rowStudent).getUnpassedCourses().get(rowIndex);
 		
 		switch (columnIndex) {

@@ -63,7 +63,14 @@ public class GradeAnnulmentDialog extends JDialog {
 				GradeController gradeController = GradeController.getGradeController();
 				gradeController.annulment();
 				
-				if(GradeController.gradeAnnuled || GradeController.exists == false) {
+				if(GradeController.gradeAnnuled) {
+					
+					dispose();
+					GradeController.gradeAnnuled = false;
+					gradeAnnulmentDialog = null;
+					GradeController.exists = false;
+				}
+				else if(GradeController.exists == false) {
 					
 					dispose();
 					GradeController.gradeAnnuled = false;

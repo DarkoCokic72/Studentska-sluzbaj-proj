@@ -1,5 +1,6 @@
 package Controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
@@ -9,9 +10,11 @@ import Model.Student;
 import Model.StudentDatabase;
 import Model.Subject;
 import Model.SubjectDatabase;
+import gui.EditStudentDialog;
 import gui.GradeAnnulmentDialog;
 import gui.GradeDatabase;
 import gui.GradeEntryDialog;
+import gui.GradeTable;
 import gui.MainFrame;
 import gui.PassedExamsTab;
 import gui.PassedExamsTable;
@@ -57,38 +60,37 @@ public class GradeController {
 		String dateString = GradeEntryDialog.getDate().getText().trim();
 		if(Validation.checkDate(dateString) == true) {
 			
-		Date date = Converter.convertStringToDate(dateString);
-		Grade g = new Grade(student, subject, grade, date);
-		GradeDatabase gradeDatabase = GradeDatabase.getInstance();
-		gradeDatabase.addGrade(g);
+			Date date = Converter.convertStringToDate(dateString);
+			Grade g = new Grade(student, subject, grade, date);
+			GradeDatabase gradeDatabase = GradeDatabase.getInstance();
+			gradeDatabase.addGrade(g);
 			
-		//dodavanje ocene u polozene predmete
-		student.getPassedCourses().add(g);
-		PassedExamsTable.getInstance().updateTable();
+			//dodavanje ocene u polozene predmete
+			student.getPassedCourses().add(g);
+			PassedExamsTable.getInstance().updateTable();
 			
-		//brisanje iz nepolozenih predmeta
-		//int selectedRowSubject = UnpassedExamsTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow());
-		student.getUnpassedCourses().remove(subject);
-		UnpassedExamsTable.getTable().updateTable();
+			//brisanje iz nepolozenih predmeta
+			student.getUnpassedCourses().remove(subject);
+			UnpassedExamsTable.getTable().updateTable();
 			
-		//promena proseka za studenta
-		student.setAvgMark();
-		double average = student.getAvgMark();
-		String averageTxt;
-		if(MainFrame.languageChanged) {
-			averageTxt = MainFrame.getMainFrame().getResourceBundle().getString("avgMark") + " : " + String.format("%.2f", average);
-		} else {
-			averageTxt = String.format("Prosečna ocena: %.2f", average);
-		}
-		PassedExamsTab.getAverageLabel().setText(averageTxt);
+			//promena proseka za studenta
+			student.setAvgMark();
+			double average = student.getAvgMark();
+			String averageTxt;
+			if(MainFrame.languageChanged) {
+				averageTxt = MainFrame.getMainFrame().getResourceBundle().getString("avgMark") + " : " + String.format("%.2f", average);
+			} else {
+				averageTxt = String.format("Prosečna ocena: %.2f", average);
+			}
+			PassedExamsTab.getAverageLabel().setText(averageTxt);
 			
-		//promena espb bodova koje je student osvojio
-		String textFromESPBLab = PassedExamsTab.getTotalESPBLabel().getText().trim();
-		String ESPBString = textFromESPBLab.replaceAll("[^\\d]", "");
-		int ESPB = Integer.parseInt(ESPBString);
-		ESPB = ESPB + subject.getESPB();
-		String espbTxt;
-		if(MainFrame.languageChanged) {
+			//promena espb bodova koje je student osvojio
+			String textFromESPBLab = PassedExamsTab.getTotalESPBLabel().getText().trim();
+			String ESPBString = textFromESPBLab.replaceAll("[^\\d]", "");
+			int ESPB = Integer.parseInt(ESPBString);
+			ESPB = ESPB + subject.getESPB();
+			String espbTxt;
+			if(MainFrame.languageChanged) {
 				espbTxt = MainFrame.getMainFrame().getResourceBundle().getString("totalESPBLabel") + " : " +String.format("%d", ESPB);
 			} else {
 				espbTxt = String.format("Ukupno ESPB: %d", ESPB);
@@ -99,20 +101,26 @@ public class GradeController {
 			subject.getStudentWhoPassed().add(student);
 			subject.getStudentWhoDidNotPassed().remove(student);
 			
-			gradeEntried = true;
-				
+			gradeEntried = true;			
 		}	
 	}
 	
 	public void annulment() {
 		
-		int selectedRow = StudentTable.getTable().getSelectedRow();
+		int selectedRow = EditStudentDialog.selectedRow;
 		Student student = StudentDatabase.getInstance().getStudentFromRow(selectedRow);
-		Grade grade = GradeDatabase.getInstance().getGradeFromRow(GradeAnnulmentDialog.selectedRow);
-		Subject subjectCheck = grade.getPassedSubject();
+		
+		String subjectCode = GradeDatabase.getInstance().getValueAt(PassedExamsTable.getInstance().getSelectedRow(), 0, student.getIndexID());
+		Grade grade = null;
+		for(Grade g: GradeDatabase.getInstance().getGrades()) {
+			if(subjectCode.equals(g.getPassedSubject().getSubjectCode())) {
+				grade = g;
+			}
+		}
 	
+		Subject subject = grade.getPassedSubject();
 		for(Subject s: SubjectDatabase.getDatabase().getSubjects()) {
-			if(s.getSubjectCode().equals(subjectCheck.getSubjectCode())) {
+			if(s.getSubjectCode().equals(subject.getSubjectCode())) {
 				exists = true;
 			}
 		}
@@ -124,13 +132,12 @@ public class GradeController {
 			JOptionPane.showMessageDialog(null, "Izabrani predmet više ne postoji.");
 			return;
 		}
-		Subject subject = grade.getPassedSubject();
-	
-		GradeDatabase.getInstance().getGrades().remove(grade);
 		
+		subject.getStudentWhoPassed().remove(student);
+		subject.getStudentWhoDidNotPassed().add(student);
 		student.getPassedCourses().remove(grade);
-		
 		student.getUnpassedCourses().add(subject);
+		GradeDatabase.getInstance().getGrades().remove(grade);
 		
 		student.setAvgMark();
 		double average = student.getAvgMark();
@@ -154,11 +161,10 @@ public class GradeController {
 		}
 		PassedExamsTab.getTotalESPBLabel().setText(espbTxt);
 		
-		subject.getStudentWhoPassed().remove(student);
-		subject.getStudentWhoDidNotPassed().add(student);
-		
+		GradeTable.getInstance().updateTable();
 		PassedExamsTable.getInstance().updateTable();
 		UnpassedExamsTable.getTable().updateTable();
+		
 		
 		gradeAnnuled = true;
 		

@@ -18,6 +18,8 @@ public class GradeTable extends JTable{
 	
 	public void updateTable() {
 		gradeTableModel.fireTableDataChanged();
+		repaint();
+		validate();
 	}
 	
 	public static GradeTable getInstance() {

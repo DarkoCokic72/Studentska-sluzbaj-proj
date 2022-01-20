@@ -20,7 +20,7 @@ public class PassedExamsAbstractTable extends AbstractTableModel{
 	public int getRowCount() {
 		// TODO Auto-generated method stub
 		StudentDatabase studentDatabase = StudentDatabase.getInstance();
-		Student student = new Student(studentDatabase.getStudentFromRow(StudentTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow())));
+		Student student = studentDatabase.getStudentFromRow(StudentTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow()));
 		return student.getPassedCourses().size();
 		
 	}

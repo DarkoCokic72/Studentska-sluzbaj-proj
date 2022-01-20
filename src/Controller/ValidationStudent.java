@@ -251,7 +251,7 @@ public class ValidationStudent {
 			if(s.getIndexID().equalsIgnoreCase(index)) {
 				if(MainFrame.languageChanged) {
 					JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("formatIndexNumberAlreadyExists"));
-					return ret;
+					return false;
 				}
 				JOptionPane.showMessageDialog(null, "Vec postoji student sa tim brojem indeksa!");
 				ret = false;

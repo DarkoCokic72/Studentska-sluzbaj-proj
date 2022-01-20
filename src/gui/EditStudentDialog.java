@@ -17,7 +17,7 @@ public class EditStudentDialog extends JDialog{
 	
 	public EditStudentDialog() {
 		
-		int selectedRow = StudentTable.getTable().getSelectedRow();
+		selectedRow = StudentTable.getTable().getSelectedRow();
 		
 		setVisible(true);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -67,6 +67,7 @@ public class EditStudentDialog extends JDialog{
 				EditStudentPanel.deleteEditStudPanel();
 		    	EditStudentDialog.deleteEditStudentDialog();
 				EditStudentInformationTab.deleteEditStudentInformationTab();
+				StudentTable.getTable().updateTable();
 			}
 		});
 		

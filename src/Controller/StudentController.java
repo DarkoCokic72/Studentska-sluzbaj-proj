@@ -123,6 +123,7 @@ public class StudentController {
 			
 			String index = EditStudentInformationTab.getIndexField().getText().trim();
 			String wrongIndex = EditStudentInformationTab.getIndexField().getText().trim();
+			student.setIndexID("-1");
 			
 			if(ValidationStudent.checkIndex(wrongIndex)) {
 				Date date = Converter.convertStringToDate(dateStr);
