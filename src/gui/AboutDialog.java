@@ -82,5 +82,11 @@ public class AboutDialog extends JDialog{
 	
 	public static void initComponents() {
 		
+		aboutDialog.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("aboutDialogTitle"));
+		student1Lab.setText(MainFrame.getMainFrame().getResourceBundle().getString("student1Lab"));
+		student2Lab.setText(MainFrame.getMainFrame().getResourceBundle().getString("student2Lab"));
+		text.setText(MainFrame.getMainFrame().getResourceBundle().getString("aboutTxt"));
+		student1.setText(MainFrame.getMainFrame().getResourceBundle().getString("student1Txt"));
+		student2.setText(MainFrame.getMainFrame().getResourceBundle().getString("student2Txt"));
 	}
 }
