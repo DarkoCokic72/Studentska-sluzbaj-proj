@@ -104,13 +104,13 @@ public class MainController {
 		switch(centralPanel.getSelectedIndex()) {
 		
 		case 0:
-			int selectedRow = StudentTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow());
+			int selectedRow = StudentTable.getTable().getSelectedRow();
 			if(selectedRow == -1) {
 				if(MainFrame.languageChanged) {
 					JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("selectRowError"));
 					return;
 				}
-				JOptionPane.showMessageDialog(null, "Selektujte vrstu koju zelite da izbrisete");
+				JOptionPane.showMessageDialog(null, "Selektujte vrstu koju zelite da izbrišete");
 				return;
 			}
 			else {
