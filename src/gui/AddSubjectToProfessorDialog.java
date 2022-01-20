@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -19,6 +21,8 @@ import javax.swing.JScrollPane;
 import Model.ProfessorDatabase;
 
 public class AddSubjectToProfessorDialog extends JDialog{
+	
+	private static AddSubjectToProfessorDialog addSubjectToProfessorDialog = null;
 	private  static JButton confirm;
 	private static JButton cancel;
 	
@@ -70,6 +74,7 @@ public class AddSubjectToProfessorDialog extends JDialog{
 				ProfessorDatabase.getDatabase().addSubject();
 				ProffesorTeachesSubjectTable.getInstance().updateTable();
 				dispose();
+				addSubjectToProfessorDialog = null;
 				
 			}
 		});
@@ -81,7 +86,18 @@ public class AddSubjectToProfessorDialog extends JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				addSubjectToProfessorDialog = null;
 				
+			}
+			
+		
+		});
+		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				addSubjectToProfessorDialog = null;
 			}
 		});
 		
@@ -93,6 +109,28 @@ public class AddSubjectToProfessorDialog extends JDialog{
 		add(south, BorderLayout.SOUTH);
 		 
 		
+		
+	}
+	
+	public static AddSubjectToProfessorDialog getAddSubjectToProfessorDialog() {
+		
+		if (addSubjectToProfessorDialog == null) {
+			addSubjectToProfessorDialog= new AddSubjectToProfessorDialog();
+		}
+		
+		if(MainFrame.languageChanged == true) {
+			initComponents();;
+		}
+		
+		return addSubjectToProfessorDialog;
+	}
+	
+	public static void initComponents() {
+		
+    	addSubjectToProfessorDialog.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("addSubjectToProfessorDialogTitle"));
+    	
+    	confirm.setText(MainFrame.getMainFrame().getResourceBundle().getString("confirmBtn"));
+		cancel.setText(MainFrame.getMainFrame().getResourceBundle().getString("cancelBtn"));
 		
 	}
 	
