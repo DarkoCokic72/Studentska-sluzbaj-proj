@@ -41,21 +41,6 @@ public class GradeController {
 			} 
 		}
 		
-		
-		for(Subject s: SubjectDatabase.getDatabase().getSubjects()) {
-			if(s.getSubjectCode().equals(subject.getSubjectCode())) {
-				exists = true;
-			}
-		}
-		if(exists == false) {
-			if(MainFrame.languageChanged) {
-				JOptionPane.showMessageDialog(null,  MainFrame.getMainFrame().getResourceBundle().getString("subjectDoesntExist"));
-				return;
-			}
-			JOptionPane.showMessageDialog(null, "Izabrani predmet više ne postoji.");
-			return;
-		}
-		
 		int grade = GradeEntryDialog.getGrade();
 		String dateString = GradeEntryDialog.getDate().getText().trim();
 		if(Validation.checkDate(dateString) == true) {
@@ -68,6 +53,7 @@ public class GradeController {
 			//dodavanje ocene u polozene predmete
 			student.getPassedCourses().add(g);
 			PassedExamsTable.getInstance().updateTable();
+			GradeTable.getInstance().updateTable();
 			
 			//brisanje iz nepolozenih predmeta
 			student.getUnpassedCourses().remove(subject);
@@ -107,18 +93,12 @@ public class GradeController {
 	
 	public void annulment() {
 		
+		exists = false;
 		int selectedRow = EditStudentDialog.selectedRow;
 		Student student = StudentDatabase.getInstance().getStudentFromRow(selectedRow);
-		
-		String subjectCode = GradeDatabase.getInstance().getValueAt(PassedExamsTable.getInstance().getSelectedRow(), 0, student.getIndexID());
-		Grade grade = null;
-		for(Grade g: GradeDatabase.getInstance().getGrades()) {
-			if(subjectCode.equals(g.getPassedSubject().getSubjectCode())) {
-				grade = g;
-			}
-		}
-	
+		Grade grade = student.getPassedCourses().get(GradeAnnulmentDialog.selectedRow);
 		Subject subject = grade.getPassedSubject();
+		
 		for(Subject s: SubjectDatabase.getDatabase().getSubjects()) {
 			if(s.getSubjectCode().equals(subject.getSubjectCode())) {
 				exists = true;
@@ -133,11 +113,21 @@ public class GradeController {
 			return;
 		}
 		
-		subject.getStudentWhoPassed().remove(student);
 		subject.getStudentWhoDidNotPassed().add(student);
-		student.getPassedCourses().remove(grade);
+		student.getPassedCourses().remove(GradeAnnulmentDialog.selectedRow);
 		student.getUnpassedCourses().add(subject);
-		GradeDatabase.getInstance().getGrades().remove(grade);
+		subject.getStudentWhoPassed().remove(student);
+		
+		int i = 0;
+		for (Grade g: GradeDatabase.getInstance().getGrades()) {
+			
+			if (g.getPassedSubject().getSubjectCode().equals(subject.getSubjectCode()) && grade.getStudent().getIndexID().equals(student.getIndexID())) {
+				GradeDatabase.getInstance().getGrades().remove(i);
+				break;
+			}
+			i++;
+		}
+		
 		
 		student.setAvgMark();
 		double average = student.getAvgMark();
@@ -164,7 +154,6 @@ public class GradeController {
 		GradeTable.getInstance().updateTable();
 		PassedExamsTable.getInstance().updateTable();
 		UnpassedExamsTable.getTable().updateTable();
-		
 		
 		gradeAnnuled = true;
 		

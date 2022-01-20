@@ -117,7 +117,7 @@ public class GradeEntryDialog extends JDialog{
 					GradeController gradeContr = GradeController.getGradeController();
 					gradeContr.entry();
 					
-					if(GradeController.gradeEntried || GradeController.exists == false) {
+					if(GradeController.gradeEntried) {
 						
 						Validation.textFieldFilledGradeEntry = false;
 						dispose();
