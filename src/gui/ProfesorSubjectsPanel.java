@@ -59,7 +59,7 @@ public class ProfesorSubjectsPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//AddSubjectToProf
-				AddSubjectToProfessorDialog addSubjToProf = new AddSubjectToProfessorDialog();
+				AddSubjectToProfessorDialog addSubjToProf = AddSubjectToProfessorDialog.getAddSubjectToProfessorDialog();
 				addSubjToProf.setVisible(true);
 			}
 		});

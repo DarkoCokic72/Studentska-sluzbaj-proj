@@ -91,9 +91,6 @@ public class RemoveSubjectFromProfessor extends JDialog{
 		
 	}
 	
-	public static void deleteInstance() {
-		removeSubjectFromProfessor = null;
-	}
 	
 	public static RemoveSubjectFromProfessor getRemoveSubjectFromProfessor() {
 		

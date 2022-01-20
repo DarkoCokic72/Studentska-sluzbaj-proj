@@ -39,7 +39,6 @@ public class EditProfessorDialog extends JDialog {
 		    	EditProfessorDialog.deleteEditProfessorDialog();
 				EditProfessorInformationTab.deleteEditProfessorInformationTab();
 				ProfesorSubjectsPanel.deleteInstance();
-				RemoveSubjectFromProfessor.deleteInstance();
 			
 			}
 		});
