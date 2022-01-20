@@ -140,6 +140,7 @@ public class MenuBar extends JMenuBar{
 			public void actionPerformed(ActionEvent arg0) {
 				Locale.setDefault(new Locale("en", "US"));
 				MainFrame.englishLanguage = true;
+				MainFrame.serbianLanguage = false;
 				MainFrame.getMainFrame().changeLanguage();
 			}
 		});
@@ -150,11 +151,15 @@ public class MenuBar extends JMenuBar{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Locale.setDefault(new Locale("sr", "RS"));
+				MainFrame.englishLanguage = false;
 				MainFrame.serbianLanguage = true;
 				MainFrame.getMainFrame().changeLanguage();
 			}
 		});
 			
+		ButtonGroup bg = new ButtonGroup();
+		bg.add(miSerbian);
+		bg.add(miEnglish);
 		
 		help.add(miEnglish);
 		help.add(miSerbian);
