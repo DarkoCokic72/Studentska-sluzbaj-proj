@@ -164,7 +164,16 @@ public class SetDirectorOfChairDialog extends JDialog{
 		if(setInstance == null)
 			setInstance = new SetDirectorOfChairDialog(parent);
 		
+		if(MainFrame.languageChanged == true)
+			initComponents();
+		
 		return setInstance;
+	}
+	
+	public static void initComponents() {
+		setInstance.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("setDirDialog"));
+		setBtn.setText(MainFrame.getMainFrame().getResourceBundle().getString("setDirBtn"));
+		cancelBtn.setText(MainFrame.getMainFrame().getResourceBundle().getString("cancelDirBtn"));
 	}
 
 }

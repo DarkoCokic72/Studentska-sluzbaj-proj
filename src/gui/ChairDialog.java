@@ -46,8 +46,13 @@ public class ChairDialog extends JDialog{
 					setDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 					setDialog.setVisible(true);
 				} else {
-					JOptionPane.showMessageDialog(null, "Izaberite vrstu za katedru kome postavljate šefa.");
-					return;
+					if(MainFrame.languageChanged) {
+						JOptionPane.showMessageDialog(null, MainFrame.getMainFrame().getResourceBundle().getString("dirOfChairMsgErr"));
+						return;
+					} else {
+						JOptionPane.showMessageDialog(null, "Izaberite vrstu za katedru kome postavljate šefa.");
+						return;
+					}
 				}
 			}
 		});
@@ -77,6 +82,16 @@ public class ChairDialog extends JDialog{
 		if(chairDialog == null)
 			chairDialog = new ChairDialog();
 		
+		if(MainFrame.languageChanged == true)
+			initComponents();
+		
 		return chairDialog;
+	}
+	
+	public static void initComponents() {
+		chairDialog.setTitle(MainFrame.getMainFrame().getResourceBundle().getString("chairDialog"));
+		setBtn.setText(MainFrame.getMainFrame().getResourceBundle().getString("setDirOfChairBtn"));
+		
+		ChairTable.initComponents();
 	}
 }

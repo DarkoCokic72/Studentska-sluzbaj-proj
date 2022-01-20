@@ -27,5 +27,13 @@ public class ChairTable extends JTable{
 	public void updateTable() {
 		model.fireTableDataChanged();
 	}
+	
+	public static void initComponents() {
+		chTable.getColumnModel().getColumn(0).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("chairCodeCol"));
+		chTable.getColumnModel().getColumn(1).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("chairNameCol"));
+		chTable.getColumnModel().getColumn(2).setHeaderValue(MainFrame.getMainFrame().getResourceBundle().getString("chairDirCol"));
+		
+		chTable.updateTable();
+	}
 
 }

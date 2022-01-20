@@ -43,7 +43,9 @@ public class AddSubjectToProfessorDialog extends JDialog{
 		AddSubjectToProfessorTable table = AddSubjectToProfessorTable.getInstance();
 		
 		JScrollPane scroll = new JScrollPane(table);
-		scroll.setBorder(BorderFactory.createEmptyBorder(30,30,20,30));
+		scroll.setPreferredSize(new Dimension(400, 400));
+		scroll.setBorder(BorderFactory.createEmptyBorder(21,21,11,21));
+		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		JLabel label = new JLabel("Predmeti: ");
 		north.add(label);

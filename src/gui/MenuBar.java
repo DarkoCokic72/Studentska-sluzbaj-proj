@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.Locale;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
@@ -37,6 +38,7 @@ public class MenuBar extends JMenuBar{
 	private static JMenuItem miHelp;
 	private static JMenuItem miAbout;
 	private static JCheckBoxMenuItem miEnglish;
+	private static JCheckBoxMenuItem miSerbian;
 	
 	public MenuBar() {
 		
@@ -98,6 +100,7 @@ public class MenuBar extends JMenuBar{
 		
 		file.setMnemonic('F');
 		
+		
 		edit = new JMenu("Edit");
 		miEdit = new JMenuItem("Edit");
 		miDelete = new JMenuItem("Delete");
@@ -140,7 +143,21 @@ public class MenuBar extends JMenuBar{
 				MainFrame.getMainFrame().changeLanguage();
 			}
 		});
+		
+		miSerbian = new JCheckBoxMenuItem("Serbian");
+		miSerbian.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Locale.setDefault(new Locale("sr", "RS"));
+				MainFrame.serbianLanguage = true;
+				MainFrame.getMainFrame().changeLanguage();
+			}
+		});
+			
+		
 		help.add(miEnglish);
+		help.add(miSerbian);
 		help.addSeparator();
 		help.add(miHelp);
 		help.addSeparator();
@@ -237,6 +254,19 @@ public class MenuBar extends JMenuBar{
 				ChairDialog chairDialog = ChairDialog.getInstance();
 				chairDialog.setLocationRelativeTo(MainFrame.getMainFrame());
 				
+			}
+		});
+		
+		miSave.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try {
+					Serialization.serialization();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 	}
