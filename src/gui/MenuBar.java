@@ -107,8 +107,8 @@ public class MenuBar extends JMenuBar{
 		miEdit = new JMenuItem("Edit");
 		miDelete = new JMenuItem("Delete");
 		
-		miEdit.setMnemonic('d');
-		miDelete.setMnemonic('e');
+		miEdit.setMnemonic('E');
+		miDelete.setMnemonic('D');
 		
 		miEdit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
 		miDelete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, ActionEvent.SHIFT_MASK));
@@ -193,6 +193,8 @@ public class MenuBar extends JMenuBar{
 		help.add(miAbout);
 		
 		help.setMnemonic('H');
+		miEnglish.setMnemonic('n');
+		miSerbian.setMnemonic('r');
 		
 		add(file);
 		add(edit);
@@ -322,6 +324,45 @@ public class MenuBar extends JMenuBar{
 		miAbout.setText(MainFrame.getMainFrame().getResourceBundle().getString("miAbout"));
 		miEnglish.setText(MainFrame.getMainFrame().getResourceBundle().getString("miEnglish"));
 		miSerbian.setText(MainFrame.getMainFrame().getResourceBundle().getString("miSerbian"));
+		
+		if(MainFrame.serbianLanguage) {
+			
+			file.setMnemonic('D');
+			edit.setMnemonic('I');
+			help.setMnemonic('P');
+			miNew.setMnemonic('N');
+			miOpen.setMnemonic('O');
+			miClose.setMnemonic('Z');
+			miStudent.setMnemonic('t');
+			miProfesor.setMnemonic('P');
+			miSubject.setMnemonic('r');
+			miChair.setMnemonic('K');
+			miEdit.setMnemonic('I');
+			miDelete.setMnemonic('O');
+			miHelp.setMnemonic('P');
+			miAbout.setMnemonic('A');
+			miEnglish.setMnemonic('n');
+			miSerbian.setMnemonic('r');
+			
+		} else {
+			
+			file.setMnemonic('F');
+			edit.setMnemonic('E');
+			help.setMnemonic('H');
+			miNew.setMnemonic('N');
+			miOpen.setMnemonic('O');
+			miClose.setMnemonic('C');
+			miStudent.setMnemonic('t');
+			miProfesor.setMnemonic('P');
+			miSubject.setMnemonic('u');
+			miChair.setMnemonic('D');
+			miEdit.setMnemonic('E');
+			miDelete.setMnemonic('D');
+			miHelp.setMnemonic('H');
+			miAbout.setMnemonic('A');
+			miEnglish.setMnemonic('n');
+			miSerbian.setMnemonic('r');
+		}
 		
 	}
 }
