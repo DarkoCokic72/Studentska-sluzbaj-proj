@@ -20,7 +20,7 @@ public class PassedExamsAbstractTable extends AbstractTableModel{
 	public int getRowCount() {
 		// TODO Auto-generated method stub
 		StudentDatabase studentDatabase = StudentDatabase.getInstance();
-		Student student = studentDatabase.getStudentFromRow(StudentTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow()));
+		Student student = studentDatabase.getStudentFromRow(EditStudentDialog.selectedRow);
 		return student.getPassedCourses().size();
 		
 	}
@@ -39,7 +39,7 @@ public class PassedExamsAbstractTable extends AbstractTableModel{
 	@Override
 	public String getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
-		int rowStudent = StudentTable.getTable().convertRowIndexToModel(StudentTable.getTable().getSelectedRow());
+		int rowStudent = EditStudentDialog.selectedRow;
 		Grade grade = StudentDatabase.getInstance().getStudentFromRow(rowStudent).getPassedCourses().get(rowIndex);
 		
 		switch(columnIndex) {

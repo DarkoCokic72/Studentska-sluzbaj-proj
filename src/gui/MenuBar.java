@@ -321,6 +321,7 @@ public class MenuBar extends JMenuBar{
 		miHelp.setText(MainFrame.getMainFrame().getResourceBundle().getString("miHelp"));
 		miAbout.setText(MainFrame.getMainFrame().getResourceBundle().getString("miAbout"));
 		miEnglish.setText(MainFrame.getMainFrame().getResourceBundle().getString("miEnglish"));
+		miSerbian.setText(MainFrame.getMainFrame().getResourceBundle().getString("miSerbian"));
 		
 	}
 }

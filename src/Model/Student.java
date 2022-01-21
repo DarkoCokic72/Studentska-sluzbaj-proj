@@ -88,8 +88,8 @@ public class Student extends Person implements Serializable{
 		
 		if(!passedCourses.isEmpty()) {
 			ListIterator<Grade> it = passedCourses.listIterator();
-			int sum = 0;
-			int size = 0;
+			double sum = 0;
+			double size = 0;
 			while(it.hasNext()) {
 				Grade g = it.next();
 				sum += g.getMark();

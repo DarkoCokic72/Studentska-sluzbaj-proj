@@ -7,7 +7,6 @@ import Model.Address;
 import Model.Student;
 import Model.Student.Status;
 import Model.StudentDatabase;
-import gui.AddProfessorDialog;
 import gui.AddStudentDialog;
 import gui.EditStudentInformationTab;
 import gui.StudentTable;
