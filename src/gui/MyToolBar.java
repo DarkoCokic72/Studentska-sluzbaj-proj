@@ -1,15 +1,22 @@
 package gui;
 
 import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 
+import javax.swing.AbstractAction;
+import javax.swing.AbstractButton;
+import javax.swing.ActionMap;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
 import Controller.MainController;
@@ -29,8 +36,8 @@ public class MyToolBar extends JToolBar {
 		btnCreate = new JButton();
 		btnCreate.setToolTipText("Create entity");
 		btnCreate.setIcon(new ImageIcon("images" + File.separator + "Plus-icon.png"));
-		add(btnCreate);
-
+		add(btnCreate); 
+		
 		addSeparator();
 
 		btnEdit = new JButton();
@@ -61,118 +68,123 @@ public class MyToolBar extends JToolBar {
 		btnSearch.setToolTipText("Search entity");
 		btnSearch.setIcon(new ImageIcon("images" + File.separator +"search-icon.png"));
 		add(btnSearch);
-				
-		btnCreate.addMouseListener(new MouseListener() {
+		
+		btnCreate.addActionListener(new ActionListener() {
 
 			@Override
-			public void mouseReleased(MouseEvent arg0) {
-			}
-
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-			}
-
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				MainController.add();
+				
 			}
-
+			
 		});
 		
+		KeyStroke keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_C , KeyEvent.CTRL_DOWN_MASK);
+		int condition = JComponent.WHEN_IN_FOCUSED_WINDOW;
+		InputMap inputMap = btnCreate.getInputMap(condition);
+		ActionMap actionMap = btnCreate.getActionMap();
+		inputMap.put(keyStroke, keyStroke.toString());
+	    actionMap.put(keyStroke.toString(), new AbstractAction() {
+			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 7529236918948520061L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				btnCreate.doClick();
+			}
+		});
 		
-		btnEdit.addMouseListener(new MouseListener() {
+	    btnEdit.addActionListener(new ActionListener() {
 
 			@Override
-			public void mouseReleased(MouseEvent arg0) {
-			}
-
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-			}
-
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
 				MainController.edit();
+				
 			}
+	    	
+	    });
+	    
+	    keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_E , KeyEvent.CTRL_DOWN_MASK);
+		condition = JComponent.WHEN_IN_FOCUSED_WINDOW;
+		inputMap = btnEdit.getInputMap(condition);
+		actionMap = btnEdit.getActionMap();
+		inputMap.put(keyStroke, keyStroke.toString());
+	    actionMap.put(keyStroke.toString(), new AbstractAction() {
 			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 3218530110365506595L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				btnEdit.doClick();
+			}
 		});
 		
-		btnDelete.addMouseListener(new MouseListener() {
+		
+		btnDelete.addActionListener(new ActionListener() {
 
 			@Override
-			public void mouseReleased(MouseEvent arg0) {
-			}
-
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-			}
-
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
 				MainController.delete();
-
 				
 			}
 			
 		});
 		
-		btnSearch.addMouseListener(new MouseListener() {
+		keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_D , KeyEvent.CTRL_DOWN_MASK);
+		condition = JComponent.WHEN_IN_FOCUSED_WINDOW;
+		inputMap = btnDelete.getInputMap(condition);
+		actionMap = btnDelete.getActionMap();
+		inputMap.put(keyStroke, keyStroke.toString());
+	    actionMap.put(keyStroke.toString(), new AbstractAction() {
 			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 5532527550873390851L;
+
 			@Override
-			public void mouseReleased(MouseEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				MainController.search(textField);
+				btnDelete.doClick();
 			}
 		});
+		
+		btnSearch.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				MainController.search(textField);
+				
+			}
+			
+		});
+		
+		keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_R , KeyEvent.CTRL_DOWN_MASK);
+		condition = JComponent.WHEN_IN_FOCUSED_WINDOW;
+		inputMap = btnSearch.getInputMap(condition);
+		actionMap = btnSearch.getActionMap();
+		inputMap.put(keyStroke, keyStroke.toString());
+	    actionMap.put(keyStroke.toString(), new AbstractAction() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				btnSearch.doClick();
+			}
+		});
+	    
+
 		
 	}
 	
