@@ -23,6 +23,7 @@ import javax.swing.ListSelectionModel;
 
 import Controller.SubjectController;
 import Model.Profesor;
+import Model.Profesor.Zvanje;
 import Model.ProfessorDatabase;
 
 public class ChooseProfessorDialog extends JDialog{
@@ -36,6 +37,8 @@ public class ChooseProfessorDialog extends JDialog{
 	
 	private static JButton confirm;
 	private static JButton cancel;
+
+	private ArrayList<String> ids;
 	
 	public ChooseProfessorDialog() {
 		
@@ -49,11 +52,15 @@ public class ChooseProfessorDialog extends JDialog{
 		setTitle("Odaberi profesora");
 		setResizable(false);
 		
+		ids = new ArrayList<String>();
 		ArrayList<Profesor> professorList = ProfessorDatabase.getDatabase().getProfessors();
 		listModel = new DefaultListModel<String>();
 		for(Profesor p: professorList) {
-			String professor = p.getName() + " " + p.getSurname();
-			listModel.addElement(professor);
+			if(p.getZvanje().equals(Zvanje.REDOVNI_PROFESOR) || p.getZvanje().equals(Zvanje.VANREDNI_PROFESOR) || p.getZvanje().equals(Zvanje.DOCENT)) {
+				ids.add(Integer.toString(p.getPersonalID()));
+				String professor = p.getName() + " " + p.getSurname();
+				listModel.addElement(professor);
+			}
 		}
 		
 		list = new JList<String>(listModel);
@@ -79,7 +86,14 @@ public class ChooseProfessorDialog extends JDialog{
 					JOptionPane.showMessageDialog(null, "Niste izabrali profesora");
 					return;
 				}
-				Profesor professor = ProfessorDatabase.getDatabase().getProfessorFromRow(selectedRow);
+				//Profesor professor = ProfessorDatabase.getDatabase().getProfessorFromRow(selectedRow);
+				int id = Integer.parseInt(ids.get(selectedRow));
+				Profesor professor = null;
+				for(Profesor p: ProfessorDatabase.getDatabase().getProfessors()) {
+					if(p.getPersonalID() == id) {
+						professor = p;
+					}
+				}
 				SubjectController subjectController = SubjectController.getSubjectController();
 				subjectController.chooseProfessor(EditSubjectInformationTab.subject, professor);
 				

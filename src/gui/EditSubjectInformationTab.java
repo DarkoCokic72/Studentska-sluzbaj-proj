@@ -281,10 +281,10 @@ public class EditSubjectInformationTab extends JPanel {
 		
 		switch (index) {
 		case 0:
-			term = Subject.Term.WINTER;
+			term = Subject.Term.SUMMER;
 			break;
 		case 1:
-			term = Term.SUMMER;
+			term = Term.WINTER;
 			break;
 		}
 		return term;
